@@ -17,7 +17,7 @@ import domain.Actor;
 import domain.MessageBox;
 
 @Controller
-@RequestMapping("/messageBox")
+@RequestMapping("/messageBox/actor")
 public class MessageBoxController {
 
 	@Autowired
@@ -30,7 +30,7 @@ public class MessageBoxController {
 	// Action-1 ---------------------------------------------------------------		
 
 	//MUESTRA LAS CAJAS DE MENSAJE DE UN ACTOR
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView action1() {
 		final ModelAndView result;
 		final Collection<MessageBox> boxes;

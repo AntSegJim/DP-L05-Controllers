@@ -25,10 +25,11 @@ requestURI="messageBox/show.do" >
 <display:column property="name" titleKey="messageBox.name" />
 <display:column> <a href="message/show.do?messageBoxId=${row.id}"><spring:message code="messageBox.show.message" /></a> </display:column>
 	<display:column>
-	
+	<jstl:if test="${row.name eq 'Mensajes del trabajo' }">
 		<form action="messageBox/delete.do">
   	 	 <input type="submit" value="<spring:message code="messageBox.delete" />" />
 		</form>
+	</jstl:if>	
 	</display:column>
 
 <jstl:if test="!(name == In box || name = Out box || name = Trash box || name = Spam box)">

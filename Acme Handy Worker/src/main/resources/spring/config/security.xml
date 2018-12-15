@@ -65,7 +65,7 @@
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
 
-		<security:intercept-url pattern="/messageBox/show.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/messageBox/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/message/actor/send.do" access="isAuthenticated()" /> 
