@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="customer/complaints" extends="master.page">	
+		<put-attribute name="title" value="Quejas customer" />
+		<put-attribute name="body" value="/views/customer/complaints.jsp" />
+	</definition>
+	<definition name="customer/showComplaint" extends="master.page">	
+		<put-attribute name="title" value="Ver queja" />
+		<put-attribute name="body" value="/views/customer/showComplaint.jsp" />
+	</definition>
+	<definition name="customer/createComplaint" extends="master.page">	
+		<put-attribute name="title" value="Crear queja" />
+		<put-attribute name="body" value="/views/customer/createComplaint.jsp" />
+	</definition>
+	<definition name="customer/editcomplaint" extends="master.page">	
+		<put-attribute name="title" value="Editar queja" />
+		<put-attribute name="body" value="/views/complaint/editComplaint.jsp" />
+	</definition>
+	
+</tiles-definitions>
