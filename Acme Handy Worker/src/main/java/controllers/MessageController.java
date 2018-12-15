@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.MessageBoxService;
 import services.MessageService;
 import domain.Message;
 
@@ -18,12 +19,25 @@ import domain.Message;
 public class MessageController {
 
 	@Autowired
-	private MessageService	messageService;
+	private MessageService		messageService;
+
+	@Autowired
+	private MessageBoxService	messageBoxService;
 
 
 	public MessageController() {
 		super();
 	}
+
+	//	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	//	public ModelAndView listMessage(@RequestParam final int messageBoxId) {
+	//		ModelAndView result;
+	//		Collection<Message> messages;
+	//		
+	//		messages = this.messageService.;
+	//		Assert.notNull(messages);
+	//		
+	//	}
 
 	@RequestMapping(value = "/actor/send", method = RequestMethod.GET)
 	public ModelAndView createMessage() {

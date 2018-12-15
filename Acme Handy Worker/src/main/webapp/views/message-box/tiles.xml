@@ -18,7 +18,12 @@
 
 	<definition name="messageBox/show" extends="master.page">	
 		<put-attribute name="title" value="Profile: Action 1" />
-		<put-attribute name="body" value="/views/message-box/see-message-box.jsp" />
+		<put-attribute name="body" value="/views/message-box/list-message-box.jsp" />
+	</definition>
+	
+	<definition name="messageBox/edit" extends="master.page">	
+		<put-attribute name="title" value="Perfil: Acción 1" />
+		<put-attribute name="body" value="/views/message-box/edit-message-box.jsp" />
 	</definition>
 	
 	<definition name="messageBox/create" extends="master.page">	

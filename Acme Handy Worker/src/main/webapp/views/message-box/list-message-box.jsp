@@ -22,24 +22,21 @@
 <display:table pagesize="5" name="boxes" id="row"
 requestURI="messageBox/show.do" >
 
-<display:column property="name" titleKey="messageBox.name" />
+<display:column>
+	<jstl:if test="${(row.name ne 'Spam box') and (row.name ne 'Out box') and (row.name ne 'In box') and (row.name ne 'Trash box')}">
+		<a href="messageBox/actor/edit.do?messageBoxId=${row.id}"><spring:message code="messageBox.list.edit" /></a>
+	</jstl:if>
+</display:column>
+
+<display:column property="name" titleKey="messageBox.name"  />
 <display:column> <a href="message/show.do?messageBoxId=${row.id}"><spring:message code="messageBox.show.message" /></a> </display:column>
-	<display:column>
+<%--	<display:column>
 	<jstl:if test="${row.name eq 'Mensajes del trabajo' }">
 		<form action="messageBox/delete.do">
   	 	 <input type="submit" value="<spring:message code="messageBox.delete" />" />
 		</form>
 	</jstl:if>	
-	</display:column>
-
-<jstl:if test="!(name == In box || name = Out box || name = Trash box || name = Spam box)">
-	<display:column>
-	
-		<form action="messageBox/modified.do">
-  	 	 <input type="submit" value="<spring:message code="messageBox.modified" />" />
-		</form>
-	</display:column>
-</jstl:if>
+	</display:column> --%>
 
 </display:table>
 
@@ -51,7 +48,3 @@ requestURI="messageBox/show.do" >
 			onclick="javascript: relativeRedir('welcome/index.do');" />
 
 </security:authorize>
-
-<%-- <security:authorize access="isAnonymous()">
-<p>Hola</p>
-</security:authorize>--%>
