@@ -45,13 +45,16 @@ public class CategoryServiceTest extends AbstractTest {
 		c.setName("Hijo");
 		c.setParent(c);
 
+		Assert.isTrue(c.getParent().getSoon().isEmpty());
+
 		saved = this.categoryService.save(c);
+		Assert.notEmpty(c.getParent().getSoon());
+
 		categories = this.categoryService.findAll();
 		Assert.isTrue(categories.contains(saved));
 		super.authenticate(null);
 
 	}
-
 	@Test
 	public void testDeleteCategory() {
 		super.authenticate("admin");

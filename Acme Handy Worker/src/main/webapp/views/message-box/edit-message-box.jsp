@@ -32,10 +32,13 @@
 	<form:errors cssClass="error" path="name" />
 	<br />
 	
+	
+	
+	<br /><br />
 	<input type="submit" name="save" 
 	value="<spring:message code="messageBox.create.save" />" />
 
-<input type="button" name="cancel" value="<spring:message code="messageBox.create.cancel" />"
+	<input type="button" name="cancel" value="<spring:message code="messageBox.create.cancel" />"
 			onclick="javascript: relativeRedir('messageBox/actor/list.do');" />
 </form:form>
 
