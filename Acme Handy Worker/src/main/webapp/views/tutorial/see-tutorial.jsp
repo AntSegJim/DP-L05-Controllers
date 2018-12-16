@@ -22,19 +22,22 @@
 requestURI="tutorial/handyWorker/show.do" >
 
 <display:column property="title" titleKey="tutorial.title" />
-<display:column property="moment" titleKey="tutotial.moment" />
-<display:column property="summary" titleKey="tutotial.summary" />
+<display:column property="moment" titleKey="tutorial.moment" />
+<display:column property="summary" titleKey="tutorial.summary" />
+<display:column property="picture" titleKey="tutorial.pictures" />
+<display:column property="section" titleKey="tutorial.sections" />
+<display:column property="sponsorship" titleKey="tutorial.sponsorship" />
+<!--  
 	<display:column>
 		<form action="picture/handyWorker/show.do?tutorialId=${row.id}">
   	 	 <input type="submit" value="<spring:message code="tutorial.seePicture" />" />
 		</form>
 	</display:column>
+	-->
 </display:table>
 
 <form action="tutorial/handyWorker/create.do">
     <input type="submit" value="<spring:message code="tutorial.create" />" />
-    <input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
-			onclick="javascript: relativeRedir('welcome/index.do');" />
 </form>
 
 

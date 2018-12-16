@@ -41,14 +41,14 @@
 	<br />
 	
 	<form:label path="summary">
-		<spring:message code="summary" />:
+		<spring:message code="tutorial.summary" />:
 	</form:label>
 	<form:input path="summary" />
 	<form:errors cssClass="error" path="summary" />
 	<br />
 	
 	<form:label path="picture">
-		<spring:message code="tutorial.picture" />:
+		<spring:message code="tutorial.pictures" />:
 	</form:label>
 	<jstl:forEach var="picture" items="${pictures}"> 
 
@@ -60,7 +60,7 @@
 	
 		
 	<form:label path="section">
-		<spring:message code="tutorial.section" />:
+		<spring:message code="tutorial.sections" />:
 	</form:label>
 	<jstl:forEach var="section" items="${sections}"> 
 
@@ -88,9 +88,8 @@
 			onclick="return confirm('<spring:message code="tutorial.confirm.delete" />')" />&nbsp;
 	</jstl:if>
 		
-		<input type="submit" name="cancel"
-		value="<spring:message code="tutorial.cancel" />"
-		onclick="javascript: relativeRedir('tutorial/handyWorker/show.do');" />
+		<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
+			onclick="javascript: relativeRedir('tutorial/handyWorker/show.do');" />
 	<br />
  	
 </form:form>
