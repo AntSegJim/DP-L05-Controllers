@@ -29,7 +29,7 @@ import domain.HandyWorker;
 import domain.Warranty;
 
 @Controller
-@RequestMapping("/finder/handyWorker")
+@RequestMapping("/finder/handy-worker")
 public class FinderHandyWorkerController extends AbstractController {
 
 	@Autowired
@@ -75,7 +75,7 @@ public class FinderHandyWorkerController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/handy-worker/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView actionSave(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
 		final ModelAndView result;
 
@@ -102,8 +102,8 @@ public class FinderHandyWorkerController extends AbstractController {
 	//MUESTRA EL FILTRO DEL FINDER
 
 	// Listing ----------------------------------------------------------------
-	@RequestMapping(value = "/results", method = RequestMethod.GET)
-	public ModelAndView results() {
+	@RequestMapping(value = "/results", method = RequestMethod.POST)
+	public ModelAndView results(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId) {
 		final ModelAndView result;
 		final Integer id_user = LoginService.getPrincipal().getId();
 		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
@@ -112,10 +112,27 @@ public class FinderHandyWorkerController extends AbstractController {
 		final Collection<FixUpTask> fixs = this.fixUpTaskService.fixUpTasksByFinder(finder.getId());
 		;
 		result = new ModelAndView("finder/results");
-		result.addObject("requestURI", "finder/handyWorker/results.do");
+		result.addObject("requestURI", "finder/handy-worker/results.do");
 		result.addObject("fixUpTasks", fixs);
 
 		return result;
 	}
+
+	// Listing ----------------------------------------------------------------
+	//		@RequestMapping(value = "/results", method = RequestMethod.GET)
+	//		public ModelAndView results() {
+	//			final ModelAndView result;
+	//			final Integer id_user = LoginService.getPrincipal().getId();
+	//			final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
+	//			final Finder finder = handyWorker.getFinder();
+	//
+	//			final Collection<FixUpTask> fixs = this.fixUpTaskService.fixUpTasksByFinder(finder.getId());
+	//			;
+	//			result = new ModelAndView("finder/results");
+	//			result.addObject("requestURI", "finder/handyWorker/results.do");
+	//			result.addObject("fixUpTasks", fixs);
+	//
+	//			return result;
+	//		}
 
 }

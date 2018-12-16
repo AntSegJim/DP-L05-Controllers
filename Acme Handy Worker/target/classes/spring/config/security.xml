@@ -54,13 +54,13 @@
   		<security:intercept-url pattern="/finder/handyWorker/**" access="hasRole('HANDYWORKER')" />
 		
 
-		<security:intercept-url pattern="/finder/show.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/finder/handy-worker/show.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/tutorial/handyWorker/show.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/fixUpTask/handyWorker/list.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/fixUptask/customer/create.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/tutorial/handyWorker/create.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/finder/handy-worker/save.do" access="hasRole('HANDYWORKER')" /> 
-		<security:intercept-url pattern="/finder/results.do" access="hasRole('HANDYWORKER')" />
+		<security:intercept-url pattern="/finder/handy-worker/results.do" access="hasRole('HANDYWORKER')" />
 
 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
