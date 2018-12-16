@@ -350,6 +350,16 @@
 		<property name="actor" ref="customer3" />
 	</bean>
 
+	<bean id="messageBox8" class="domain.MessageBox">
+		<property name="name" value="In box" />
+		<property name="messages">
+			<list>
+				<ref bean="message2" />
+			</list>
+		</property>
+		<property name="actor" ref="customer1" />
+	</bean>
+
 	<!-- Message -->
 	<bean id="message1" class="domain.Message">
 		<property name="moment" value="05/06/2018 12:34" />

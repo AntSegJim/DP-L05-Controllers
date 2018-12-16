@@ -16,18 +16,21 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
+
 <security:authorize access="isAuthenticated()">
 
 <p><spring:message code="profile.action.1" /></p>
 <display:table pagesize="5" name="boxes" id="row"
 requestURI="messageBox/show.do" >
-
+<jstl:if test="${fn:length(boxes) ne 4}">
 <display:column>
 	<jstl:if test="${(row.name ne 'Spam box') and (row.name ne 'Out box') and (row.name ne 'In box') and (row.name ne 'Trash box')}">
 		<a href="messageBox/actor/edit.do?messageBoxId=${row.id}"><spring:message code="messageBox.list.edit" /></a>
 	</jstl:if>
 </display:column>
-
+</jstl:if>
 <display:column property="name" titleKey="messageBox.name"  />
 <display:column> <a href="message/show.do?messageBoxId=${row.id}"><spring:message code="messageBox.show.message" /></a> </display:column>
 <%--	<display:column>
