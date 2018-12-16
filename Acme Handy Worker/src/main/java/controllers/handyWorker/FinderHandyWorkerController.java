@@ -29,7 +29,7 @@ import domain.HandyWorker;
 import domain.Warranty;
 
 @Controller
-@RequestMapping("/finder/handyWorker")
+@RequestMapping("/finder/handy-worker")
 public class FinderHandyWorkerController extends AbstractController {
 
 	@Autowired
@@ -75,7 +75,7 @@ public class FinderHandyWorkerController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/handy-worker/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView actionSave(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
 		final ModelAndView result;
 
