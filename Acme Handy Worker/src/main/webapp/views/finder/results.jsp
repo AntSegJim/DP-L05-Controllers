@@ -19,7 +19,7 @@
 <security:authorize access="hasRole('HANDYWORKER')">
 
 <p><spring:message code="finder.results" /></p>
-<display:table pagesize="5" name="fixUpTasks" id="row" requestURI="finder/results.do" >
+<display:table pagesize="5" name="fixUpTasks" id="row" requestURI="${requestURI}" >
 
 <display:column property="ticker" titleKey="fixUpTask.ticker" />
 <display:column property="moment" titleKey="fixUpTask.moment"/>

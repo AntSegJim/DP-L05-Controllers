@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.handyWorker;
 
 import java.util.Collection;
 
@@ -20,6 +20,7 @@ import services.FinderService;
 import services.FixUpTaskService;
 import services.HandyWorkerService;
 import services.WarrantyService;
+import controllers.AbstractController;
 import domain.Category;
 import domain.Filter;
 import domain.Finder;
@@ -28,8 +29,8 @@ import domain.HandyWorker;
 import domain.Warranty;
 
 @Controller
-@RequestMapping("/finder")
-public class HandyWorkerController {
+@RequestMapping("/finder/handyWorker")
+public class FinderHandyWorkerController extends AbstractController {
 
 	@Autowired
 	private HandyWorkerService	handyWorkerService;
@@ -44,6 +45,12 @@ public class HandyWorkerController {
 	@Autowired
 	private FixUpTaskService	fixUpTaskService;
 
+
+	// Constructors -----------------------------------------------------------
+
+	public FinderHandyWorkerController() {
+		super();
+	}
 
 	// Action-1 ---------------------------------------------------------------		
 
@@ -93,13 +100,19 @@ public class HandyWorkerController {
 		return result;
 	}
 	//MUESTRA EL FILTRO DEL FINDER
+
+	// Listing ----------------------------------------------------------------
 	@RequestMapping(value = "/results", method = RequestMethod.GET)
 	public ModelAndView results() {
 		final ModelAndView result;
+		final Integer id_user = LoginService.getPrincipal().getId();
+		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
+		final Finder finder = handyWorker.getFinder();
 
-		final Collection<FixUpTask> fixs = this.fixUpTaskService.findAll();
-
+		final Collection<FixUpTask> fixs = this.fixUpTaskService.fixUpTasksByFinder(finder.getId());
+		;
 		result = new ModelAndView("finder/results");
+		result.addObject("requestURI", "finder/handyWorker/results.do");
 		result.addObject("fixUpTasks", fixs);
 
 		return result;

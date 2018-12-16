@@ -92,7 +92,7 @@ public class FixUpTaskService {
 	}
 
 	public Collection<FixUpTask> fixUpTasksByFinder(final Integer finderId) {
-		return this.fixUpTasksByFinder(finderId);
+		return this.fixUpTaskRepository.fixUpTasksByFinder(finderId);
 	}
 	public Collection<String> allTickersFix() {
 		return this.fixUpTaskRepository.allTickerInFixUpTask();
