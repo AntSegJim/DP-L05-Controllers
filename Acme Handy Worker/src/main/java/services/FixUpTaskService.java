@@ -122,4 +122,8 @@ public class FixUpTaskService {
 		final Customer c = this.customerService.customerByUserAccount(userAccount.getId());
 		return this.fixUpTaskRepository.fixUpTasksCustomer(c.getId());
 	}
+
+	public Collection<FixUpTask> filterFixUpTask(final String ticker, final String description, final String address, final Date fi, final Date ff, final Double lowPrice, final Double highPrice, final String category, final String warranty) {
+		return this.fixUpTaskRepository.filterFixUpTask(ticker, description, address, fi, ff, lowPrice, highPrice, category, warranty);
+	}
 }

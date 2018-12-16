@@ -64,8 +64,6 @@
 		<security:intercept-url pattern="/fixUptask/customer/create.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/tutorial/handyWorker/create.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/finder/handy-worker/save.do" access="hasRole('HANDYWORKER')" /> 
-		<security:intercept-url pattern="/finder/handy-worker/results.do" access="hasRole('HANDYWORKER')" />
-
 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 

@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +24,7 @@ public interface FixUpTaskRepository extends JpaRepository<FixUpTask, Integer> {
 
 	@Query("select f.ticker from FixUpTask f")
 	public Collection<String> allTickerInFixUpTask();
+
+	@Query("select f from FixUpTask f where locate(?1,f.ticker) != 0 and locate(?2,f.description) != 0 and locate(?3,f.address) != 0 and f.moment between ?4 and ?5 and f.maximunPrice between ?6 and ?7 and locate(?8,f.category.name) != 0 and locate(?9,f.warranty.title) != 0")
+	public Collection<FixUpTask> filterFixUpTask(String ticker, String description, String address, Date fi, Date ff, Double lp, Double hp, String c, String w);
 }

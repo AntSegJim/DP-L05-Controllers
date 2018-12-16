@@ -252,4 +252,10 @@ public class FixUpTaskServiceTest extends AbstractTest {
 		Assert.isTrue(!values.isEmpty());
 		super.authenticate(null);
 	}
+
+	@Test
+	public void filterTest() {
+		final Collection<FixUpTask> f = this.fixUpTaskService.filterFixUpTask("a", "a", "pon", new Date(), new Date(), 1., 10., "", "");
+		System.out.println(f.size());
+	}
 }

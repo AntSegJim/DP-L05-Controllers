@@ -24,7 +24,6 @@ import controllers.AbstractController;
 import domain.Category;
 import domain.Filter;
 import domain.Finder;
-import domain.FixUpTask;
 import domain.HandyWorker;
 import domain.Warranty;
 
@@ -75,7 +74,7 @@ public class FinderHandyWorkerController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView actionSave(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
 		final ModelAndView result;
 
@@ -99,40 +98,54 @@ public class FinderHandyWorkerController extends AbstractController {
 
 		return result;
 	}
-	//MUESTRA EL FILTRO DEL FINDER
 
-	// Listing ----------------------------------------------------------------
-	@RequestMapping(value = "/results", method = RequestMethod.POST)
-	public ModelAndView results(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId) {
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "search")
+	public ModelAndView actionSearch(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
 		final ModelAndView result;
+
+		String categoryName = "";
+		if (categoryId != 0) {
+			newFilter.setCategory(this.categoryService.findOne(categoryId));
+			categoryName = newFilter.getCategory().getName();
+		}
+		String warrantyTitle = "";
+		if (warrantyId != 0) {
+			newFilter.setWarranty(this.warrantyService.findOne(warrantyId));
+			warrantyTitle = newFilter.getWarranty().getTitle();
+		}
+
+		final Filter sf = this.filterService.save(newFilter);
+
+		result = new ModelAndView("finder/results");
 		final Integer id_user = LoginService.getPrincipal().getId();
 		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
 		final Finder finder = handyWorker.getFinder();
+		finder.setFixUpTask(this.fixUpTaskService.filterFixUpTask(sf.getTicker(), sf.getDescription(), sf.getAddress(), sf.getStartDate(), sf.getEndDate(), sf.getLowPrice(), sf.getHighPrice(), categoryName, warrantyTitle));
 
-		final Collection<FixUpTask> fixs = this.fixUpTaskService.fixUpTasksByFinder(finder.getId());
-		;
-		result = new ModelAndView("finder/results");
 		result.addObject("requestURI", "finder/handy-worker/results.do");
-		result.addObject("fixUpTasks", fixs);
+		result.addObject("fixUpTasks", finder.getFixUpTask());
 
 		return result;
 	}
 
-	// Listing ----------------------------------------------------------------
-	//		@RequestMapping(value = "/results", method = RequestMethod.GET)
-	//		public ModelAndView results() {
-	//			final ModelAndView result;
-	//			final Integer id_user = LoginService.getPrincipal().getId();
-	//			final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
-	//			final Finder finder = handyWorker.getFinder();
+	//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "search")
+	//	public ModelAndView actionSearch(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
+	//		final ModelAndView result;
 	//
-	//			final Collection<FixUpTask> fixs = this.fixUpTaskService.fixUpTasksByFinder(finder.getId());
-	//			;
-	//			result = new ModelAndView("finder/results");
-	//			result.addObject("requestURI", "finder/handyWorker/results.do");
-	//			result.addObject("fixUpTasks", fixs);
+	//		newFilter.setCategory(this.categoryService.findOne(categoryId));
+	//		newFilter.setWarranty(this.warrantyService.findOne(warrantyId));
 	//
-	//			return result;
-	//		}
-
+	//		final Filter sf = this.filterService.save(newFilter);
+	//
+	//		result = new ModelAndView("finder/results");
+	//		final Integer id_user = LoginService.getPrincipal().getId();
+	//		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
+	//		final Finder finder = handyWorker.getFinder();
+	//		finder.setFixUpTask(this.fixUpTaskService.filterFixUpTask(sf.getTicker(), sf.getDescription(), sf.getAddress(), sf.getStartDate(), sf.getEndDate(), sf.getLowPrice(), sf.getHighPrice(), sf.getCategory().getName(), sf.getWarranty().getTitle()));
+	//
+	//		result.addObject("requestURI", "finder/handy-worker/results.do");
+	//		result.addObject("fixUpTasks", finder.getFixUpTask());
+	//
+	//		return result;
+	//	}
 }
