@@ -382,7 +382,7 @@
 		<property name="sender" ref="administrator1" />
 		<property name="receiver" ref="handyWorker1" />
 		<property name="emailReceiver" value="mirella@hotmail.com" />
-		
+
 
 	</bean>
 
@@ -1476,7 +1476,7 @@
 		</property>
 		<property name="filter" ref="filter1" />
 	</bean>
-	
+
 	<bean id="finder2" class="domain.Finder">
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
@@ -1486,7 +1486,7 @@
 		</property>
 		<property name="filter" ref="filter1" />
 	</bean>
-	
+
 	<bean id="finder3" class="domain.Finder">
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
@@ -1496,7 +1496,7 @@
 		</property>
 		<property name="filter" ref="filter1" />
 	</bean>
-	
+
 	<bean id="finder4" class="domain.Finder">
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
@@ -1506,7 +1506,7 @@
 		</property>
 		<property name="filter" ref="filter1" />
 	</bean>
-	
+
 	<bean id="finder5" class="domain.Finder">
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
@@ -1639,7 +1639,7 @@
 		<property name="email" value="antonioArahal@hotmail.com" />
 		<property name="makeHandyWorker" value="HandyWorker1" />
 		<property name="score" value="1" />
-		<property name="finder" ref="finder1"/>
+		<property name="finder" ref="finder1" />
 		<property name="endorseHWorker">
 			<list>
 				<ref bean="endorsement1" />
@@ -1664,7 +1664,7 @@
 		<property name="email" value="raul@hotmail.com" />
 		<property name="makeHandyWorker" value="HandyWorker2" />
 		<property name="score" value="2" />
-		<property name="finder" ref="finder2"/>
+		<property name="finder" ref="finder2" />
 		<property name="endorseHWorker">
 			<list>
 				<ref bean="endorsement2" />
@@ -1689,7 +1689,7 @@
 		<property name="email" value="ecija@hotmail.com" />
 		<property name="makeHandyWorker" value="HandyWorker3" />
 		<property name="score" value="10" />
-		<property name="finder" ref="finder3"/>
+		<property name="finder" ref="finder3" />
 		<property name="endorseHWorker">
 			<list>
 				<ref bean="endorsement3" />
@@ -1714,7 +1714,7 @@
 		<property name="email" value="rober@hotmail.com" />
 		<property name="makeHandyWorker" value="@Robert" />
 		<property name="score" value="3" />
-		<property name="finder" ref="finder4"/>
+		<property name="finder" ref="finder4" />
 		<property name="endorseHWorker">
 			<list>
 
@@ -1739,7 +1739,7 @@
 		<property name="email" value="india@hotmail.com" />
 		<property name="makeHandyWorker" value="@India" />
 		<property name="score" value="56" />
-		<property name="finder" ref="finder5"/>
+		<property name="finder" ref="finder5" />
 		<property name="endorseHWorker">
 			<list>
 				<ref bean="endorsement6" />

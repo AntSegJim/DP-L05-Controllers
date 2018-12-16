@@ -31,10 +31,15 @@
 	<form:input path="name" />
 	<form:errors cssClass="error" path="name" />
 	<br />
-</form:form>
+	
+	<input type="submit" name="save" 
+	value="<spring:message code="messageBox.create.save" />" />
 
 <input type="button" name="cancel" value="<spring:message code="messageBox.create.cancel" />"
 			onclick="javascript: relativeRedir('messageBox/actor/list.do');" />
+</form:form>
+
+
 
 </security:authorize>
 

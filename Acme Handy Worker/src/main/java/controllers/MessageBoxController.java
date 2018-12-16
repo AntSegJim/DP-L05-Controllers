@@ -3,9 +3,12 @@ package controllers;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,4 +62,18 @@ public class MessageBoxController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final MessageBox messageBox, final BindingResult binding) {
+		final ModelAndView result;
+
+		if (!binding.hasErrors()) {
+			this.messageBoxServive.save(messageBox);
+			result = new ModelAndView("redirect:list.do");
+		} else {
+			result = new ModelAndView("messageBox/edit");
+			result.addObject("messageBox", messageBox);
+		}
+
+		return result;
+	}
 }
