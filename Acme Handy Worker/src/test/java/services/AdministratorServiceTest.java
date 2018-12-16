@@ -91,7 +91,7 @@ public class AdministratorServiceTest extends AbstractTest {
 		final MessageBox inBox2 = this.messageBoxService.getInBox(saved.getId());
 		final MessageBox outBox2 = this.messageBoxService.getOutBox(saved.getId());
 
-		Assert.isTrue(trashBox2 != null && spamBox2 != null && inBox2 != null && outBox2 != null, "Hola");
+		Assert.isTrue(trashBox2 != null && spamBox2 != null && inBox2 != null && outBox2 != null);
 
 		admins = this.administratorService.findAll();
 
