@@ -37,11 +37,19 @@ public class WarrantyService {
 		return this.warrantyRepository.findOne(id);
 	}
 	public Warranty save(final Warranty w) {
-		Assert.isTrue(w.getDraftMode() == 1 && w.getTitle() != null && w.getTitle() != "" && w.getLaws() != null && w.getTerms() != null, "WarrantyService.save -> ERROR");
-		return this.warrantyRepository.save(w);
+		Warranty result = null;
+		final Warranty oldWarranty = this.warrantyRepository.findOne(w.getId());
+
+		if (oldWarranty.getDraftMode() == 1) {
+			Assert.isTrue(w.getTitle() != null && w.getTitle() != "" && w.getLaws() != null && w.getTerms() != null, "WarrantyService.save -> ERROR");
+			result = this.warrantyRepository.save(w);
+		} else
+			result = oldWarranty;
+
+		return result;
 	}
 	public void delete(final Warranty w) {
-		Assert.isTrue(w.getDraftMode() == 1, "WarrantyService.delete -> ERROR");
-		this.warrantyRepository.delete(w);
+		if (w.getDraftMode() == 1)
+			this.warrantyRepository.delete(w);
 	}
 }

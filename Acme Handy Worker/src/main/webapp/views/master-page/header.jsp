@@ -26,7 +26,8 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>	
-					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>								
+					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
+					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.administrator.warranty" /></a></li>						
 				</ul>
 			</li>
 		</security:authorize>
