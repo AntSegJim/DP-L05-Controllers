@@ -65,14 +65,14 @@ public class WarrantyAdministratorController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@Valid final Warranty newWarranty, final BindingResult binding) {
 		final ModelAndView result;
-		final Collection<Warranty> warranties;
 
-		this.warrantyService.save(newWarranty);
+		if (!binding.hasErrors()) {
+			this.warrantyService.save(newWarranty);
+			result = new ModelAndView("warranty/list");
+			result.addObject("warranties", this.warrantyService.findAll());
+		} else
+			result = new ModelAndView("redirect:edit.do?warrantyId=" + newWarranty.getId());
 
-		warranties = this.warrantyService.findAll();
-
-		result = new ModelAndView("warranty/list");
-		result.addObject("warranties", warranties);
 		return result;
 
 	}
