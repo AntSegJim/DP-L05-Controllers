@@ -12,8 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import security.UserAccount;
 import services.HandyWorkerService;
+import services.PictureService;
+import services.SectionService;
+import services.SponsorshipService;
 import services.TutorialService;
 import domain.HandyWorker;
+import domain.Picture;
+import domain.Section;
+import domain.Sponsorship;
 import domain.Tutorial;
 
 @Controller
@@ -25,6 +31,12 @@ public class TutorialController {
 
 	@Autowired
 	private HandyWorkerService	handyWorkerService;
+	@Autowired
+	private PictureService		pictureS;
+	@Autowired
+	private SectionService		sectionS;
+	@Autowired
+	private SponsorshipService	sponsorshipS;
 
 
 	@RequestMapping(value = "/handyWorker/show", method = RequestMethod.GET)
@@ -46,11 +58,20 @@ public class TutorialController {
 	public ModelAndView action2() {
 		final ModelAndView result;
 		final Tutorial tutorial;
+		final Collection<Picture> pictures;
+		final Collection<Section> sections;
+		final Collection<Sponsorship> sponsorships;
 
+		pictures = this.pictureS.finaAll();
+		sections = this.sectionS.findAll();
+		sponsorships = this.sponsorshipS.findAll();
 		tutorial = this.tutorialService.create();
 
 		result = new ModelAndView("tutorial/create");
 		result.addObject("tutorial", tutorial);
+		result.addObject("pictures", pictures);
+		result.addObject("sections", sections);
+		result.addObject("sponsorships", sponsorships);
 
 		return result;
 	}

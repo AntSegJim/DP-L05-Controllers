@@ -105,9 +105,9 @@ public class ComplaintService {
 	}
 	public Complaint findOne(final int complaintId) {
 
-		final UserAccount userAccount = LoginService.getPrincipal();
-		final Customer c = this.customerService.customerByUserAccount(userAccount.getId());
-		Assert.isTrue(userAccount.getAuthorities().contains(Authority.CUSTOMER) && this.complaintRepository.findAllCustomerComplaint(c.getId()).contains(this.complaintRepository.findOne(complaintId)));
+		//final UserAccount userAccount = LoginService.getPrincipal();
+		//final Customer c = this.customerService.customerByUserAccount(userAccount.getId());
+		//Assert.isTrue(userAccount.getAuthorities().contains(Authority.CUSTOMER) && this.complaintRepository.findAllCustomerComplaint(c.getId()).contains(this.complaintRepository.findOne(complaintId)));
 
 		return this.complaintRepository.findOne(complaintId);
 	}
@@ -136,7 +136,7 @@ public class ComplaintService {
 	}
 
 	public Collection<Complaint> findAllCustomerComplaint(final Integer id) {
-		return this.findAllCustomerComplaint(id);
+		return this.complaintRepository.findAllCustomerComplaint(id);
 	}
 
 }

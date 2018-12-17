@@ -10,12 +10,10 @@
 <p><spring:message code="handyWorker.application.title" /></p>
 
 <display:table pagesize="5" name="applications" id="row"
-requestURI="handyWorker/showApplication.do?applicationId=${row.id}" >
+requestURI="${requestURI}" >
 
 <display:column>
-	<form action="handyWorker/editApplication.do?applicationId=${row.id}">
-  	 	<input type="submit" value="<spring:message code="handyWorker.application.editApplication.link" />" />
-	</form>
+	<a href="application/handyWorker/editApplication.do?applicationId=${row.id}"><spring:message code="handyWorker.application.editApplication.link" /></a>
 </display:column>
 
 <display:column property="moment" titleKey="application.moment" />
@@ -23,16 +21,10 @@ requestURI="handyWorker/showApplication.do?applicationId=${row.id}" >
 <display:column property="price" titleKey="application.price" />
 <display:column property="comments" titleKey="application.comments" />
 <display:column property="creditCard.number" titleKey="application.creditCard" />
-<display:column property="fixUpTask.Id" titleKey="application.fixUpTask" />
-
-<display:column>
-	<form action="handyWorker/showApplication.do?applicationId=${row.id}">
-  	 	<input type="submit" value="<spring:message code="handyWorker.application.showApplication.link" />" />
-	</form>
-</display:column>
+<display:column property="fixUpTask.id" titleKey="application.fixUpTask" />
 
 </display:table>
-<form action="handyWorker/createApplication.do">
+<form action="application/handyWorker/createApplication.do">
   	 	<input type="submit" value="<spring:message code="handyWorker.application.create.link" />" />
 	</form>
 

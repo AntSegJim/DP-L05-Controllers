@@ -50,11 +50,11 @@
 	<form:label path="picture">
 		<spring:message code="tutorial.pictures" />:
 	</form:label>
-	<jstl:forEach var="picture" items="${pictures}"> 
-
-	<input type="checkbox" name="picture" value="${picture.url}"/>
-	
-	</jstl:forEach>
+	<form:select id="pictures" path="picture">
+		<form:option value="0" label="----" />		
+		<form:options items="${pictures}" itemValue="id"
+			itemLabel="picture" />
+	</form:select>
 	<form:errors cssClass="error" path="picture" />
 	<br />
 	
@@ -64,7 +64,7 @@
 	</form:label>
 	<jstl:forEach var="section" items="${sections}"> 
 
-	<input type="checkbox" name="section" value="${sections.title}"/>
+	<input type="checkbox" name="section" value="${section.title}"/>
 	
 	</jstl:forEach>
 	<form:errors cssClass="error" path="section" />
@@ -75,7 +75,7 @@
 	</form:label>
 	<jstl:forEach var="sponsorship" items="${sponsorships}"> 
 
-	<input type="checkbox" name="sponsorship" value="${sponsorship.linkTargePage}"/>
+	<input type="checkbox" name="sponsorship" value="${sponsorship.linkTargetPage}"/>
 	
 	</jstl:forEach>
 	<form:errors cssClass="error" path="sponsorship" />

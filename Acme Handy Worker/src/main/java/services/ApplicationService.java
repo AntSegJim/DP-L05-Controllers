@@ -51,6 +51,11 @@ public class ApplicationService {
 		a.setStatus(0);
 		return a;
 	}
+
+	public Application findOne(final int applicationId) {
+		return this.applicationRepository.findOne(applicationId);
+	}
+
 	public Collection<Application> findAll() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();

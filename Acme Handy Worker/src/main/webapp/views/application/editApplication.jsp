@@ -10,13 +10,18 @@
 
 <p><spring:message code="handyWorker.application.form.edit.title" /></p>
 
-<form:form  modelAttribute="application">
+<form:form action="application/handyWorker/editApplication.do" modelAttribute="application">
+	<form:hidden path="id" />
+	<form:hidden path="version" />
 	
-<form:label path="momment">
+	
+<form:label path="moment">
 	<spring:message code="handyWorker.application.momment" />
 </form:label>
-<form:input path="momment" />
-<form:errors path="momment"/>
+<form:input path="moment" />
+<form:errors path="moment"/>
+
+<br />
 
 <form:label path="status">
 	<spring:message code="handyWorker.application.status" />
@@ -24,11 +29,15 @@
 <form:input path="status" />
 <form:errors path="status"/>
 
+<br />
+
 <form:label path="price">
 	<spring:message code="handyWorker.application.price" />
 </form:label>
 <form:input path="price" />
 <form:errors path="price"/>
+
+<br />
 
 <form:label path="comments">
 	<spring:message code="handyWorker.application.comments" />
@@ -36,11 +45,37 @@
 <form:input path="comments" />
 <form:errors path="comments"/>
 
+<br />
+
 <!-- Faltan creditCard y fixUpTask -->
+
+<form:label path="creditCard">
+	<spring:message code="handyWorker.application.creditCard" />
+</form:label>
+<form:select id="creditCards" path="creditCard">
+		<form:option value="0" label="----" />		
+		<form:options items="${creditCards}" itemValue="id"
+			itemLabel="number" />
+	</form:select>
+<form:errors path="creditCard"/>
+
+<br />
+
+<form:label path="fixUpTask">
+	<spring:message code="handyWorker.application.fixUpTask" />
+</form:label>
+<form:select id="fixUpTasks" path="fixUpTask">
+		<form:option value="0" label="----" />		
+		<form:options items="${fixUpTasks}" itemValue="id"
+			itemLabel="ticker" />
+	</form:select>
+<form:errors path="fixUpTask"/>
+
+<br />
 	
 <input type="submit" name="save" value="<spring:message code="handyWorker.application.save" />" />
 <input type="button" name="cancel" value="<spring:message code="handyWorker.application.cancel" />"
-			onclick="javascript: relativeRedir('handyWorker/showApplication.do');" />
+			onclick="javascript: relativeRedir('application/handyWorker/applications.do');" />
 	
 
 </form:form>

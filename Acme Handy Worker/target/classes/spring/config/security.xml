@@ -47,14 +47,10 @@
 		<security:intercept-url pattern="/category/administrator/list.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/category/administrator/edit.do" access="hasRole('ADMIN')" /> 
 		
-		<security:intercept-url pattern="/customer/complaints.do" access="hasRole('CUSTOMER')" /> 
-  		<security:intercept-url pattern="/customer/showComplaint.do" access="hasRole('CUSTOMER')" /> 
-  		<security:intercept-url pattern="/customer/createComplaint.do" access="hasRole('CUSTOMER')" /> 
-  		<security:intercept-url pattern="/customer/editComplaint.do" access="hasRole('CUSTOMER')" /> 
-  		<security:intercept-url pattern="/handyWorker/applications.do" access="hasRole('HANDYWORKER')" /> 
-  		<security:intercept-url pattern="/handyWorker/showApplication.do" access="hasRole('HANDYWORKER')" /> 
-  		<security:intercept-url pattern="/handyWorker/createApplication.do" access="hasRole('HANDYWORKER')" /> 
-  		<security:intercept-url pattern="/handyWorker/editApplication.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/complaint/customer/**" access="hasRole('CUSTOMER')" /> 
+  		
+  		<security:intercept-url pattern="/application/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
+  		
   		<security:intercept-url pattern="/finder/handyWorker/**" access="hasRole('HANDYWORKER')" />
 		
 

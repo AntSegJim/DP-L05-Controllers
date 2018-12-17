@@ -39,7 +39,7 @@
 					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
 				</ul>
 			</li>
-			<li><a href="customer/complaints.do"><spring:message code="master.page.customer.complaints" /></a></li>
+			<li><a href="complaint/customer/complaints.do"><spring:message code="master.page.customer.complaints" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('HANDYWORKER')">
@@ -51,7 +51,7 @@
 					<li><a href="fixUptask/handyWorker/list.do"><spring:message code="master.page.handyworker.fixUptask" /></a></li>
 				</ul>
 			</li>
-			<li><a href="handyWorker/applications.do"><spring:message code="master.page.handyworker.applications"/></a></li>
+			<li><a href="application/handyWorker/applications.do"><spring:message code="master.page.handyworker.applications"/></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
