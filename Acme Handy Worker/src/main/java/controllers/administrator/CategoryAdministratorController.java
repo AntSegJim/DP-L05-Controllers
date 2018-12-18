@@ -38,21 +38,40 @@ public class CategoryAdministratorController {
 
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int categoryId) {
+		ModelAndView result;
+		Category category;
+
+		category = this.categoryService.findOne(categoryId);
+		result = new ModelAndView("category/show");
+		result.addObject("category", category);
+		return result;
+
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int categoryId) {
 		ModelAndView result;
 		Category category;
 		final Collection<Category> categories;
+		final Collection<Category> categories2;
 
 		category = this.categoryService.findOne(categoryId);
 		Assert.notNull(category);
 
 		categories = this.categoryService.findAll();
 		categories.remove(category);
+		categories.removeAll(category.getSoon());
+
+		categories2 = this.categoryService.findAll();
+		categories.remove(category);
+		categories.remove(category.getParent());
 
 		result = new ModelAndView("category/edit");
 		result.addObject("category", category);
 		result.addObject("categories", categories);
+		result.addObject("categories2", categories2);
 
 		return result;
 	}
@@ -78,12 +97,14 @@ public class CategoryAdministratorController {
 	//	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Category category, final BindingResult binding, @RequestParam("parent") final int categoryId) {
+	public ModelAndView save(@Valid final Category category, final BindingResult binding, @RequestParam("parent") final int categoryId, @RequestParam("soon") final Collection<Category> son) {
 		ModelAndView result;
 
 		if (!binding.hasErrors()) {
-			final Category c = this.categoryService.findOne(categoryId);
-			category.setParent(c);
+			final Category p = this.categoryService.findOne(categoryId);
+			category.setParent(p);
+
+			category.setSoon(son);
 			this.categoryService.save(category);
 			result = new ModelAndView("category/list");
 			final Collection<Category> categories = this.categoryService.findAll();
@@ -91,6 +112,7 @@ public class CategoryAdministratorController {
 
 		} else
 			result = new ModelAndView("redirect:edit.do?categoryId=" + category.getId());
+
 		return result;
 
 	}

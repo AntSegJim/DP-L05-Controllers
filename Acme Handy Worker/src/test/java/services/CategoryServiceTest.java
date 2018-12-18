@@ -75,4 +75,5 @@ public class CategoryServiceTest extends AbstractTest {
 		super.authenticate(null);
 
 	}
+
 }

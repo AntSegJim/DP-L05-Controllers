@@ -16,27 +16,9 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-
 
 <security:authorize access="hasRole('ADMIN')">
 
-<display:table pagesize="5" name="categories" id="row"
-requestURI="category/administrator/list.do" >
-
-<display:column>
-	<jstl:if test="${(row.name ne 'CATEGORY')}">
-		<a href="category/administrator/edit.do?categoryId=${row.id}"><spring:message code="category.edit" /></a>
-	</jstl:if>
-</display:column>
-
-
-<display:column property="name" titleKey="category.name"  />
-
-<display:column>
-		<a href="category/administrator/show.do?categoryId=${row.id}"><spring:message code="category.show" /></a>
-</display:column>
-
-</display:table>
+<spring:message code="category.name" /> ${category.name} <br/>
 
 </security:authorize>

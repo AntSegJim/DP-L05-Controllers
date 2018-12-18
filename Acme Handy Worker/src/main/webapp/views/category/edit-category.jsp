@@ -16,6 +16,8 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 
 <security:authorize access="hasRole('ADMIN')">
 
@@ -42,9 +44,9 @@
 	<form:label path="soon">
 	<spring:message code="category.son"/>:
 	</form:label>
-	<display:table name="${category.soon }" id="row">
-	<display:column property="name" titleKey="category.name" />
-	</display:table>
+	<form:select path="soon">
+		<form:options items="${categories2}" itemLabel="name" itemValue="id"/>
+	</form:select>
 	
 	<br />
 	
