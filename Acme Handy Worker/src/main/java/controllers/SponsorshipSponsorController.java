@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
+import services.CreditCardService;
 import services.SponsorService;
 import services.SponsorshipService;
 import domain.Sponsor;
@@ -23,6 +24,8 @@ public class SponsorshipSponsorController {
 	private SponsorService		sponsorService;
 	@Autowired
 	private SponsorshipService	sponsorshipService;
+	@Autowired
+	private CreditCardService	creditCardService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -35,6 +38,19 @@ public class SponsorshipSponsorController {
 
 		result = new ModelAndView("sponsorship/list");
 		result.addObject("sponsorships", sponsorships);
+		return result;
+
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView result;
+
+		final Sponsorship sponsorship = this.sponsorshipService.create();
+
+		result = new ModelAndView("sponsorship/create");
+		result.addObject("sponsorship", sponsorship);
+		result.addObject("creditCards", this.creditCardService.findAll());
 		return result;
 
 	}
