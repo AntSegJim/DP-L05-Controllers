@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
@@ -76,4 +77,29 @@ public class TutorialController {
 		return result;
 	}
 
+	@RequestMapping(value = "/AllTutorials", method = RequestMethod.GET)
+	public ModelAndView allTutorials() {
+		final ModelAndView result;
+		final Collection<Tutorial> tutorials;
+
+		tutorials = this.tutorialService.findAll();
+
+		result = new ModelAndView("tutorial/AllTutorials");
+		result.addObject("tutorials", tutorials);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/showTutorialHW", method = RequestMethod.GET)
+	public ModelAndView showTutorialHW(@RequestParam final int handyWorkerId) {
+		final ModelAndView result;
+		HandyWorker h;
+
+		h = this.handyWorkerService.findOne(handyWorkerId);
+
+		result = new ModelAndView("tutorial/showTutorialHW");
+		result.addObject("h", h);
+
+		return result;
+	}
 }
