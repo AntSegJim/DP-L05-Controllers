@@ -2,6 +2,7 @@
 package controllers.administrator;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.validation.Valid;
 
@@ -97,12 +98,17 @@ public class CategoryAdministratorController {
 	//	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Category category, final BindingResult binding, @RequestParam("parent") final int categoryId, @RequestParam("soon") final Collection<Category> son) {
+	public ModelAndView save(@Valid final Category category, final BindingResult binding, @RequestParam("parent") final int categoryId, @RequestParam(value = "soon", required = false) Collection<Category> son) {
 		ModelAndView result;
 
 		if (!binding.hasErrors()) {
+
+			if (son == null)
+				son = new HashSet<Category>();
+
 			final Category p = this.categoryService.findOne(categoryId);
 			category.setParent(p);
+
 			category.setSoon(son);
 			this.categoryService.save(category);
 			result = new ModelAndView("category/list");
