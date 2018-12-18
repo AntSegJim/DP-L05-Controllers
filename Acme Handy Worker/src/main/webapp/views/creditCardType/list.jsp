@@ -24,7 +24,7 @@
 	<spring:message code="creditCardType.brandName" />
 	</form:label>
 	<form:input path="brandName" />
-	<form:errors path="brandName"/>
+	<form:errors cssClass="error" path="brandName"/>
 	
 	<input type="submit" name="save" value="<spring:message code="creditCardType.save" />" />
 

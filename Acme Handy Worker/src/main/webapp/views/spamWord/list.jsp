@@ -24,7 +24,7 @@
 	<spring:message code="spamWord.name" />
 	</form:label>
 	<form:input path="name" />
-	<form:errors path="name"/>
+	<form:errors cssClass="error" path="name"/>
 	
 	<input type="submit" name="save" value="<spring:message code="spamWord.save" />" />
 
