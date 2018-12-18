@@ -36,6 +36,7 @@
 		<value>/views/warranty/messages</value>
 		<value>/views/application/messages</value>
 		<value>/views/sponsorship/messages</value>
+		<value>/views/creditCardType/messages</value>
 		
 		
 	</util:list>

@@ -52,7 +52,8 @@
 		<security:intercept-url pattern="/warranty/administrator/list.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/warranty/administrator/edit.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/warranty/administrator/show.do" access="hasRole('ADMIN')" />  
-		<security:intercept-url pattern="/warranty/administrator/delete.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/warranty/administrator/delete.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/creditCardType/administrator/list.do" access="hasRole('ADMIN')" /> 		 
 		
 		<security:intercept-url pattern="/complaint/customer/**" access="hasRole('CUSTOMER')" /> 
   		
