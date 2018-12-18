@@ -31,6 +31,7 @@ public class CreditCardTypeAdministratorController {
 		creditCardTypes = this.creditCardTypeService.findAll();
 		final CreditCardType newCreditCardType = this.creditCardTypeService.create();
 		result = new ModelAndView("creditCardType/list");
+		result.addObject("requestURI", "creditCardType/administrator/list.do");
 		result.addObject("creditCardTypes", creditCardTypes);
 		result.addObject("creditCardType", newCreditCardType);
 		return result;

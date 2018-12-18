@@ -33,6 +33,7 @@ public class WarrantyAdministratorController {
 		warranties = this.warrantyService.findAll();
 
 		result = new ModelAndView("warranty/list");
+		result.addObject("requestURI", "warranty/administrator/list.do");
 		result.addObject("warranties", warranties);
 		return result;
 
