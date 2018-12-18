@@ -97,4 +97,8 @@ public class SponsorService {
 
 		return res;
 	}
+	public Sponsor sponsorUserAccount(final Integer id) {
+		return this.sponsorRepository.handyWorkerUserAccount(id);
+	}
+
 }

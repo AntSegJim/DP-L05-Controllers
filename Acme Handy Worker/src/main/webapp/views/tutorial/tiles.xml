@@ -26,5 +26,15 @@
 		<put-attribute name="body" value="/views/tutorial/create-tutorial.jsp" />
 	</definition>
 	
+	<definition name="tutorial/AllTutorials" extends="master.page">	
+		<put-attribute name="title" value="Todos los tutoriales" />
+		<put-attribute name="body" value="/views/tutorial/AllTutorials.jsp" />
+	</definition>
+	
+	<definition name="tutorial/showTutorialHW" extends="master.page">	
+		<put-attribute name="title" value="Handy Worker" />
+		<put-attribute name="body" value="/views/tutorial/showTutorialHW.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

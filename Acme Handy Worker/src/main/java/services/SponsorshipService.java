@@ -59,4 +59,7 @@ public class SponsorshipService {
 		this.SRepo.delete(sponsorship);
 	}
 
+	public Collection<Sponsorship> findAllMySponsorships(final Integer sponsorId) {
+		return this.SRepo.allMySponsorships(sponsorId);
+	}
 }
