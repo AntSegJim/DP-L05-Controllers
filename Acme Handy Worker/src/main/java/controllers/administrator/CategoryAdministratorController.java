@@ -57,6 +57,26 @@ public class CategoryAdministratorController {
 		return result;
 	}
 
+	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	//	public ModelAndView save(@Valid final Category category, final BindingResult binding, @RequestParam("parent") final int categoryId) {
+	//		ModelAndView result;
+	//
+	//		if (!binding.hasErrors()) {
+	//			final Category c = this.categoryService.findOne(categoryId);
+	//			category.setParent(c);
+	//			this.categoryService.save(category);
+	//			result = new ModelAndView("redirect:list.do");
+	//		} else {
+	//			final Collection<Category> categories = this.categoryService.findAll();
+	//			categories.remove(category);
+	//			result = new ModelAndView("category/edit");
+	//			result.addObject("category", category);
+	//			result.addObject("categories", categories);
+	//		}
+	//		return result;
+	//
+	//	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Category category, final BindingResult binding, @RequestParam("parent") final int categoryId) {
 		ModelAndView result;
@@ -65,14 +85,12 @@ public class CategoryAdministratorController {
 			final Category c = this.categoryService.findOne(categoryId);
 			category.setParent(c);
 			this.categoryService.save(category);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+			result = new ModelAndView("category/list");
 			final Collection<Category> categories = this.categoryService.findAll();
-			categories.remove(category);
-			result = new ModelAndView("category/edit");
-			result.addObject("category", category);
 			result.addObject("categories", categories);
-		}
+
+		} else
+			result = new ModelAndView("redirect:edit.do?categoryId=" + category.getId());
 		return result;
 
 	}
