@@ -66,6 +66,8 @@
 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
+		
+		<security:intercept-url pattern="/sponsorship/sponsor/list.do" access="hasRole('SPONSOR')" /> 
 
 		<security:intercept-url pattern="/messageBox/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messageBox/actor/edit.do" access="isAuthenticated()" /> 
