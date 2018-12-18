@@ -47,8 +47,8 @@ public class CreditCardTypeAdministratorController {
 			result = new ModelAndView("redirect:list.do");
 		} else {
 			final Collection<CreditCardType> ccts = this.creditCardTypeService.findAll();
-			result = new ModelAndView("category/edit");
-			result.addObject("category", creditCardType);
+			result = new ModelAndView("creditCardType/edit");
+			result.addObject("creditCardType", creditCardType);
 			result.addObject("creditCardTypes", ccts);
 		}
 		return result;

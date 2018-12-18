@@ -18,22 +18,22 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-<form:form action="creditCardType/administrator/list.do" modelAttribute="creditCardType">
+<form:form action="spam-word/administrator/list.do" modelAttribute="spamWord">
 
-	<form:label path="brandName">
-	<spring:message code="creditCardType.brandName" />
+	<form:label path="name">
+	<spring:message code="spamWord.name" />
 	</form:label>
-	<form:input path="brandName" />
-	<form:errors path="brandName"/>
+	<form:input path="name" />
+	<form:errors path="name"/>
 	
-	<input type="submit" name="save" value="<spring:message code="creditCardType.save" />" />
+	<input type="submit" name="save" value="<spring:message code="spamWord.save" />" />
 
 </form:form>
 
-<p><spring:message code="creditCardType.list" /></p>
-<display:table pagesize="5" name="creditCardTypes" id="row" requestURI="${requestURI}" >
+<p><spring:message code="spamWord.list" /></p>
+<display:table pagesize="5" name="spamWords" id="row" requestURI="${requestURI}" >
 
-<display:column property="brandName" titleKey="creditCardType.brandName" />
+<display:column property="name" titleKey="spamWord.name" />
 
 </display:table>
 
