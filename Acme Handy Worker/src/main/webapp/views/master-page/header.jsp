@@ -30,7 +30,7 @@
 					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.administrator.warranty" /></a></li>						
 				</ul>
 			</li>
-			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCardType" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="creditCardType/administrator/list.do"><spring:message code="master.page.administrator.creditCardType" /></a></li>						

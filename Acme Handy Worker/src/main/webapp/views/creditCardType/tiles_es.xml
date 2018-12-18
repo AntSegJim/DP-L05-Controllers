@@ -16,13 +16,9 @@
       
 <tiles-definitions>
 
-	<definition name="complaint/complaints" extends="master.page">	
-		<put-attribute name="title" value="Quejas customer" />
-		<put-attribute name="body" value="/views/complaint/complaints.jsp" />
-	</definition>
-	<definition name="complaint/editComplaint" extends="master.page">	
-		<put-attribute name="title" value="Editar queja" />
-		<put-attribute name="body" value="/views/complaint/editComplaint.jsp" />
+	<definition name="creditCardType/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de marcas en Tarjetas de Crédito" />
+		<put-attribute name="body" value="/views/creditCardType/list.jsp" />
 	</definition>
 	
 </tiles-definitions>
