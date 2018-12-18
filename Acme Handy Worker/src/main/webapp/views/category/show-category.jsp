@@ -19,6 +19,15 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-<spring:message code="category.name" /> ${category.name} <br/>
+<spring:message code="category.name" /> : ${category.name} <br/>
+<spring:message code="category.parent" /> : ${category.parent.name} <br/>
+<spring:message code="category.son" /> :  <br/>
+<display:table name="${category.soon}" id="row">
+<display:column property="name" titleKey="category.name" />
+</display:table>
+<br />
+<br />
+	<input type="button" name="cancel" value="<spring:message code="category.cancel" />"
+			onclick="javascript: relativeRedir('category/administrator/list.do');" />
 
 </security:authorize>

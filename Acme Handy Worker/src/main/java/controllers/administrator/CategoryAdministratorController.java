@@ -103,7 +103,6 @@ public class CategoryAdministratorController {
 		if (!binding.hasErrors()) {
 			final Category p = this.categoryService.findOne(categoryId);
 			category.setParent(p);
-
 			category.setSoon(son);
 			this.categoryService.save(category);
 			result = new ModelAndView("category/list");
