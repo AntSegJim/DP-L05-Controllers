@@ -71,8 +71,11 @@ public class WarrantyAdministratorController {
 			this.warrantyService.save(newWarranty);
 			result = new ModelAndView("warranty/list");
 			result.addObject("warranties", this.warrantyService.findAll());
-		} else
-			result = new ModelAndView("redirect:edit.do?warrantyId=" + newWarranty.getId());
+		} else {
+			//result = new ModelAndView("redirect:edit.do?warrantyId=" + newWarranty.getId());
+			result = new ModelAndView("warranty/edit");
+			result.addObject("warranty", newWarranty);
+		}
 
 		return result;
 
@@ -105,5 +108,45 @@ public class WarrantyAdministratorController {
 			result.addObject("warranties", this.warrantyService.findAll());
 			return result;
 		}
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView result;
+		Warranty warranty;
+
+		warranty = this.warrantyService.create();
+		result = new ModelAndView("warranty/create");
+		result.addObject("warranty", warranty);
+		return result;
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView create(@Valid final Warranty newWarranty, final BindingResult binding, @RequestParam("laws") final String leyes, @RequestParam("terms") final String terminos) {
+		final ModelAndView result;
+
+		if (!binding.hasErrors()) {
+
+			this.warrantyService.save(newWarranty);
+			result = new ModelAndView("warranty/list");
+			result.addObject("warranties", this.warrantyService.findAll());
+		} else {
+			result = new ModelAndView("warranty/create");
+			result.addObject("warranty", newWarranty);
+		}
+
+		return result;
+
+	}
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "cancel")
+	public ModelAndView cancelCreate() {
+		final ModelAndView result;
+		final Collection<Warranty> warranties;
+
+		warranties = this.warrantyService.findAll();
+
+		result = new ModelAndView("warranty/list");
+		result.addObject("warranties", warranties);
+		return result;
 	}
 }

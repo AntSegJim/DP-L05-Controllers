@@ -23,7 +23,7 @@ public class WarrantyService {
 
 	public Warranty create() {
 		final Warranty w = new Warranty();
-		w.setDraftMode(0);
+		w.setDraftMode(1);
 		w.setLaws(new HashSet<String>());
 		w.setTerms(new HashSet<String>());
 		w.setTitle("");
@@ -39,9 +39,12 @@ public class WarrantyService {
 	public Warranty save(final Warranty w) {
 		Warranty result = null;
 		final Warranty oldWarranty = this.warrantyRepository.findOne(w.getId());
-
-		if (oldWarranty.getDraftMode() == 1) {
+		if (oldWarranty == null) {
 			Assert.isTrue(w.getTitle() != null && w.getTitle() != "" && w.getLaws() != null && w.getTerms() != null, "WarrantyService.save -> ERROR");
+			result = this.warrantyRepository.save(w);
+		} else if (oldWarranty.getDraftMode() == 1) {
+			Assert.isTrue(w.getTitle() != null && w.getTitle() != "" && w.getLaws() != null && w.getTerms() != null, "WarrantyService.save -> ERROR");
+			System.out.println(w.getLaws());
 			result = this.warrantyRepository.save(w);
 		} else
 			result = oldWarranty;

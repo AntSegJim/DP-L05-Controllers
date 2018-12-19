@@ -18,6 +18,8 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
+<a href="warranty/administrator/create.do"><spring:message code="warranty.create" /></a>
+
 <p><spring:message code="warranty.list" /></p>
 <jstl:if test="${not empty exception}">
 		<p style="color:red"> <spring:message code="warranty.error.foreignKey" /> </p>
