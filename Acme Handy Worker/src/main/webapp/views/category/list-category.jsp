@@ -39,4 +39,8 @@ requestURI="category/administrator/list.do" >
 
 </display:table>
 
+<br />
+
+<a href="category/administrator/create.do"><spring:message code="category.create" /></a>
+
 </security:authorize>

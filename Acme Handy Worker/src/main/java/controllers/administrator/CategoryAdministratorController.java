@@ -39,6 +39,23 @@ public class CategoryAdministratorController {
 
 	}
 
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView result;
+		Category category;
+		final Collection<Category> categories;
+
+		categories = this.categoryService.findAll();
+
+		category = this.categoryService.create();
+
+		result = new ModelAndView("category/create");
+		result.addObject("category", category);
+		result.addObject("categories", categories);
+
+		return result;
+	}
+
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int categoryId) {
 		ModelAndView result;
@@ -47,6 +64,7 @@ public class CategoryAdministratorController {
 		category = this.categoryService.findOne(categoryId);
 		result = new ModelAndView("category/show");
 		result.addObject("category", category);
+
 		return result;
 
 	}
