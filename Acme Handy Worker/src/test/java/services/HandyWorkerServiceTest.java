@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
 import security.UserAccount;
 import utilities.AbstractTest;
 import domain.Category;
-import domain.Filter;
 import domain.Finder;
 import domain.HandyWorker;
 import domain.MessageBox;
@@ -30,8 +29,6 @@ import domain.Warranty;
 @Transactional
 public class HandyWorkerServiceTest extends AbstractTest {
 
-	@Autowired
-	private FilterService		filterService;
 	@Autowired
 	private FinderService		finderService;
 	@Autowired
@@ -73,10 +70,8 @@ public class HandyWorkerServiceTest extends AbstractTest {
 		s.setUserAccount(ua);
 		s.setSurname("SurnameHandy");
 
-		final Filter filter = this.filterService.create();
-		filter.setAddress("hola");
 		final Finder finder = this.finderService.create();
-		finder.setFilter(filter);
+		finder.setAddress("hola");
 		s.setFinder(finder);
 		Assert.isTrue(s.getUserAccount().getId() == ua.getId());
 		Assert.isTrue(s.getUserAccount().getUsername().equals("Antonio"));
@@ -100,8 +95,8 @@ public class HandyWorkerServiceTest extends AbstractTest {
 		h.setUserAccount(ua);
 		h.setMakeHandyWorker("handuWorkerMake");
 		h.setScore(1);
-		final Filter filter = this.filterService.create();
-		filter.setAddress("address");
+		final Finder finder = this.finderService.create();
+		finder.setAddress("address");
 		final Warranty warranty = this.warrantyService.create();
 		warranty.setDraftMode(1);
 		warranty.setLaws(new HashSet<String>());
@@ -111,11 +106,8 @@ public class HandyWorkerServiceTest extends AbstractTest {
 		category.setName("Categoria12");
 		category.setParent(this.categoryService.findOne(2357));
 		category.setSoon(new HashSet<Category>());
-		filter.setWarranty(this.warrantyService.save(warranty));
-		filter.setCategory(this.categoryService.save(category));
-		final Filter savedFilter = this.filterService.save(filter);
-		final Finder finder = this.finderService.create();
-		finder.setFilter(savedFilter);
+		finder.setWarranty(this.warrantyService.save(warranty));
+		finder.setCategory(this.categoryService.save(category));
 		finder.setMoment(new Date());
 		final Finder savedFinder = this.finderService.save(finder);
 		h.setFinder(savedFinder);

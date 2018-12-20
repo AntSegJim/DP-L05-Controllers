@@ -19,7 +19,7 @@
 <security:authorize access="hasRole('HANDYWORKER')">
 
 <p><spring:message code="finder.show" /></p>
-<display:table pagesize="5" name="filter" id="row" requestURI="finder/show.do" >
+<display:table pagesize="5" name="finder" id="row" requestURI="finder/show.do" >
 
 <display:column property="ticker" titleKey="filter.ticker" />
 <display:column property="description" titleKey="filter.description"/>
@@ -33,9 +33,10 @@
 
 </display:table>
 
-<form:form action="finder/handy-worker/save.do" modelAttribute="filter">
+<form:form action="finder/handy-worker/save.do" modelAttribute="finder">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+	<form:hidden path="moment"/>
 	
 	<form:label path="ticker">
 	<spring:message code="filter.ticker"/>:

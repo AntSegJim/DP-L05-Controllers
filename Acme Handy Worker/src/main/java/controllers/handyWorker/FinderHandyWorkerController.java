@@ -15,14 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.CategoryService;
-import services.FilterService;
 import services.FinderService;
 import services.FixUpTaskService;
 import services.HandyWorkerService;
 import services.WarrantyService;
 import controllers.AbstractController;
 import domain.Category;
-import domain.Filter;
 import domain.Finder;
 import domain.HandyWorker;
 import domain.Warranty;
@@ -35,8 +33,6 @@ public class FinderHandyWorkerController extends AbstractController {
 	private HandyWorkerService	handyWorkerService;
 	@Autowired
 	private FinderService		finderService;
-	@Autowired
-	private FilterService		filterService;
 	@Autowired
 	private CategoryService		categoryService;
 	@Autowired
@@ -55,15 +51,14 @@ public class FinderHandyWorkerController extends AbstractController {
 
 	//MUESTRA EL FILTRO DEL FINDER
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView action1() {
+	public ModelAndView show() {
 		final ModelAndView result;
 		final Integer id_user = LoginService.getPrincipal().getId();
 		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
 		final Finder finder = handyWorker.getFinder();
-		final Filter filter = finder.getFilter();
 
 		result = new ModelAndView("finder/show");
-		result.addObject("filter", filter);
+		result.addObject("finder", finder);
 
 		final Collection<Category> categories = this.categoryService.findAll();
 		result.addObject("categories", categories);
@@ -75,20 +70,19 @@ public class FinderHandyWorkerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
-	public ModelAndView actionSave(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
+	public ModelAndView actionSave(@Valid final Finder newFinder, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
 		final ModelAndView result;
 
-		newFilter.setCategory(this.categoryService.findOne(categoryId));
-		newFilter.setWarranty(this.warrantyService.findOne(warrantyId));
+		newFinder.setCategory(this.categoryService.findOne(categoryId));
+		newFinder.setWarranty(this.warrantyService.findOne(warrantyId));
 
-		this.filterService.save(newFilter);
+		this.finderService.save(newFinder);
 
 		result = new ModelAndView("finder/show");
 		final Integer id_user = LoginService.getPrincipal().getId();
 		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
 		final Finder finder = handyWorker.getFinder();
-		final Filter filter = finder.getFilter();
-		result.addObject("filter", filter);
+		result.addObject("finder", finder);
 
 		final Collection<Category> categories = this.categoryService.findAll();
 		result.addObject("categories", categories);
@@ -100,21 +94,21 @@ public class FinderHandyWorkerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "search")
-	public ModelAndView actionSearch(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
+	public ModelAndView actionSearch(@Valid final Finder newFinder, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
 		final ModelAndView result;
 
 		String categoryName = "";
 		if (categoryId != 0) {
-			newFilter.setCategory(this.categoryService.findOne(categoryId));
-			categoryName = newFilter.getCategory().getName();
+			newFinder.setCategory(this.categoryService.findOne(categoryId));
+			categoryName = newFinder.getCategory().getName();
 		}
 		String warrantyTitle = "";
 		if (warrantyId != 0) {
-			newFilter.setWarranty(this.warrantyService.findOne(warrantyId));
-			warrantyTitle = newFilter.getWarranty().getTitle();
+			newFinder.setWarranty(this.warrantyService.findOne(warrantyId));
+			warrantyTitle = newFinder.getWarranty().getTitle();
 		}
 
-		final Filter sf = this.filterService.save(newFilter);
+		final Finder sf = this.finderService.save(newFinder);
 
 		result = new ModelAndView("finder/results");
 		final Integer id_user = LoginService.getPrincipal().getId();
@@ -128,24 +122,21 @@ public class FinderHandyWorkerController extends AbstractController {
 		return result;
 	}
 
-	//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "search")
-	//	public ModelAndView actionSearch(@Valid final Filter newFilter, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
-	//		final ModelAndView result;
-	//
-	//		newFilter.setCategory(this.categoryService.findOne(categoryId));
-	//		newFilter.setWarranty(this.warrantyService.findOne(warrantyId));
-	//
-	//		final Filter sf = this.filterService.save(newFilter);
-	//
-	//		result = new ModelAndView("finder/results");
-	//		final Integer id_user = LoginService.getPrincipal().getId();
-	//		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
-	//		final Finder finder = handyWorker.getFinder();
-	//		finder.setFixUpTask(this.fixUpTaskService.filterFixUpTask(sf.getTicker(), sf.getDescription(), sf.getAddress(), sf.getStartDate(), sf.getEndDate(), sf.getLowPrice(), sf.getHighPrice(), sf.getCategory().getName(), sf.getWarranty().getTitle()));
-	//
-	//		result.addObject("requestURI", "finder/handy-worker/results.do");
-	//		result.addObject("fixUpTasks", finder.getFixUpTask());
-	//
-	//		return result;
-	//	}
+	@RequestMapping(value = "/list-results", method = RequestMethod.GET)
+	public ModelAndView listFixUpTaskOfTheResults() {
+		final ModelAndView result;
+		final Integer id_user = LoginService.getPrincipal().getId();
+		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
+		final Finder finder = handyWorker.getFinder();
+
+		result = new ModelAndView("finder/results");
+
+		final Collection<Category> categories = this.categoryService.findAll();
+		result.addObject("categories", categories);
+
+		final Collection<Warranty> warranties = this.warrantyService.findAll();
+		result.addObject("warranties", warranties);
+
+		return result;
+	}
 }

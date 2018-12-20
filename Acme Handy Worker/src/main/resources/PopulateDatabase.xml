@@ -1452,9 +1452,8 @@
 		<property name="userAccount" ref="userAccount8" />
 	</bean>
 
-
-	<!-- Filter -->
-	<bean id="filter1" class="domain.Filter">
+	<!-- Finder -->
+	<bean id="finder1" class="domain.Finder">
 		<property name="ticker" value="123412-09pplm" />
 		<property name="description" value="lo describo" />
 		<property name="address" value="pongo direccion" />
@@ -1464,57 +1463,84 @@
 		<property name="highPrice" value="14" />
 		<property name="warranty" ref="warranty1" />
 		<property name="category" ref="soonCategory1" />
-	</bean>
-
-	<!-- Finder -->
-	<bean id="finder1" class="domain.Finder">
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
 			<list>
 				<ref bean="fixUpTask1" />
 			</list>
 		</property>
-		<property name="filter" ref="filter1" />
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
+	<property name="ticker" value="123412-09pplm" />
+		<property name="description" value="lo describo" />
+		<property name="address" value="pongo direccion" />
+		<property name="startDate" value="01/02/2015 23:59" />
+		<property name="endDate" value="02/02/2015 23:59" />
+		<property name="lowPrice" value="12" />
+		<property name="highPrice" value="14" />
+		<property name="warranty" ref="warranty1" />
+		<property name="category" ref="soonCategory1" />
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
 			<list>
 				<ref bean="fixUpTask1" />
 			</list>
 		</property>
-		<property name="filter" ref="filter1" />
 	</bean>
 
 	<bean id="finder3" class="domain.Finder">
+	<property name="ticker" value="123412-09pplm" />
+		<property name="description" value="lo describo" />
+		<property name="address" value="pongo direccion" />
+		<property name="startDate" value="01/02/2015 23:59" />
+		<property name="endDate" value="02/02/2015 23:59" />
+		<property name="lowPrice" value="12" />
+		<property name="highPrice" value="14" />
+		<property name="warranty" ref="warranty1" />
+		<property name="category" ref="soonCategory1" />
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
 			<list>
 				<ref bean="fixUpTask1" />
 			</list>
 		</property>
-		<property name="filter" ref="filter1" />
 	</bean>
 
 	<bean id="finder4" class="domain.Finder">
+	<property name="ticker" value="123412-09pplm" />
+		<property name="description" value="lo describo" />
+		<property name="address" value="pongo direccion" />
+		<property name="startDate" value="01/02/2015 23:59" />
+		<property name="endDate" value="02/02/2015 23:59" />
+		<property name="lowPrice" value="12" />
+		<property name="highPrice" value="14" />
+		<property name="warranty" ref="warranty1" />
+		<property name="category" ref="soonCategory1" />
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
 			<list>
 				<ref bean="fixUpTask1" />
 			</list>
 		</property>
-		<property name="filter" ref="filter1" />
 	</bean>
 
 	<bean id="finder5" class="domain.Finder">
+	<property name="ticker" value="123412-09pplm" />
+		<property name="description" value="lo describo" />
+		<property name="address" value="pongo direccion" />
+		<property name="startDate" value="01/02/2015 23:59" />
+		<property name="endDate" value="02/02/2015 23:59" />
+		<property name="lowPrice" value="12" />
+		<property name="highPrice" value="14" />
+		<property name="warranty" ref="warranty1" />
+		<property name="category" ref="soonCategory1" />
 		<property name="moment" value="01/02/2015 23:59" />
 		<property name="fixUpTask">
 			<list>
 				<ref bean="fixUpTask1" />
 			</list>
 		</property>
-		<property name="filter" ref="filter1" />
 	</bean>
 
 	<!-- FixUpTask -->
