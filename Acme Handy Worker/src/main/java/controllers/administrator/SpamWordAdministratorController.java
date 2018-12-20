@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.SpamWordService;
+import controllers.AbstractController;
 import domain.SpamWord;
 
 @Controller
 @RequestMapping("/spam-word/administrator")
-public class SpamWordAdministratorController {
+public class SpamWordAdministratorController extends AbstractController {
 
 	@Autowired
 	private SpamWordService	spamWordService;

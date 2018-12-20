@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CreditCardTypeService;
+import controllers.AbstractController;
 import domain.CreditCardType;
 
 @Controller
 @RequestMapping("/creditCardType/administrator")
-public class CreditCardTypeAdministratorController {
+public class CreditCardTypeAdministratorController extends AbstractController {
 
 	@Autowired
 	private CreditCardTypeService	creditCardTypeService;

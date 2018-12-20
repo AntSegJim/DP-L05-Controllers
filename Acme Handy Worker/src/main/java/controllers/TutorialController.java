@@ -25,7 +25,7 @@ import domain.Tutorial;
 
 @Controller
 @RequestMapping("/tutorial")
-public class TutorialController {
+public class TutorialController extends AbstractController {
 
 	@Autowired
 	private TutorialService		tutorialService;

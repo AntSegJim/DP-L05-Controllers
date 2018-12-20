@@ -24,7 +24,7 @@ import domain.Referee;
 
 @Controller
 @RequestMapping("/complaint/customer")
-public class ComplaintCustomerController {
+public class ComplaintCustomerController extends AbstractController {
 
 	@Autowired
 	private CustomerService		CService;
