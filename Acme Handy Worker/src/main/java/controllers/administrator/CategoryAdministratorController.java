@@ -142,21 +142,19 @@ public class CategoryAdministratorController extends AbstractController {
 
 	}
 
-	//	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
-	//	public ModelAndView delete(final int categoryId, final BindingResult binding) {
-	//		ModelAndView result;
-	//		final Category c = this.categoryService.findOne(categoryId);
-	//
-	//		try {
-	//			this.categoryService.delete(c);
-	//			result = new ModelAndView("category/list");
-	//			result.addObject("categories", this.categoryService.findAll());
-	//			return result;
-	//		} catch (final Exception e) {
-	//			result = new ModelAndView("category/show");
-	//			result.addObject("category", c);
-	//		}
-	//		return result;
-	//	}
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Category category, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			this.categoryService.delete(category);
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("categories", this.categoryService.findAll());
+		} catch (final Exception e) {
+			result = new ModelAndView("category/edit");
+			result.addObject("category", category);
+		}
+		return result;
+	}
 
 }
