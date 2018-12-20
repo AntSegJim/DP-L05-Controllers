@@ -69,8 +69,7 @@ public class WarrantyAdministratorController {
 
 		if (!binding.hasErrors()) {
 			this.warrantyService.save(newWarranty);
-			result = new ModelAndView("warranty/list");
-			result.addObject("warranties", this.warrantyService.findAll());
+			result = new ModelAndView("redirect:list.do");
 		} else {
 			//result = new ModelAndView("redirect:edit.do?warrantyId=" + newWarranty.getId());
 			result = new ModelAndView("warranty/edit");
@@ -83,12 +82,7 @@ public class WarrantyAdministratorController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "cancel")
 	public ModelAndView cancel() {
 		final ModelAndView result;
-		final Collection<Warranty> warranties;
-
-		warranties = this.warrantyService.findAll();
-
-		result = new ModelAndView("warranty/list");
-		result.addObject("warranties", warranties);
+		result = new ModelAndView("redirect:list.do");
 		return result;
 	}
 
@@ -98,9 +92,7 @@ public class WarrantyAdministratorController {
 		final Warranty w = this.warrantyService.findOne(warrantyId);
 		try {
 			this.warrantyService.delete(w);
-			result = new ModelAndView("warranty/list");
-
-			result.addObject("warranties", this.warrantyService.findAll());
+			result = new ModelAndView("redirect:list.do");
 			return result;
 		} catch (final Exception e) {
 			result = new ModelAndView("warranty/list");
@@ -128,8 +120,7 @@ public class WarrantyAdministratorController {
 		if (!binding.hasErrors()) {
 
 			this.warrantyService.save(newWarranty);
-			result = new ModelAndView("warranty/list");
-			result.addObject("warranties", this.warrantyService.findAll());
+			result = new ModelAndView("redirect:list.do");
 		} else {
 			result = new ModelAndView("warranty/create");
 			result.addObject("warranty", newWarranty);
@@ -141,12 +132,7 @@ public class WarrantyAdministratorController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "cancel")
 	public ModelAndView cancelCreate() {
 		final ModelAndView result;
-		final Collection<Warranty> warranties;
-
-		warranties = this.warrantyService.findAll();
-
-		result = new ModelAndView("warranty/list");
-		result.addObject("warranties", warranties);
+		result = new ModelAndView("redirect:list.do");
 		return result;
 	}
 }
