@@ -41,13 +41,21 @@
 	</form:select>
 	<br />
 	
+	<jstl:choose>
+	<jstl:when test="${category.id ne 0 }">
 	<form:label path="soon">
 	<spring:message code="category.son"/>:
 	</form:label>
 	<form:select path="soon">
 		<form:options items="${categories2}" itemLabel="name" itemValue="id"/>
 	</form:select>
+	</jstl:when>
 	
+	<jstl:otherwise>
+		<form:hidden path="soon" />
+	</jstl:otherwise>
+	
+	</jstl:choose>
 	<br />
 	
 	<input type="submit" name="save" 

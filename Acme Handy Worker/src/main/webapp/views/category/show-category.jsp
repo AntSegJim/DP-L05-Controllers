@@ -29,5 +29,5 @@
 <br />
 	<input type="button" name="cancel" value="<spring:message code="category.cancel" />"
 			onclick="javascript: relativeRedir('category/administrator/list.do');" />
-
+			
 </security:authorize>

@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
+import controllers.AbstractController;
 import domain.Category;
 
 @Controller
 @RequestMapping("/category/administrator")
-public class CategoryAdministratorController {
+public class CategoryAdministratorController extends AbstractController {
 
 	@Autowired
 	private CategoryService	categoryService;
@@ -84,8 +85,9 @@ public class CategoryAdministratorController {
 		categories.removeAll(category.getSoon());
 
 		categories2 = this.categoryService.findAll();
-		categories.remove(category);
-		categories.remove(category.getParent());
+		categories2.remove(category);
+		categories2.remove(category.getParent());
+		categories2.remove(this.categoryService.rootCategory());
 
 		result = new ModelAndView("category/edit");
 		result.addObject("category", category);
@@ -139,5 +141,22 @@ public class CategoryAdministratorController {
 		return result;
 
 	}
+
+	//	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	//	public ModelAndView delete(final int categoryId, final BindingResult binding) {
+	//		ModelAndView result;
+	//		final Category c = this.categoryService.findOne(categoryId);
+	//
+	//		try {
+	//			this.categoryService.delete(c);
+	//			result = new ModelAndView("category/list");
+	//			result.addObject("categories", this.categoryService.findAll());
+	//			return result;
+	//		} catch (final Exception e) {
+	//			result = new ModelAndView("category/show");
+	//			result.addObject("category", c);
+	//		}
+	//		return result;
+	//	}
 
 }
