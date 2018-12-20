@@ -24,7 +24,7 @@
 <jstl:if test="${not empty exception}">
 		<p style="color:red"> <spring:message code="warranty.error.foreignKey" /> </p>
 </jstl:if>
-<display:table pagesize="5" name="warranties" id="row" requestURI="warranty/administrator/show.do" >
+<display:table pagesize="5" name="warranties" id="row" requestURI="warranty/administrator/list.do" >
 	
 	<display:column property="title" titleKey="warranty.title"/>
 	
