@@ -49,6 +49,7 @@ public class CreditCardTypeAdministratorController extends AbstractController {
 		} else {
 			final Collection<CreditCardType> ccts = this.creditCardTypeService.findAll();
 			result = new ModelAndView("creditCardType/list");
+			result.addObject("requestURI", "creditCardType/administrator/list.do");
 			result.addObject("creditCardType", creditCardType);
 			result.addObject("creditCardTypes", ccts);
 		}

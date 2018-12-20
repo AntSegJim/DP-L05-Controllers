@@ -48,6 +48,7 @@ public class SpamWordAdministratorController extends AbstractController {
 		} else {
 			final Collection<SpamWord> sws = this.spamWordService.findAll();
 			result = new ModelAndView("spamWord/list");
+			result.addObject("requestURI", "spam-word/administrator/list.do");
 			result.addObject("spamWord", spamWord);
 			result.addObject("spamWords", sws);
 		}
