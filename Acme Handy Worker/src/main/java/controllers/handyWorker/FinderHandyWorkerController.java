@@ -3,6 +3,7 @@ package controllers.handyWorker;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.validation.Valid;
 
@@ -101,11 +102,10 @@ public class FinderHandyWorkerController extends AbstractController {
 		finder.setMoment(new Date());
 		finder.setFixUpTask(resultado);
 		this.finderService.save(finder);
-
 		result = new ModelAndView("redirect:list.do");
-
 		return result;
 	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listFixUpTaskOfTheResults() {
 		final ModelAndView result;
@@ -113,6 +113,10 @@ public class FinderHandyWorkerController extends AbstractController {
 		final Integer id_user = LoginService.getPrincipal().getId();
 		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
 		final Finder finder = handyWorker.getFinder();
+
+		if ((new Date().getTime() - finder.getMoment().getTime()) / 3600000 > 1)
+			//Cambiar ese 1 por el atributo que puede modificar el ADMIN
+			finder.setFixUpTask(new HashSet<FixUpTask>());
 
 		result = new ModelAndView("finder/results");
 		result.addObject("requestURI", "finder/handy-worker/list.do");
