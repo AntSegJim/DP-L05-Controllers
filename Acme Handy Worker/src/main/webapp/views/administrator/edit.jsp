@@ -28,8 +28,7 @@
 	<form:hidden path="userAccount.authorities" />
 	
 	<fieldset>
-	<spring:message code="administrator.personalDatas" />
-	<br />
+	<legend><spring:message code="administrator.personalDatas" /></legend>
 	
 	<form:label path="name"><spring:message code="administrator.name" /></form:label>
 	<form:input path="name" />

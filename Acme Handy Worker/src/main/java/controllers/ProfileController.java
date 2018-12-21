@@ -71,7 +71,7 @@ public class ProfileController extends AbstractController {
 	public ModelAndView action3(@Valid final Actor actor, final BindingResult binding) {
 		//throw new RuntimeException("Oops! An *expected* exception was thrown. This is normal behaviour.");
 		ModelAndView result;
-		if (!binding.hasErrors()) {
+		if (binding.hasErrors()) {
 			this.actorService.save(actor);
 			result = new ModelAndView("redirect:action-2.do");
 		} else {
