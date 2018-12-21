@@ -3,7 +3,6 @@ package controllers.handyWorker;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 
 import javax.validation.Valid;
 
@@ -12,11 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.CategoryService;
+import services.CustomizableFinderService;
 import services.FinderService;
 import services.FixUpTaskService;
 import services.HandyWorkerService;
@@ -33,15 +32,17 @@ import domain.Warranty;
 public class FinderHandyWorkerController extends AbstractController {
 
 	@Autowired
-	private HandyWorkerService	handyWorkerService;
+	private HandyWorkerService			handyWorkerService;
 	@Autowired
-	private FinderService		finderService;
+	private FinderService				finderService;
 	@Autowired
-	private CategoryService		categoryService;
+	private CategoryService				categoryService;
 	@Autowired
-	private WarrantyService		warrantyService;
+	private WarrantyService				warrantyService;
 	@Autowired
-	private FixUpTaskService	fixUpTaskService;
+	private FixUpTaskService			fixUpTaskService;
+	@Autowired
+	private CustomizableFinderService	customizableFinderService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -73,35 +74,21 @@ public class FinderHandyWorkerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "search")
-	public ModelAndView actionSearch(@Valid final Finder newf, final BindingResult binding, @RequestParam("category") final Integer categoryId, @RequestParam("warranty") final Integer warrantyId) {
+	public ModelAndView actionSearch(@Valid final Finder newf, final BindingResult binding) {
 		final ModelAndView result;
 
 		String categoryName = "";
-		if (categoryId != 0) {
-			newf.setCategory(this.categoryService.findOne(categoryId));
+		if (newf.getCategory() != null)
 			categoryName = newf.getCategory().getName();
-		}
 		String warrantyTitle = "";
-		if (warrantyId != 0) {
-			newf.setWarranty(this.warrantyService.findOne(warrantyId));
+		if (newf.getWarranty() != null)
 			warrantyTitle = newf.getWarranty().getTitle();
-		}
-		final Integer id_user = LoginService.getPrincipal().getId();
-		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
-		final Finder finder = handyWorker.getFinder();
+
 		final Collection<FixUpTask> resultado = this.fixUpTaskService.filterFixUpTask(newf.getTicker(), newf.getDescription(), newf.getAddress(), newf.getStartDate(), newf.getEndDate(), newf.getLowPrice(), newf.getHighPrice(), categoryName, warrantyTitle);
-		finder.setTicker(newf.getTicker());
-		finder.setAddress(newf.getAddress());
-		finder.setDescription(newf.getDescription());
-		finder.setStartDate(newf.getStartDate());
-		finder.setEndDate(newf.getEndDate());
-		finder.setLowPrice(newf.getLowPrice());
-		finder.setHighPrice(newf.getHighPrice());
-		finder.setCategory(newf.getCategory());
-		finder.setWarranty(newf.getWarranty());
-		finder.setMoment(new Date());
-		finder.setFixUpTask(resultado);
-		this.finderService.save(finder);
+		newf.setFixUpTask(resultado);
+		newf.setMoment(new Date());
+		this.finderService.save(newf);
+
 		result = new ModelAndView("redirect:list.do");
 		return result;
 	}
@@ -114,10 +101,18 @@ public class FinderHandyWorkerController extends AbstractController {
 		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
 		final Finder finder = handyWorker.getFinder();
 
-		if ((new Date().getTime() - finder.getMoment().getTime()) / 3600000 > 1)
-			//Cambiar ese 1 por el atributo que puede modificar el ADMIN
-			finder.setFixUpTask(new HashSet<FixUpTask>());
+		String categoryName = "";
+		if (finder.getCategory() != null)
+			categoryName = finder.getCategory().getName();
+		String warrantyTitle = "";
+		if (finder.getWarranty() != null)
+			warrantyTitle = finder.getWarranty().getTitle();
 
+		if ((new Date().getTime() - finder.getMoment().getTime()) / 3600000 > this.customizableFinderService.getValues().getTimeCache()) {
+			finder.setFixUpTask(this.fixUpTaskService.filterFixUpTask(finder.getTicker(), finder.getDescription(), finder.getAddress(), finder.getStartDate(), finder.getEndDate(), finder.getLowPrice(), finder.getHighPrice(), categoryName, warrantyTitle));
+			finder.setMoment(new Date());
+			this.finderService.save(finder);
+		}
 		result = new ModelAndView("finder/results");
 		result.addObject("requestURI", "finder/handy-worker/list.do");
 		result.addObject("fixUpTasks", finder.getFixUpTask());
