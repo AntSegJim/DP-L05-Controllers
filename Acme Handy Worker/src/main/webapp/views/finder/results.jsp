@@ -30,8 +30,9 @@
 
 </display:table>
 
-
-<a href="finder/handy-worker/show.do" ><spring:message code="filter.volver" /></a>
+<div style="text-align:center;">
+	<a href="finder/handy-worker/show.do" ><spring:message code="filter.volver" /></a>
+</div>
 </security:authorize>
 
 

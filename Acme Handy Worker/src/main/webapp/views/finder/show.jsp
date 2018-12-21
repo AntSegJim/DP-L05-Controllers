@@ -33,6 +33,9 @@
 
 </display:table>
 
+<div style="text-align:center;">
+	<a href="finder/handy-worker/list.do" ><spring:message code="filter.busqueda-anterior" /></a>
+</div>
 <form:form action="finder/handy-worker/save.do" modelAttribute="finder">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
@@ -105,13 +108,10 @@
 	</form:select>
 	
 	<br /><br />
-	<input type="submit" name="save" 
-	value="<spring:message code="filter.save" />" />
-	
+		
 	<input type="submit" name="search" 
 	value="<spring:message code="filter.search" />" />
 </form:form>
-
 </security:authorize>
 
 
