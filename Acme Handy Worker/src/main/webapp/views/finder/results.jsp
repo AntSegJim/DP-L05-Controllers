@@ -19,6 +19,9 @@
 <security:authorize access="hasRole('HANDYWORKER')">
 
 <p><spring:message code="finder.results" /></p>
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="finder.error" /> </p>
+</jstl:if>
 <display:table pagesize="5" name="fixUpTasks" id="row" requestURI="${requestURI}" >
 
 <display:column property="ticker" titleKey="fixUpTask.ticker" />
