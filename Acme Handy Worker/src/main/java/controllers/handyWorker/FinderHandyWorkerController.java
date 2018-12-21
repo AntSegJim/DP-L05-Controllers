@@ -75,7 +75,7 @@ public class FinderHandyWorkerController extends AbstractController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "search")
 	public ModelAndView actionSearch(@Valid final Finder newf, final BindingResult binding) {
-		final ModelAndView result;
+		ModelAndView result;
 
 		String categoryName = "";
 		if (newf.getCategory() != null)
@@ -84,18 +84,38 @@ public class FinderHandyWorkerController extends AbstractController {
 		if (newf.getWarranty() != null)
 			warrantyTitle = newf.getWarranty().getTitle();
 
-		final Collection<FixUpTask> resultado = this.fixUpTaskService.filterFixUpTask(newf.getTicker(), newf.getDescription(), newf.getAddress(), newf.getStartDate(), newf.getEndDate(), newf.getLowPrice(), newf.getHighPrice(), categoryName, warrantyTitle);
-		newf.setFixUpTask(resultado);
-		newf.setMoment(new Date());
-		this.finderService.save(newf);
+		Date fechaInicio = new Date(0);
+		if (newf.getStartDate() != null)
+			fechaInicio = newf.getStartDate();
+		Date fechaFin = new Date();
+		if (newf.getEndDate() != null)
+			fechaFin = newf.getEndDate();
 
-		result = new ModelAndView("redirect:list.do");
+		Double precioMinimo = 0.0;
+		if (newf.getLowPrice() != null)
+			precioMinimo = newf.getLowPrice();
+		Double precioMaximo = Double.MAX_VALUE;
+		if (newf.getHighPrice() != null)
+			precioMaximo = newf.getHighPrice();
+
+		try {
+			final Collection<FixUpTask> resultado = this.fixUpTaskService.filterFixUpTask(newf.getTicker(), newf.getDescription(), newf.getAddress(), fechaInicio, fechaFin, precioMinimo, precioMaximo, categoryName, warrantyTitle);
+			newf.setFixUpTask(resultado);
+			newf.setMoment(new Date());
+			this.finderService.save(newf);
+
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("finder/show");
+			result.addObject("finder", newf);
+			result.addObject("exception", e);
+		}
 		return result;
 	}
-
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listFixUpTaskOfTheResults() {
 		final ModelAndView result;
+		result = new ModelAndView("finder/results");
 
 		final Integer id_user = LoginService.getPrincipal().getId();
 		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
@@ -108,12 +128,16 @@ public class FinderHandyWorkerController extends AbstractController {
 		if (finder.getWarranty() != null)
 			warrantyTitle = finder.getWarranty().getTitle();
 
-		if ((new Date().getTime() - finder.getMoment().getTime()) / 3600000 > this.customizableFinderService.getValues().getTimeCache()) {
-			finder.setFixUpTask(this.fixUpTaskService.filterFixUpTask(finder.getTicker(), finder.getDescription(), finder.getAddress(), finder.getStartDate(), finder.getEndDate(), finder.getLowPrice(), finder.getHighPrice(), categoryName, warrantyTitle));
-			finder.setMoment(new Date());
-			this.finderService.save(finder);
-		}
-		result = new ModelAndView("finder/results");
+		if ((new Date().getTime() - finder.getMoment().getTime()) / 3600000 > this.customizableFinderService.getValues().getTimeCache())
+			try {
+				finder.setFixUpTask(this.fixUpTaskService.filterFixUpTask(finder.getTicker(), finder.getDescription(), finder.getAddress(), finder.getStartDate(), finder.getEndDate(), finder.getLowPrice(), finder.getHighPrice(), categoryName,
+					warrantyTitle));
+				finder.setMoment(new Date());
+				this.finderService.save(finder);
+			} catch (final Exception e) {
+				result.addObject("exception", e);
+			}
+
 		result.addObject("requestURI", "finder/handy-worker/list.do");
 		result.addObject("fixUpTasks", finder.getFixUpTask());
 		return result;

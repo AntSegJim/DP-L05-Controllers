@@ -19,6 +19,10 @@
 <security:authorize access="hasRole('HANDYWORKER')">
 
 <p><spring:message code="finder.show" /></p>
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="finder.error" /> </p>
+</jstl:if>
+
 <display:table pagesize="5" name="finder" id="row" requestURI="finder/show.do" >
 
 <display:column property="ticker" titleKey="filter.ticker" />
