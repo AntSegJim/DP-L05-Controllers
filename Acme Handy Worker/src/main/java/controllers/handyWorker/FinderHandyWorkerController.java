@@ -84,9 +84,22 @@ public class FinderHandyWorkerController extends AbstractController {
 		if (newf.getWarranty() != null)
 			warrantyTitle = newf.getWarranty().getTitle();
 
+		Date fechaInicio = new Date(0);
+		if (newf.getStartDate() != null)
+			fechaInicio = newf.getStartDate();
+		Date fechaFin = new Date();
+		if (newf.getEndDate() != null)
+			fechaFin = newf.getEndDate();
+
+		Double precioMinimo = 0.0;
+		if (newf.getLowPrice() != null)
+			precioMinimo = newf.getLowPrice();
+		Double precioMaximo = Double.MAX_VALUE;
+		if (newf.getHighPrice() != null)
+			precioMaximo = newf.getHighPrice();
+
 		try {
-			final Collection<FixUpTask> resultado = this.fixUpTaskService.filterFixUpTask(newf.getTicker(), newf.getDescription(), newf.getAddress(), newf.getStartDate(), newf.getEndDate(), newf.getLowPrice(), newf.getHighPrice(), categoryName,
-				warrantyTitle);
+			final Collection<FixUpTask> resultado = this.fixUpTaskService.filterFixUpTask(newf.getTicker(), newf.getDescription(), newf.getAddress(), fechaInicio, fechaFin, precioMinimo, precioMaximo, categoryName, warrantyTitle);
 			newf.setFixUpTask(resultado);
 			newf.setMoment(new Date());
 			this.finderService.save(newf);
@@ -99,7 +112,6 @@ public class FinderHandyWorkerController extends AbstractController {
 		}
 		return result;
 	}
-
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listFixUpTaskOfTheResults() {
 		final ModelAndView result;
