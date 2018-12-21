@@ -95,7 +95,7 @@
 	</form:label>
 	<form:select path="category">
 		<form:options items="${categories}" itemLabel="name" itemValue="id"/>
-		<form:option label="todas" value="0"></form:option>
+		<form:option label="todas" value="-1"></form:option>
 	</form:select>
 	<br />
 	
@@ -104,7 +104,7 @@
 	</form:label>
 	<form:select path="warranty">
 		<form:options items="${warranties}" itemLabel="title" itemValue="id"/>
-		<form:option label="todas" value="0"></form:option>
+		<form:option label="todas" value="-1"></form:option>
 	</form:select>
 	
 	<br /><br />

@@ -105,6 +105,7 @@ public class HandyWorkerService {
 		final UserAccount user = h.getUserAccount();
 		user.setPassword(hash);
 
+		this.finderService.save(h.getFinder());
 		res = this.handyWorkerRepository.save(h);
 
 		this.messageBoxService.createMessageBoxSystem(res);
