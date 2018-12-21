@@ -42,9 +42,9 @@ public class CustomizableFinderService {
 		return this.customizableFinderRepository.findAll();
 	}
 
-	//	public CustomizableFinder findOne(final int customizableFinderId) {
-	//		return this.customizableFinderRepository.findOne(customizableFinderId);
-	//	}
+	public CustomizableFinder findOne(final int customizableFinderId) {
+		return this.customizableFinderRepository.findOne(customizableFinderId);
+	}
 
 	//updating
 	public CustomizableFinder save(final CustomizableFinder customizableFinder) {
@@ -55,9 +55,8 @@ public class CustomizableFinderService {
 		return this.customizableFinderRepository.save(customizableFinder);
 	}
 
-	//deleting
-	//	public void delete(final CustomizableFinder customizableFinder) {
-	//		this.customizableFinderRepository.delete(customizableFinder);
-	//	}
+	public CustomizableFinder getValues() {
+		return this.customizableFinderRepository.getCustomizableFinder();
+	}
 
 }

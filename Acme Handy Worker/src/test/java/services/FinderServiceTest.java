@@ -16,7 +16,6 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Category;
-import domain.Filter;
 import domain.Finder;
 import domain.Warranty;
 
@@ -30,8 +29,6 @@ public class FinderServiceTest extends AbstractTest {
 	@Autowired
 	private FinderService	finderService;
 	@Autowired
-	private FilterService	filterService;
-	@Autowired
 	private CategoryService	categoryService;
 	@Autowired
 	private WarrantyService	warrantyService;
@@ -41,7 +38,33 @@ public class FinderServiceTest extends AbstractTest {
 	@Test
 	public void testCreateFinder() {
 		Finder f;
+		final Warranty warranty, savedWarranty;
+		warranty = this.warrantyService.create();
+		final Collection<String> laws = warranty.getLaws();
+		laws.add("Ley1");
+		final Collection<String> terms = warranty.getTerms();
+		terms.add("Term1");
+		warranty.setLaws(laws);
+		warranty.setTerms(terms);
+		warranty.setTitle("TituloWarranty");
+		warranty.setDraftMode(1);
+		savedWarranty = this.warrantyService.save(warranty);
+
+		Category category, savedCategory;
+		category = this.categoryService.create();
+		category.setName("CategoriaPrimera");
+		category.setParent(category);
+		savedCategory = this.categoryService.save(category);
+
 		f = this.finderService.create();
+		f.setAddress("Direccion");
+		f.setDescription("Description");
+		f.setEndDate(new Date());
+		f.setHighPrice(12.);
+		f.setLowPrice(10.);
+		f.setStartDate(new Date());
+		f.setWarranty(savedWarranty);
+		f.setCategory(savedCategory);
 		f.setMoment(new Date());
 		Assert.isTrue(f.getMoment() != null);
 	}
@@ -50,10 +73,18 @@ public class FinderServiceTest extends AbstractTest {
 		super.authenticate("admin");
 		Finder f, savedF;
 		f = this.finderService.create();
-		f.setMoment(new Date());
-		final Filter filter = f.getFilter();
+		f = this.finderService.create();
+		f.setAddress("Direccion");
+		f.setDescription("Description");
+		f.setEndDate(new Date());
+		f.setHighPrice(12.);
+		f.setLowPrice(10.);
+		f.setStartDate(new Date());
 
-		final Category c = filter.getCategory();
+		f.setMoment(new Date());
+		f.setMoment(new Date());
+
+		final Category c = f.getCategory();
 		c.setName("hola");
 		c.setSoon(new HashSet<Category>());
 		c.setParent(this.categoryService.findOne(5625));
@@ -70,25 +101,13 @@ public class FinderServiceTest extends AbstractTest {
 		w.setTitle("TitleWarranty");
 		savedw = this.warrantyService.save(w);
 
-		filter.setCategory(this.categoryService.save(c));
-		filter.setWarranty(savedw);
-		final Filter savedFilter = this.filterService.save(filter);
-		f.setFilter(savedFilter);
+		f.setWarranty(savedw);
+		f.setCategory(this.categoryService.save(c));
 
 		savedF = this.finderService.save(f);
 		final Collection<Finder> fs = this.finderService.findAll();
 		Assert.isTrue(fs.contains(savedF));
 		super.authenticate(null);
-	}
-	@Test
-	public void testDeleteFinder() {
-		Finder f, savedF;
-		f = this.finderService.create();
-		f.setMoment(new Date());
-		savedF = this.finderService.save(f);
-		this.finderService.delete(savedF);
-		final Collection<Finder> fs = this.finderService.findAll();
-		Assert.isTrue(!fs.contains(savedF));
 	}
 
 }

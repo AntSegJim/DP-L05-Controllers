@@ -19,7 +19,7 @@
 <security:authorize access="hasRole('HANDYWORKER')">
 
 <p><spring:message code="finder.show" /></p>
-<display:table pagesize="5" name="filter" id="row" requestURI="finder/show.do" >
+<display:table pagesize="5" name="finder" id="row" requestURI="finder/show.do" >
 
 <display:column property="ticker" titleKey="filter.ticker" />
 <display:column property="description" titleKey="filter.description"/>
@@ -33,9 +33,13 @@
 
 </display:table>
 
-<form:form action="finder/handy-worker/save.do" modelAttribute="filter">
+<div style="text-align:center;">
+	<a href="finder/handy-worker/list.do" ><spring:message code="filter.busqueda-anterior" /></a>
+</div>
+<form:form action="finder/handy-worker/save.do" modelAttribute="finder">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
+	<form:hidden path="moment"/>
 	
 	<form:label path="ticker">
 	<spring:message code="filter.ticker"/>:
@@ -91,7 +95,7 @@
 	</form:label>
 	<form:select path="category">
 		<form:options items="${categories}" itemLabel="name" itemValue="id"/>
-		<form:option label="todas" value="0"></form:option>
+		<form:option label="todas" value="-1"></form:option>
 	</form:select>
 	<br />
 	
@@ -100,17 +104,14 @@
 	</form:label>
 	<form:select path="warranty">
 		<form:options items="${warranties}" itemLabel="title" itemValue="id"/>
-		<form:option label="todas" value="0"></form:option>
+		<form:option label="todas" value="-1"></form:option>
 	</form:select>
 	
 	<br /><br />
-	<input type="submit" name="save" 
-	value="<spring:message code="filter.save" />" />
-	
+		
 	<input type="submit" name="search" 
 	value="<spring:message code="filter.search" />" />
 </form:form>
-
 </security:authorize>
 
 

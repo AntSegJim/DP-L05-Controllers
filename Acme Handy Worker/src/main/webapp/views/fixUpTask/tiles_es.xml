@@ -10,6 +10,7 @@
  * http://www.tdg-seville.info/License.html
  -->
 
+
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
@@ -21,9 +22,9 @@
 		<put-attribute name="body" value="/views/fixUpTask/show.jsp" />
 	</definition>
 	
-	<definition name="fixUpTask/customer/list" extends="master.page">	
+	<definition name="fixUpTask/list" extends="master.page">	
 		<put-attribute name="title" value="Lista de tarea de reparación" />
-		<put-attribute name="body" value="/views/fixUpTask/list-fixUptask.jsp" />
+		<put-attribute name="body" value="/views/fixUpTask/list-fixUpTask.jsp" />
 	</definition>
 	
 	<definition name="fixUpTask/customer/create" extends="master.page">	

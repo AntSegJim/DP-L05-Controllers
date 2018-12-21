@@ -45,7 +45,8 @@
 </form>
 
 <security:authorize access="hasRole('CUSTOMER')">
-<form action="fixUpTask/customer/list-fixUpTask.do">
-    <input type="submit" value="Ver lista de fixUpTask" />
+<form action="fixUpTask/customer/list.do">
+    <input type="submit" value="<spring:message code="fixUpTask.list" />" />
 </form>
 </security:authorize>
+
