@@ -71,10 +71,10 @@ public class AdministratorService {
 	//Update
 	public Administrator save(final Administrator admin) {
 		final UserAccount userLoged = LoginService.getPrincipal();
-		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"), "Comprobar que hay admin conectado");
 
 		Administrator res = null;
-		Assert.isTrue(admin.getName() != null && admin.getName() != "" && admin.getSurname() != null && admin.getSurname() != "" && admin.getUserAccount() != null && admin.getEmail() != null && admin.getEmail() != "");
+		Assert.isTrue(admin.getName() != null && admin.getName() != "" && admin.getSurname() != null && admin.getSurname() != "" && admin.getUserAccount() != null && admin.getEmail() != null && admin.getEmail() != "", "Fallo en datos personales");
 
 		final String regexEmail1 = "[^@]+@[^@]+\\.[a-zA-Z]{2,}";
 		final Pattern patternEmail1 = Pattern.compile(regexEmail1);
@@ -92,7 +92,7 @@ public class AdministratorService {
 		final Pattern patternEmail4 = Pattern.compile(regexEmail4);
 		final Matcher matcherEmail4 = patternEmail4.matcher(admin.getEmail());
 
-		Assert.isTrue((matcherEmail1.matches() == true || matcherEmail2.matches() == true || matcherEmail3.matches() == true || matcherEmail4.matches() == true));
+		Assert.isTrue((matcherEmail1.matches() == true || matcherEmail2.matches() == true || matcherEmail3.matches() == true || matcherEmail4.matches() == true), "Email");
 
 		if (admin.getPhone() != "" || admin.getPhone() != null) {
 			final String regexTelefono = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$";
@@ -102,8 +102,8 @@ public class AdministratorService {
 		}
 
 		//NUEVO
-		Assert.isTrue(admin.getUserAccount().getUsername() != null && admin.getUserAccount().getUsername() != "");
-		Assert.isTrue(admin.getUserAccount().getPassword() != null && admin.getUserAccount().getPassword() != "");
+		Assert.isTrue(admin.getUserAccount().getUsername() != null && admin.getUserAccount().getUsername() != "", "Cuenta");
+		Assert.isTrue(admin.getUserAccount().getPassword() != null && admin.getUserAccount().getPassword() != "", "Cuenta");
 
 		final Md5PasswordEncoder encoder;
 		encoder = new Md5PasswordEncoder();
@@ -112,7 +112,7 @@ public class AdministratorService {
 		user.setPassword(hash);
 
 		res = this.adminRepo.save(admin);
-		this.messageBoxService.createMessageBoxSystem(res);
+		//this.messageBoxService.createMessageBoxSystem(res);
 
 		return res;
 	}

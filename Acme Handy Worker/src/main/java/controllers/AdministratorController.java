@@ -10,13 +10,25 @@
 
 package controllers;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import services.AdministratorService;
+import domain.Administrator;
 
 @Controller
 @RequestMapping("/administrator")
 public class AdministratorController extends AbstractController {
+
+	@Autowired
+	private AdministratorService	administratorService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -24,18 +36,32 @@ public class AdministratorController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------		
-
-	@RequestMapping("/action-1")
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView action1() {
 		ModelAndView result;
+		final Administrator administrator;
 
-		result = new ModelAndView("administrator/action-1");
+		administrator = this.administratorService.create();
+
+		result = new ModelAndView("administrator/create");
+		result.addObject("administrator", administrator);
 
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(@Valid final Administrator administrator, final BindingResult binding) {
+		ModelAndView result;
+
+		if (!binding.hasErrors()) {
+			this.administratorService.save(administrator);
+			result = new ModelAndView("redirect:action-2.do");
+		} else {
+			result = new ModelAndView("administrator/create");
+			result.addObject("administrator", administrator);
+		}
+		return result;
+	}
 
 	@RequestMapping("/action-2")
 	public ModelAndView action2() {
