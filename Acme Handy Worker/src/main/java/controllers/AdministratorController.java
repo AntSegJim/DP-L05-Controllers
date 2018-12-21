@@ -52,14 +52,20 @@ public class AdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@Valid final Administrator administrator, final BindingResult binding) {
 		ModelAndView result;
-
-		if (!binding.hasErrors()) {
-			this.administratorService.save(administrator);
-			result = new ModelAndView("redirect:action-2.do");
-		} else {
+		try {
+			if (!binding.hasErrors()) {
+				this.administratorService.save(administrator);
+				result = new ModelAndView("redirect:action-2.do");
+			} else {
+				result = new ModelAndView("administrator/create");
+				result.addObject("administrator", administrator);
+			}
+		} catch (final Exception e) {
 			result = new ModelAndView("administrator/create");
+			result.addObject("exception", e);
 			result.addObject("administrator", administrator);
 		}
+
 		return result;
 	}
 

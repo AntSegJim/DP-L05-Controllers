@@ -18,57 +18,67 @@
 
 <p><spring:message code="administrator.action.1" /></p>
 <form:form action="administrator/edit.do" modelAttribute="administrator">
-
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="administrator.error" /> </p>
+</jstl:if>
 	<form:hidden path="id"/>
 	<form:hidden path="version" />
 	<form:hidden path="numberSocialProfiles" />
 	<form:hidden path="profileSocialNetwork" />
 	<form:hidden path="userAccount.authorities" />
 	
+	<fieldset>
+	<spring:message code="administrator.personalDatas" />
+	<br />
 	
-	<form:label path="name"><spring:message code="administrator.name" />:</form:label>
+	<form:label path="name"><spring:message code="administrator.name" /></form:label>
 	<form:input path="name" />
 	<form:errors cssClass="error" path="name" />
 	<br />
 	
-	<form:label path="middleName"><spring:message code="administrator.middleName" />:</form:label>
+	<form:label path="middleName"><spring:message code="administrator.middleName" /></form:label>
 	<form:input path="middleName" />
 	<form:errors cssClass="error" path="middleName" />
 	<br />
 	
-	<form:label path="surname"><spring:message code="administrator.surname" />:</form:label>
+	<form:label path="surname"><spring:message code="administrator.surname" /></form:label>
 	<form:input path="surname" />
 	<form:errors cssClass="error" path="surname" />
 	<br />
 		
-	<form:label path="photo"><spring:message code="administrator.photo" />:</form:label>
+	<form:label path="photo"><spring:message code="administrator.photo" /></form:label>
 	<form:input path="photo" />
 	<form:errors cssClass="error" path="photo" />
 	<br />
 	
-	<form:label path="email"><spring:message code="administrator.email" />:</form:label>
+	<form:label path="email"><spring:message code="administrator.email" /></form:label>
 	<form:input path="email" />
 	<form:errors cssClass="error" path="email" />
 	<br />
 	
-	<form:label path="phone"><spring:message code="administrator.phone" />:</form:label>
+	<form:label path="phone"><spring:message code="administrator.phone" /></form:label>
 	<form:input path="phone" />
 	<form:errors cssClass="error" path="phone" />
 	<br />
 	
-	<form:label path="address"><spring:message code="administrator.adress" />:</form:label>
+	<form:label path="address"><spring:message code="administrator.adress" /></form:label>
 	<form:input path="address" />
 	<form:errors cssClass="error" path="address" />
 	<br />
+	<p><spring:message code="administrator.information" /></p>
+	</fieldset>
+	<br />
 	
-	<form:label path="userAccount.username"><spring:message code="administrator.username" />:</form:label>
+	<fieldset>
+	 <legend><spring:message code="administrator.userAccount" /></legend>
+	<form:label path="userAccount.username"><spring:message code="administrator.username" /></form:label>
 	<form:input path="userAccount.username" />
 	<form:errors cssClass="error" path="userAccount.username" />
 	
-	<form:label path="userAccount.password" ><spring:message code="administrator.password" />:</form:label>
+	<form:label path="userAccount.password" ><spring:message code="administrator.password" /></form:label>
 	<form:input path="userAccount.password" type="password"/>
 	<form:errors cssClass="error" path="userAccount.password" />
-	
+	</fieldset>
 	<br />
 	
 	<input type="submit" name="save" 
