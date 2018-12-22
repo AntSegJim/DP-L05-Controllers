@@ -16,13 +16,12 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+
 <security:authorize access="isAuthenticated()">
 
 <display:table pagesize="5" name="messages" id="row"
 requestURI="messageBox/actor/show.do" >
-
-<%-- <fmt:formatDate value="${date}" pattern="yyyy" /> --%>
-<display:column property="moment" titleKey="message.moment"  />
+<display:column property="moment" titleKey ="message.moment"  format="{0,date,dd/MM/yyyy}"  />
 <display:column property="subject" titleKey="message.subject"  />
 <display:column property="tag" titleKey="message.tag"  />
 <display:column property="emailReceiver" titleKey="message.emailReceiver"  />
