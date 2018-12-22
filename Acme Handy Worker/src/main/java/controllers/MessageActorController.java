@@ -1,45 +1,49 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.MessageBoxService;
 import services.MessageService;
 import domain.Message;
 
 @Controller
-@RequestMapping("/message")
-public class MessageController {
+@RequestMapping("/message/actor")
+public class MessageActorController {
 
 	@Autowired
-	private MessageService		messageService;
-
-	@Autowired
-	private MessageBoxService	messageBoxService;
+	private MessageService	messageService;
 
 
-	public MessageController() {
+	public MessageActorController() {
 		super();
 	}
 
-	//	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	//	public ModelAndView listMessage(@RequestParam final int messageBoxId) {
-	//		ModelAndView result;
-	//		Collection<Message> messages;
-	//		
-	//		messages = this.messageService.;
-	//		Assert.notNull(messages);
-	//		
-	//	}
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView listMessage(@RequestParam final int messageBoxId) {
+		final ModelAndView result;
+		Collection<Message> messages;
 
-	@RequestMapping(value = "/actor/send", method = RequestMethod.GET)
+		messages = this.messageService.getMessageByBox(messageBoxId);
+		Assert.notNull(messages);
+
+		result = new ModelAndView("messages/list");
+		result.addObject("messages", messages);
+
+		return result;
+
+	}
+	@RequestMapping(value = "/send", method = RequestMethod.GET)
 	public ModelAndView createMessage() {
 		final ModelAndView result;
 		final Message message;
@@ -51,7 +55,7 @@ public class MessageController {
 
 	}
 
-	@RequestMapping(value = "/actor/send", method = RequestMethod.POST)
+	@RequestMapping(value = "/send", method = RequestMethod.POST)
 	public ModelAndView sendMessage(@Valid final Message message, final BindingResult binding) {
 		final ModelAndView result;
 		if (!binding.hasErrors()) {

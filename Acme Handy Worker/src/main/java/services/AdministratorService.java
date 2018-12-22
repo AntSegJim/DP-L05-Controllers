@@ -112,7 +112,7 @@ public class AdministratorService {
 		user.setPassword(hash);
 
 		res = this.adminRepo.save(admin);
-		//this.messageBoxService.createMessageBoxSystem(res);
+		this.messageBoxService.createMessageBoxSystem(res);
 
 		return res;
 	}

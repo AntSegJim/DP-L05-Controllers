@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import security.UserAccount;
 import utilities.AbstractTest;
 import domain.Administrator;
+import domain.MessageBox;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -85,12 +86,12 @@ public class AdministratorServiceTest extends AbstractTest {
 		Assert.isTrue(a.getUserAccount().getPassword().equals("adminCris"));
 
 		saved = this.administratorService.save(a);
-		//		final MessageBox trashBox2 = this.messageBoxService.getTrashBox(saved.getId());
-		//		final MessageBox spamBox2 = this.messageBoxService.getSpamBox(saved.getId());
-		//		final MessageBox inBox2 = this.messageBoxService.getInBox(saved.getId());
-		//		final MessageBox outBox2 = this.messageBoxService.getOutBox(saved.getId());
-		//
-		//		Assert.isTrue(trashBox2 != null && spamBox2 != null && inBox2 != null && outBox2 != null);
+		final MessageBox trashBox2 = this.messageBoxService.getTrashBox(saved.getId());
+		final MessageBox spamBox2 = this.messageBoxService.getSpamBox(saved.getId());
+		final MessageBox inBox2 = this.messageBoxService.getInBox(saved.getId());
+		final MessageBox outBox2 = this.messageBoxService.getOutBox(saved.getId());
+
+		Assert.isTrue(trashBox2 != null && spamBox2 != null && inBox2 != null && outBox2 != null);
 
 		admins = this.administratorService.findAll();
 

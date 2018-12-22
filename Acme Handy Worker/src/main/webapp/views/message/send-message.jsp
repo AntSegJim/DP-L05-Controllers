@@ -25,22 +25,22 @@
 	<form:hidden path="id"/>
 	<form:hidden path="version" />
 
-<form:label path="emailReceiver"><spring:message code="message.send.emailReceiver" />:</form:label>
+<form:label path="emailReceiver"><spring:message code="message.emailReceiver" />:</form:label>
 	<form:input path="emailReceiver" />
 	<form:errors path="emailReceiver"/>
 	<br />
 
-<form:label path="subject"><spring:message code="message.send.subject" />:</form:label>
+<form:label path="subject"><spring:message code="message.subject" />:</form:label>
 	<form:input path="subject" />
 	<form:errors path="subject"/>
 	<br />
 
-<form:label path="body"><spring:message code="message.send.body" />:</form:label>
+<form:label path="body"><spring:message code="message.body" />:</form:label>
 	<form:input path="body" />
 	<form:errors path="body"/>
 	<br />
 	
-	<form:label path="priority"><spring:message code="message.send.priority" />:</form:label>
+	<form:label path="priority"><spring:message code="message.priority" />:</form:label>
 	<form:select path="priority">
 		<option value="0">HIGH</option>
 		<option value="1">NEUTRAL</option>
@@ -49,7 +49,7 @@
 	<form:errors path="priority"/>
 	<br />
 	
-	<form:label path="tag"><spring:message code="message.send.tag" />:</form:label>
+	<form:label path="tag"><spring:message code="message.tag" />:</form:label>
 	<form:input path="tag" />
 	<form:errors path="tag"/>
 	<br />

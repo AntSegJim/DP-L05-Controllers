@@ -20,6 +20,10 @@
 
 <form:form action="messageBox/actor/edit.do" modelAttribute="messageBox">
 
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="messageBox.error" /> </p>
+</jstl:if>
+
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="actor" />

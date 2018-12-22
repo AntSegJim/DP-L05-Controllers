@@ -23,7 +23,7 @@
 
 <p><spring:message code="profile.action.1" /></p>
 <display:table pagesize="5" name="boxes" id="row"
-requestURI="messageBox/show.do" >
+requestURI="messageBox/actor/list.do" >
 <jstl:if test="${fn:length(boxes) ne 4}">
 <display:column>
 	<jstl:if test="${(row.name ne 'Spam box') and (row.name ne 'Out box') and (row.name ne 'In box') and (row.name ne 'Trash box')}">
@@ -32,14 +32,8 @@ requestURI="messageBox/show.do" >
 </display:column>
 </jstl:if>
 <display:column property="name" titleKey="messageBox.name"  />
-<display:column> <a href="message/show.do?messageBoxId=${row.id}"><spring:message code="messageBox.show.message" /></a> </display:column>
-<%--	<display:column>
-	<jstl:if test="${row.name eq 'Mensajes del trabajo' }">
-		<form action="messageBox/delete.do">
-  	 	 <input type="submit" value="<spring:message code="messageBox.delete" />" />
-		</form>
-	</jstl:if>	
-	</display:column> --%>
+<display:column> <a href="message/actor/list.do?messageBoxId=${row.id}"><spring:message code="messageBox.show.message" /></a> </display:column>
+
 
 </display:table>
 

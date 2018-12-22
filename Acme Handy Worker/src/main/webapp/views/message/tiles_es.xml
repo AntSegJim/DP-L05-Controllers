@@ -16,9 +16,9 @@
       
  <tiles-definitions>
  
- <definition name="message/show" extends="master.page">
+ <definition name="messages/list" extends="master.page">
   <put-attribute name="title" value="Perfil: Acción 1" /> 
-  <put-attribute name="body" value="/views/message/see-message.jsp" /> 
+  <put-attribute name="body" value="/views/message/list.jsp" /> 
   </definition>
   
  <definition name="message/details" extends="master.page">

@@ -18,24 +18,16 @@
 
 <security:authorize access="isAuthenticated()">
 
-<p><spring:message code="messageBox.create" /></p>
+<display:table pagesize="5" name="messages" id="row"
+requestURI="messageBox/actor/show.do" >
 
-<form:form action="messageBox/create.do" modelAtributte ="messageBox">
+<%-- <fmt:formatDate value="${date}" pattern="yyyy" /> --%>
+<display:column property="moment" titleKey="message.moment"  />
+<display:column property="subject" titleKey="message.subject"  />
+<display:column property="tag" titleKey="message.tag"  />
+<display:column property="emailReceiver" titleKey="message.emailReceiver"  />
 
-<form:label path="name">
-	<spring:message code="messageBox.create.name" />
-</form:label>
-<form:input path="name" />
-<form:errors path="name"/>
 
-<input type="submit" name="save" value="<spring:message code="messageBox.create.save" />" />
-<input type="button" name="cancel" value="<spring:message code="messageBox.create.cancel" />"
-			onclick="javascript: relativeRedir('messageBox/show.do');" />
-
-</form:form>
+</display:table>
 
 </security:authorize>
-
-<%-- <security:authorize access="isAnonymous()">
-<p>Hola</p>
-</security:authorize>--%>

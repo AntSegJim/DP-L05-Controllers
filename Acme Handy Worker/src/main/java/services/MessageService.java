@@ -110,6 +110,10 @@ public class MessageService {
 			trashBox.getMessages().add(message);
 	}
 
+	public Collection<Message> getMessageByBox(final int id) {
+		return this.messageRepository.getMessagesByBox(id);
+	}
+
 	public Boolean auxEsSpam(final Message message) {
 		Boolean res = false;
 		final Collection<String> spamWords = this.spamWordService.getNamesOfSpamWord();

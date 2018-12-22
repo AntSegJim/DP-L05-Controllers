@@ -23,7 +23,7 @@ import domain.MessageBox;
 
 @Controller
 @RequestMapping("/messageBox/actor")
-public class MessageBoxController {
+public class MessageBoxActorController {
 
 	@Autowired
 	private MessageBoxService	messageBoxServive;
@@ -64,13 +64,19 @@ public class MessageBoxController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final MessageBox messageBox, final BindingResult binding) {
-		final ModelAndView result;
+		ModelAndView result;
 
-		if (!binding.hasErrors()) {
-			this.messageBoxServive.save(messageBox);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+		try {
+			if (!binding.hasErrors()) {
+				this.messageBoxServive.save(messageBox);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("messageBox/edit");
+				result.addObject("messageBox", messageBox);
+			}
+		} catch (final Exception e) {
 			result = new ModelAndView("messageBox/edit");
+			result.addObject("exception", e);
 			result.addObject("messageBox", messageBox);
 		}
 
