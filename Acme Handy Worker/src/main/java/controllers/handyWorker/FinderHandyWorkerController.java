@@ -77,33 +77,10 @@ public class FinderHandyWorkerController extends AbstractController {
 	public ModelAndView actionSearch(@Valid final Finder newf, final BindingResult binding) {
 		ModelAndView result;
 
-		String categoryName = "";
-		if (newf.getCategory() != null)
-			categoryName = newf.getCategory().getName();
-		String warrantyTitle = "";
-		if (newf.getWarranty() != null)
-			warrantyTitle = newf.getWarranty().getTitle();
-
-		Date fechaInicio = new Date(0);
-		if (newf.getStartDate() != null)
-			fechaInicio = newf.getStartDate();
-		Date fechaFin = new Date();
-		if (newf.getEndDate() != null)
-			fechaFin = newf.getEndDate();
-
-		Double precioMinimo = 0.0;
-		if (newf.getLowPrice() != null)
-			precioMinimo = newf.getLowPrice();
-		Double precioMaximo = Double.MAX_VALUE;
-		if (newf.getHighPrice() != null)
-			precioMaximo = newf.getHighPrice();
-
 		try {
-			final Collection<FixUpTask> resultado = this.fixUpTaskService.filterFixUpTask(newf.getTicker(), newf.getDescription(), newf.getAddress(), fechaInicio, fechaFin, precioMinimo, precioMaximo, categoryName, warrantyTitle);
-			newf.setFixUpTask(resultado);
+			newf.setFixUpTask(this.buscarFixUpTask(newf));
 			newf.setMoment(new Date());
 			this.finderService.save(newf);
-
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Exception e) {
 			result = new ModelAndView("finder/show");
@@ -121,18 +98,9 @@ public class FinderHandyWorkerController extends AbstractController {
 		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
 		final Finder finder = handyWorker.getFinder();
 
-		String categoryName = "";
-		if (finder.getCategory() != null)
-			categoryName = finder.getCategory().getName();
-		String warrantyTitle = "";
-		if (finder.getWarranty() != null)
-			warrantyTitle = finder.getWarranty().getTitle();
-
 		if ((new Date().getTime() - finder.getMoment().getTime()) / 3600000 > this.customizableFinderService.getValues().getTimeCache())
 			try {
-				//Hacer lo mismo que en save
-				finder.setFixUpTask(this.fixUpTaskService.filterFixUpTask(finder.getTicker(), finder.getDescription(), finder.getAddress(), finder.getStartDate(), finder.getEndDate(), finder.getLowPrice(), finder.getHighPrice(), categoryName,
-					warrantyTitle));
+				finder.setFixUpTask(this.buscarFixUpTask(finder));
 				finder.setMoment(new Date());
 				this.finderService.save(finder);
 			} catch (final Exception e) {
@@ -142,5 +110,31 @@ public class FinderHandyWorkerController extends AbstractController {
 		result.addObject("requestURI", "finder/handy-worker/list.do");
 		result.addObject("fixUpTasks", finder.getFixUpTask());
 		return result;
+	}
+
+	private Collection<FixUpTask> buscarFixUpTask(final Finder finder) {
+		String categoryName = "";
+		if (finder.getCategory() != null)
+			categoryName = finder.getCategory().getName();
+		String warrantyTitle = "";
+		if (finder.getWarranty() != null)
+			warrantyTitle = finder.getWarranty().getTitle();
+
+		Date fechaInicio = new Date(0);
+		if (finder.getStartDate() != null)
+			fechaInicio = finder.getStartDate();
+		Date fechaFin = new Date();
+		if (finder.getEndDate() != null)
+			fechaFin = finder.getEndDate();
+
+		Double precioMinimo = 0.0;
+		if (finder.getLowPrice() != null)
+			precioMinimo = finder.getLowPrice();
+		Double precioMaximo = Double.MAX_VALUE;
+		if (finder.getHighPrice() != null)
+			precioMaximo = finder.getHighPrice();
+
+		return this.fixUpTaskService.filterFixUpTask(finder.getTicker(), finder.getDescription(), finder.getAddress(), fechaInicio, fechaFin, precioMinimo, precioMaximo, categoryName, warrantyTitle);
+
 	}
 }
