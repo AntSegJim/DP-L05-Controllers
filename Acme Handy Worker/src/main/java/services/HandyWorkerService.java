@@ -79,6 +79,9 @@ public class HandyWorkerService {
 
 		Assert.isTrue(h.getName() != null && h.getSurname() != null && h.getName() != "" && h.getSurname() != "" && h.getUserAccount() != null && h.getEmail() != null && h.getEmail() != "", "HandyWorkerService.save -> Name or Surname invalid");
 
+		if (h.getId() == 0)
+			h.setMakeHandyWorker(h.getName() + " " + h.getMiddleName() + " " + h.getSurname());
+
 		final String regexEmail1 = "[^@]+@[^@]+\\.[a-zA-Z]{2,}";
 		final Pattern pattern = Pattern.compile(regexEmail1);
 		final Matcher matcherEmail1 = pattern.matcher(h.getEmail());
