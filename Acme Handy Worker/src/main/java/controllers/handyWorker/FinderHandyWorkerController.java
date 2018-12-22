@@ -130,6 +130,7 @@ public class FinderHandyWorkerController extends AbstractController {
 
 		if ((new Date().getTime() - finder.getMoment().getTime()) / 3600000 > this.customizableFinderService.getValues().getTimeCache())
 			try {
+				//Hacer lo mismo que en save
 				finder.setFixUpTask(this.fixUpTaskService.filterFixUpTask(finder.getTicker(), finder.getDescription(), finder.getAddress(), finder.getStartDate(), finder.getEndDate(), finder.getLowPrice(), finder.getHighPrice(), categoryName,
 					warrantyTitle));
 				finder.setMoment(new Date());
