@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Actor;
 import domain.Message;
 import domain.MessageBox;
 
@@ -61,7 +63,7 @@ public class MessageServiceTest extends AbstractTest {
 		m.setBody("Este es un mensaje para el test");
 		m.setPriority(0);
 		m.setTag("tag");
-		m.setReceiver(this.actorService.getActorByEmail("pablo@hotmail.com"));
+		m.setReceiver(null);
 		m.setEmailReceiver("cristian@hotmail.com");
 
 		saved = this.messageService.save(m);
@@ -124,6 +126,40 @@ public class MessageServiceTest extends AbstractTest {
 		super.authenticate(null);
 
 	}
+
+	@Test
+	public void sendMessageBroadcast() {
+		super.authenticate("admin");
+
+		Message message, saved;
+		Collection<Message> messages;
+		message = this.messageService.create();
+		message.setSubject("Pedro");
+		message.setBody("Este es un mensaje para el test");
+		message.setPriority(1);
+		message.setTag("tag2");
+		message.setEmailReceiver("@");
+
+		saved = this.messageService.save(message);
+
+		messages = this.messageService.findAll();
+		Assert.isTrue(messages.contains(saved));
+		final MessageBox outBox = this.messageBoxService.getOutBox(saved.getSender().getId());
+		this.messageService.sendMessage(saved);
+
+		Assert.isTrue(outBox.getMessages().contains(saved));
+
+		final List<Actor> actors = this.actorService.findAll();
+		actors.remove(saved.getSender());
+		for (int i = 0; i < actors.size(); i++) {
+			final MessageBox inBox = this.messageBoxService.getInBox(actors.get(i).getId());
+			Assert.isTrue(inBox.getMessages().contains(saved));
+		}
+
+		super.authenticate(null);
+
+	}
+
 	@Test
 	public void testDeleteMessage() {
 		super.authenticate("customer2");
@@ -146,4 +182,5 @@ public class MessageServiceTest extends AbstractTest {
 		Assert.isTrue(trashBox.getMessages().contains(saved));
 		super.authenticate(null);
 	}
+
 }

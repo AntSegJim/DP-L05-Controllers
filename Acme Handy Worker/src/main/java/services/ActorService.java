@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,6 +68,10 @@ public class ActorService {
 		Assert.notNull(actor);
 
 		return actor;
+	}
+
+	public List<Actor> findAll() {
+		return this.actorRepository.findAll();
 	}
 
 }

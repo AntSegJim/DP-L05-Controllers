@@ -85,8 +85,7 @@ public class Message extends DomainEntity {
 		this.sender = sender;
 	}
 	@Valid
-	@ManyToOne(optional = false)
-	@NotNull
+	@ManyToOne(optional = true)
 	public Actor getReceiver() {
 		return this.receiver;
 	}

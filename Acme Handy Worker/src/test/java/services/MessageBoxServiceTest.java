@@ -35,6 +35,8 @@ public class MessageBoxServiceTest extends AbstractTest {
 
 	@Test
 	public void testCreateMessageBox() {
+		super.authenticate("customer2");
+
 		final MessageBox box;
 		final Collection<Message> messages = new HashSet<>();
 		box = this.messageBoxService.create();
@@ -48,6 +50,7 @@ public class MessageBoxServiceTest extends AbstractTest {
 		Assert.isTrue(box.getMessages() != null);
 
 		Assert.isTrue(box.getActor() != null);
+		super.authenticate(null);
 	}
 
 	@Test
