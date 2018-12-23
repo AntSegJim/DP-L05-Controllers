@@ -44,6 +44,9 @@
 
 	<input type="button" name="cancel" value="<spring:message code="messageBox.create.cancel" />"
 			onclick="javascript: relativeRedir('messageBox/actor/list.do');" />
+			
+	<input type="submit" name="delete" 
+	value="<spring:message code="messageBox.delete" />" />
 </form:form>
 
 

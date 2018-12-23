@@ -82,7 +82,11 @@
 		
 		<security:intercept-url pattern="/messageBox/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messageBox/actor/edit.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/messageBox/actor/create.do" access="isAuthenticated()" /> 
+		
 		<security:intercept-url pattern="/message/actor/list.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/message/actor/show.do" access="isAuthenticated()" /> 
+		
 		
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 

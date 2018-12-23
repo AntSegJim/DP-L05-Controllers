@@ -32,7 +32,9 @@ public class MessageBoxService {
 		final MessageBox box = new MessageBox();
 		box.setName("");
 		box.setMessages(new HashSet<Message>());
-		box.setActor(new Actor());
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		box.setActor(a);
 
 		//		if (user.getAuthorities().contains(Authority.CUSTOMER))
 		//			box.setActor(this.CService.create());
@@ -60,9 +62,6 @@ public class MessageBoxService {
 	public MessageBox save(final MessageBox box) {
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
-		if (box.getActor().equals(new Actor()))
-			box.setActor(a);
-
 		Assert.isTrue(box.getActor().equals(a));
 
 		Assert.isTrue(!(box.getName().replace(" ", "").toUpperCase().equals("INBOX")));

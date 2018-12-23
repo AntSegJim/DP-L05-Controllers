@@ -50,6 +50,18 @@ public class MessageBoxActorController {
 		return result;
 	}
 
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		MessageBox box;
+
+		box = this.messageBoxServive.create();
+
+		result = new ModelAndView("messageBox/create");
+		result.addObject("messageBox", box);
+		return result;
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int messageBoxId) {
 		final ModelAndView result;
@@ -82,4 +94,21 @@ public class MessageBoxActorController {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final MessageBox messageBox, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			this.messageBoxServive.delete(messageBox);
+			result = new ModelAndView("redirect:list.do");
+
+		} catch (final Exception e) {
+			result = new ModelAndView("messageBox/edit");
+			result.addObject("exception", e);
+			result.addObject("messageBox", messageBox);
+		}
+		return result;
+	}
+
 }

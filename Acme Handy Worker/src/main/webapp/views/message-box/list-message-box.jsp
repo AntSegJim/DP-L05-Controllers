@@ -37,7 +37,7 @@ requestURI="messageBox/actor/list.do" >
 
 </display:table>
 
-<form action="messageBox/create.do">
+<form action="messageBox/actor/create.do">
     <input type="submit" value="<spring:message code="messageBox.create" />" />
 </form>
 
