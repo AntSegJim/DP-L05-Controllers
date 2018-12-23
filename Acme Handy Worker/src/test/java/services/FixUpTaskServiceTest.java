@@ -1,7 +1,6 @@
 
 package services;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -50,7 +49,7 @@ public class FixUpTaskServiceTest extends AbstractTest {
 
 
 	@Test
-	public void createFixUpTask() throws ParseException {
+	public void createFixUpTask() throws java.text.ParseException {
 		super.authenticate("customer2");
 		final Customer customer = this.customerService.create();
 
@@ -101,7 +100,7 @@ public class FixUpTaskServiceTest extends AbstractTest {
 		super.authenticate(null);
 	}
 	@Test
-	public void savedFixUpTask() throws ParseException {
+	public void savedFixUpTask() throws java.text.ParseException {
 		super.authenticate("customer2");
 		final Customer customer, savedCus;
 
@@ -255,7 +254,9 @@ public class FixUpTaskServiceTest extends AbstractTest {
 
 	@Test
 	public void filterTest() {
-		final Collection<FixUpTask> f = this.fixUpTaskService.filterFixUpTask("a", "a", "pon", new Date(), new Date(), 1., 10., "", "");
+		final Collection<FixUpTask> f = this.fixUpTaskService.filterFixUpTask("", "", "", new Date(), new Date(), 1., 10., "", "");
+		final Collection<FixUpTask> f2 = this.fixUpTaskService.filterFixUpTask2("", "", "", new Date(0), new Date(), 1., 25., "", "", 3);
 		System.out.println(f.size());
+		System.out.println(f2.size());
 	}
 }

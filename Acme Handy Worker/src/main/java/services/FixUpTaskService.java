@@ -126,4 +126,8 @@ public class FixUpTaskService {
 	public Collection<FixUpTask> filterFixUpTask(final String ticker, final String description, final String address, final Date fi, final Date ff, final Double lowPrice, final Double highPrice, final String category, final String warranty) {
 		return this.fixUpTaskRepository.filterFixUpTask(ticker, description, address, fi, ff, lowPrice, highPrice, category, warranty);
 	}
+	public Collection<FixUpTask> filterFixUpTask2(final String ticker, final String description, final String address, final Date fi, final Date ff, final Double lowPrice, final Double highPrice, final String category, final String warranty,
+		final Integer limite) {
+		return this.fixUpTaskRepository.filterFixUpTask2(ticker, description, address, fi, ff, lowPrice, highPrice, category, warranty, limite);
+	}
 }
