@@ -16,11 +16,6 @@
        
 <tiles-definitions>
 
-<definition name="fixUpTask/customer,handyWorker/show" extends="master.page">	
-		<put-attribute name="title" value="Fix-up Task show " />
-		<put-attribute name="body" value="/views/fixUpTask/show.jsp" />
-	</definition>
-	
 	<definition name="fixUpTask/list" extends="master.page">	
 		<put-attribute name="title" value="Fix-up Task list" />
 		<put-attribute name="body" value="/views/fixUpTask/list.jsp" />
@@ -30,13 +25,10 @@
 		<put-attribute name="title" value="Create Fix-up Task" />
 		<put-attribute name="body" value="/views/fixUpTask/create.jsp" />
 	</definition>
-	<definition name="fixUpTask/customer/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit Fix-up Task" />
-		<put-attribute name="body" value="/views/fixUpTask/create.jsp" />
-	</definition>
-	<definition name="fixUpTask/handyWorker/list" extends="master.page">	
-		<put-attribute name="title" value="Fix-up Task list" />
-		<put-attribute name="body" value="/views/fixUpTask/list-fixUptask-handyWorker.jsp" />
+	
+	<definition name="fixUpTask/show" extends="master.page">	
+		<put-attribute name="title" value="Showing this Fix-up Task" />
+		<put-attribute name="body" value="/views/fixUpTask/show.jsp" />
 	</definition>
 	
 </tiles-definitions>

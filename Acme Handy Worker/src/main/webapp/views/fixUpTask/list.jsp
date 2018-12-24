@@ -18,16 +18,13 @@
 
 <security:authorize access="hasRole('CUSTOMER')">
 
+<jstl:if test="${not empty exception}">
+		<p style="color:red; font-weight: bolder;"> <spring:message code="fixUpTask.error" /> </p>
+</jstl:if>
+
 	<p><spring:message code="fixUpTask.list" /></p>
 	<display:table pagesize="5" name="fixUpTasks" id="row"
 		requestURI="fix-up-task/customer/list.do">
-
-		<display:column>
-			<form action="fix-up-task/customer/edit.do?fixUpTaskId=${row.id}">
-				<input type="submit"
-					value="<spring:message code="fixUpTask.edit" />" />
-			</form>
-		</display:column>
 
 		<display:column property="moment" titleKey="fixUpTask.moment"
 			sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
@@ -36,12 +33,13 @@
 		<display:column property="address" titleKey="fixUpTask.address" />
 
 		<display:column>
-
-			<a
-				href="fixUpTask/customer,handyWorker/show.do?fixUpTaskId=${row.id}">
-				<spring:message code="fixUpTask.show" />
-			</a>
-
+			<a href="fix-up-task/customer/show.do?fixUpTaskId=${row.id}">
+				<spring:message code="fixUpTask.show" /></a>
+		</display:column>
+		
+		<display:column>
+			<a href="fix-up-task/customer/delete.do?fixUpTaskId=${row.id}">
+				<spring:message code="fixUpTask.delete" /></a>
 		</display:column>
 
 	</display:table>

@@ -16,11 +16,6 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-
-<definition name="fixUpTask/customer,handyWorker/show" extends="master.page">	
-		<put-attribute name="title" value="Mostrar Tarea de reparación " />
-		<put-attribute name="body" value="/views/fixUpTask/show.jsp" />
-	</definition>
 	
 	<definition name="fixUpTask/list" extends="master.page">	
 		<put-attribute name="title" value="Lista de tarea de reparación" />
@@ -31,16 +26,10 @@
 		<put-attribute name="title" value="Crear tarea de reparación" />
 		<put-attribute name="body" value="/views/fixUpTask/create.jsp" />
 	</definition>
-	<definition name="fixUpTask/customer/edit" extends="master.page">	
-		<put-attribute name="title" value="Crear tarea de reparación" />
-		<put-attribute name="body" value="/views/fixUpTask/create.jsp" />
-	</definition>
-	<definition name="fixUpTask/handyWorker/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de tarea de reparación" />
-		<put-attribute name="body" value="/views/fixUpTask/list-fixUptask-handyWorker.jsp" />
-	</definition>
-	
-	
 
+	<definition name="fixUpTask/show" extends="master.page">	
+		<put-attribute name="title" value="Mostrando esta tarea" />
+		<put-attribute name="body" value="/views/fixUpTask/show.jsp" />
+	</definition>
 	
 </tiles-definitions>

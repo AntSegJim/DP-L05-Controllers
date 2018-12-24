@@ -77,10 +77,6 @@ public class FixUpTaskService {
 		return this.fixUpTaskRepository.save(f);
 	}
 	public void delete(final FixUpTask f) {
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(f.getCustomer().getUserAccount().equals(userAccount));
-		Assert.isTrue(this.fixUpTaskRepository.findAll().contains(f));
 		this.fixUpTaskRepository.delete(f);
 	}
 

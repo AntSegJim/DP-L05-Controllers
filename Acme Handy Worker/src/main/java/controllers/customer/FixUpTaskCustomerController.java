@@ -7,9 +7,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
@@ -33,13 +35,16 @@ public class FixUpTaskCustomerController extends AbstractController {
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(value = "exception", required = false, defaultValue = "-2") final Integer e) {
 		final ModelAndView result;
 		final Collection<FixUpTask> fixUpTasks = this.fixUpTaskService.findAllCustomer();
 
 		result = new ModelAndView("fixUpTask/list");
 		result.addObject("fixUpTasks", fixUpTasks);
 		result.addObject("requestURI", "fix-up-task/customer/list.do");
+
+		if (e == -1)
+			result.addObject("exception", e);
 
 		return result;
 	}
@@ -76,6 +81,35 @@ public class FixUpTaskCustomerController extends AbstractController {
 
 			final Collection<Warranty> warranties = this.warrantyService.findAll();
 			result.addObject("warranties", warranties);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int fixUpTaskId) {
+		ModelAndView result;
+		FixUpTask fixUpTask;
+		try {
+			fixUpTask = this.fixUpTaskService.findOne(fixUpTaskId);
+			Assert.notNull(fixUpTask);
+			result = new ModelAndView("fixUpTask/show");
+			result.addObject("fixUpTask", fixUpTask);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do?exception=-1");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int fixUpTaskId) {
+		ModelAndView result;
+		try {
+			final FixUpTask fixUpTask = this.fixUpTaskService.findOne(fixUpTaskId);
+			Assert.notNull(fixUpTask);
+			this.fixUpTaskService.delete(fixUpTask);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do?exception=-1");
 		}
 		return result;
 	}
