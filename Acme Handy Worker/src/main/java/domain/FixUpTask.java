@@ -29,7 +29,7 @@ public class FixUpTask extends DomainEntity {
 	private String					description;
 	private String					address;
 	private Double					maximunPrice;
-	private int						periodTime;
+	private Integer					periodTime;
 
 	private Category				category;
 	private Warranty				warranty;
@@ -91,11 +91,11 @@ public class FixUpTask extends DomainEntity {
 	}
 	@Valid
 	@NotNull
-	public int getPeriodTime() {
+	public Integer getPeriodTime() {
 		return this.periodTime;
 	}
 
-	public void setPeriodTime(final int periodTime) {
+	public void setPeriodTime(final Integer periodTime) {
 		this.periodTime = periodTime;
 	}
 

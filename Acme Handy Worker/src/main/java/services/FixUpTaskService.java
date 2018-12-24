@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
@@ -37,8 +36,6 @@ public class FixUpTaskService {
 	private CurriculaService	curriculaService;
 	@Autowired
 	private ComplaintService	complaintService;
-	@Autowired
-	private ActorService		actorService;
 
 
 	public FixUpTask create() {
@@ -70,14 +67,12 @@ public class FixUpTaskService {
 		return this.fixUpTaskRepository.findOne(id);
 	}
 	public FixUpTask save(final FixUpTask f) {
-		final UserAccount user = this.actorService.getActorLogged().getUserAccount();
-		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("CUSTOMER"));
 
 		final Collection<String> allTickerFix = this.fixUpTaskRepository.allTickerInFixUpTask();
 		final Collection<String> allTickerCurricula = this.curriculaService.allTickersCurricula();
 		final Collection<String> allTickerComplaint = this.complaintService.allTickersComplaint();
 		f.setMoment(new Date());
-		Assert.isTrue(f.getTicker() != null && f.getTicker() != "" && f.getMoment() != null && f.getMoment().before(Calendar.getInstance().getTime()) && f.getCategory() != null && f.getCustomer() != null);
+		Assert.isTrue(f.getTicker() != null && f.getTicker() != "" && f.getCategory() != null && f.getCustomer() != null);
 		Assert.isTrue(!allTickerComplaint.contains(f.getTicker()) && !allTickerFix.contains(f.getTicker()) && !allTickerCurricula.contains(f.getTicker()));
 		return this.fixUpTaskRepository.save(f);
 	}

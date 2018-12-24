@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
-import services.CustomerService;
 import services.FixUpTaskService;
 import services.WarrantyService;
 import controllers.AbstractController;
@@ -25,8 +24,6 @@ import domain.Warranty;
 @RequestMapping("/fix-up-task/customer")
 public class FixUpTaskCustomerController extends AbstractController {
 
-	@Autowired
-	private CustomerService		customerService;
 	@Autowired
 	private FixUpTaskService	fixUpTaskService;
 	@Autowired
