@@ -4,7 +4,6 @@ package services;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import org.springframework.util.Assert;
 import repositories.FixUpTaskRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Application;
 import domain.Category;
 import domain.Customer;
 import domain.FixUpTask;
@@ -52,14 +50,14 @@ public class FixUpTaskService {
 		final Warranty wa = this.WService.create();
 		final Customer cus = this.customerService.customerByUserAccount(userAccount.getId());
 		f.setAddress("");
-		f.setApplication(new HashSet<Application>());
+		f.setApplication(null);
 		f.setCategory(ca);
 		f.setCustomer(cus);
 		f.setDescription("");
 		f.setMaximunPrice(0.);
 		f.setMoment(new Date());
 		f.setPeriodTime(0);
-		f.setTicker("");
+		f.setTicker(ComplaintService.generar(new Date()));
 		f.setWarranty(wa);
 		return f;
 	}
@@ -78,7 +76,7 @@ public class FixUpTaskService {
 		final Collection<String> allTickerFix = this.fixUpTaskRepository.allTickerInFixUpTask();
 		final Collection<String> allTickerCurricula = this.curriculaService.allTickersCurricula();
 		final Collection<String> allTickerComplaint = this.complaintService.allTickersComplaint();
-
+		f.setMoment(new Date());
 		Assert.isTrue(f.getTicker() != null && f.getTicker() != "" && f.getMoment() != null && f.getMoment().before(Calendar.getInstance().getTime()) && f.getCategory() != null && f.getCustomer() != null);
 		Assert.isTrue(!allTickerComplaint.contains(f.getTicker()) && !allTickerFix.contains(f.getTicker()) && !allTickerCurricula.contains(f.getTicker()));
 		return this.fixUpTaskRepository.save(f);

@@ -24,10 +24,10 @@
 	
 	<definition name="fixUpTask/list" extends="master.page">	
 		<put-attribute name="title" value="Lista de tarea de reparación" />
-		<put-attribute name="body" value="/views/fixUpTask/list-fixUpTask.jsp" />
+		<put-attribute name="body" value="/views/fixUpTask/list.jsp" />
 	</definition>
 	
-	<definition name="fixUpTask/customer/create" extends="master.page">	
+	<definition name="fixUpTask/create" extends="master.page">	
 		<put-attribute name="title" value="Crear tarea de reparación" />
 		<put-attribute name="body" value="/views/fixUpTask/create.jsp" />
 	</definition>

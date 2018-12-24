@@ -16,42 +16,39 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-
+<security:authorize access="hasRole('CUSTOMER')">
 
 <p><spring:message code="fixUpTask.list" /></p>
 
 <display:table pagesize="5" name="fixUpTasks" id="row"
-requestURI="fixUpTask/customer/list.do?" >
+requestURI="fix-up-task/customer/list.do?" >
 
-<security:authorize access="hasRole('CUSTOMER')">
 
 <display:column>
 	
-	<form action="fixUpTask/customer/edit.do?fixUpTaskId=${row.id}">
+	<form action="fix-up-task/customer/edit.do?fixUpTaskId=${row.id}">
   	 	<input type="submit" value="<spring:message code="fixUpTask.edit" />" />
 	</form>
 
 </display:column>
-</security:authorize>
+
 
 <display:column property="moment" titleKey="fixUpTask.moment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
 <display:column property="description" titleKey="fixUpTask.description" />
 <display:column property="address" titleKey="fixUpTask.address" />
+
 <display:column>
 
-		<a href="fixUpTask/customer,handyWorker/show.do?fixUpTaskId=${row.id}">
+	<a href="fixUpTask/customer,handyWorker/show.do?fixUpTaskId=${row.id}">
   	 <spring:message code="fixUpTask.show" /> </a>
   	 
-	
-	
 </display:column>
 
 </display:table>
 
-<security:authorize access="hasRole('CUSTOMER')">
 
 <input type="button" name="create" value="<spring:message code="fixUpTask.create" />"
-			onclick="javascript: relativeRedir('fixUpTask/customer/create.do');" />
+			onclick="javascript: relativeRedir('fix-up-task/customer/create.do');" />
 
 </security:authorize>
 

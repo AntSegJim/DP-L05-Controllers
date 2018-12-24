@@ -53,6 +53,7 @@
 				</ul>
 			</li>
 			<li><a href="complaint/customer/complaints.do"><spring:message code="master.page.customer.complaints" /></a></li>
+			<li><a href="fix-up-task/customer/list.do"><spring:message	code="master.page.customer.fixUpTask" /></a>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('HANDYWORKER')">
