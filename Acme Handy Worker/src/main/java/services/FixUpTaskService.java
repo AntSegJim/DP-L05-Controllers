@@ -119,4 +119,8 @@ public class FixUpTaskService {
 		final Integer limite) {
 		return this.fixUpTaskRepository.filterFixUpTask2(ticker, description, address, fi, ff, lowPrice, highPrice, category, warranty, limite);
 	}
+
+	public Collection<FixUpTask> findAllCustomerById(final Integer customerId) {
+		return this.fixUpTaskRepository.fixUpTasksCustomer(customerId);
+	}
 }

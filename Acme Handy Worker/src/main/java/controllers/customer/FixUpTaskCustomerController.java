@@ -60,7 +60,7 @@ public class FixUpTaskCustomerController extends AbstractController {
 		final Collection<Category> categories = this.categoryService.findAll();
 		result.addObject("categories", categories);
 
-		final Collection<Warranty> warranties = this.warrantyService.findAll();
+		final Collection<Warranty> warranties = this.warrantyService.findAllNotDraftMode();
 		result.addObject("warranties", warranties);
 
 		return result;
@@ -79,7 +79,7 @@ public class FixUpTaskCustomerController extends AbstractController {
 			final Collection<Category> categories = this.categoryService.findAll();
 			result.addObject("categories", categories);
 
-			final Collection<Warranty> warranties = this.warrantyService.findAll();
+			final Collection<Warranty> warranties = this.warrantyService.findAllNotDraftMode();
 			result.addObject("warranties", warranties);
 		}
 		return result;

@@ -43,8 +43,7 @@ public class WarrantyService {
 			Assert.isTrue(w.getTitle() != null && w.getTitle() != "" && w.getLaws() != null && w.getTerms() != null, "WarrantyService.save -> ERROR");
 			result = this.warrantyRepository.save(w);
 		} else if (oldWarranty.getDraftMode() == 1) {
-			Assert.isTrue(w.getTitle() != null && w.getTitle() != "" && w.getLaws() != null && w.getTerms() != null, "WarrantyService.save -> ERROR");
-			System.out.println(w.getLaws());
+			Assert.isTrue(w.getTitle() != null && w.getTitle() != "" && w.getLaws() != null && w.getTerms() != null, "WarrantyService.save2 -> ERROR");
 			result = this.warrantyRepository.save(w);
 		} else
 			result = oldWarranty;
@@ -54,5 +53,9 @@ public class WarrantyService {
 	public void delete(final Warranty w) {
 		if (w.getDraftMode() == 1)
 			this.warrantyRepository.delete(w);
+	}
+
+	public Collection<Warranty> findAllNotDraftMode() {
+		return this.warrantyRepository.findAllNotDraftMode();
 	}
 }

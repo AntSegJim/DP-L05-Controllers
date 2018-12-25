@@ -51,3 +51,24 @@
 
 </security:authorize>
 
+<security:authorize access="hasRole('HANDYWORKER')">
+
+	<p><spring:message code="fixUpTask.list" /></p>
+	<display:table pagesize="5" name="fixUpTasks" id="row"
+		requestURI="fix-up-task/handy-worker/list.do">
+
+		<display:column property="moment" titleKey="fixUpTask.moment"
+			sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
+		<display:column property="description"
+			titleKey="fixUpTask.description" />
+		<display:column property="address" titleKey="fixUpTask.address" />
+
+		<display:column>
+			<a href="fix-up-task/handy-worker/show.do?fixUpTaskId=${row.id}">
+				<spring:message code="fixUpTask.show" /></a>
+		</display:column>
+
+	</display:table>
+
+</security:authorize>
+

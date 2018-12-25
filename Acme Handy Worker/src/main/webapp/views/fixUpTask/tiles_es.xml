@@ -32,4 +32,9 @@
 		<put-attribute name="body" value="/views/fixUpTask/show.jsp" />
 	</definition>
 	
+	<definition name="fixUpTask/customerData" extends="master.page">	
+		<put-attribute name="title" value="Mostrando los datos del cliente" />
+		<put-attribute name="body" value="/views/fixUpTask/customerData.jsp" />
+	</definition>
+	
 </tiles-definitions>

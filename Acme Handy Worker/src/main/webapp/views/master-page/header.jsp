@@ -65,6 +65,7 @@
 					<li><a href="fixUptask/handyWorker/list.do"><spring:message code="master.page.handyworker.fixUptask" /></a></li>
 				</ul>
 			</li>
+			<li><a href="fix-up-task/handy-worker/list.do"><spring:message	code="master.page.handyworker.fixUpTask" /></a>
 			<li><a href="application/handyWorker/applications.do"><spring:message code="master.page.handyworker.applications"/></a></li>
 		</security:authorize>
 		
