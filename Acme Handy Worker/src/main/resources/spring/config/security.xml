@@ -89,6 +89,7 @@
 		<security:intercept-url pattern="/endorsement/customer,handy-worker/edit.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>
 		<security:intercept-url pattern="/endorsement/customer,handy-worker/show.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>
 		<security:intercept-url pattern="/endorsement/customer,handy-worker/delete.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>		
+		<security:intercept-url pattern="/endorsement/customer,handy-worker/create.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>		
 		
 		<security:intercept-url pattern="/messageBox/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messageBox/actor/edit.do" access="isAuthenticated()" /> 
