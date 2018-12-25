@@ -38,6 +38,7 @@
 		<value>/views/sponsorship/messages</value>
 		<value>/views/creditCardType/messages</value>
 		<value>/views/spamWord/messages</value>
+		<value>/views/endorsement/messages</value>
 		
 		
 	</util:list>

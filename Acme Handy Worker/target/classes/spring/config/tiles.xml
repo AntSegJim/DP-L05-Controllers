@@ -39,6 +39,7 @@
 		<value>/views/sponsorship/tiles.xml</value>
 		<value>/views/creditCardType/tiles.xml</value>
 		<value>/views/spamWord/tiles.xml</value>
+		<value>/views/endorsement/tiles.xml</value>
 		
 	</util:list>
 

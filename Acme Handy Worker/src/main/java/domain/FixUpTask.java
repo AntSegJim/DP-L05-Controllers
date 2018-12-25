@@ -18,6 +18,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -28,7 +29,7 @@ public class FixUpTask extends DomainEntity {
 	private String					description;
 	private String					address;
 	private Double					maximunPrice;
-	private int						periodTime;
+	private Integer					periodTime;
 
 	private Category				category;
 	private Warranty				warranty;
@@ -52,6 +53,7 @@ public class FixUpTask extends DomainEntity {
 	}
 	@NotNull
 	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getMoment() {
 		return this.moment;
@@ -60,7 +62,8 @@ public class FixUpTask extends DomainEntity {
 	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
-
+	@Valid
+	@NotBlank
 	public String getDescription() {
 		return this.description;
 	}
@@ -68,7 +71,8 @@ public class FixUpTask extends DomainEntity {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
+	@Valid
+	@NotBlank
 	public String getAddress() {
 		return this.address;
 	}
@@ -76,7 +80,8 @@ public class FixUpTask extends DomainEntity {
 	public void setAddress(final String address) {
 		this.address = address;
 	}
-
+	@Valid
+	@NotNull
 	public Double getMaximunPrice() {
 		return this.maximunPrice;
 	}
@@ -84,12 +89,13 @@ public class FixUpTask extends DomainEntity {
 	public void setMaximunPrice(final Double maximunPrice) {
 		this.maximunPrice = maximunPrice;
 	}
-
-	public int getPeriodTime() {
+	@Valid
+	@NotNull
+	public Integer getPeriodTime() {
 		return this.periodTime;
 	}
 
-	public void setPeriodTime(final int periodTime) {
+	public void setPeriodTime(final Integer periodTime) {
 		this.periodTime = periodTime;
 	}
 

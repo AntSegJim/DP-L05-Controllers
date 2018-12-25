@@ -18,20 +18,14 @@
 <body>
 
 <security:authorize access="hasRole('CUSTOMER')">
-<form:form action="fixUpTask/customer/create.do" modelAttribute="fixUpTask">
+<form:form action="fix-up-task/customer/save.do" modelAttribute="fixUpTask">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="customer" />
-	
- 
- 	<form:label path="moment">
-		<spring:message code="fixUpTask.moment" />:
-	</form:label>
-	<form:input path="moment" />
-	<form:errors cssClass="error" path="moment" />
-	<br />
-	
+	<form:hidden path="ticker" />	
+	<form:hidden path="customer" />	
+ 	<form:hidden path="moment" />
+ 	
 	<form:label path="description">
 		<spring:message code="fixUpTask.description" />:
 	</form:label>
@@ -56,52 +50,33 @@
 	<form:label path="periodTime">
 		<spring:message code="fixUpTask.periodTime" />:
 	</form:label>
-	<form:input path="PeriodDate" />
+	<form:input path="periodTime" />
 	<form:errors cssClass="error" path="periodTime" />
 	<br />
-		<form:label path="category">
+	
+	<form:label path="category">
 		<spring:message code="fixUpTask.category" />:
 	</form:label>
-	<form:select id="categorys" path="category">
-		<form:option value="0" label="----" />		
-		<form:options items="${categorys}" itemValue="id" itemLabel="name" />
+	<form:select path="category">
+		<form:options items="${categories}" itemValue="id" itemLabel="name" />
 	</form:select>
-	<form:errors cssClass="error" path="categorys" />
+	<form:errors cssClass="error" path="category" />
 	<br />
 	
-		<form:label path="warranty">
+	<form:label path="warranty">
 		<spring:message code="fixUpTask.warranty" />:
 	</form:label>
-	<form:select id="warrantys" path="warranty">
-		<form:option value="0" label="----" />		
-		<form:options items="${warrantys}" itemValue="id" itemLabel="name" />
+	<form:select path="warranty">	
+		<form:options items="${warranties}" itemValue="id" itemLabel="title" />
 	</form:select>
-	<form:errors cssClass="error" path="warratys" />
-	<br />
+	<form:errors cssClass="error" path="warranty" />
+	<br> <br>
 	
-	<form:label path="application">
-		<spring:message code="fixUpTask.application" />:
-	</form:label>
-	<jstl:forEach var="application" items="${applications}"> 
-
-	<input type="checkbox" name="application" value="${application.moment}"/>
-	
-	</jstl:forEach>
-	<form:errors cssClass="error" path="application" />
-	<br />
-	
-	<input type="submit" name="save"
-		value="<spring:message code="fixUpTask.save" />" />&nbsp; 
-	<jstl:if test="${fixUpTask.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="fixUpTask.delete" />"
-			onclick="return confirm('<spring:message code="fixUpTask.confirm.delete" />')" />&nbsp;
-	</jstl:if>
+	<input type="submit" name="save" value="<spring:message code="fixUpTask.save" />" />
 		
-		<input type="submit" name="cancel"
-		value="<spring:message code="fixUpTask.cancel" />"
-		onclick="javascript: relativeRedir('fixUpTask/customer/list.do');" />
-	<br />
+	<div style="text-align:center;">
+	<a href="fix-up-task/customer/list.do" ><spring:message code="fixUpTask.cancel" /></a>
+	</div>
  	
 </form:form>
 </security:authorize>

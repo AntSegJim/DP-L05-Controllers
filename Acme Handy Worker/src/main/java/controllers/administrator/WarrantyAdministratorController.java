@@ -54,13 +54,17 @@ public class WarrantyAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int warrantyId) {
-		final ModelAndView result;
+		ModelAndView result;
 		Warranty warranty;
+		try {
+			warranty = this.warrantyService.findOne(warrantyId);
+			Assert.notNull(warranty);
+			result = new ModelAndView("warranty/edit");
+			result.addObject("warranty", warranty);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do");
+		}
 
-		warranty = this.warrantyService.findOne(warrantyId);
-		Assert.notNull(warrantyId);
-		result = new ModelAndView("warranty/edit");
-		result.addObject("warranty", warranty);
 		return result;
 	}
 

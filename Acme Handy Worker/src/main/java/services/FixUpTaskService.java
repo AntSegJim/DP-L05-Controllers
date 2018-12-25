@@ -1,10 +1,8 @@
 
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +15,6 @@ import org.springframework.util.Assert;
 import repositories.FixUpTaskRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Application;
 import domain.Category;
 import domain.Customer;
 import domain.FixUpTask;
@@ -39,8 +36,6 @@ public class FixUpTaskService {
 	private CurriculaService	curriculaService;
 	@Autowired
 	private ComplaintService	complaintService;
-	@Autowired
-	private ActorService		actorService;
 
 
 	public FixUpTask create() {
@@ -52,14 +47,14 @@ public class FixUpTaskService {
 		final Warranty wa = this.WService.create();
 		final Customer cus = this.customerService.customerByUserAccount(userAccount.getId());
 		f.setAddress("");
-		f.setApplication(new HashSet<Application>());
+		f.setApplication(null);
 		f.setCategory(ca);
 		f.setCustomer(cus);
 		f.setDescription("");
 		f.setMaximunPrice(0.);
 		f.setMoment(new Date());
 		f.setPeriodTime(0);
-		f.setTicker("");
+		f.setTicker(ComplaintService.generar(new Date()));
 		f.setWarranty(wa);
 		return f;
 	}
@@ -72,22 +67,16 @@ public class FixUpTaskService {
 		return this.fixUpTaskRepository.findOne(id);
 	}
 	public FixUpTask save(final FixUpTask f) {
-		final UserAccount user = this.actorService.getActorLogged().getUserAccount();
-		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("CUSTOMER"));
 
 		final Collection<String> allTickerFix = this.fixUpTaskRepository.allTickerInFixUpTask();
 		final Collection<String> allTickerCurricula = this.curriculaService.allTickersCurricula();
 		final Collection<String> allTickerComplaint = this.complaintService.allTickersComplaint();
-
-		Assert.isTrue(f.getTicker() != null && f.getTicker() != "" && f.getMoment() != null && f.getMoment().before(Calendar.getInstance().getTime()) && f.getCategory() != null && f.getCustomer() != null);
+		f.setMoment(new Date());
+		Assert.isTrue(f.getTicker() != null && f.getTicker() != "" && f.getCategory() != null && f.getCustomer() != null);
 		Assert.isTrue(!allTickerComplaint.contains(f.getTicker()) && !allTickerFix.contains(f.getTicker()) && !allTickerCurricula.contains(f.getTicker()));
 		return this.fixUpTaskRepository.save(f);
 	}
 	public void delete(final FixUpTask f) {
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(f.getCustomer().getUserAccount().equals(userAccount));
-		Assert.isTrue(this.fixUpTaskRepository.findAll().contains(f));
 		this.fixUpTaskRepository.delete(f);
 	}
 
@@ -129,5 +118,9 @@ public class FixUpTaskService {
 	public Collection<FixUpTask> filterFixUpTask2(final String ticker, final String description, final String address, final Date fi, final Date ff, final Double lowPrice, final Double highPrice, final String category, final String warranty,
 		final Integer limite) {
 		return this.fixUpTaskRepository.filterFixUpTask2(ticker, description, address, fi, ff, lowPrice, highPrice, category, warranty, limite);
+	}
+
+	public Collection<FixUpTask> findAllCustomerById(final Integer customerId) {
+		return this.fixUpTaskRepository.fixUpTasksCustomer(customerId);
 	}
 }

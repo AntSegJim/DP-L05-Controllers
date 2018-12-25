@@ -60,25 +60,36 @@
 		<security:intercept-url pattern="/spam-word/administrator/list.do" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/complaint/customer/**" access="hasRole('CUSTOMER')" /> 
-  		
   		<security:intercept-url pattern="/application/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
-  		
   		<security:intercept-url pattern="/finder/handyWorker/**" access="hasRole('HANDYWORKER')" />		
 		<security:intercept-url pattern="/fixUpTask/customer/**" access="hasRole('CUSTOMER')" />
 
 		<security:intercept-url pattern="/finder/handy-worker/show.do" access="hasRole('HANDYWORKER')" />
 		<security:intercept-url pattern="/finder/handy-worker/list.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/tutorial/handyWorker/show.do" access="hasRole('HANDYWORKER')" /> 
-		<security:intercept-url pattern="/fixUpTask/handyWorker/list.do" access="hasRole('HANDYWORKER')" /> 
-		<security:intercept-url pattern="/fixUptask/customer/create.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/tutorial/handyWorker/create.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/finder/handy-worker/save.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/fix-up-task/handy-worker/list.do" access="hasRole('HANDYWORKER')" />
+		<security:intercept-url pattern="/fix-up-task/handy-worker/show.do" access="hasRole('HANDYWORKER')" />
+		<security:intercept-url pattern="/fix-up-task/handy-worker/customer-data.do" access="hasRole('HANDYWORKER')" />
 
+		<security:intercept-url pattern="/fix-up-task/customer/**" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/fix-up-task/customer/create.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/fix-up-task/customer/list.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/fix-up-task/customer/show.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/fix-up-task/customer/delete.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
 		
 		<security:intercept-url pattern="/sponsorship/sponsor/list.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/sponsorship/sponsor/create.do" access="hasRole('SPONSOR')" />
+		
+		<security:intercept-url pattern="/endorsement/customer,handy-worker/**" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>
+		<security:intercept-url pattern="/endorsement/customer,handy-worker/list.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>
+		<security:intercept-url pattern="/endorsement/customer,handy-worker/edit.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>
+		<security:intercept-url pattern="/endorsement/customer,handy-worker/show.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>
+		<security:intercept-url pattern="/endorsement/customer,handy-worker/delete.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>		
+		<security:intercept-url pattern="/endorsement/customer,handy-worker/create.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>		
 		
 		<security:intercept-url pattern="/messageBox/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messageBox/actor/edit.do" access="isAuthenticated()" /> 
