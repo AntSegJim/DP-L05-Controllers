@@ -130,7 +130,7 @@ public class EndorsementServiceTest extends AbstractTest {
 		e.setMoment(new Date());
 
 		savedE = this.endorsementService.save(e);
-		final Collection<Endorsement> es = this.endorsementService.findAll();
+		final Collection<Endorsement> es = this.endorsementService.myEndorsements();
 		Assert.isTrue(es.contains(savedE));
 		super.authenticate(null);
 	}
@@ -181,7 +181,7 @@ public class EndorsementServiceTest extends AbstractTest {
 
 		savedE = this.endorsementService.save(e);
 		this.endorsementService.delete(savedE);
-		final Collection<Endorsement> es = this.endorsementService.findAll();
+		final Collection<Endorsement> es = this.endorsementService.myEndorsements();
 		Assert.isTrue(!es.contains(e));
 		super.authenticate(null);
 	}

@@ -34,7 +34,11 @@ public class EndorsementService {
 		e.setMoment(null);
 		return e;
 	}
+
 	public Collection<Endorsement> findAll() {
+		return this.endorsementRepository.findAll();
+	}
+	public Collection<Endorsement> myEndorsements() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		return this.endorsementRepository.myEndorsements(userAccount.getId());
@@ -50,7 +54,7 @@ public class EndorsementService {
 		return this.endorsementRepository.save(e);
 	}
 	public void delete(final Endorsement endorsement) {
-		final Collection<Endorsement> endorsements = this.findAll();
+		final Collection<Endorsement> endorsements = this.myEndorsements();
 		Assert.isTrue(endorsements.contains(endorsement), "EndorsementService.delete -> You mustn't delete this endorsment.");
 		this.endorsementRepository.delete(endorsement);
 	}
