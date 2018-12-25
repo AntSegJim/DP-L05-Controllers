@@ -63,7 +63,6 @@ public class MessageServiceTest extends AbstractTest {
 		m.setBody("Este es un mensaje para el test");
 		m.setPriority(0);
 		m.setTag("tag");
-		m.setReceiver(null);
 		m.setEmailReceiver("cristian@hotmail.com");
 
 		saved = this.messageService.save(m);
@@ -145,7 +144,7 @@ public class MessageServiceTest extends AbstractTest {
 		messages = this.messageService.findAll();
 		Assert.isTrue(messages.contains(saved));
 		final MessageBox outBox = this.messageBoxService.getOutBox(saved.getSender().getId());
-		this.messageService.sendMessage(saved);
+		this.messageService.sendBroadcastMessage(saved);
 
 		Assert.isTrue(outBox.getMessages().contains(saved));
 

@@ -43,7 +43,9 @@ public class MessageService {
 		message.setBody("");
 		message.setPriority(0);
 		message.setTag("");
-		message.setSender(new Actor());
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor actor = this.actorService.getActorByUserAccount(user.getId());
+		message.setSender(actor);
 		message.setReceiver(new Actor());
 		message.setEmailReceiver("");
 		return message;
@@ -53,56 +55,59 @@ public class MessageService {
 
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor actor = this.actorService.getActorByUserAccount(user.getId());
-		message.setSender(actor);
 		Assert.isTrue(message.getSender().equals(actor));
 
 		Assert.isTrue(message != null && message.getMoment() != null && message.getPriority() >= 0 && message.getPriority() <= 2 && message.getSender() != null);
 		Assert.isTrue(message.getEmailReceiver() != null && message.getEmailReceiver() != "");
 
-		if (message.getEmailReceiver() != "@") {
-			final Actor receiver = this.actorService.getActorByEmail(message.getEmailReceiver());
-			Assert.notNull(receiver);
-			message.setReceiver(receiver);
-		} else
+		if (message.getEmailReceiver().equals("@"))
 			message.setReceiver(null);
+		else {
+			final Actor receiver = this.actorService.getActorByEmail(message.getEmailReceiver());
+			Assert.notNull(receiver, "Aqui");
+			message.setReceiver(receiver);
+		}
 
 		return this.messageRepository.save(message);
 	}
 
 	public void sendMessage(final Message message) {
 
-		if (message.getEmailReceiver() != "@") {
-			final MessageBox outBox = this.messageBoxService.getOutBox(message.getSender().getId());
-			outBox.getMessages().add(message);
+		Assert.isTrue(message.getEmailReceiver() != "@");
+		final MessageBox outBox = this.messageBoxService.getOutBox(message.getSender().getId());
+		outBox.getMessages().add(message);
 
-			if (this.auxEsSpam(message)) {
-				final MessageBox spamBox = this.messageBoxService.getSpamBox(message.getReceiver().getId());
-				spamBox.getMessages().add(message);
-			} else {
-				final MessageBox inBox = this.messageBoxService.getInBox(message.getReceiver().getId());
-				inBox.getMessages().add(message);
-			}
+		if (this.auxEsSpam(message)) {
+			final MessageBox spamBox = this.messageBoxService.getSpamBox(message.getReceiver().getId());
+			spamBox.getMessages().add(message);
 		} else {
-			final UserAccount userLoged = LoginService.getPrincipal();
-			Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-
-			final MessageBox outBox = this.messageBoxService.getOutBox(message.getSender().getId());
-			outBox.getMessages().add(message);
-
-			//			final List<Actor> actors = this.actorService.findAll();
-			final List<Actor> actors = this.actorService.findAll();
-			actors.remove(message.getSender());
-
-			for (int i = 0; i < actors.size(); i++)
-				if (this.auxEsSpam(message)) {
-					final MessageBox spamBox = this.messageBoxService.getSpamBox(actors.get(i).getId());
-					spamBox.getMessages().add(message);
-				} else {
-					final MessageBox inBox = this.messageBoxService.getInBox(actors.get(i).getId());
-					inBox.getMessages().add(message);
-				}
+			final MessageBox inBox = this.messageBoxService.getInBox(message.getReceiver().getId());
+			inBox.getMessages().add(message);
 		}
 	}
+
+	public void sendBroadcastMessage(final Message message) {
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		Assert.isTrue(message.getEmailReceiver().equals("@"));
+
+		final MessageBox outBox = this.messageBoxService.getOutBox(message.getSender().getId());
+		outBox.getMessages().add(message);
+
+		final List<Actor> actors = this.actorService.findAll();
+		actors.remove(message.getSender());
+
+		for (int i = 0; i < actors.size(); i++)
+			if (this.auxEsSpam(message)) {
+				final MessageBox spamBox = this.messageBoxService.getSpamBox(actors.get(i).getId());
+				spamBox.getMessages().add(message);
+			} else {
+				final MessageBox inBox = this.messageBoxService.getInBox(actors.get(i).getId());
+				inBox.getMessages().add(message);
+			}
+
+	}
+
 	public Collection<Message> findAll() {
 		return this.messageRepository.findAll();
 	}

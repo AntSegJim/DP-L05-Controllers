@@ -20,11 +20,18 @@
 
 <p><spring:message code="message.send" /></p>
 
-<form:form modelAttribute="newMessage" action = "message/actor/send.do">
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="messageBox.error" /> </p>
+</jstl:if>
+
+<form:form modelAttribute="newMessage" action ="message/actor/send.do">
 
 	<form:hidden path="id"/>
 	<form:hidden path="version" />
-
+	<form:hidden path="moment" />
+	<form:hidden path="sender" />
+	<form:hidden path="receiver" />
+	
 <form:label path="emailReceiver"><spring:message code="message.emailReceiver" />:</form:label>
 	<form:input path="emailReceiver" />
 	<form:errors path="emailReceiver"/>
@@ -53,12 +60,18 @@
 	<form:input path="tag" />
 	<form:errors path="tag"/>
 	<br />
+	<br />
 
 <input type="submit" name="save" value="<spring:message code="message.send.save" />" />
+<security:authorize access="hasRole('ADMIN')">
+<input type="submit" name="broadcast" value="<spring:message code="message.send.broadcast" />" />
+</security:authorize>
 <input type="button" name="cancel" value="<spring:message code="message.send.cancel" />"
-			onclick="javascript: relativeRedir('message/show.do');" />
+			onclick="javascript: relativeRedir('welcome/index.do');" />
 
 
 </form:form>
-
+<security:authorize access="hasRole('ADMIN')">
+<p><spring:message code="message.send.help" /></p>
+</security:authorize>
 </security:authorize>

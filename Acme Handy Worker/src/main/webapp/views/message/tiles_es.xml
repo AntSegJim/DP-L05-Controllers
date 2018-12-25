@@ -21,12 +21,12 @@
   <put-attribute name="body" value="/views/message/list.jsp" /> 
   </definition>
   
- <definition name="message/details" extends="master.page">
+   <definition name="mensaje/show" extends="master.page">
   <put-attribute name="title" value="Perfil: Acción 1" /> 
   <put-attribute name="body" value="/views/message/more-details.jsp" /> 
   </definition>
   
- <definition name="message/send" extends="master.page">
+ <definition name="mensaje/send" extends="master.page">
   <put-attribute name="title" value="Profile: Action 1" /> 
   <put-attribute name="body" value="/views/message/send-message.jsp" /> 
   </definition>
