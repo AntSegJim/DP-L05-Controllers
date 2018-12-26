@@ -19,12 +19,13 @@
 <security:authorize access="hasAnyRole('CUSTOMER','HANDYWORKER')">
 
 <p><spring:message code="warranty.edit" /></p>
-
+<jstl:if test="${not empty exception}">
+		<p style="color:red;font-weight: bold;" > <spring:message code="endorsement.error" /> </p>
+</jstl:if>
 <form:form action="endorsement/customer,handy-worker/edit.do" modelAttribute="endorsement">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="moment"/>
-	<form:hidden path="version"/>
 	<form:hidden path="handyWorkerSender"/>
 	<form:hidden path="handyWorkerReceiver"/>
 	<form:hidden path="customerSender"/>

@@ -22,7 +22,7 @@
 
 <p><spring:message code="warranty.list" /></p>
 <jstl:if test="${not empty exception}">
-		<p style="color:red"> <spring:message code="warranty.error.foreignKey" /> </p>
+		<p style="color:red;font-weight: bold;"> <spring:message code="warranty.error.foreignKey" /> </p>
 </jstl:if>
 <display:table pagesize="5" name="warranties" id="row" requestURI="warranty/administrator/list.do" >
 	
