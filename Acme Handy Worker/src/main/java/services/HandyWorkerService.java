@@ -136,7 +136,7 @@ public class HandyWorkerService {
 
 	}
 
-	public Collection<HandyWorker> getHandyWorkerInvolveInAnyOfHisFixUpTask(final Integer customerId) {
+	public Collection<HandyWorker> getHandyWorkerInvolveInAnyOfHisFixUpTask(final int customerId) {
 		return this.handyWorkerRepository.getHandyWorkerInvolveInAnyOfHisFixUpTask(customerId);
 	}
 

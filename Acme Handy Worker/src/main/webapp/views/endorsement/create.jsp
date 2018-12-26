@@ -36,7 +36,7 @@
     	<jstl:when test="${endorsement.handyWorkerSender.email==myEmail}">
 			<form:label path="customerReceiver"><spring:message code="endorsement.receiver.customer"/>:</form:label>
 			<form:select path="customerReceiver">
-				<form:options items="${customerReceivers}" itemLabel="correo" itemValue="id"/>
+				<form:options items="${customerReceivers}" itemLabel="email" itemValue="id"/>
 			</form:select>
     	</jstl:when>    
     	<jstl:otherwise>

@@ -110,7 +110,7 @@ public class CustomerService {
 		return this.customerRepository.customerUserAccount(id);
 	}
 
-	public Collection<Customer> getCustomerForWhomItIsWorked(final Integer handyWorkerId) {
+	public Collection<Customer> getCustomerForWhomItIsWorked(final int handyWorkerId) {
 		return this.customerRepository.getCustomerForWhomItIsWorked(handyWorkerId);
 	}
 }
