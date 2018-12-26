@@ -43,9 +43,7 @@ public class CategoryServiceTest extends AbstractTest {
 		Category c;
 		c = this.categoryService.create();
 		c.setName("Hijo");
-		c.setParent(c);
-
-		Assert.isTrue(c.getParent().getSoon().isEmpty());
+		c.setParent(this.categoryService.rootCategory());
 
 		saved = this.categoryService.save(c);
 		Assert.notEmpty(c.getParent().getSoon());
@@ -64,7 +62,7 @@ public class CategoryServiceTest extends AbstractTest {
 
 		Category c;
 		c = this.categoryService.create();
-		c.setName("CATEGORY");
+		c.setName("Nueva categoria");
 		saved = this.categoryService.save(c);
 		this.categoryService.delete(saved);
 

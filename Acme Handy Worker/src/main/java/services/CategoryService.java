@@ -60,6 +60,7 @@ public class CategoryService {
 		Assert.isTrue(!(category.getName().equals(null)), "CategoryService.save -> Name null");
 		Assert.isTrue(!(category.getName() == ""), "CategoryService.save -> Name");
 		Assert.isTrue(!(category.getParent().equals(null)), "CategoryService.save -> Parent");
+		Assert.isTrue(!(category == category.getParent()));
 		//		final Collection<String> names = this.categoryRepository.namesCategory();
 		//		Assert.isTrue(!names.contains(category.getName().toUpperCase()), "CategoryService.save -> Fallo");
 		final Collection<Category> sonOfParent = category.getParent().getSoon();
