@@ -1196,7 +1196,7 @@
 	</bean>
 	<bean id="soonCategory4" class="domain.Category">
 		<property name="name" value="Pest control" />
-		<property name="parent" ref="soonCategory4" />
+		<property name="parent" ref="soonCategory3" />
 		<property name="soon">
 			<null />
 		</property>
