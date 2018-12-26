@@ -109,4 +109,8 @@ public class CustomerService {
 	public Customer customerByUserAccount(final Integer id) {
 		return this.customerRepository.customerUserAccount(id);
 	}
+
+	public Collection<Customer> getCustomerForWhomItIsWorked(final Integer handyWorkerId) {
+		return this.customerRepository.getCustomerForWhomItIsWorked(handyWorkerId);
+	}
 }

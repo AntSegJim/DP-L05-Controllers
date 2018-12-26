@@ -89,9 +89,9 @@ public class EndorsementCustomerHandyWorkerController {
 		result = new ModelAndView("endorsement/create");
 		result.addObject("endorsement", endorsement);
 		result.addObject("myEmail", actor.getEmail());
-		//poner para seleccionar un customer o handy con el que se haya trabajado Fix-Appli
-		result.addObject("handyWorkerReceivers", this.handyWorkerService.findAll());
-		result.addObject("customerReceivers", this.customerService.findAll());
+
+		result.addObject("handyWorkerReceivers", this.handyWorkerService.getHandyWorkerInvolveInAnyOfHisFixUpTask(actor.getId()));
+		result.addObject("customerReceivers", this.customerService.getCustomerForWhomItIsWorked(actor.getId()));
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
