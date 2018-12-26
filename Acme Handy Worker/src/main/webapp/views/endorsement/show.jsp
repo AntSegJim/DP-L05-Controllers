@@ -21,10 +21,10 @@
 <p><spring:message code="endorsement.show" /></p>
 
 <spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
-<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender} <br />
-<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver} <br />
-<spring:message code="endorsement.sender" />: ${endorsement.customerSender} <br />
-<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver} <br />
+<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
+<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
+<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
+<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
 <spring:message code="endorsement.comments" />: ${endorsement.comments} <br />
 
 <br>
