@@ -16,49 +16,53 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasRole('ADMIN')">
+<security:authorize access="hasAnyRole('CUSTOMER','HANDYWORKER')">
 
-<p><spring:message code="warranty.create" /></p>
+<p><spring:message code="endorsement.create" /></p>
 
-<form:form action="warranty/administrator/create.do" modelAttribute="warranty">
+<jstl:if test="${not empty exception}">
+		<p style="color:red;font-weight: bold;" > <spring:message code="endorsement.error" /> </p>
+</jstl:if>
+
+<form:form action="endorsement/customer,handy-worker/edit.do" modelAttribute="endorsement">
 	
-	<form:label path="title">
-	<spring:message code="warranty.title"/>:
-	</form:label>
-	<form:input path="title"/>
-	<form:errors cssClass="error" path="title"/>
-	<br />
+	<form:hidden path="id"/>
+	<form:hidden path="version"/>
+	<form:hidden path="moment"/>
+	<form:hidden path="handyWorkerSender"/>
+	<form:hidden path="customerSender"/>
 	
-	<form:label path="terms">
-	<spring:message code="warranty.terms"/>:
+	<jstl:choose>
+    	<jstl:when test="${endorsement.handyWorkerSender.email==myEmail}">
+			<form:label path="customerReceiver"><spring:message code="endorsement.receiver.customer"/>:</form:label>
+			<form:select path="customerReceiver">
+				<form:options items="${customerReceivers}" itemLabel="email" itemValue="id"/>
+			</form:select>
+    	</jstl:when>    
+    	<jstl:otherwise>
+     	    <form:label path="handyWorkerReceiver"><spring:message code="endorsement.receiver.handy"/>:</form:label>
+			<form:select path="handyWorkerReceiver">
+				<form:options items="${handyWorkerReceivers}" itemLabel="email" itemValue="id"/>
+			</form:select>
+    	</jstl:otherwise>
+	</jstl:choose>
+	<br>
+	<form:label path="comments">
+	<spring:message code="endorsement.comments"/>:
 	</form:label>
-	<form:input path="terms"/>
-	<form:errors cssClass="error" path="terms"/>
-	<br />
-	
-	<form:label path="laws">
-	<spring:message code="warranty.laws"/>:
-	</form:label>
-	<form:input path="laws"/>
-	<form:errors cssClass="error" path="laws"/>
-	<br />
-	
-	<form:label path="draftMode">
-	<spring:message code="warranty.draftmode"/>:
-	</form:label>
-	<form:input path="draftMode"/>
-	<form:errors cssClass="error" path="draftMode"/>*
-	<p>*<spring:message code="warranty.draftmode.text"/></p>
-	<br />
+	<form:input path="comments"/>
+	<form:errors cssClass="error" path="comments"/>
 		
 	<br /><br />
 	<input type="submit" name="save" 
-	value="<spring:message code="warranty.save" />" />
-	
-	<input type="submit" name="cancel" 
-	value="<spring:message code="warranty.cancel" />" />
+	value="<spring:message code="endorsement.save" />" />
 </form:form>
 
+<div style="text-align:center;">
+	<a href="endorsement/customer,handy-worker/list.do">
+		<spring:message code="endorsement.cancel" />
+	</a>
+</div>
 </security:authorize>
 
 

@@ -19,21 +19,27 @@
 <security:authorize access="hasAnyRole('CUSTOMER','HANDYWORKER')">
 
 <p><spring:message code="warranty.edit" /></p>
-
+<jstl:if test="${not empty exception}">
+		<p style="color:red;font-weight: bold;" > <spring:message code="endorsement.error" /> </p>
+</jstl:if>
 <form:form action="endorsement/customer,handy-worker/edit.do" modelAttribute="endorsement">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="moment"/>
-	<form:hidden path="version"/>
 	<form:hidden path="handyWorkerSender"/>
+	<form:hidden path="customerReceiver"/>
 	<form:hidden path="handyWorkerReceiver"/>
 	<form:hidden path="customerSender"/>
-	<form:hidden path="customerReceiver"/>
+	<security:authorize access="hasRole('HANDYWORKER')">	
+		<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
+		<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
+	</security:authorize>
+	<security:authorize access="hasRole('CUSTOMER')">
+		<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
+		<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
+	</security:authorize>
+	
 	<spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
-	<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
-	<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
-	<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
-	<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
 	
 	<form:label path="comments">
 	<spring:message code="endorsement.comments"/>:

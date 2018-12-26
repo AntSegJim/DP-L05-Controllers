@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.CustomerService;
 import services.EndorsementService;
+import services.HandyWorkerService;
 import domain.Actor;
 import domain.Endorsement;
 
@@ -28,6 +30,10 @@ public class EndorsementCustomerHandyWorkerController {
 	private EndorsementService	endorsementService;
 	@Autowired
 	private ActorService		actorService;
+	@Autowired
+	private CustomerService		customerService;
+	@Autowired
+	private HandyWorkerService	handyWorkerService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -77,16 +83,17 @@ public class EndorsementCustomerHandyWorkerController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-
+		final int id_user = LoginService.getPrincipal().getId();
+		final Actor actor = this.actorService.getActorByUserAccount(id_user);
 		final Endorsement endorsement = this.endorsementService.create();
 		result = new ModelAndView("endorsement/create");
 		result.addObject("endorsement", endorsement);
+		result.addObject("myEmail", actor.getEmail());
 
-		//poner para seleccionar un customer o handy con el que se haya trabajado Fix-Appli
-
+		result.addObject("handyWorkerReceivers", this.handyWorkerService.getHandyWorkerInvolveInAnyOfHisFixUpTask(actor.getId()));
+		result.addObject("customerReceivers", this.customerService.getCustomerForWhomItIsWorked(actor.getId()));
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int endorsementId) {
 		ModelAndView result;
@@ -104,12 +111,18 @@ public class EndorsementCustomerHandyWorkerController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@Valid final Endorsement newEndorsement, final BindingResult binding) {
-		final ModelAndView result;
+		ModelAndView result;
 
-		if (!binding.hasErrors()) {
-			this.endorsementService.save(newEndorsement);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+		if (!binding.hasErrors())
+			try {
+				this.endorsementService.save(newEndorsement);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Exception e) {
+				result = new ModelAndView("endorsement/edit");
+				result.addObject("endorsement", newEndorsement);
+				result.addObject("exception", e);
+			}
+		else {
 			result = new ModelAndView("endorsement/edit");
 			result.addObject("endorsement", newEndorsement);
 		}
