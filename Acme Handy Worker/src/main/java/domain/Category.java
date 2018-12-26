@@ -45,7 +45,7 @@ public class Category extends DomainEntity {
 		this.parent = parent;
 	}
 	@Valid
-	@OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
 	public Collection<Category> getSoon() {
 		return this.soon;
 	}

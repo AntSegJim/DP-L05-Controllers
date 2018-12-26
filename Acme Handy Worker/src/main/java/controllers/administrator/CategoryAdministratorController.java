@@ -2,7 +2,6 @@
 package controllers.administrator;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.validation.Valid;
 
@@ -75,7 +74,6 @@ public class CategoryAdministratorController extends AbstractController {
 		ModelAndView result;
 		Category category;
 		final Collection<Category> categories;
-		final Collection<Category> categories2;
 
 		category = this.categoryService.findOne(categoryId);
 		Assert.notNull(category);
@@ -84,59 +82,53 @@ public class CategoryAdministratorController extends AbstractController {
 		categories.remove(category);
 		categories.removeAll(category.getSoon());
 
-		categories2 = this.categoryService.findAll();
-		categories2.remove(category);
-		categories2.remove(category.getParent());
-		categories2.remove(this.categoryService.rootCategory());
-
 		result = new ModelAndView("category/edit");
 		result.addObject("category", category);
 		result.addObject("categories", categories);
-		result.addObject("categories2", categories2);
 
 		return result;
 	}
 
-	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	//	public ModelAndView save(@Valid final Category category, final BindingResult binding, @RequestParam("parent") final int categoryId) {
-	//		ModelAndView result;
-	//
-	//		if (!binding.hasErrors()) {
-	//			final Category c = this.categoryService.findOne(categoryId);
-	//			category.setParent(c);
-	//			this.categoryService.save(category);
-	//			result = new ModelAndView("redirect:list.do");
-	//		} else {
-	//			final Collection<Category> categories = this.categoryService.findAll();
-	//			categories.remove(category);
-	//			result = new ModelAndView("category/edit");
-	//			result.addObject("category", category);
-	//			result.addObject("categories", categories);
-	//		}
-	//		return result;
-	//
-	//	}
+	@RequestMapping(value = "/editByName", method = RequestMethod.GET)
+	public ModelAndView edit2(@RequestParam final String nameCategory) {
+		ModelAndView result;
+		Category category;
+		final Collection<Category> categories;
+
+		category = this.categoryService.categoryByName(nameCategory);
+		Assert.notNull(category);
+
+		categories = this.categoryService.findAll();
+		categories.remove(category);
+		categories.removeAll(category.getSoon());
+
+		result = new ModelAndView("category/edit");
+		result.addObject("category", category);
+		result.addObject("categories", categories);
+		return result;
+	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Category category, final BindingResult binding, @RequestParam("parent") final int categoryId, @RequestParam(value = "soon", required = false) Collection<Category> son) {
+	public ModelAndView save(@Valid final Category category, final BindingResult binding) {
 		ModelAndView result;
 
-		if (!binding.hasErrors()) {
+		try {
+			if (!binding.hasErrors()) {
+				this.categoryService.save(category);
+				result = new ModelAndView("redirect:list.do");
 
-			if (son == null)
-				son = new HashSet<Category>();
+			} else {
+				result = new ModelAndView("category/edit");
+				result.addObject("category", category);
+				result.addObject("categories", this.categoryService.findAll());
+			}
+		} catch (final Exception e) {
+			result = new ModelAndView("category/edit");
+			result.addObject("category", category);
+			result.addObject("categories", this.categoryService.findAll());
+			result.addObject("exception", e);
 
-			final Category p = this.categoryService.findOne(categoryId);
-			category.setParent(p);
-
-			category.setSoon(son);
-			this.categoryService.save(category);
-			result = new ModelAndView("category/list");
-			final Collection<Category> categories = this.categoryService.findAll();
-			result.addObject("categories", categories);
-
-		} else
-			result = new ModelAndView("redirect:edit.do?categoryId=" + category.getId());
+		}
 
 		return result;
 
@@ -153,6 +145,9 @@ public class CategoryAdministratorController extends AbstractController {
 		} catch (final Exception e) {
 			result = new ModelAndView("category/edit");
 			result.addObject("category", category);
+			final Collection<Category> categories = this.categoryService.findAll();
+			result.addObject("categories", categories);
+			result.addObject("exception", e);
 		}
 		return result;
 	}

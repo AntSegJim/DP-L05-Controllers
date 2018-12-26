@@ -23,8 +23,14 @@
 
 <form:form action="category/administrator/edit.do" modelAttribute="category">
 
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="category.error" /> </p>
+</jstl:if>
+
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="soon" />
+	
 	
 	<form:label path="name">
 	<spring:message code="category.name" />:
@@ -41,22 +47,6 @@
 	</form:select>
 	<br />
 	
-	<jstl:choose>
-	<jstl:when test="${category.id ne 0 }">
-	<form:label path="soon">
-	<spring:message code="category.son"/>:
-	</form:label>
-	<form:select path="soon">
-		<form:options items="${categories2}" itemLabel="name" itemValue="id"/>
-	</form:select>
-	</jstl:when>
-	
-	<jstl:otherwise>
-		<form:hidden path="soon" />
-	</jstl:otherwise>
-	
-	</jstl:choose>
-	<br />
 	
 	<input type="submit" name="save" 
 	value="<spring:message code="category.save" />" />

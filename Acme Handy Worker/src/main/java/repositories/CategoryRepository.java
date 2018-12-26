@@ -19,5 +19,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 	public List<Category> categorySoonFromParent(int categoryId);
 	@Query("select c from Category c where c.name = 'CATEGORY'")
 	public Category rootCategory();
-
+	@Query("select c from Category c where c.name=?1")
+	public Category categoryByName(String name);
 }

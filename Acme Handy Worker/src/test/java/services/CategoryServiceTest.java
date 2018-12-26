@@ -64,7 +64,7 @@ public class CategoryServiceTest extends AbstractTest {
 
 		Category c;
 		c = this.categoryService.create();
-		c.setName("Hijo");
+		c.setName("CATEGORY");
 		saved = this.categoryService.save(c);
 		this.categoryService.delete(saved);
 

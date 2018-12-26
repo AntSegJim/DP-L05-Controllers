@@ -24,6 +24,13 @@
 <spring:message code="category.son" /> :  <br/>
 <display:table name="${category.soon}" id="row">
 <display:column property="name" titleKey="category.name" />
+<display:column>
+<jstl:if test="${row.name != 'CATEGORY'}">
+		<a href="category/administrator/editByName.do?nameCategory=${row.name}"><spring:message code="category.edit" /></a>
+	</jstl:if>
+		
+</display:column>
+
 </display:table>
 <br />
 <br />

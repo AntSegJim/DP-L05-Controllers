@@ -70,7 +70,7 @@ public class CategoryService {
 	public void delete(final Category category) {
 		final UserAccount user = LoginService.getPrincipal();
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("ADMIN"), "CategoryService.delete -> Authority");
-		Assert.isTrue(!((category.getName() == "CATEGORY")));
+		Assert.isTrue(!(category.getName().equals("CATEGORY")));
 
 		this.categoryRepository.delete(category);
 
@@ -78,6 +78,10 @@ public class CategoryService {
 
 	public Category rootCategory() {
 		return this.categoryRepository.rootCategory();
+	}
+
+	public Category categoryByName(final String name) {
+		return this.categoryRepository.categoryByName(name);
 	}
 
 }
