@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -24,13 +26,17 @@ public class EndorsementService {
 	// ---------- Simple CRUD methods ----------
 
 	public Endorsement create() {
+
+		//		final int id_user = LoginService.getPrincipal().getId();
+		//		final Actor actor = this.actorService.getActorByUserAccount(id_user);
+
 		final Endorsement e = new Endorsement();
-		e.setComments(null);
+		e.setComments(new HashSet<String>());
 		e.setCustomerReceiver(null);
 		e.setCustomerSender(null);
 		e.setHandyWorkerReceiver(null);
 		e.setHandyWorkerSender(null);
-		e.setMoment(null);
+		e.setMoment(new Date());
 		return e;
 	}
 

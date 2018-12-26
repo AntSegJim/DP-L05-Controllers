@@ -26,4 +26,14 @@
 		<put-attribute name="body" value="/views/endorsement/show.jsp" />
 	</definition>
 	
+	<definition name="endorsement/edit" extends="master.page">	
+		<put-attribute name="title" value="Editing endorsement" />
+		<put-attribute name="body" value="/views/endorsement/edit.jsp" />
+	</definition>
+	
+	<definition name="endorsement/create" extends="master.page">	
+		<put-attribute name="title" value="Creating an endorsement" />
+		<put-attribute name="body" value="/views/endorsement/create.jsp" />
+	</definition>
+	
 </tiles-definitions>

@@ -45,7 +45,9 @@
 		
 		<bean class="converters.CustomerToStringConverter" />
 		<bean class="converters.StringToCustomerConverter" />
-				
+		
+		<bean class="converters.HandyWorkerToStringConverter" />
+		<bean class="converters.StringToHandyWorkerConverter" />
 				
 	</util:list>
 	
