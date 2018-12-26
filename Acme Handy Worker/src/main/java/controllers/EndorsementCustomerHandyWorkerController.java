@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import services.ActorService;
 import services.EndorsementService;
+import domain.Actor;
 import domain.Endorsement;
 
 @Controller
@@ -23,20 +26,25 @@ public class EndorsementCustomerHandyWorkerController {
 
 	@Autowired
 	private EndorsementService	endorsementService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Endorsement> endorsements = this.endorsementService.myEndorsements();
+		final int id_user = LoginService.getPrincipal().getId();
+		final Actor actor = this.actorService.getActorByUserAccount(id_user);
 
-		result = new ModelAndView("fixUpTask/list");
+		final Collection<Endorsement> endorsements = this.endorsementService.myEndorsements(actor.getId());
+
+		result = new ModelAndView("endorsement/list");
+		result.addObject("myEmail", actor.getEmail());
 		result.addObject("endorsements", endorsements);
 		result.addObject("requestURI", "endorsement/customer,handy-worker/list.do");
 
 		return result;
 	}
-
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int endorsementId) {
 		ModelAndView result;
@@ -44,7 +52,7 @@ public class EndorsementCustomerHandyWorkerController {
 		try {
 			endorsement = this.endorsementService.findOne(endorsementId);
 			Assert.notNull(endorsement);
-			result = new ModelAndView("endorsemenet/show");
+			result = new ModelAndView("endorsement/show");
 			result.addObject("endorsement", endorsement);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");

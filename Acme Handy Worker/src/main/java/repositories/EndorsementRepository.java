@@ -12,6 +12,6 @@ import domain.Endorsement;
 @Repository
 public interface EndorsementRepository extends JpaRepository<Endorsement, Integer> {
 
-	@Query("select e from Endorsement e where (e.handyWorkerSender.userAccount = ?1 and e.handyWorkerReceiver.userAccount = ?1) or (e.customerSender.userAccount = ?1 and e.customerReceiver.userAccount = ?1)")
-	public Collection<Endorsement> myEndorsements(Integer userAccountId);
+	@Query("select e from Endorsement e where e.handyWorkerSender.id = ?1 or e.handyWorkerReceiver.id = ?1 or e.customerSender.id = ?1 or e.customerReceiver.id = ?1")
+	public Collection<Endorsement> myEndorsements(int userAccountId);
 }

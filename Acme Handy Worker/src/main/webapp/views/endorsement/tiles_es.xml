@@ -16,9 +16,14 @@
       
 <tiles-definitions>
 
-	<definition name="creditCardType/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de marcas en Tarjetas de Crédito" />
-		<put-attribute name="body" value="/views/creditCardType/list.jsp" />
+	<definition name="endorsement/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de apoyos" />
+		<put-attribute name="body" value="/views/endorsement/list.jsp" />
+	</definition>
+	
+	<definition name="endorsement/show" extends="master.page">	
+		<put-attribute name="title" value="Mostrando apoyo" />
+		<put-attribute name="body" value="/views/endorsement/show.jsp" />
 	</definition>
 	
 </tiles-definitions>

@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import security.LoginService;
 import security.UserAccount;
 import utilities.AbstractTest;
 import domain.Customer;
@@ -34,9 +35,11 @@ public class EndorsementServiceTest extends AbstractTest {
 	private CustomerService		customerService;
 	@Autowired
 	private HandyWorkerService	handyWorkerService;
+	@Autowired
+	private ActorService		actorService;
 
 
-	//---------------------- Test ----------------------
+	//	---------------------- Test ----------------------
 	@Test
 	public void testCreateEndorsement() {
 		super.authenticate("customer2");
@@ -130,7 +133,8 @@ public class EndorsementServiceTest extends AbstractTest {
 		e.setMoment(new Date());
 
 		savedE = this.endorsementService.save(e);
-		final Collection<Endorsement> es = this.endorsementService.myEndorsements();
+		final int id = LoginService.getPrincipal().getId();
+		final Collection<Endorsement> es = this.endorsementService.myEndorsements(this.actorService.getActorByUserAccount(id).getId());
 		Assert.isTrue(es.contains(savedE));
 		super.authenticate(null);
 	}
@@ -181,8 +185,18 @@ public class EndorsementServiceTest extends AbstractTest {
 
 		savedE = this.endorsementService.save(e);
 		this.endorsementService.delete(savedE);
-		final Collection<Endorsement> es = this.endorsementService.myEndorsements();
+		final int id = LoginService.getPrincipal().getId();
+		final Collection<Endorsement> es = this.endorsementService.myEndorsements(this.actorService.getActorByUserAccount(id).getId());
 		Assert.isTrue(!es.contains(e));
+		super.authenticate(null);
+	}
+
+	@Test
+	public void testEndorsement() {
+		super.authenticate("customer2");
+		final int id = LoginService.getPrincipal().getId();
+		final Collection<Endorsement> es = this.endorsementService.myEndorsements(this.actorService.getActorByUserAccount(id).getId());
+		System.out.print(es);
 		super.authenticate(null);
 	}
 }

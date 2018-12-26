@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 
 import repositories.EndorsementRepository;
 import security.LoginService;
-import security.UserAccount;
 import domain.Endorsement;
 
 @Service
@@ -38,10 +37,8 @@ public class EndorsementService {
 	public Collection<Endorsement> findAll() {
 		return this.endorsementRepository.findAll();
 	}
-	public Collection<Endorsement> myEndorsements() {
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		return this.endorsementRepository.myEndorsements(userAccount.getId());
+	public Collection<Endorsement> myEndorsements(final int actorId) {
+		return this.endorsementRepository.myEndorsements(actorId);
 	}
 	public Endorsement findOne(final int endorsementId) {
 		return this.endorsementRepository.findOne(endorsementId);
@@ -54,7 +51,8 @@ public class EndorsementService {
 		return this.endorsementRepository.save(e);
 	}
 	public void delete(final Endorsement endorsement) {
-		final Collection<Endorsement> endorsements = this.myEndorsements();
+		final Integer userAccountId = LoginService.getPrincipal().getId();
+		final Collection<Endorsement> endorsements = this.myEndorsements(userAccountId);
 		Assert.isTrue(endorsements.contains(endorsement), "EndorsementService.delete -> You mustn't delete this endorsment.");
 		this.endorsementRepository.delete(endorsement);
 	}
