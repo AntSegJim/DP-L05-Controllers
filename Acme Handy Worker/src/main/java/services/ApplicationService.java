@@ -75,4 +75,7 @@ public class ApplicationService {
 			Assert.isTrue(a.getCreditCard().equals(null));
 		return this.applicationRepository.save(a);
 	}
+	public Collection<Application> getMyApplications(final int handyWorkerId) {
+		return this.getMyApplications(handyWorkerId);
+	}
 }

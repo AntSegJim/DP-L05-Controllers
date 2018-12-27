@@ -38,12 +38,14 @@
 			<form:select path="customerReceiver">
 				<form:options items="${customerReceivers}" itemLabel="email" itemValue="id"/>
 			</form:select>
+			<form:hidden path="handyWorkerReceiver"/>
     	</jstl:when>    
     	<jstl:otherwise>
      	    <form:label path="handyWorkerReceiver"><spring:message code="endorsement.receiver.handy"/>:</form:label>
 			<form:select path="handyWorkerReceiver">
 				<form:options items="${handyWorkerReceivers}" itemLabel="email" itemValue="id"/>
 			</form:select>
+			<form:hidden path="customerReceiver"/>
     	</jstl:otherwise>
 	</jstl:choose>
 	<br>

@@ -15,10 +15,6 @@ public interface HandyWorkerRepository extends JpaRepository<HandyWorker, Intege
 	@Query("select e from HandyWorker e where ((select sum(a.application.size)*1.0 /(select count(h) from HandyWorker h) from HandyWorker a)) * 0.1 + ((select sum(a.application.size)*1.0/(select count(h) from HandyWorker h) from HandyWorker a)) < e.application.size order by e.application.size ASC")
 	public Collection<HandyWorker> handyWorkerMoreTentPercentApplicatonsAccepted();
 
-	//	@Query("select h from HandyWorker h where h.userAccount.id = ?1")
-	//	public Collection<HandyWorker> handyWorkerByUserAccount(Integer userAccountId);
-
-	//Añadido por jesus para el metodo  findAllByHandyWorker de phaseService
 	@Query("select c from HandyWorker c where c.userAccount.id = ?1")
 	public HandyWorker handyWorkerUserAccount(Integer id);
 

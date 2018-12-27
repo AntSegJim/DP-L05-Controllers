@@ -18,19 +18,33 @@
 
 <security:authorize access="hasAnyRole('CUSTOMER','HANDYWORKER')">
 
-	<p>
-		<spring:message code="endorsement.show" />
-	</p>
-
-	<spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
-	<security:authorize access="hasRole('HANDYWORKER')">
-		<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
-		<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
-	</security:authorize>
-	<security:authorize access="hasRole('CUSTOMER')">
-		<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
-		<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
-	</security:authorize>
+	<p><spring:message code="endorsement.show" /></p>
+	
+	<jstl:choose>
+    	<jstl:when test="${endorsement.handyWorkerReceiver.email==myEmail || endorsement.customerReceiver.email==myEmail}">
+			<spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
+			<security:authorize access="hasRole('HANDYWORKER')">
+				<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
+				<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
+			</security:authorize>
+			<security:authorize access="hasRole('CUSTOMER')">
+				<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
+				<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
+			</security:authorize>
+	</jstl:when>    
+    	<jstl:otherwise>
+    		<spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
+			<security:authorize access="hasRole('HANDYWORKER')">
+				<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
+				<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
+			</security:authorize>
+			<security:authorize access="hasRole('CUSTOMER')">
+				<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
+				<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
+			</security:authorize>
+    	</jstl:otherwise>
+	</jstl:choose>
+	
 	<spring:message code="endorsement.comments" />: ${endorsement.comments} <br />
 
 	<br>

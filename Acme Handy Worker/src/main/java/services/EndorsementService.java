@@ -59,9 +59,12 @@ public class EndorsementService {
 		return this.endorsementRepository.findOne(endorsementId);
 	}
 	public Endorsement save(final Endorsement e) {
-
-		final Integer userAccountId = LoginService.getPrincipal().getId();
-		Assert.isTrue(e.getCustomerSender().getUserAccount().equals(userAccountId) || e.getHandyWorkerSender().equals(userAccountId));
+		final Integer id_user = LoginService.getPrincipal().getId();
+		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(id_user);
+		if (handyWorker == null)
+			e.setCustomerSender(this.customerService.customerByUserAccount(id_user));
+		else
+			e.setHandyWorkerSender(handyWorker);
 		Assert.isTrue((e.getCustomerReceiver() == null && e.getHandyWorkerReceiver() != null) || (e.getHandyWorkerReceiver() == null && e.getCustomerReceiver() != null));
 		Assert.isTrue((e.getCustomerSender() == null && e.getHandyWorkerSender() != null) || (e.getHandyWorkerSender() == null && e.getCustomerSender() != null));
 		return this.endorsementRepository.save(e);

@@ -16,7 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasAnyRole('CUSTOMER','HANDYWOKER')">
+<security:authorize access="hasAnyRole('CUSTOMER','HANDYWORKER')">
 
 <a href="endorsement/customer,handy-worker/create.do"><spring:message code="endorsement.create" /></a>
 
@@ -25,15 +25,30 @@
 		<p style="color:red"> <spring:message code="endorsement.error" /> </p>
 </jstl:if>
 <display:table pagesize="5" name="endorsements" id="row" requestURI="endorsement/customer,handy-worker/list.do" >
-	
 	<display:column property="moment" titleKey="endorsement.moment"/>
-	<security:authorize access="hasRole('CUSTOMER')">
-		<display:column property="handyWorkerReceiver.email" titleKey="endorsement.moment"/>
-	</security:authorize>
-	<security:authorize access="hasRole('HANDYWOKER')">
-		<display:column property="customerReceiver.email" titleKey="endorsement.receiver"/>
-	</security:authorize>
 	
+	<jstl:choose>
+    	<jstl:when test="${row.handyWorkerReceiver.email==myEmail || row.customerReceiver.email==myEmail}">
+			<security:authorize access="hasRole('CUSTOMER')">
+				<display:column titleKey="endorsement.sender">${row.handyWorkerSender.email}</display:column>
+				<display:column titleKey="endorsement.receiver">${row.customerReceiver.email}</display:column>
+			</security:authorize>
+			<security:authorize access="hasRole('HANDYWORKER')">
+				<display:column titleKey="endorsement.sender">${row.customerSender.email}</display:column>
+				<display:column titleKey="endorsement.receiver">${row.handyWorkerReceiver.email}</display:column>
+			</security:authorize>
+    	</jstl:when>    
+    	<jstl:otherwise>
+     	   <security:authorize access="hasRole('CUSTOMER')">
+     	   		<display:column titleKey="endorsement.sender">${row.customerSender.email}</display:column>
+				<display:column titleKey="endorsement.receiver">${row.handyWorkerReceiver.email}</display:column>
+			</security:authorize>
+			<security:authorize access="hasRole('HANDYWORKER')">
+				<display:column titleKey="endorsement.sender">${row.handyWorkerSender.email}</display:column>
+				<display:column titleKey="endorsement.receiver">${row.customerReceiver.email}</display:column>
+			</security:authorize>
+    	</jstl:otherwise>
+	</jstl:choose>
 	<display:column titleKey="endorsement.show">
 		<a href="endorsement/customer,handy-worker/show.do?endorsementId=${row.id}"><spring:message code="endorsement.show" /></a>
 	</display:column>

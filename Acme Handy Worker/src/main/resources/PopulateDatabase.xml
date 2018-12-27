@@ -2051,7 +2051,7 @@
 		<property name="moment" value="02/06/2017 20:12" />
 		<property name="status" value="0" />
 		<property name="price" value="50" />
-		<property name="handyWorker" ref="handyWorker2"></property>
+		<property name="handyWorker" ref="handyWorker3"></property>
 		<property name="comments">
 			<list>
 				<value>Aplicacion2</value>
@@ -2100,21 +2100,22 @@
 
 	<!-- Customer -->
 	<bean id="customer1" class="domain.Customer">
-		<property name="name" value="Anton"></property>
-		<property name="surname" value="Seg"></property>
+		<property name="name" value="Pepito"></property>
+		<property name="surname" value="Los Palotes"></property>
 		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg"></property>
-		<property name="email" value="antonio_alandalus@hotmail.com" />
+		<property name="email" value="pepito_lospalotes@hotmail.com" />
 		<property name="score" value="10" />
 		<property name="endorseCustomer">
 			<list>
-				<ref bean="endorsement1" />
-				<ref bean="endorsement2" />
+				<ref bean="endorsement5" />
+				<ref bean="endorsement6" />
+				<ref bean="endorsement7" />
 			</list>
 		</property>
 		<property name="receiveEndorseFromCustomer">
 			<list>
-				<ref bean="endorsement3" />
-				<ref bean="endorsement4" />
+				<ref bean="endorsement1" />
+				<ref bean="endorsement2" />
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount5" />
@@ -2124,16 +2125,19 @@
 	<bean id="customer2" class="domain.Customer">
 		<property name="name" value="Jesus"></property>
 		<property name="surname" value="Elias"></property>
-		<property name="email" value="jesusdp@hotmail.com" />
+		<property name="email" value="jesus_elias@hotmail.com" />
 		<property name="score" value="9" />
 		<property name="endorseCustomer">
 			<list>
-				<ref bean="endorsement5" />
+				<ref bean="endorsement8" />
+				<ref bean="endorsement9" />
+				<ref bean="endorsement10" />
 			</list>
 		</property>
 		<property name="receiveEndorseFromCustomer">
 			<list>
-				<ref bean="endorsement6" />
+				<ref bean="endorsement3" />
+				<ref bean="endorsement4" />
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount6" />
@@ -2383,28 +2387,36 @@
 
 	<!-- HandyWorker -->
 	<bean id="handyWorker1" class="domain.HandyWorker">
-		<property name="name" value="Anton"></property>
-		<property name="surname" value="Seg"></property>
-		<property name="email" value="antonioArahal@hotmail.com" />
+		<property name="name" value="Antonio"></property>
+		<property name="surname" value="Segura"></property>
+		<property name="email" value="antonioSegura@hotmail.com" />
 		<property name="makeHandyWorker" value="HandyWorker1" />
 		<property name="score" value="1" />
 		<property name="finder" ref="finder1" />
 		<property name="endorseHWorker">
 			<list>
 				<ref bean="endorsement1" />
+				<ref bean="endorsement2" />
+				<ref bean="endorsement3" />
+				<ref bean="endorsement4" />
 			</list>
 		</property>
 		<property name="receiveEndorseFromHWorker">
 			<list>
-				<ref bean="endorsement1" />
+				<ref bean="endorsement5" />
+				<ref bean="endorsement6" />
+				<ref bean="endorsement7" />
+				<ref bean="endorsement8" />
+				<ref bean="endorsement9" />
+				<ref bean="endorsement10" />
 			</list>
 		</property>
+		<property name="userAccount" ref="userAccount16" />
 		<property name="application">
 			<list>
 				<ref bean="application1" />
 			</list>
 		</property>
-		<property name="userAccount" ref="userAccount16" />
 	</bean>
 
 	<bean id="handyWorker2" class="domain.HandyWorker">
@@ -2424,12 +2436,12 @@
 				<ref bean="endorsement1" />
 			</list>
 		</property>
+		<property name="userAccount" ref="userAccount17" />
 		<property name="application">
 			<list>
 				<ref bean="application2" />
 			</list>
 		</property>
-		<property name="userAccount" ref="userAccount17" />
 	</bean>
 
 	<bean id="handyWorker3" class="domain.HandyWorker">
@@ -2449,12 +2461,12 @@
 				<ref bean="endorsement1" />
 			</list>
 		</property>
+		<property name="userAccount" ref="userAccount18" />
 		<property name="application">
 			<list>
 				<ref bean="application3" />
 			</list>
 		</property>
-		<property name="userAccount" ref="userAccount18" />
 	</bean>
 
 	<bean id="handyWorker4" class="domain.HandyWorker">
@@ -2474,12 +2486,12 @@
 				<ref bean="endorsement1" />
 			</list>
 		</property>
+		<property name="userAccount" ref="userAccount19" />
 		<property name="application">
 			<list>
-				<ref bean="application3" />
+				
 			</list>
 		</property>
-		<property name="userAccount" ref="userAccount19" />
 	</bean>
 
 	<bean id="handyWorker5" class="domain.HandyWorker">
@@ -2499,12 +2511,12 @@
 
 			</list>
 		</property>
+		<property name="userAccount" ref="userAccount20" />
 		<property name="application">
 			<list>
-				<ref bean="application1" />
+				
 			</list>
 		</property>
-		<property name="userAccount" ref="userAccount20" />
 	</bean>
 
 
@@ -2513,27 +2525,27 @@
 		<property name="moment" value="12/12/2012 12:12" />
 		<property name="comments">
 			<list>
-				<value>Coment1</value>
-				<value>Coment2</value>
+				<value>Me gusta tu trabajo</value>
+				<value>Ha quedado genial</value>
 			</list>
 		</property>
 		<property name="handyWorkerSender" ref="handyWorker1" />
-		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="customerSender" ref="customer1" />
+		<property name="handyWorkerReceiver"><null /></property>
+		<property name="customerSender"><null /></property>
 		<property name="customerReceiver" ref="customer1" />
 
 	</bean>
 	<bean id="endorsement2" class="domain.Endorsement">
-		<property name="moment" value="12/12/2012 12:12" />
+		<property name="moment" value="05/05/2005 15:15" />
 		<property name="comments">
 			<list>
-				<value>Coment1</value>
-				<value>Coment2</value>
+				<value>No me ha gustado nada</value>
+				<value>Vaya desastre</value>
 			</list>
 		</property>
 		<property name="handyWorkerSender" ref="handyWorker1" />
-		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="customerSender" ref="customer1" />
+		<property name="handyWorkerReceiver"><null /></property>
+		<property name="customerSender"><null /></property>
 		<property name="customerReceiver" ref="customer1" />
 	</bean>
 
@@ -2541,59 +2553,107 @@
 		<property name="moment" value="12/12/2012 12:12" />
 		<property name="comments">
 			<list>
-				<value>Coment1</value>
-				<value>Coment2</value>
+				<value>Te comento</value>
+				<value>Bueno mejor no</value>
 			</list>
 		</property>
 		<property name="handyWorkerSender" ref="handyWorker1" />
-		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="customerSender" ref="customer1" />
-		<property name="customerReceiver" ref="customer1" />
+		<property name="handyWorkerReceiver"><null /></property>
+		<property name="customerSender"><null /></property>
+		<property name="customerReceiver" ref="customer2" />
 	</bean>
 
 	<bean id="endorsement4" class="domain.Endorsement">
 		<property name="moment" value="12/12/2012 12:12" />
 		<property name="comments">
 			<list>
-				<value>Coment1</value>
-				<value>Coment2</value>
+				<value>Comentario endo4</value>
+				<value>Comentario endo5</value>
 			</list>
 		</property>
 		<property name="handyWorkerSender" ref="handyWorker1" />
-		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="customerSender" ref="customer1" />
-		<property name="customerReceiver" ref="customer1" />
+		<property name="handyWorkerReceiver"><null /></property>
+		<property name="customerSender"><null /></property>
+		<property name="customerReceiver" ref="customer2" />
 	</bean>
 
 	<bean id="endorsement5" class="domain.Endorsement">
 		<property name="moment" value="13/12/2012 12:12" />
 		<property name="comments">
 			<list>
-				<value>Coment1</value>
-				<value>Coment2</value>
+				<value>Muy man handy endo 5</value>
 			</list>
 		</property>
-		<property name="handyWorkerSender" ref="handyWorker2" />
-		<property name="handyWorkerReceiver" ref="handyWorker2" />
-		<property name="customerSender" ref="customer2" />
-		<property name="customerReceiver" ref="customer2" />
+		<property name="handyWorkerReceiver" ref="handyWorker1" />
+		<property name="handyWorkerSender"><null /></property>
+		<property name="customerReceiver"><null /></property>
+		<property name="customerSender" ref="customer1" />
 	</bean>
 
 	<bean id="endorsement6" class="domain.Endorsement">
-		<property name="moment" value="14/12/2012 12:12" />
+		<property name="moment" value="01/01/2001 12:12" />
 		<property name="comments">
 			<list>
-				<value>Coment1</value>
-				<value>Coment2</value>
+				<value>Muy man handy endo 6</value>
 			</list>
 		</property>
-		<property name="handyWorkerSender" ref="handyWorker3" />
-		<property name="handyWorkerReceiver" ref="handyWorker3" />
+		<property name="handyWorkerReceiver" ref="handyWorker1" />
+		<property name="handyWorkerSender"><null /></property>
+		<property name="customerReceiver"><null /></property>
+		<property name="customerSender" ref="customer1" />
+	</bean>
+	
+	<bean id="endorsement7" class="domain.Endorsement">
+		<property name="moment" value="07/07/2007 12:12" />
+		<property name="comments">
+			<list>
+				<value>Muy man handy endo 7</value>
+			</list>
+		</property>
+		<property name="handyWorkerReceiver" ref="handyWorker1" />
+		<property name="handyWorkerSender"><null /></property>
+		<property name="customerReceiver"><null /></property>
+		<property name="customerSender" ref="customer1" />
+	</bean>
+	
+	<bean id="endorsement8" class="domain.Endorsement">
+		<property name="moment" value="08/08/2008 12:12" />
+		<property name="comments">
+			<list>
+				<value>Muy man handy endo 8</value>
+			</list>
+		</property>
+		<property name="handyWorkerReceiver" ref="handyWorker1" />
+		<property name="handyWorkerSender"><null /></property>
+		<property name="customerReceiver"><null /></property>
 		<property name="customerSender" ref="customer2" />
-		<property name="customerReceiver" ref="customer2" />
 	</bean>
 
-
+	<bean id="endorsement9" class="domain.Endorsement">
+		<property name="moment" value="09/09/2009 12:12" />
+		<property name="comments">
+			<list>
+				<value>Muy man handy endo 9</value>
+			</list>
+		</property>
+		<property name="handyWorkerReceiver" ref="handyWorker1" />
+		<property name="handyWorkerSender"><null /></property>
+		<property name="customerReceiver"><null /></property>
+		<property name="customerSender" ref="customer2" />
+	</bean>
+	
+	<bean id="endorsement10" class="domain.Endorsement">
+		<property name="moment" value="10/10/2010 10:10" />
+		<property name="comments">
+			<list>
+				<value>Muy man handy endo 10</value>
+			</list>
+		</property>
+		<property name="handyWorkerReceiver" ref="handyWorker1" />
+		<property name="handyWorkerSender"><null /></property>
+		<property name="customerReceiver"><null /></property>
+		<property name="customerSender" ref="customer2" />
+	</bean>
 
 	<!-- Tutorial -->
 	<bean id="tutorial1" class="domain.Tutorial">

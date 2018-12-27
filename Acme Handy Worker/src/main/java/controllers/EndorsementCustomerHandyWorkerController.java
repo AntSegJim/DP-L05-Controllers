@@ -60,6 +60,9 @@ public class EndorsementCustomerHandyWorkerController {
 			Assert.notNull(endorsement);
 			result = new ModelAndView("endorsement/show");
 			result.addObject("endorsement", endorsement);
+			final int id_user = LoginService.getPrincipal().getId();
+			final Actor actor = this.actorService.getActorByUserAccount(id_user);
+			result.addObject("myEmail", actor.getEmail());
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
 		}
