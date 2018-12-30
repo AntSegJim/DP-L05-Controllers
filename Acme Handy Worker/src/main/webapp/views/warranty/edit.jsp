@@ -52,13 +52,13 @@
 	<form:errors cssClass="error" path="draftMode"/>*
 	<p>*<spring:message code="warranty.draftmode.text"/></p>
 	<br />
-		
-	<br /><br />
+
 	<input type="submit" name="save" 
 	value="<spring:message code="warranty.save" />" />
 	
-	<input type="submit" name="cancel" 
-	value="<spring:message code="warranty.cancel" />" />
+	<input type="button" name="cancel" 
+	value="<spring:message code="warranty.cancel" />" 
+	onclick="javascript:relativeRedir('warranty/administrator/list.do');"/>
 </form:form>
 
 </security:authorize>

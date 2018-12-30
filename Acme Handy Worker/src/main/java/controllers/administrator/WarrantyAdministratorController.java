@@ -84,12 +84,6 @@ public class WarrantyAdministratorController extends AbstractController {
 		return result;
 
 	}
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "cancel")
-	public ModelAndView cancel() {
-		final ModelAndView result;
-		result = new ModelAndView("redirect:list.do");
-		return result;
-	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int warrantyId) {
@@ -133,11 +127,5 @@ public class WarrantyAdministratorController extends AbstractController {
 
 		return result;
 
-	}
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "cancel")
-	public ModelAndView cancelCreate() {
-		final ModelAndView result;
-		result = new ModelAndView("redirect:list.do");
-		return result;
 	}
 }

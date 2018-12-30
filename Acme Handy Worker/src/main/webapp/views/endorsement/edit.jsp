@@ -51,13 +51,12 @@
 	<input type="submit" name="save" 
 	value="<spring:message code="endorsement.save" />" />
 	
+	<input type="button" name="cancel" 
+	value="<spring:message code="endorsement.cancel" />" 
+	onclick="javascript:relativeRedir('endorsement/customer,handy-worker/list.do');"/>
+	
 </form:form>
 
-	<div style="text-align:center;">
-		<a href="endorsement/customer,handy-worker/list.do">
-			<spring:message code="endorsement.cancel" />
-		</a>
-	</div>
 </security:authorize>
 
 
