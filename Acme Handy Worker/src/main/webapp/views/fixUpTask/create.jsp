@@ -74,10 +74,10 @@
 	
 	<input type="submit" name="save" value="<spring:message code="fixUpTask.save" />" />
 		
-	<div style="text-align:center;">
-	<a href="fix-up-task/customer/list.do" ><spring:message code="fixUpTask.cancel" /></a>
-	</div>
- 	
+	<input type="button" name="cancel" 
+	value="<spring:message code="fixUpTask.cancel" />" 
+	onclick="javascript:relativeRedir('fix-up-task/customer/list.do');"/>	
+		 	
 </form:form>
 </security:authorize>
 </body>

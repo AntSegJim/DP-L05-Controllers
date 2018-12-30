@@ -46,6 +46,10 @@
 	<input type="submit" name="save" 
 	value="<spring:message code="sponsorship.save" />" />
 	
+	<input type="button" name="cancel" 
+	value="<spring:message code="sponsorship.cancel" />" 
+	onclick="javascript:relativeRedir('sponsorship/sponsor/list.do');"/>	
+	
 </form:form>
 
 </security:authorize>
