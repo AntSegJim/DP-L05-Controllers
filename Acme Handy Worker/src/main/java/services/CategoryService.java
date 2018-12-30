@@ -57,12 +57,16 @@ public class CategoryService {
 	//updating
 	public Category save(final Category category) {
 		Assert.isTrue(category.getName() != null && category.getName() != "" && !category.getSoon().contains(category.getParent()), "CategoryService.save -> Primero");
-		Assert.isTrue(!(category.getName().equals(null)), "CategoryService.save -> Name null");
-		Assert.isTrue(!(category.getName() == ""), "CategoryService.save -> Name");
 		Assert.isTrue(!(category.getParent().equals(null)), "CategoryService.save -> Parent");
 		Assert.isTrue(!(category == category.getParent()));
-		//		final Collection<String> names = this.categoryRepository.namesCategory();
-		//		Assert.isTrue(!names.contains(category.getName().toUpperCase()), "CategoryService.save -> Fallo");
+		final Collection<String> names = this.namesCategory();
+
+		if (category.getId() == 0)
+			Assert.isTrue(!names.contains(category.getName().toUpperCase()), "CategoryService.save -> Fallo");
+		//		else {
+		//			names.remove(category.getName().toUpperCase());
+		//			Assert.isTrue(!names.contains(category.getName().toUpperCase()), "CategoryService.save -> Fallo");
+
 		final Collection<Category> sonOfParent = category.getParent().getSoon();
 		sonOfParent.add(category);
 		return this.categoryRepository.save(category);
@@ -83,6 +87,10 @@ public class CategoryService {
 
 	public Category categoryByName(final String name) {
 		return this.categoryRepository.categoryByName(name);
+	}
+
+	public Collection<String> namesCategory() {
+		return this.categoryRepository.namesCategory();
 	}
 
 }

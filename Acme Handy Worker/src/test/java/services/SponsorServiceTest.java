@@ -45,6 +45,7 @@ public class SponsorServiceTest extends AbstractTest {
 		s.setEmail("antonio@us.es");
 		s.setPhone("654321123");
 		s.setSurname("Segura");
+		s.setIsBanned(0);
 		s.setUserAccount(ua);
 
 		Assert.isTrue(s.getUserAccount().getId() == ua.getId());
@@ -67,6 +68,8 @@ public class SponsorServiceTest extends AbstractTest {
 		s.setEmail("antonio@us.es");
 		s.setPhone("654321123");
 		s.setSurname("Segura");
+		s.setIsBanned(0);
+
 		s.setUserAccount(ua);
 
 		Assert.isTrue(s.getUserAccount().getUsername().equals("Antonio"));

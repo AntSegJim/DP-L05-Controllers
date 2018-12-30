@@ -32,6 +32,7 @@ public class MessageBoxService {
 		final MessageBox box = new MessageBox();
 		box.setName("");
 		box.setMessages(new HashSet<Message>());
+
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 		box.setActor(a);
@@ -60,39 +61,42 @@ public class MessageBoxService {
 
 	//Update
 	public MessageBox save(final MessageBox box) {
-		final UserAccount user = LoginService.getPrincipal();
-		final Actor a = this.actorService.getActorByUserAccount(user.getId());
-		Assert.isTrue(box.getActor().equals(a));
+
+		final MessageBox result;
+
+		//Assert.isTrue(box.getActor().equals(a));
 
 		Assert.isTrue(!(box.getName().replace(" ", "").toUpperCase().equals("INBOX")));
 		Assert.isTrue(!(box.getName().replace(" ", "").toUpperCase().equals("OUTBOX")));
 		Assert.isTrue(!(box.getName().replace(" ", "").toUpperCase().equals("TRASHBOX")));
 		Assert.isTrue(!(box.getName().replace(" ", "").toUpperCase().equals("SPAMBOX")));
 		Assert.isTrue(box != null && box.getName() != null && box.getName() != "" && box.getActor() != null);
-		return this.messageRepositoryBox.save(box);
-	}
+		result = this.messageRepositoryBox.save(box);
 
+		return result;
+	}
 	//Crear cajas del sistema
+
 	public void createMessageBoxSystem(final Actor a) {
-		final MessageBox mb1 = this.create();
+		final MessageBox mb1 = new MessageBox();
 		mb1.setName("In box");
 		mb1.setActor(a);
 		mb1.setMessages(new HashSet<Message>());
 		this.messageRepositoryBox.save(mb1);
 
-		final MessageBox mb2 = this.create();
+		final MessageBox mb2 = new MessageBox();
 		mb2.setName("Out box");
 		mb2.setActor(a);
 		mb2.setMessages(new HashSet<Message>());
 		this.messageRepositoryBox.save(mb2);
 
-		final MessageBox mb3 = this.create();
+		final MessageBox mb3 = new MessageBox();
 		mb3.setName("Spam box");
 		mb3.setActor(a);
 		mb3.setMessages(new HashSet<Message>());
 		this.messageRepositoryBox.save(mb3);
 
-		final MessageBox mb4 = this.create();
+		final MessageBox mb4 = new MessageBox();
 		mb4.setName("Trash box");
 		mb4.setActor(a);
 		mb4.setMessages(new HashSet<Message>());

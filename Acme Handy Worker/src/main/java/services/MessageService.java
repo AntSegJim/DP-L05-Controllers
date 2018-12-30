@@ -23,16 +23,19 @@ import domain.MessageBox;
 public class MessageService {
 
 	@Autowired
-	private MessageRepository	messageRepository;
+	private MessageRepository		messageRepository;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private MessageBoxService	messageBoxService;
+	private MessageBoxService		messageBoxService;
 
 	@Autowired
-	private SpamWordService		spamWordService;
+	private SpamWordService			spamWordService;
+
+	@Autowired
+	private AdministratorService	adminService;
 
 
 	public Message create() {
@@ -77,7 +80,8 @@ public class MessageService {
 		final MessageBox outBox = this.messageBoxService.getOutBox(message.getSender().getId());
 		outBox.getMessages().add(message);
 
-		if (this.auxEsSpam(message)) {
+		if (this.auxEsSpam(message) || this.auxEsSpamSubject(message) || this.auxEsSpamTag(message)) {
+
 			final MessageBox spamBox = this.messageBoxService.getSpamBox(message.getReceiver().getId());
 			spamBox.getMessages().add(message);
 		} else {
@@ -98,7 +102,7 @@ public class MessageService {
 		actors.remove(message.getSender());
 
 		for (int i = 0; i < actors.size(); i++)
-			if (this.auxEsSpam(message)) {
+			if (this.auxEsSpam(message) || this.auxEsSpamSubject(message) || this.auxEsSpamTag(message)) {
 				final MessageBox spamBox = this.messageBoxService.getSpamBox(actors.get(i).getId());
 				spamBox.getMessages().add(message);
 			} else {
@@ -143,6 +147,36 @@ public class MessageService {
 		Boolean res = false;
 		final Collection<String> spamWords = this.spamWordService.getNamesOfSpamWord();
 		final String[] contenido = message.getBody().replace(".", "").replace(",", "").split(" ");
+
+		for (int i = 0; i < contenido.length; i++) {
+			final String palabra = contenido[i];
+			if (spamWords.contains(palabra)) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
+
+	public Boolean auxEsSpamSubject(final Message message) {
+		Boolean res = false;
+		final Collection<String> spamWords = this.spamWordService.getNamesOfSpamWord();
+		final String[] contenido = message.getSubject().replace(".", "").replace(",", "").split(" ");
+
+		for (int i = 0; i < contenido.length; i++) {
+			final String palabra = contenido[i];
+			if (spamWords.contains(palabra)) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
+
+	public Boolean auxEsSpamTag(final Message message) {
+		Boolean res = false;
+		final Collection<String> spamWords = this.spamWordService.getNamesOfSpamWord();
+		final String[] contenido = message.getTag().replace(".", "").replace(",", "").split(" ");
 
 		for (int i = 0; i < contenido.length; i++) {
 			final String palabra = contenido[i];

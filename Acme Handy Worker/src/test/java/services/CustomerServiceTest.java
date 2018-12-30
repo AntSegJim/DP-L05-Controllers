@@ -42,6 +42,7 @@ public class CustomerServiceTest extends AbstractTest {
 		c.setAddress("calle Arahal");
 		c.setEmail("antonio@us.es");
 		c.setPhone("654321231");
+		c.setIsBanned(0);
 		uaCustomer.setUsername("customerRaul");
 		uaCustomer.setPassword("customerRaul");
 		c.setUserAccount(uaCustomer);
@@ -69,6 +70,7 @@ public class CustomerServiceTest extends AbstractTest {
 		c.setAddress("calle Arahal");
 		c.setEmail("antonio@us.es");
 		c.setPhone("653211231");
+		c.setIsBanned(0);
 		uaCustomer.setUsername("customerRaul");
 		uaCustomer.setPassword("customerRaul");
 		c.setUserAccount(uaCustomer);

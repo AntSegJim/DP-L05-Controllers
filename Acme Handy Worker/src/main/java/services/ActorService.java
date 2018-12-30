@@ -1,7 +1,10 @@
 
 package services;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,9 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Administrator;
+import domain.ProfileSocialNetwork;
 
 @Service
 @Transactional
@@ -22,8 +28,36 @@ public class ActorService {
 
 	@Autowired
 	private ActorRepository	actorRepository;
+	@Autowired
+	private SpamWordService	spamWordService;
 
 
+	public Actor create() {
+		final Actor admin = new Administrator();
+		admin.setName("");
+		admin.setMiddleName("");
+		admin.setSurname("");
+		admin.setPhoto("");
+		admin.setEmail("");
+		admin.setPhone("");
+		admin.setAddress("");
+		admin.setNumberSocialProfiles(0);
+		//PREGUNTAR
+		final UserAccount user = new UserAccount();
+		user.setAuthorities(new HashSet<Authority>());
+		final Authority ad = new Authority();
+		ad.setAuthority(Authority.ADMIN);
+		user.getAuthorities().add(ad);
+
+		//NUEVO
+		user.setUsername("");
+		user.setPassword("");
+
+		admin.setUserAccount(user);
+
+		admin.setProfileSocialNetwork(new HashSet<ProfileSocialNetwork>());
+		return admin;
+	}
 	public Actor save(final Actor a) {
 		Actor res = null;
 
@@ -72,6 +106,39 @@ public class ActorService {
 
 	public List<Actor> findAll() {
 		return this.actorRepository.findAll();
+	}
+
+	public Actor findOne(final int id) {
+		return this.actorRepository.findOne(id);
+	}
+
+	public Actor getActorByUsername(final String username) {
+		return this.actorRepository.getActoyByUsername(username);
+	}
+
+	//	//BAN ACTOR
+	//
+	public Collection<Actor> getSuspiciousActorsByMessageWord(final String palabra) {
+		return this.actorRepository.actorSuspicious(palabra);
+	}
+
+	public Collection<Actor> getSuspiciousActorsByMessage() {
+		final Set<Actor> suspiciousActors = new HashSet<>();
+
+		final List<String> spamWords = (List<String>) this.spamWordService.getNamesOfSpamWord();
+		for (int i = 0; i < spamWords.size(); i++) {
+			final Collection<Actor> a = this.getSuspiciousActorsByMessageWord(spamWords.get(i));
+			suspiciousActors.addAll(a);
+		}
+		return suspiciousActors;
+	}
+
+	public Collection<Actor> getSuspiciousActor() {
+		final Set<Actor> suspiciousActors = new HashSet<>();
+		suspiciousActors.addAll(this.getSuspiciousActorsByMessage());
+
+		return suspiciousActors;
+
 	}
 
 }

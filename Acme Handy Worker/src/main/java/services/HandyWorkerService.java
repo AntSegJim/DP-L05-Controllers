@@ -47,6 +47,7 @@ public class HandyWorkerService {
 		h.setReceiveEndorseFromHWorker(new HashSet<Endorsement>());
 		h.setScore(0);
 		h.setSurname("");
+		h.setIsBanned(0);
 		h.setFinder(this.finderService.create());
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
@@ -102,16 +103,21 @@ public class HandyWorkerService {
 		Assert.isTrue(h.getUserAccount().getUsername() != null && h.getUserAccount().getUsername() != "");
 		Assert.isTrue(h.getUserAccount().getPassword() != null && h.getUserAccount().getPassword() != "");
 
-		final Md5PasswordEncoder encoder;
-		encoder = new Md5PasswordEncoder();
-		final String hash = encoder.encodePassword(h.getUserAccount().getPassword(), null);
-		final UserAccount user = h.getUserAccount();
-		user.setPassword(hash);
+		if (h.getId() == 0) {
+			final Md5PasswordEncoder encoder;
+			encoder = new Md5PasswordEncoder();
+			final String hash = encoder.encodePassword(h.getUserAccount().getPassword(), null);
+			final UserAccount user = h.getUserAccount();
+			user.setPassword(hash);
+
+		}
+		Assert.isTrue(h.getIsBanned() == 0 || h.getIsBanned() == 1);
 
 		this.finderService.save(h.getFinder());
 		res = this.handyWorkerRepository.save(h);
 
-		this.messageBoxService.createMessageBoxSystem(res);
+		if (h.getId() == 0)
+			this.messageBoxService.createMessageBoxSystem(res);
 
 		return res;
 	}

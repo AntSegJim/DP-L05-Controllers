@@ -359,7 +359,7 @@
 		</property>
 		<property name="actor" ref="customer2" />
 	</bean>
-	
+
 	<bean id="messageBox9" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
@@ -399,7 +399,7 @@
 		</property>
 		<property name="actor" ref="customer3" />
 	</bean>
-	
+
 	<bean id="messageBox13" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
@@ -439,7 +439,7 @@
 		</property>
 		<property name="actor" ref="customer4" />
 	</bean>
-	
+
 	<bean id="messageBox17" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
@@ -479,8 +479,8 @@
 		</property>
 		<property name="actor" ref="administrator1" />
 	</bean>
-	
-		<bean id="messageBox21" class="domain.MessageBox">
+
+	<bean id="messageBox21" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -519,8 +519,8 @@
 		</property>
 		<property name="actor" ref="administrator2" />
 	</bean>
-	
-		<bean id="messageBox25" class="domain.MessageBox">
+
+	<bean id="messageBox25" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -599,8 +599,8 @@
 		</property>
 		<property name="actor" ref="administrator4" />
 	</bean>
-	
-		<bean id="messageBox33" class="domain.MessageBox">
+
+	<bean id="messageBox33" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -639,8 +639,8 @@
 		</property>
 		<property name="actor" ref="handyWorker1" />
 	</bean>
-	
-			<bean id="messageBox37" class="domain.MessageBox">
+
+	<bean id="messageBox37" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -680,7 +680,7 @@
 		<property name="actor" ref="handyWorker2" />
 	</bean>
 
-		<bean id="messageBox41" class="domain.MessageBox">
+	<bean id="messageBox41" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -719,7 +719,7 @@
 		</property>
 		<property name="actor" ref="handyWorker3" />
 	</bean>
-	
+
 	<bean id="messageBox45" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
@@ -761,7 +761,7 @@
 	</bean>
 
 
-		<bean id="messageBox49" class="domain.MessageBox">
+	<bean id="messageBox49" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -800,8 +800,8 @@
 		</property>
 		<property name="actor" ref="handyWorker5" />
 	</bean>
-	
-		<bean id="messageBox53" class="domain.MessageBox">
+
+	<bean id="messageBox53" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -840,8 +840,8 @@
 		</property>
 		<property name="actor" ref="referee1" />
 	</bean>
-	
-			<bean id="messageBox57" class="domain.MessageBox">
+
+	<bean id="messageBox57" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -880,8 +880,8 @@
 		</property>
 		<property name="actor" ref="referee2" />
 	</bean>
-	
-			<bean id="messageBox61" class="domain.MessageBox">
+
+	<bean id="messageBox61" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -898,7 +898,7 @@
 				<ref bean="message1" />
 			</list>
 		</property>
-		<property name="actor" ref="referee2" />
+		<property name="actor" ref="referee3" />
 	</bean>
 
 	<bean id="messageBox63" class="domain.MessageBox">
@@ -920,9 +920,9 @@
 		</property>
 		<property name="actor" ref="referee3" />
 	</bean>
-	
-		
-			<bean id="messageBox65" class="domain.MessageBox">
+
+
+	<bean id="messageBox65" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -961,9 +961,9 @@
 		</property>
 		<property name="actor" ref="sponsor1" />
 	</bean>
-	
-			
-			<bean id="messageBox69" class="domain.MessageBox">
+
+
+	<bean id="messageBox69" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -1000,10 +1000,10 @@
 
 			</list>
 		</property>
-		<property name="actor" ref="sponsor2"/>
+		<property name="actor" ref="sponsor2" />
 	</bean>
-	
-				<bean id="messageBox73" class="domain.MessageBox">
+
+	<bean id="messageBox73" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -1040,10 +1040,10 @@
 
 			</list>
 		</property>
-		<property name="actor" ref="sponsor3"/>
+		<property name="actor" ref="sponsor3" />
 	</bean>
-	
-				<bean id="messageBox77" class="domain.MessageBox">
+
+	<bean id="messageBox77" class="domain.MessageBox">
 		<property name="name" value="Spam box" />
 		<property name="messages">
 			<list>
@@ -1080,9 +1080,9 @@
 
 			</list>
 		</property>
-		<property name="actor" ref="sponsor4"/>
+		<property name="actor" ref="sponsor4" />
 	</bean>
-	
+
 	<!-- Message -->
 	<bean id="message1" class="domain.Message">
 		<property name="moment" value="05/06/2018 12:34" />
@@ -1091,7 +1091,7 @@
 			value="Este es un mensaje que estoy escribiendo para popular la base de datos" />
 		<property name="priority" value="1" />
 		<property name="tag" value="tag" />
-		<property name="sender" ref="customer1" />
+		<property name="sender" ref="administrator1" />
 		<property name="receiver" ref="customer2" />
 		<property name="emailReceiver" value="cristian@hotmail.com" />
 	</bean>
@@ -1099,7 +1099,7 @@
 	<bean id="message2" class="domain.Message">
 		<property name="moment" value="05/08/2018 16:34" />
 		<property name="subject" value="Subject2" />
-		<property name="body" value="Es mi cumpleaños" />
+		<property name="body" value="Es mi sex cumpleaños" />
 		<property name="priority" value="2" />
 		<property name="tag" value="tag" />
 		<property name="sender" ref="administrator1" />
@@ -1244,6 +1244,7 @@
 		<property name="phone" value="+34 620510520" />
 		<property name="address" value="SEVILLA" />
 		<property name="numberSocialProfiles" value="3" />
+		<property name="isBanned" value="0" />
 		<property name="categories">
 			<list>
 				<ref bean="soonCategory2" />
@@ -1265,6 +1266,7 @@
 		<property name="phone" value="+34 620670520" />
 		<property name="address" value="SEVILLA" />
 		<property name="numberSocialProfiles" value="0" />
+		<property name="isBanned" value="0" />
 		<property name="categories">
 			<list>
 
@@ -1282,6 +1284,7 @@
 		<property name="name" value="Jose" />
 		<property name="surname" value="Lorca" />
 		<property name="email" value="jose@hotmail.com" />
+		<property name="isBanned" value="0" />
 		<property name="categories">
 			<list>
 				<ref bean="parentCategory" />
@@ -1297,6 +1300,7 @@
 		<property name="phone" value="+34 676510520" />
 		<property name="address" value="SEVILLA" />
 		<property name="numberSocialProfiles" value="1" />
+		<property name="isBanned" value="0" />
 		<property name="categories">
 			<list>
 				<ref bean="soonCategory1" />
@@ -1411,24 +1415,31 @@
 		<property name="name" value="Antonio" />
 		<property name="surname" value="Segura" />
 		<property name="email" value="antsegjim@hotmail.com" />
+		<property name="phone" value="+1 620556520" />
+		<property name="isBanned" value="0" />
 		<property name="userAccount" ref="userAccount12" />
 	</bean>
 	<bean id="sponsor2" class="domain.Sponsor">
 		<property name="name" value="Homer" />
 		<property name="surname" value="Simpson" />
 		<property name="email" value="homer@hotmail.com" />
+		<property name="phone" value="+1 620556520" />
+		<property name="isBanned" value="0" />
 		<property name="userAccount" ref="userAccount13" />
 	</bean>
 	<bean id="sponsor3" class="domain.Sponsor">
 		<property name="name" value="Bart" />
 		<property name="surname" value="Simpson" />
 		<property name="email" value="bart@hotmail.com" />
+		<property name="phone" value="+1 620556520" />
+		<property name="isBanned" value="0" />
 		<property name="userAccount" ref="userAccount14" />
 	</bean>
 	<bean id="sponsor4" class="domain.Sponsor">
 		<property name="name" value="Lisa" />
 		<property name="surname" value="Simpson" />
 		<property name="email" value="lisa@hotmail.com" />
+		<property name="isBanned" value="0" />
 		<property name="userAccount" ref="userAccount15" />
 	</bean>
 
@@ -1840,6 +1851,7 @@
 		<property name="phone" value="+33 620410520" />
 		<property name="address" value="Madrid" />
 		<property name="numberSocialProfiles" value="3" />
+		<property name="isBanned" value="0" />
 		<property name="userAccount" ref="userAccount9" />
 
 	</bean>
@@ -1854,6 +1866,7 @@
 		<property name="phone" value="+1 620556520" />
 		<property name="address" value="BARCELONA" />
 		<property name="numberSocialProfiles" value="3" />
+		<property name="isBanned" value="0" />
 		<property name="userAccount" ref="userAccount10" />
 
 	</bean>
@@ -1868,6 +1881,7 @@
 		<property name="phone" value="+34 620545620" />
 		<property name="address" value="ARAHAL" />
 		<property name="numberSocialProfiles" value="1" />
+		<property name="isBanned" value="0" />
 		<property name="userAccount" ref="userAccount11" />
 
 	</bean>
@@ -2104,7 +2118,9 @@
 		<property name="surname" value="Los Palotes"></property>
 		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg"></property>
 		<property name="email" value="pepito_lospalotes@hotmail.com" />
+		<property name="phone" value="654567765" />
 		<property name="score" value="10" />
+		<property name="isBanned" value="0" />
 		<property name="endorseCustomer">
 			<list>
 				<ref bean="endorsement5" />
@@ -2127,6 +2143,7 @@
 		<property name="surname" value="Elias"></property>
 		<property name="email" value="jesus_elias@hotmail.com" />
 		<property name="score" value="9" />
+		<property name="isBanned" value="0" />
 		<property name="endorseCustomer">
 			<list>
 				<ref bean="endorsement8" />
@@ -2148,6 +2165,7 @@
 		<property name="surname" value="Ruíz"></property>
 		<property name="email" value="pablo@hotmail.com" />
 		<property name="score" value="9" />
+		<property name="isBanned" value="0" />
 		<property name="endorseCustomer">
 			<list>
 				<ref bean="endorsement5" />
@@ -2166,6 +2184,7 @@
 		<property name="surname" value="Rodriguez"></property>
 		<property name="email" value="maria@hotmail.com" />
 		<property name="score" value="9" />
+		<property name="isBanned" value="0" />
 		<property name="endorseCustomer">
 			<list>
 				<ref bean="endorsement1" />
@@ -2199,7 +2218,7 @@
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
-	<property name="ticker" value="123412-09pplm" />
+		<property name="ticker" value="123412-09pplm" />
 		<property name="description" value="lo describo" />
 		<property name="address" value="pongo direccion" />
 		<property name="startDate" value="01/02/2015 23:59" />
@@ -2217,7 +2236,7 @@
 	</bean>
 
 	<bean id="finder3" class="domain.Finder">
-	<property name="ticker" value="123412-09pplm" />
+		<property name="ticker" value="123412-09pplm" />
 		<property name="description" value="lo describo" />
 		<property name="address" value="pongo direccion" />
 		<property name="startDate" value="01/02/2015 23:59" />
@@ -2235,7 +2254,7 @@
 	</bean>
 
 	<bean id="finder4" class="domain.Finder">
-	<property name="ticker" value="123412-09pplm" />
+		<property name="ticker" value="123412-09pplm" />
 		<property name="description" value="lo describo" />
 		<property name="address" value="pongo direccion" />
 		<property name="startDate" value="01/02/2015 23:59" />
@@ -2253,7 +2272,7 @@
 	</bean>
 
 	<bean id="finder5" class="domain.Finder">
-	<property name="ticker" value="123412-09pplm" />
+		<property name="ticker" value="123412-09pplm" />
 		<property name="description" value="lo describo" />
 		<property name="address" value="pongo direccion" />
 		<property name="startDate" value="01/02/2015 23:59" />
@@ -2390,8 +2409,10 @@
 		<property name="name" value="Antonio"></property>
 		<property name="surname" value="Segura"></property>
 		<property name="email" value="antonioSegura@hotmail.com" />
+		<property name="phone" value="656789055" />
 		<property name="makeHandyWorker" value="HandyWorker1" />
 		<property name="score" value="1" />
+		<property name="isBanned" value="0" />
 		<property name="finder" ref="finder1" />
 		<property name="endorseHWorker">
 			<list>
@@ -2426,6 +2447,7 @@
 		<property name="makeHandyWorker" value="HandyWorker2" />
 		<property name="score" value="2" />
 		<property name="finder" ref="finder2" />
+		<property name="isBanned" value="0" />
 		<property name="endorseHWorker">
 			<list>
 				<ref bean="endorsement2" />
@@ -2451,6 +2473,7 @@
 		<property name="makeHandyWorker" value="HandyWorker3" />
 		<property name="score" value="10" />
 		<property name="finder" ref="finder3" />
+		<property name="isBanned" value="0" />
 		<property name="endorseHWorker">
 			<list>
 				<ref bean="endorsement3" />
@@ -2476,6 +2499,7 @@
 		<property name="makeHandyWorker" value="@Robert" />
 		<property name="score" value="3" />
 		<property name="finder" ref="finder4" />
+		<property name="isBanned" value="0" />
 		<property name="endorseHWorker">
 			<list>
 
@@ -2489,7 +2513,7 @@
 		<property name="userAccount" ref="userAccount19" />
 		<property name="application">
 			<list>
-				
+
 			</list>
 		</property>
 	</bean>
@@ -2501,6 +2525,7 @@
 		<property name="makeHandyWorker" value="@India" />
 		<property name="score" value="56" />
 		<property name="finder" ref="finder5" />
+		<property name="isBanned" value="0" />
 		<property name="endorseHWorker">
 			<list>
 				<ref bean="endorsement6" />
@@ -2514,7 +2539,7 @@
 		<property name="userAccount" ref="userAccount20" />
 		<property name="application">
 			<list>
-				
+
 			</list>
 		</property>
 	</bean>
@@ -2530,8 +2555,12 @@
 			</list>
 		</property>
 		<property name="handyWorkerSender" ref="handyWorker1" />
-		<property name="handyWorkerReceiver"><null /></property>
-		<property name="customerSender"><null /></property>
+		<property name="handyWorkerReceiver">
+			<null />
+		</property>
+		<property name="customerSender">
+			<null />
+		</property>
 		<property name="customerReceiver" ref="customer1" />
 
 	</bean>
@@ -2544,8 +2573,12 @@
 			</list>
 		</property>
 		<property name="handyWorkerSender" ref="handyWorker1" />
-		<property name="handyWorkerReceiver"><null /></property>
-		<property name="customerSender"><null /></property>
+		<property name="handyWorkerReceiver">
+			<null />
+		</property>
+		<property name="customerSender">
+			<null />
+		</property>
 		<property name="customerReceiver" ref="customer1" />
 	</bean>
 
@@ -2558,8 +2591,12 @@
 			</list>
 		</property>
 		<property name="handyWorkerSender" ref="handyWorker1" />
-		<property name="handyWorkerReceiver"><null /></property>
-		<property name="customerSender"><null /></property>
+		<property name="handyWorkerReceiver">
+			<null />
+		</property>
+		<property name="customerSender">
+			<null />
+		</property>
 		<property name="customerReceiver" ref="customer2" />
 	</bean>
 
@@ -2572,8 +2609,12 @@
 			</list>
 		</property>
 		<property name="handyWorkerSender" ref="handyWorker1" />
-		<property name="handyWorkerReceiver"><null /></property>
-		<property name="customerSender"><null /></property>
+		<property name="handyWorkerReceiver">
+			<null />
+		</property>
+		<property name="customerSender">
+			<null />
+		</property>
 		<property name="customerReceiver" ref="customer2" />
 	</bean>
 
@@ -2585,8 +2626,12 @@
 			</list>
 		</property>
 		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="handyWorkerSender"><null /></property>
-		<property name="customerReceiver"><null /></property>
+		<property name="handyWorkerSender">
+			<null />
+		</property>
+		<property name="customerReceiver">
+			<null />
+		</property>
 		<property name="customerSender" ref="customer1" />
 	</bean>
 
@@ -2598,11 +2643,15 @@
 			</list>
 		</property>
 		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="handyWorkerSender"><null /></property>
-		<property name="customerReceiver"><null /></property>
+		<property name="handyWorkerSender">
+			<null />
+		</property>
+		<property name="customerReceiver">
+			<null />
+		</property>
 		<property name="customerSender" ref="customer1" />
 	</bean>
-	
+
 	<bean id="endorsement7" class="domain.Endorsement">
 		<property name="moment" value="07/07/2007 12:12" />
 		<property name="comments">
@@ -2611,11 +2660,15 @@
 			</list>
 		</property>
 		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="handyWorkerSender"><null /></property>
-		<property name="customerReceiver"><null /></property>
+		<property name="handyWorkerSender">
+			<null />
+		</property>
+		<property name="customerReceiver">
+			<null />
+		</property>
 		<property name="customerSender" ref="customer1" />
 	</bean>
-	
+
 	<bean id="endorsement8" class="domain.Endorsement">
 		<property name="moment" value="08/08/2008 12:12" />
 		<property name="comments">
@@ -2624,8 +2677,12 @@
 			</list>
 		</property>
 		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="handyWorkerSender"><null /></property>
-		<property name="customerReceiver"><null /></property>
+		<property name="handyWorkerSender">
+			<null />
+		</property>
+		<property name="customerReceiver">
+			<null />
+		</property>
 		<property name="customerSender" ref="customer2" />
 	</bean>
 
@@ -2637,11 +2694,15 @@
 			</list>
 		</property>
 		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="handyWorkerSender"><null /></property>
-		<property name="customerReceiver"><null /></property>
+		<property name="handyWorkerSender">
+			<null />
+		</property>
+		<property name="customerReceiver">
+			<null />
+		</property>
 		<property name="customerSender" ref="customer2" />
 	</bean>
-	
+
 	<bean id="endorsement10" class="domain.Endorsement">
 		<property name="moment" value="10/10/2010 10:10" />
 		<property name="comments">
@@ -2650,8 +2711,12 @@
 			</list>
 		</property>
 		<property name="handyWorkerReceiver" ref="handyWorker1" />
-		<property name="handyWorkerSender"><null /></property>
-		<property name="customerReceiver"><null /></property>
+		<property name="handyWorkerSender">
+			<null />
+		</property>
+		<property name="customerReceiver">
+			<null />
+		</property>
 		<property name="customerSender" ref="customer2" />
 	</bean>
 

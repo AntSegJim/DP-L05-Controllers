@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.WordRepository;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Word;
@@ -42,7 +41,7 @@ public class WordService {
 
 	public Word save(final Word word) {
 		final UserAccount user = LoginService.getPrincipal();
-		Assert.isTrue(user.getAuthorities().contains(Authority.ADMIN));
+		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("ADMIN"), "Comprobar que hay admin conectado");
 		Assert.isTrue(word != null && word.getName() != null && word.getName() != "" && (word.getValue() == 0 || word.getValue() == 1));
 		return this.wordRepository.save(word);
 	}

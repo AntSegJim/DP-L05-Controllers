@@ -53,10 +53,10 @@
 
 <input type="button" name="cancel" value="<spring:message code="category.cancel" />"
 			onclick="javascript: relativeRedir('category/administrator/list.do');" />
-
+<jstl:if test="${category.id ne 0 }">
 <input type="submit" name="delete" 
 	value="<spring:message code="category.delete" />" />
-
+</jstl:if>
 </form:form>
 
 </security:authorize>

@@ -26,8 +26,9 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="actor" />
-	<form:hidden path="messages" />
+	<form:hidden path="actor"/>
+	<form:hidden path="messages"/>
+	
 		
 	<form:label path="name">
 	<spring:message code="messageBox.create.name" />:
@@ -35,9 +36,7 @@
 	<form:input path="name" />
 	<form:errors cssClass="error" path="name" />
 	<br />
-	
-	
-	
+			
 	<br /><br />
 	<input type="submit" name="save" 
 	value="<spring:message code="messageBox.create.save" />" />

@@ -26,7 +26,7 @@
 <br/> 
 <b><spring:message code="message.emailReceiver" />:</b> ${mensaje.emailReceiver }
 <br/> 
-<b><spring:message code="message.show" />:</b> ${mensaje.subject } 
+<b><spring:message code="message.subject" />:</b> ${mensaje.subject } 
 <br/> 
 <b><spring:message code="message.body" />: </b>${mensaje.body }
 <br/> 

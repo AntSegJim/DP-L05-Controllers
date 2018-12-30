@@ -43,6 +43,7 @@ public class AdministratorServiceTest extends AbstractTest {
 		a.setAddress("calle Arahal");
 		a.setEmail("antonio@us.es");
 		a.setPhone("654321231");
+		a.setIsBanned(0);
 		uaAdmin.setUsername("adminCris");
 		uaAdmin.setPassword("adminCris");
 		a.setUserAccount(uaAdmin);
@@ -73,6 +74,7 @@ public class AdministratorServiceTest extends AbstractTest {
 		a.setAddress("calle Arahal");
 		a.setEmail("antArahal@hotmail.com");
 		a.setPhone("654321231");
+		a.setIsBanned(0);
 		uaAdmin.setUsername("adminCris");
 		uaAdmin.setPassword("adminCris");
 		a.setUserAccount(uaAdmin);

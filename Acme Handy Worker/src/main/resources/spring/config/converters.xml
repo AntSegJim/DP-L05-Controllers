@@ -48,6 +48,16 @@
 		
 		<bean class="converters.HandyWorkerToStringConverter" />
 		<bean class="converters.StringToHandyWorkerConverter" />
+		
+		<bean class="converters.UserAccountToStringConverter" />
+		<bean class="converters.StringToUserAccountConverter" />
+		
+		<bean class="converters.EndorsementToStringConverter" />
+		<bean class="converters.StringToEndorsementConverter" />
+		
+		<bean class="converters.AplicationToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		
 				
 	</util:list>
 	

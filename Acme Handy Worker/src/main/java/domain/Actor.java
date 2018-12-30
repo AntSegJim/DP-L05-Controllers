@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
@@ -34,6 +35,7 @@ public class Actor extends DomainEntity {
 	private String								phone;
 	private String								address;
 	private Integer								numberSocialProfiles;
+	private Integer								isBanned;
 	private UserAccount							userAccount;
 	private Collection<ProfileSocialNetwork>	profileSocialNetwork;
 
@@ -137,6 +139,16 @@ public class Actor extends DomainEntity {
 
 	public void setProfileSocialNetwork(final Collection<ProfileSocialNetwork> profileSocialNetwork) {
 		this.profileSocialNetwork = profileSocialNetwork;
+	}
+
+	@NotNull
+	@Range(max = 1, min = 0)
+	public Integer getIsBanned() {
+		return this.isBanned;
+	}
+
+	public void setIsBanned(final Integer isBanned) {
+		this.isBanned = isBanned;
 	}
 
 }

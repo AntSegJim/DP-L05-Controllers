@@ -40,6 +40,7 @@ public class SponsorService {
 		s.setPhoto("");
 		s.setProfileSocialNetwork(new HashSet<ProfileSocialNetwork>());
 		s.setSurname("");
+		s.setIsBanned(0);
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
 		user.setAuthorities(new HashSet<Authority>());
@@ -85,15 +86,19 @@ public class SponsorService {
 		Assert.isTrue(s.getUserAccount().getUsername() != null && s.getUserAccount().getUsername() != "");
 		Assert.isTrue(s.getUserAccount().getPassword() != null && s.getUserAccount().getPassword() != "");
 
-		final Md5PasswordEncoder encoder;
-		encoder = new Md5PasswordEncoder();
-		final String hash = encoder.encodePassword(s.getUserAccount().getPassword(), null);
-		final UserAccount user = s.getUserAccount();
-		user.setPassword(hash);
+		if (s.getId() == 0) {
+			final Md5PasswordEncoder encoder;
+			encoder = new Md5PasswordEncoder();
+			final String hash = encoder.encodePassword(s.getUserAccount().getPassword(), null);
+			final UserAccount user = s.getUserAccount();
+			user.setPassword(hash);
+		}
+		Assert.isTrue(s.getIsBanned() == 0 || s.getIsBanned() == 1);
 
 		res = this.sponsorRepository.save(s);
 
-		this.messageBoxService.createMessageBoxSystem(res);
+		if (s.getId() == 0)
+			this.messageBoxService.createMessageBoxSystem(res);
 
 		return res;
 	}

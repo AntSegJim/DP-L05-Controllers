@@ -46,6 +46,7 @@ public class CustomerService {
 		c.setReceiveEndorseFromCustomer(new HashSet<Endorsement>());
 		c.setScore(0);
 		c.setSurname("");
+		c.setIsBanned(0);
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
 		user.setAuthorities(new HashSet<Authority>());
@@ -93,15 +94,19 @@ public class CustomerService {
 		Assert.isTrue(c.getUserAccount().getUsername() != null && c.getUserAccount().getUsername() != "");
 		Assert.isTrue(c.getUserAccount().getPassword() != null && c.getUserAccount().getPassword() != "");
 
-		final Md5PasswordEncoder encoder;
-		encoder = new Md5PasswordEncoder();
-		final String hash = encoder.encodePassword(c.getUserAccount().getPassword(), null);
-		final UserAccount user = c.getUserAccount();
-		user.setPassword(hash);
+		if (c.getId() == 0) {
+			final Md5PasswordEncoder encoder;
+			encoder = new Md5PasswordEncoder();
+			final String hash = encoder.encodePassword(c.getUserAccount().getPassword(), null);
+			final UserAccount user = c.getUserAccount();
+			user.setPassword(hash);
+		}
+		Assert.isTrue(c.getIsBanned() == 0 || c.getIsBanned() == 1);
 
 		res = this.customerRepository.save(c);
 
-		this.messageBoxService.createMessageBoxSystem(res);
+		if (c.getId() == 0)
+			this.messageBoxService.createMessageBoxSystem(res);
 
 		return res;
 	}

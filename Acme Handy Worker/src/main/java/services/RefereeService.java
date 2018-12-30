@@ -81,8 +81,11 @@ public class RefereeService {
 
 	//updating
 	public Referee save(final Referee r) {
-		final UserAccount userLoged = LoginService.getPrincipal();
-		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		if (r.getId() == 0) {
+			final UserAccount userLoged = LoginService.getPrincipal();
+			Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		}
 
 		Referee res = null;
 
@@ -108,26 +111,18 @@ public class RefereeService {
 		Assert.isTrue(r.getUserAccount().getUsername() != null && r.getUserAccount().getUsername() != "");
 		Assert.isTrue(r.getUserAccount().getPassword() != null && r.getUserAccount().getPassword() != "");
 
-		final Md5PasswordEncoder encoder;
-		encoder = new Md5PasswordEncoder();
-		final String hash = encoder.encodePassword(r.getUserAccount().getPassword(), null);
-		final UserAccount user = r.getUserAccount();
-		user.setPassword(hash);
+		if (r.getId() == 0) {
 
+			final Md5PasswordEncoder encoder;
+			encoder = new Md5PasswordEncoder();
+			final String hash = encoder.encodePassword(r.getUserAccount().getPassword(), null);
+			final UserAccount user = r.getUserAccount();
+			user.setPassword(hash);
+		}
 		res = this.refereeRepository.save(r);
-		//		final MessageBox mb1 = this.messageBoxService.create();
-		//		mb1.setName("inbox");
-		//		mb1.setActor(res);
-		//		final MessageBox mb2 = this.messageBoxService.create();
-		//		mb2.setName("outbox");
-		//		mb2.setActor(res);
-		//		final MessageBox mb3 = this.messageBoxService.create();
-		//		mb3.setName("spambox");
-		//		mb3.setActor(res);
-		//		final MessageBox mb4 = this.messageBoxService.create();
-		//		mb4.setName("trashbox");
-		//		mb4.setActor(res);
-		this.messageBoxService.createMessageBoxSystem(res);
+
+		if (r.getId() == 0)
+			this.messageBoxService.createMessageBoxSystem(res);
 
 		return res;
 	}

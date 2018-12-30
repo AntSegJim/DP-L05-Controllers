@@ -40,6 +40,7 @@ public class AdministratorService {
 		admin.setEmail("");
 		admin.setPhone("");
 		admin.setAddress("");
+		admin.setIsBanned(0);
 		admin.setNumberSocialProfiles(0);
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
@@ -105,15 +106,19 @@ public class AdministratorService {
 		Assert.isTrue(admin.getUserAccount().getUsername() != null && admin.getUserAccount().getUsername() != "", "Cuenta");
 		Assert.isTrue(admin.getUserAccount().getPassword() != null && admin.getUserAccount().getPassword() != "", "Cuenta");
 
-		final Md5PasswordEncoder encoder;
-		encoder = new Md5PasswordEncoder();
-		final String hash = encoder.encodePassword(admin.getUserAccount().getPassword(), null);
-		final UserAccount user = admin.getUserAccount();
-		user.setPassword(hash);
+		if (admin.getId() == 0) {
+			final Md5PasswordEncoder encoder;
+			encoder = new Md5PasswordEncoder();
+			final String hash = encoder.encodePassword(admin.getUserAccount().getPassword(), null);
+			final UserAccount user = admin.getUserAccount();
+			user.setPassword(hash);
+		}
+
+		Assert.isTrue(admin.getIsBanned() == 0 || admin.getIsBanned() == 1);
 
 		res = this.adminRepo.save(admin);
-		this.messageBoxService.createMessageBoxSystem(res);
-
+		if (admin.getId() == 0)
+			this.messageBoxService.createMessageBoxSystem(res);
 		return res;
 	}
 

@@ -69,6 +69,7 @@ public class HandyWorkerServiceTest extends AbstractTest {
 		s.setPhone("654321123");
 		s.setUserAccount(ua);
 		s.setSurname("SurnameHandy");
+		s.setIsBanned(0);
 
 		final Finder finder = this.finderService.create();
 		finder.setAddress("hola");
@@ -95,6 +96,7 @@ public class HandyWorkerServiceTest extends AbstractTest {
 		h.setUserAccount(ua);
 		h.setMakeHandyWorker("handuWorkerMake");
 		h.setScore(1);
+		h.setIsBanned(0);
 		final Finder finder = this.finderService.create();
 		finder.setAddress("address");
 		final Warranty warranty = this.warrantyService.create();
@@ -104,7 +106,7 @@ public class HandyWorkerServiceTest extends AbstractTest {
 		warranty.setTitle("Warranty1");
 		final Category category = this.categoryService.create();
 		category.setName("Categoria12");
-		category.setParent(this.categoryService.findOne(2357));
+		category.setParent(this.categoryService.rootCategory());
 		category.setSoon(new HashSet<Category>());
 		finder.setWarranty(this.warrantyService.save(warranty));
 		finder.setCategory(this.categoryService.save(category));
