@@ -33,7 +33,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.creditCard" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="creditCardType/administrator/list.do"><spring:message code="master.page.administrator.creditCardType" /></a></li>						
+					<li><a href="credit-card-type/administrator/list.do"><spring:message code="master.page.administrator.creditCardType" /></a></li>						
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.spam" /></a>

@@ -17,7 +17,7 @@ import controllers.AbstractController;
 import domain.CreditCardType;
 
 @Controller
-@RequestMapping("/creditCardType/administrator")
+@RequestMapping("/credit-card-type/administrator")
 public class CreditCardTypeAdministratorController extends AbstractController {
 
 	@Autowired
@@ -32,7 +32,7 @@ public class CreditCardTypeAdministratorController extends AbstractController {
 		creditCardTypes = this.creditCardTypeService.findAll();
 		final CreditCardType newCreditCardType = this.creditCardTypeService.create();
 		result = new ModelAndView("creditCardType/list");
-		result.addObject("requestURI", "creditCardType/administrator/list.do");
+		result.addObject("requestURI", "credit-card-type/administrator/list.do");
 		result.addObject("creditCardTypes", creditCardTypes);
 		result.addObject("creditCardType", newCreditCardType);
 		return result;
@@ -49,7 +49,7 @@ public class CreditCardTypeAdministratorController extends AbstractController {
 		} else {
 			final Collection<CreditCardType> ccts = this.creditCardTypeService.findAll();
 			result = new ModelAndView("creditCardType/list");
-			result.addObject("requestURI", "creditCardType/administrator/list.do");
+			result.addObject("requestURI", "credit-card-type/administrator/list.do");
 			result.addObject("creditCardType", creditCardType);
 			result.addObject("creditCardTypes", ccts);
 		}

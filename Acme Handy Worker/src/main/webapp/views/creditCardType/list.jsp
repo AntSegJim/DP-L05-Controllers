@@ -18,7 +18,7 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-<form:form action="creditCardType/administrator/list.do" modelAttribute="creditCardType">
+<form:form action="credit-card-type/administrator/list.do" modelAttribute="creditCardType">
 
 	<form:label path="brandName">
 	<spring:message code="creditCardType.brandName" />
