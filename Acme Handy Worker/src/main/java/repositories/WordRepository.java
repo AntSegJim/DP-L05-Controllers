@@ -18,4 +18,7 @@ public interface WordRepository extends JpaRepository<Word, Integer> {
 	@Query("select w from Word w where w.value=0")
 	Collection<Word> badWords();
 
+	@Query("select UPPER(w.name) from Word w")
+	Collection<String> words();
+
 }

@@ -69,6 +69,8 @@
 		<security:intercept-url pattern="/warranty/administrator/delete.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/credit-card-type/administrator/list.do" access="hasRole('ADMIN')" /> 		 
 		<security:intercept-url pattern="/spam-word/administrator/list.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/word/administrator/list.do" access="hasRole('ADMIN')" />
+		
 		
 		<security:intercept-url pattern="/complaint/customer/**" access="hasRole('CUSTOMER')" /> 
   		<security:intercept-url pattern="/application/handyWorker/**" access="hasRole('HANDYWORKER')" /> 

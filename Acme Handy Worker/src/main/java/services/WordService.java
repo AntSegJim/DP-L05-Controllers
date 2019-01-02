@@ -43,6 +43,8 @@ public class WordService {
 		final UserAccount user = LoginService.getPrincipal();
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("ADMIN"), "Comprobar que hay admin conectado");
 		Assert.isTrue(word != null && word.getName() != null && word.getName() != "" && (word.getValue() == 0 || word.getValue() == 1));
+		final Collection<String> words = this.words();
+		Assert.isTrue(!words.contains(word.getName().toUpperCase()));
 		return this.wordRepository.save(word);
 	}
 
@@ -58,6 +60,10 @@ public class WordService {
 
 	public Collection<Word> BadWords() {
 		return this.wordRepository.badWords();
+	}
+
+	public Collection<String> words() {
+		return this.wordRepository.words();
 	}
 
 }

@@ -39,7 +39,9 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.spam" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="spam-word/administrator/list.do"><spring:message code="master.page.administrator.spamWord" /></a></li>						
+					<li><a href="spam-word/administrator/list.do"><spring:message code="master.page.administrator.spamWord" /></a></li>
+					<li><a href="word/administrator/list.do"><spring:message code="master.page.administrator.word" /></a></li>						
+											
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.suspicious" /></a>
