@@ -38,8 +38,9 @@
 		<value>/views/sponsorship/messages</value>
 		<value>/views/creditCardType/messages</value>
 		<value>/views/spamWord/messages</value>
+		<value>/views/word/messages</value>
 		<value>/views/endorsement/messages</value>
-				<value>/views/actor/messages</value>
+		<value>/views/actor/messages</value>
 		
 		
 		
