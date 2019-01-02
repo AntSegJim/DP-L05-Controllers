@@ -28,5 +28,5 @@ requestURI="${Uri }" >
 <display:column> <a href="message/actor/show.do?messageId=${row.id}"><spring:message code="message.show" /></a> </display:column>
 
 </display:table>
-
+ <a href="messageBox/actor/list.do"><spring:message code="message.send.cancel" /></a>
 </security:authorize>

@@ -18,6 +18,7 @@ import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
 import services.MessageBoxService;
+import services.MessageService;
 import domain.Actor;
 import domain.MessageBox;
 
@@ -30,6 +31,9 @@ public class MessageBoxActorController {
 
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private MessageService		messageService;
 
 
 	// Action-1 ---------------------------------------------------------------		
@@ -71,6 +75,7 @@ public class MessageBoxActorController {
 		Assert.notNull(messageBox);
 		result = new ModelAndView("messageBox/edit");
 		result.addObject("messageBox", messageBox);
+		result.addObject("messages", this.messageService.getMessageByActor());
 		return result;
 	}
 
@@ -85,11 +90,13 @@ public class MessageBoxActorController {
 			} else {
 				result = new ModelAndView("messageBox/edit");
 				result.addObject("messageBox", messageBox);
+				result.addObject("messages", this.messageService.getMessageByActor());
 			}
 		} catch (final Exception e) {
 			result = new ModelAndView("messageBox/edit");
 			result.addObject("exception", e);
 			result.addObject("messageBox", messageBox);
+			result.addObject("messages", this.messageService.getMessageByActor());
 		}
 
 		return result;

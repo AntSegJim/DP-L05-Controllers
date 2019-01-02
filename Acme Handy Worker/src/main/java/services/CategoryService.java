@@ -66,6 +66,7 @@ public class CategoryService {
 		//		else {
 		//			names.remove(category.getName().toUpperCase());
 		//			Assert.isTrue(!names.contains(category.getName().toUpperCase()), "CategoryService.save -> Fallo");
+		//		}
 
 		final Collection<Category> sonOfParent = category.getParent().getSoon();
 		sonOfParent.add(category);

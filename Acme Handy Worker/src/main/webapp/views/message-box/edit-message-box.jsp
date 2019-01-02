@@ -27,7 +27,6 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="actor"/>
-	<form:hidden path="messages"/>
 	
 		
 	<form:label path="name">
@@ -36,6 +35,23 @@
 	<form:input path="name" />
 	<form:errors cssClass="error" path="name" />
 	<br />
+	
+	<jstl:choose>
+	<jstl:when test="${messageBox.id eq 0 }">
+		<form:hidden path="messages"/>
+	</jstl:when>
+	
+	<jstl:otherwise>
+	<form:label path="messages">
+	<spring:message code="messageBox.create.messages" />:
+	</form:label>
+	<form:select id="messages" path="messages">
+		<form:options items="${messages}" itemValue="id" itemLabel="subject" />
+	</form:select>
+	<form:errors cssClass="error" path="messages" />
+	<br />
+	</jstl:otherwise>
+	</jstl:choose>
 			
 	<br /><br />
 	<input type="submit" name="save" 

@@ -143,6 +143,12 @@ public class MessageService {
 		return this.messageRepository.getMessagesByBox(id);
 	}
 
+	public Collection<Message> getMessageByActor() {
+		final Integer user = LoginService.getPrincipal().getId();
+		final Actor a = this.actorService.getActorByUserAccount(user);
+		return this.messageRepository.getMessagesByActor(a.getId());
+	}
+
 	public Boolean auxEsSpam(final Message message) {
 		Boolean res = false;
 		final Collection<String> spamWords = this.spamWordService.getNamesOfSpamWord();
