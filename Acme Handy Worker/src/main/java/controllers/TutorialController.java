@@ -102,4 +102,35 @@ public class TutorialController extends AbstractController {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/showTutorialPictureHW", method = RequestMethod.GET)
+	public ModelAndView showTutorialPictureHW(@RequestParam final int tutorialId) {
+		final ModelAndView result;
+		Tutorial t;
+		Collection<Picture> pictures;
+
+		t = this.tutorialService.findOne(tutorialId);
+		pictures = t.getPicture();
+
+		result = new ModelAndView("tutorial/showTutorialPictureHW");
+		result.addObject("pictures", pictures);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/showTutorialSectionHW", method = RequestMethod.GET)
+	public ModelAndView showTutorialSectionHW(@RequestParam final int tutorialId) {
+		final ModelAndView result;
+		Tutorial t;
+		Collection<Section> sections;
+
+		t = this.tutorialService.findOne(tutorialId);
+		sections = t.getSection();
+
+		result = new ModelAndView("tutorial/showTutorialSectionHW");
+		result.addObject("sections", sections);
+
+		return result;
+	}
+
 }
