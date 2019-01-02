@@ -46,6 +46,16 @@
 		<put-attribute name="body" value="/views/tutorial/showTutorialSectionHW.jsp" />
 	</definition>
 	
+	<definition name="tutorial/showPictures" extends="master.page">	
+		<put-attribute name="title" value="Pictures tutorial" />
+		<put-attribute name="body" value="/views/tutorial/showPictures.jsp" />
+	</definition>
+	
+	<definition name="tutorial/showSections" extends="master.page">	
+		<put-attribute name="title" value="Sections tutorial" />
+		<put-attribute name="body" value="/views/tutorial/showSections.jsp" />
+	</definition>
+	
 	
 
 </tiles-definitions>
