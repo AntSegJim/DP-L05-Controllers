@@ -24,16 +24,12 @@ requestURI="tutorial/handyWorker/show.do" >
 <display:column property="title" titleKey="tutorial.title" />
 <display:column property="moment" titleKey="tutorial.moment" />
 <display:column property="summary" titleKey="tutorial.summary" />
-<display:column property="picture" titleKey="tutorial.pictures" />
-<display:column property="section" titleKey="tutorial.sections" />
-<display:column property="sponsorship" titleKey="tutorial.sponsorship" />
-<!--  
-	<display:column>
-		<form action="picture/handyWorker/show.do?tutorialId=${row.id}">
-  	 	 <input type="submit" value="<spring:message code="tutorial.seePicture" />" />
-		</form>
-	</display:column>
-	-->
+<display:column>
+	<a href="tutorial/handyWorker/showPictures.do?tutorialId=${row.id}"><spring:message code="tutorial.pictures" /></a>
+</display:column>
+<display:column>
+	<a href="tutorial/handyWorker/showSections.do?tutorialId=${row.id}"><spring:message code="tutorial.sections" /></a>
+</display:column>
 </display:table>
 
 <form action="tutorial/handyWorker/create.do">

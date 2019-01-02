@@ -40,6 +40,8 @@
 		<security:intercept-url pattern="/security/register.do" access="permitAll" />  
 		<security:intercept-url pattern="/tutorial/AllTutorials.do" access="permitAll" /> 
 		<security:intercept-url pattern="/tutorial/showTutorialHW.do" access="permitAll" />
+		<security:intercept-url pattern="/tutorial/showTutorialPictureHW.do" access="permitAll" />
+		<security:intercept-url pattern="/tutorial/showTutorialSectionHW.do" access="permitAll" />
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
@@ -79,6 +81,8 @@
 		<security:intercept-url pattern="/finder/handy-worker/list.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/tutorial/handyWorker/show.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/tutorial/handyWorker/create.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/tutorial/handyWorker/showPictures.do" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/tutorial/handyWorker/showSections.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/finder/handy-worker/save.do" access="hasRole('HANDYWORKER')" /> 
 		<security:intercept-url pattern="/fix-up-task/handy-worker/list.do" access="hasRole('HANDYWORKER')" />
 		<security:intercept-url pattern="/fix-up-task/handy-worker/show.do" access="hasRole('HANDYWORKER')" />
