@@ -24,8 +24,10 @@ import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
 import services.AdministratorService;
+import services.SponsorService;
 import domain.Actor;
 import domain.Administrator;
+import domain.Sponsor;
 
 @Controller
 @RequestMapping("/profile")
@@ -36,6 +38,9 @@ public class ProfileController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	adminService;
+
+	@Autowired
+	private SponsorService			sponsorService;
 
 
 	// Action-2 ---------------------------------------------------------------		
@@ -89,6 +94,47 @@ public class ProfileController extends AbstractController {
 		} catch (final Exception e) {
 			result = new ModelAndView("profile/editAdmin");
 			result.addObject("actor", administrator);
+			result.addObject("exception", e);
+
+		}
+		return result;
+
+	}
+
+	//SPONSOR
+
+	@RequestMapping(value = "/edit-sponsor", method = RequestMethod.GET)
+	public ModelAndView editSponsor() {
+		ModelAndView result;
+		Sponsor s;
+
+		final UserAccount user = LoginService.getPrincipal();
+		s = (Sponsor) this.actorService.getActorByUserAccount(user.getId());
+		Assert.notNull(s);
+
+		result = new ModelAndView("profile/editSponsor");
+		result.addObject("actor", s);
+		result.addObject("action", "profile/edit-sponsor.do");
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit-sponsor", method = RequestMethod.POST, params = "save")
+	public ModelAndView action3(@Valid final Sponsor sponsor, final BindingResult binding) {
+		ModelAndView result;
+		try {
+
+			if (!binding.hasErrors()) {
+				this.sponsorService.save(sponsor);
+				result = new ModelAndView("redirect:action-2.do");
+			} else {
+				result = new ModelAndView("profile/editSponsor");
+				result.addObject("actor", sponsor);
+			}
+		} catch (final Exception e) {
+			result = new ModelAndView("profile/editSponsor");
+			result.addObject("actor", sponsor);
 			result.addObject("exception", e);
 
 		}

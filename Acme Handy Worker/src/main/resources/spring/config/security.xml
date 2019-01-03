@@ -115,8 +115,8 @@
 		
 		
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/edit-administrator.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/profile/edit-sponsor.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/message/actor/send.do" access="isAuthenticated()" /> 
 		
 	

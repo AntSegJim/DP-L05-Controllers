@@ -37,7 +37,7 @@
 <display:column property="linkProfile" titleKey="profile.link" />
 
 </display:table>
-
+<br/>
 <input type="button" name="cancel" value="<spring:message code="administrator.cancel" />"
 			onclick="javascript: relativeRedir('welcome/index.do');" />
 
@@ -46,6 +46,12 @@
 
 <security:authorize access="hasRole('ADMIN')">
 <form action="profile/edit-administrator.do">
+    <input type="submit" value="<spring:message code="profile.edit.profile" />" />
+</form>
+</security:authorize>
+
+<security:authorize access="hasRole('SPONSOR')">
+<form action="profile/edit-sponsor.do">
     <input type="submit" value="<spring:message code="profile.edit.profile" />" />
 </form>
 </security:authorize>
