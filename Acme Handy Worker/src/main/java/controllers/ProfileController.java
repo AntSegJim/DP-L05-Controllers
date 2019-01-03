@@ -46,7 +46,7 @@ public class ProfileController extends AbstractController {
 	// Action-2 ---------------------------------------------------------------		
 
 	//VER SUS DATOS PERSONALES
-	@RequestMapping(value = "/action-2", method = RequestMethod.GET)
+	@RequestMapping(value = "/personal-datas", method = RequestMethod.GET)
 	public ModelAndView action2() {
 		ModelAndView result;
 		Actor a;
@@ -86,7 +86,7 @@ public class ProfileController extends AbstractController {
 
 			if (!binding.hasErrors()) {
 				this.adminService.save(administrator);
-				result = new ModelAndView("redirect:action-2.do");
+				result = new ModelAndView("redirect:personal-datas.do");
 			} else {
 				result = new ModelAndView("profile/editAdmin");
 				result.addObject("actor", administrator);
@@ -127,7 +127,7 @@ public class ProfileController extends AbstractController {
 
 			if (!binding.hasErrors()) {
 				this.sponsorService.save(sponsor);
-				result = new ModelAndView("redirect:action-2.do");
+				result = new ModelAndView("redirect:personal-datas.do");
 			} else {
 				result = new ModelAndView("profile/editSponsor");
 				result.addObject("actor", sponsor);

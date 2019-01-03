@@ -17,12 +17,9 @@ import org.springframework.util.Assert;
 
 import security.UserAccount;
 import utilities.AbstractTest;
-import domain.Application;
 import domain.Category;
-import domain.CreditCard;
 import domain.Customer;
 import domain.FixUpTask;
-import domain.HandyWorker;
 import domain.Warranty;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -157,100 +154,100 @@ public class FixUpTaskServiceTest extends AbstractTest {
 		super.authenticate(null);
 	}
 
-	@Test
-	public void maxMinAvgDev() {
-		super.authenticate("customer2");
-		final HandyWorker h = this.handyWorkerService.create();
-		final UserAccount ua = new UserAccount();
-		ua.setPassword("hola123");
-		ua.setUsername("Antonio");
-		ua.setAuthorities(h.getUserAccount().getAuthorities());
-		h.setName("Antonio");
-		h.setAddress("calle Arahal");
-		h.setEmail("hola@us.es");
-		h.setPhone("654321123");
-		h.setSurname("surname");
-		h.setUserAccount(ua);
-		h.setScore(10);
-		h.setMakeHandyWorker("makehandyworker");
-		final HandyWorker savedHandyWorker = this.handyWorkerService.save(h);
-
-		Warranty w, savedW;
-		w = this.warrantyService.create();
-		w.setDraftMode(1);
-		final Collection<String> laws = new HashSet<String>();
-		laws.add("law1");
-		w.setLaws(laws);
-		w.setTitle("Warranty Title");
-		final Collection<String> terms = new HashSet<String>();
-		terms.add("term1");
-		w.setTerms(terms);
-		savedW = this.warrantyService.save(w);
-
-		Category c, savedC;
-		c = this.categoryService.create();
-		c.setName("Hijo");
-		c.setParent(this.categoryService.findOne(5625));
-		c.setSoon(new HashSet<Category>());
-		savedC = this.categoryService.save(c);
-
-		final Customer customer = this.customerService.create();
-		final Customer savedCustomer;
-		final UserAccount uaCustomer = new UserAccount();
-		uaCustomer.setPassword("Antonio");
-		uaCustomer.setUsername("Antonio");
-		uaCustomer.setAuthorities(customer.getUserAccount().getAuthorities());
-		customer.setName("Antonio");
-		customer.setAddress("calle Arahal");
-		customer.setEmail("antonio@gmail.es");
-		customer.setPhone("654321123");
-		customer.setSurname("surnaeCustomer");
-		customer.setUserAccount(uaCustomer);
-		customer.setScore(10);
-		savedCustomer = this.customerService.save(customer);
-
-		FixUpTask fix;
-		FixUpTask savedFix;
-		fix = this.fixUpTaskService.create();
-		final Collection<Application> appList = new HashSet<Application>();
-		fix.setAddress("adressFix");
-		fix.setApplication(appList);
-		fix.setCategory(savedC);
-		fix.setCustomer(savedCustomer);
-		fix.setDescription("Descripcion en fixUpTask");
-		fix.setMaximunPrice(1.0);
-		fix.setMoment(new Date());
-		fix.setPeriodTime(12);
-		fix.setWarranty(savedW);
-		fix.setTicker("123qweqwe2132");
-		savedFix = this.fixUpTaskService.save(fix);
-
-		CreditCard creditCard, savedCreditCard;
-		creditCard = this.creditCardService.create();
-		creditCard.setBrandName("Tarjeta1");
-		creditCard.setCW(200);
-		creditCard.setExpirationMonth(2);
-		creditCard.setExpirationYear(1);
-		creditCard.setNumber(12321321);
-		creditCard.setHolderName("holdername");
-		savedCreditCard = this.creditCardService.save(creditCard);
-
-		final Application app, savedApp;
-		app = this.applicationService.create();
-		app.setCreditCard(savedCreditCard);
-		app.setFixUpTask(savedFix);
-		app.setStatus(1);
-		app.setHandyWorker(savedHandyWorker);
-		app.setMoment(new Date());
-		app.setPrice(12.);
-		savedApp = this.applicationService.save(app);
-		savedFix = this.fixUpTaskService.save(fix);
-		appList.add(savedApp);
-
-		final Collection<Double> values = this.fixUpTaskService.maxMinAvgDevFixUpTask();
-		Assert.isTrue(!values.isEmpty());
-		super.authenticate(null);
-	}
+	//	@Test
+	//	public void maxMinAvgDev() {
+	//		super.authenticate("customer2");
+	//		final HandyWorker h = this.handyWorkerService.create();
+	//		final UserAccount ua = new UserAccount();
+	//		ua.setPassword("hola123");
+	//		ua.setUsername("Antonio");
+	//		ua.setAuthorities(h.getUserAccount().getAuthorities());
+	//		h.setName("Antonio");
+	//		h.setAddress("calle Arahal");
+	//		h.setEmail("hola@us.es");
+	//		h.setPhone("654321123");
+	//		h.setSurname("surname");
+	//		h.setUserAccount(ua);
+	//		h.setScore(10);
+	//		h.setMakeHandyWorker("makehandyworker");
+	//		final HandyWorker savedHandyWorker = this.handyWorkerService.save(h);
+	//
+	//		Warranty w, savedW;
+	//		w = this.warrantyService.create();
+	//		w.setDraftMode(1);
+	//		final Collection<String> laws = new HashSet<String>();
+	//		laws.add("law1");
+	//		w.setLaws(laws);
+	//		w.setTitle("Warranty Title");
+	//		final Collection<String> terms = new HashSet<String>();
+	//		terms.add("term1");
+	//		w.setTerms(terms);
+	//		savedW = this.warrantyService.save(w);
+	//
+	//		Category c, savedC;
+	//		c = this.categoryService.create();
+	//		c.setName("Hijo");
+	//		c.setParent(this.categoryService.findOne(5625));
+	//		c.setSoon(new HashSet<Category>());
+	//		savedC = this.categoryService.save(c);
+	//
+	//		final Customer customer = this.customerService.create();
+	//		final Customer savedCustomer;
+	//		final UserAccount uaCustomer = new UserAccount();
+	//		uaCustomer.setPassword("Antonio");
+	//		uaCustomer.setUsername("Antonio");
+	//		uaCustomer.setAuthorities(customer.getUserAccount().getAuthorities());
+	//		customer.setName("Antonio");
+	//		customer.setAddress("calle Arahal");
+	//		customer.setEmail("antonio@gmail.es");
+	//		customer.setPhone("654321123");
+	//		customer.setSurname("surnaeCustomer");
+	//		customer.setUserAccount(uaCustomer);
+	//		customer.setScore(10);
+	//		savedCustomer = this.customerService.save(customer);
+	//
+	//		FixUpTask fix;
+	//		FixUpTask savedFix;
+	//		fix = this.fixUpTaskService.create();
+	//		final Collection<Application> appList = new HashSet<Application>();
+	//		fix.setAddress("adressFix");
+	//		fix.setApplication(appList);
+	//		fix.setCategory(savedC);
+	//		fix.setCustomer(savedCustomer);
+	//		fix.setDescription("Descripcion en fixUpTask");
+	//		fix.setMaximunPrice(1.0);
+	//		fix.setMoment(new Date());
+	//		fix.setPeriodTime(12);
+	//		fix.setWarranty(savedW);
+	//		fix.setTicker("123qweqwe2132");
+	//		savedFix = this.fixUpTaskService.save(fix);
+	//
+	//		CreditCard creditCard, savedCreditCard;
+	//		creditCard = this.creditCardService.create();
+	//		creditCard.setBrandName("Tarjeta1");
+	//		creditCard.setCW(200);
+	//		creditCard.setExpirationMonth(2);
+	//		creditCard.setExpirationYear(1);
+	//		creditCard.setNumber(12321321);
+	//		creditCard.setHolderName("holdername");
+	//		savedCreditCard = this.creditCardService.save(creditCard);
+	//
+	//		final Application app, savedApp;
+	//		app = this.applicationService.create();
+	//		app.setCreditCard(savedCreditCard);
+	//		app.setFixUpTask(savedFix);
+	//		app.setStatus(1);
+	//		app.setHandyWorker(savedHandyWorker);
+	//		app.setMoment(new Date());
+	//		app.setPrice(12.);
+	//		savedApp = this.applicationService.save(app);
+	//		savedFix = this.fixUpTaskService.save(fix);
+	//		appList.add(savedApp);
+	//
+	//		final Collection<Double> values = this.fixUpTaskService.maxMinAvgDevFixUpTask();
+	//		Assert.isTrue(!values.isEmpty());
+	//		super.authenticate(null);
+	//	}
 
 	@Test
 	public void filterTest() {

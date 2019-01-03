@@ -3,6 +3,7 @@ package repositories;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,5 +33,11 @@ public interface FixUpTaskRepository extends JpaRepository<FixUpTask, Integer> {
 		value = "select * from Fix_up_task f where (locate(?1,f.ticker) != 0 or locate(?2,f.description) != 0 or locate(?3,f.address) != 0) and f.moment between ?4 and ?5 and f.maximun_price between ?6 and ?7 and locate(?8,f.category) != 0 and locate(?9,f.warranty) != 0 LIMIT ?10",
 		nativeQuery = true)
 	public Collection<FixUpTask> filterFixUpTask2(String ticker, String description, String address, Date fi, Date ff, Double lp, Double hp, String c, String w, Integer limite);
+
+	@Query("select max(a.application.size), min(a.application.size), avg(a.application.size),sqrt(sum(a.application.size * a.application.size) / count(a.application.size) - (avg(a.application.size) * avg(a.application.size))) from FixUpTask a")
+	public List<Object[]> getMaxMinAvgDesvFixUpApp();
+
+	@Query("select avg(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id)),  min(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id)),  max(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id)),  sqrt(1.0*sum(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id) *  (select count(f.customer) from FixUpTask f where f.customer.id=c.id)) / count(c) - avg(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id))*  avg(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id))) from Customer c")
+	public List<Object[]> getMaxMinAvgDesvFixUp();
 
 }

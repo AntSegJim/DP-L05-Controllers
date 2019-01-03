@@ -25,6 +25,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="administrator/create.do"><spring:message code="master.page.administrator.action.1" /></a></li>
+					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>	
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
 					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.administrator.warranty" /></a></li>						
@@ -103,7 +104,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="messageBox/actor/list.do"><spring:message code="master.page.profile.messageBox" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.personal.datas" /></a></li>
+					<li><a href="profile/personal-datas.do"><spring:message code="master.page.profile.personal.datas" /></a></li>
 					<li><a href="message/actor/send.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
