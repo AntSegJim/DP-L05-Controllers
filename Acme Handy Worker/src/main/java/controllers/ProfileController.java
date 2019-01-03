@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,14 +23,19 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
+import services.AdministratorService;
 import domain.Actor;
+import domain.Administrator;
 
 @Controller
 @RequestMapping("/profile")
 public class ProfileController extends AbstractController {
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private AdministratorService	adminService;
 
 
 	// Action-2 ---------------------------------------------------------------		
@@ -49,34 +55,41 @@ public class ProfileController extends AbstractController {
 		return result;
 	}
 
-	// Action-3 ---------------------------------------------------------------		
+	//---------- ADMIN
 
-	@RequestMapping(value = "/action-3", method = RequestMethod.GET)
-	public ModelAndView action3() {
-		//throw new RuntimeException("Oops! An *expected* exception was thrown. This is normal behaviour.");
+	@RequestMapping(value = "/edit-administrator", method = RequestMethod.GET)
+	public ModelAndView editAdministrator() {
 		ModelAndView result;
-		Actor a;
+		Administrator a;
 
 		final UserAccount user = LoginService.getPrincipal();
-		a = this.actorService.getActorByUserAccount(user.getId());
+		a = (Administrator) this.actorService.getActorByUserAccount(user.getId());
+		Assert.notNull(a);
 
-		result = new ModelAndView("profile/action-3");
+		result = new ModelAndView("profile/editAdmin");
 		result.addObject("actor", a);
+		result.addObject("action", "profile/edit-administrator.do");
 
 		return result;
 
 	}
 
-	@RequestMapping(value = "/action-3", method = RequestMethod.POST)
-	public ModelAndView action3(@Valid final Actor actor, final BindingResult binding) {
-		//throw new RuntimeException("Oops! An *expected* exception was thrown. This is normal behaviour.");
+	@RequestMapping(value = "/edit-administrator", method = RequestMethod.POST, params = "save")
+	public ModelAndView action3(@Valid final Administrator administrator, final BindingResult binding) {
 		ModelAndView result;
-		if (binding.hasErrors()) {
-			this.actorService.save(actor);
-			result = new ModelAndView("redirect:action-2.do");
-		} else {
-			result = new ModelAndView("profile/action-3");
-			result.addObject("actor", actor);
+		try {
+
+			if (!binding.hasErrors()) {
+				this.adminService.save(administrator);
+				result = new ModelAndView("redirect:action-2.do");
+			} else {
+				result = new ModelAndView("profile/editAdmin");
+				result.addObject("actor", administrator);
+			}
+		} catch (final Exception e) {
+			result = new ModelAndView("profile/editAdmin");
+			result.addObject("actor", administrator);
+			result.addObject("exception", e);
 
 		}
 		return result;

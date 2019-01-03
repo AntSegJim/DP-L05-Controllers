@@ -21,15 +21,16 @@
 <security:authorize access="isAuthenticated()">
 
 <img src="${actor.photo}">  <br/>
-<spring:message code="profile.action.2.name" /> ${actor.name} <br/>
-<spring:message code="profile.action.2.middleName" /> ${actor.middleName} <br/>
-<spring:message code="profile.action.2.surname" /> ${actor.surname} <br/>
-<spring:message code="profile.action.2.email" /> ${actor.email} <br/>
-<spring:message code="profile.action.2.phone" /> ${actor.phone} <br/>
-<spring:message code="profile.action.2.address" /> ${actor.address} <br/>
-<spring:message code="profile.action.2.numberSocial" /> ${actor.numberSocialProfiles} <br/>
+<br/>
+<b><spring:message code="profile.action.2.name" /> </b> ${actor.name} <br/>
+<b><spring:message code="profile.action.2.middleName" /></b> ${actor.middleName} <br/>
+<b><spring:message code="profile.action.2.surname" /></b> ${actor.surname} <br/>
+<b><spring:message code="profile.action.2.email" /></b> ${actor.email} <br/>
+<b><spring:message code="profile.action.2.phone" /></b> ${actor.phone} <br/>
+<b><spring:message code="profile.action.2.address" /></b> ${actor.address} <br/>
+<b><spring:message code="profile.action.2.numberSocial" /></b> ${actor.numberSocialProfiles} <br/>
 <%-- que hemos con la cuenta  --%>
-<spring:message code="profile.action.2.socialProfile" />
+<b><spring:message code="profile.action.2.socialProfile" /></b>
 <display:table name="${actor.profileSocialNetwork}" id="row">
 <display:column property="nickName" titleKey="profile.nickname" />
 <display:column property="nameSocialNetwork" titleKey="profile.socialNetwork" />
@@ -37,12 +38,17 @@
 
 </display:table>
 
+<input type="button" name="cancel" value="<spring:message code="administrator.cancel" />"
+			onclick="javascript: relativeRedir('welcome/index.do');" />
+
+
 </security:authorize>
 
-<br/>
-<form action="profile/action-3.do">
+<security:authorize access="hasRole('ADMIN')">
+<form action="profile/edit-administrator.do">
     <input type="submit" value="<spring:message code="profile.edit.profile" />" />
 </form>
+</security:authorize>
 
 <security:authorize access="hasRole('CUSTOMER')">
 <form action="fixUpTask/customer/list.do">

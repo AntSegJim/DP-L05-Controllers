@@ -17,49 +17,61 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <p><spring:message code="profile.action.3" /></p>
-<form:form  modelAttribute="actor">
+<form:form  modelAttribute="actor" action="${action }">
+
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="profile.error" /> </p>
+</jstl:if>
 
 <form:label path="name"><spring:message code="profile.action.3.changePersonalData" />:</form:label><br /><br />
 	<form:hidden path="id"/>
 	<form:hidden path="version" />
+	<form:hidden path="userAccount" />
+	<form:hidden path="isBanned" />
+	<form:hidden path="profileSocialNetwork"/>	
 	
 	<form:label path="name"><spring:message code="profile.action.3.name" />:</form:label>
 	<form:input path="name"/>
-	<form:errors path="name"/>
+	<form:errors cssClass="error" path="name" />	
 	<br />
 	
 	<form:label path="middleName"><spring:message code="profile.action.3.middleName" />:</form:label>
 	<form:input path="middleName" />
-	<form:errors path="middleName"/>
+	<form:errors cssClass="error" path="middleName" />
 	<br />
 	
 	<form:label path="surname"><spring:message code="profile.action.3.surname" />:</form:label>
 	<form:input path="surname" />
-	<form:errors path="surname"/>
+	<form:errors cssClass="error" path="surname" />
+	<br />
+	
+	<form:label path="photo"><spring:message code="profile.action.3.photo" />:</form:label>
+	<form:input path="photo" />
+	<form:errors cssClass="error" path="photo" />
 	<br />
 	
 	<form:label path="email"><spring:message code="profile.action.3.email" />:</form:label>
 	<form:input path="email" />
-	<form:errors path="email"/>
+	<form:errors cssClass="error" path="email" />
 	<br />
 	
 	<form:label path="phone"><spring:message code="profile.action.3.phone" />:</form:label>
 	<form:input path="phone" />
-	<form:errors path="phone"/>
+	<form:errors cssClass="error" path="phone" />
 	<br />
 	
 	<form:label path="address"><spring:message code="profile.action.3.address" />:</form:label>
 	<form:input path="address" />
-	<form:errors path="address"/>
+	<form:errors cssClass="error" path="address" />
 	<br />
 	
 	<form:label path="numberSocialProfiles"><spring:message code="profile.action.3.numberSocialProfiles" />:</form:label>
 	<form:input path="numberSocialProfiles" />
-	<form:errors path="numberSocialProfiles"/>
+	<form:errors cssClass="error" path="numberSocialProfiles" />
 	<br />
-	
+	<br />
 	<input type="submit" name="save" value="<spring:message code="profile.action.3.save" />" />
-	<br />
-	
+	<input type="button" name="cancel" value="<spring:message code="administrator.cancel" />"
+			onclick="javascript: relativeRedir('profile/action-2.do');" />
 
 </form:form>
