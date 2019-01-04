@@ -25,10 +25,10 @@ requestURI="tutorial/handyWorker/show.do" >
 <display:column property="moment" titleKey="tutorial.moment" />
 <display:column property="summary" titleKey="tutorial.summary" />
 <display:column>
-	<a href="tutorial/handyWorker/showPictures.do?tutorialId=${row.id}"><spring:message code="tutorial.pictures" /></a>
+	<a href="picture/handyWorker/showPictures.do?tutorialId=${row.id}"><spring:message code="tutorial.pictures" /></a>
 </display:column>
 <display:column>
-	<a href="tutorial/handyWorker/showSections.do?tutorialId=${row.id}"><spring:message code="tutorial.sections" /></a>
+	<a href="section/handyWorker/showSections.do?tutorialId=${row.id}"><spring:message code="tutorial.sections" /></a>
 </display:column>
 </display:table>
 

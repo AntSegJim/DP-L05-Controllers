@@ -41,6 +41,8 @@
 		<value>/views/word/messages</value>
 		<value>/views/endorsement/messages</value>
 		<value>/views/actor/messages</value>
+		<value>/views/picture/messages</value>
+		<value>/views/section/messages</value>
 		
 		
 		

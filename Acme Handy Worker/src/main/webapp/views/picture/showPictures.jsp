@@ -15,13 +15,13 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<security:authorize access="hasRole('HANDYWORKER')">
 
-<p><spring:message code="tutorial.sections" /></p>
-<display:table pagesize="5" name="sections" id="row"
-requestURI="tutorial/handyWorker/showSections.do" >
+<p><spring:message code="pictures.title" /></p>
+<display:table pagesize="5" name="pictures" id="row"
+requestURI="picture/handyWorker/showPictures.do" >
 
-<display:column property="number" titleKey="tutorial.section.number" />
-<display:column property="title" titleKey="tutorial.section.title" />
-<display:column property="number" titleKey="tutorial.section.pieceOfText" />
+<display:column property="picture" titleKey="pictures" />
 
 </display:table>
+</security:authorize>
