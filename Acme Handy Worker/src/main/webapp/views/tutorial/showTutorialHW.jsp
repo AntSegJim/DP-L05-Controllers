@@ -21,6 +21,8 @@
 
 
 <img src="${h.photo}"><br/>
+<fieldset>
+<legend><spring:message code="tutorial.handyWorker.personalDatas" /></legend>
 <spring:message code="tutorial.HW.name" /> ${h.name} <br/>
 <spring:message code="tutorial.HW.middleName" /> ${h.middleName} <br/>
 <spring:message code="tutorial.HW.surname" /> ${h.surname} <br/>
@@ -29,6 +31,9 @@
 <spring:message code="tutorial.HW.address" /> ${h.address} <br/>
 <spring:message code="tutorial.HW.photo" /> ${h.photo} <br/>
 <spring:message code="tutorial.HW.numberSocial" /> ${h.numberSocialProfiles} <br/>
+</fieldset>
+	<br />
+	
 <%-- que hemos con la cuenta  --%>
 <spring:message code="tutorial.HW.socialProfile" />
 <display:table name="${h.profileSocialNetwork}" id="row">

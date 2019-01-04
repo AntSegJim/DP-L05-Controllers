@@ -42,6 +42,7 @@
 		<security:intercept-url pattern="/tutorial/showTutorialHW.do" access="permitAll" />
 		<security:intercept-url pattern="/tutorial/showTutorialPictureHW.do" access="permitAll" />
 		<security:intercept-url pattern="/tutorial/showTutorialSectionHW.do" access="permitAll" />
+		<security:intercept-url pattern="/tutorial/showTutorialSponsorshipHW.do" access="permitAll" />
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 

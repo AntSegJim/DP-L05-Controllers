@@ -34,6 +34,9 @@ requestURI="tutorial/AllTutorials.do" >
 <display:column>
 	<a href="tutorial/showTutorialSponsorshipHW.do?tutorialId=${row.id}"><spring:message code="tutorial.sponsorship" /></a>
 </display:column>
+<display:column>
+	<a href="tutorial/showTutorialHW.do?handyWorkerId=${row.handyWorker.id}"><spring:message code="tutorial.seeHandyWorker" /></a>
+</display:column>
 
 </display:table>
 
