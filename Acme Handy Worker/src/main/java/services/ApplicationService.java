@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -77,5 +78,24 @@ public class ApplicationService {
 	}
 	public Collection<Application> getMyApplications(final int handyWorkerId) {
 		return this.getMyApplications(handyWorkerId);
+	}
+
+	public List<Object[]> maxMavAvgDesvPriceOffered() {
+		return this.applicationRepository.maxMinAvgDesvPriceOffered();
+	}
+
+	public Double ratioPendingApp() {
+		return this.applicationRepository.ratioPendingApp();
+	}
+
+	public Double ratioAcceptedApp() {
+		return this.applicationRepository.ratioAcepptedApp();
+	}
+	public Double ratioRejectedApp() {
+		return this.applicationRepository.ratioRejectedApp();
+	}
+
+	public Double rationPendingAppStatus() {
+		return this.applicationRepository.ratioPendingAppStatus();
 	}
 }

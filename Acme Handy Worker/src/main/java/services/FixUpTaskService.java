@@ -94,6 +94,14 @@ public class FixUpTaskService {
 		return this.fixUpTaskRepository.getMaxMinAvgDesvFixUpApp();
 	}
 
+	public List<Object[]> maxMinAvgDesvFixUpPrice() {
+		return this.fixUpTaskRepository.getMaxMinAvgDesvFixUpPrice();
+	}
+
+	public List<Object[]> maxMinAvgDesvFixUpComplaint() {
+		return this.fixUpTaskRepository.getMaxMinAvgDesvFixUpComplaint();
+	}
+
 	public Collection<FixUpTask> findAllCustomer() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();

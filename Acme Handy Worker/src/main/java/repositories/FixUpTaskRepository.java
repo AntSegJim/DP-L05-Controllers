@@ -40,4 +40,10 @@ public interface FixUpTaskRepository extends JpaRepository<FixUpTask, Integer> {
 	@Query("select avg(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id)),  min(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id)),  max(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id)),  sqrt(1.0*sum(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id) *  (select count(f.customer) from FixUpTask f where f.customer.id=c.id)) / count(c) - avg(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id))*  avg(1.0*(select count(f.customer) from FixUpTask f where f.customer.id=c.id))) from Customer c")
 	public List<Object[]> getMaxMinAvgDesvFixUp();
 
+	@Query(" select max(a.maximunPrice), min(a.maximunPrice),  avg(a.maximunPrice) , sqrt(sum(a.maximunPrice * a.maximunPrice) / count(a.maximunPrice) - (avg(a.maximunPrice) * avg(a.maximunPrice))) from FixUpTask a")
+	public List<Object[]> getMaxMinAvgDesvFixUpPrice();
+
+	@Query("select avg(1.0*(select count(c.fixUpTask) from Complaint c where c.fixUpTask.id=f.id)), min(1.0*(select count(c.fixUpTask) from Complaint c where c.fixUpTask.id=f.id)),max(1.0*(select count(c.fixUpTask) from Complaint c where c.fixUpTask.id=f.id)), sqrt(1.0*sum(1.0*(select count(c.fixUpTask) from Complaint c where c.fixUpTask.id=f.id) *	 (select count(c.fixUpTask) from Complaint c where c.fixUpTask.id=f.id)) /	 count(f) - avg(1.0*(select count(c.fixUpTask) from Complaint c where c.fixUpTask.id=f.id))*	 avg(1.0*(select count(c.fixUpTask) from Complaint c where c.fixUpTask.id=f.id))) from FixUpTask f")
+	public List<Object[]> getMaxMinAvgDesvFixUpComplaint();
+
 }

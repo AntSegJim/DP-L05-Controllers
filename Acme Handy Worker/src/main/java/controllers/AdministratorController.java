@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.ApplicationService;
 import services.FixUpTaskService;
+import services.ReportService;
 import domain.Administrator;
 
 @Controller
@@ -35,6 +37,10 @@ public class AdministratorController extends AbstractController {
 	//DASHBOARD
 	@Autowired
 	private FixUpTaskService		fixUpTaskService;
+	@Autowired
+	private ApplicationService		applicationService;
+	@Autowired
+	private ReportService			reportService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -89,28 +95,83 @@ public class AdministratorController extends AbstractController {
 	public ModelAndView dashboard() {
 		ModelAndView result;
 
-		final List<Object[]> fixUpTask2 = this.fixUpTaskService.maxMinAvgDevFixUpTask();
-		final Double a2 = (Double) fixUpTask2.get(0)[0];
-		final Double b2 = (Double) fixUpTask2.get(0)[1];
-		final Double c2 = (Double) fixUpTask2.get(0)[2];
-		final Double d2 = (Double) fixUpTask2.get(0)[3];
+		final List<Object[]> fixUpTask = this.fixUpTaskService.maxMinAvgDevFixUpTask();
+		final Double fixUpAvg = (Double) fixUpTask.get(0)[0];
+		final Double fixUpMin = (Double) fixUpTask.get(0)[1];
+		final Double fixUpMax = (Double) fixUpTask.get(0)[2];
+		final Double fixUpDesv = (Double) fixUpTask.get(0)[3];
 
-		final List<Object[]> fixUpTask = this.fixUpTaskService.maxMinAvgDevFixUpTaskApp();
-		final Integer a = (Integer) fixUpTask.get(0)[0];
-		final Integer b = (Integer) fixUpTask.get(0)[1];
-		final Double c = (Double) fixUpTask.get(0)[2];
-		final Double d = (Double) fixUpTask.get(0)[3];
+		final List<Object[]> fixUpTaskApp = this.fixUpTaskService.maxMinAvgDevFixUpTaskApp();
+		final Integer fixUpAppMax = (Integer) fixUpTaskApp.get(0)[0];
+		final Integer fixUpAppMin = (Integer) fixUpTaskApp.get(0)[1];
+		final Double fixUpAppAvg = (Double) fixUpTaskApp.get(0)[2];
+		final Double fixUpAppDesv = (Double) fixUpTaskApp.get(0)[3];
+
+		final List<Object[]> fixUpTaskPrice = this.fixUpTaskService.maxMinAvgDesvFixUpPrice();
+		final Double fixUpPriceMax = (Double) fixUpTaskPrice.get(0)[0];
+		final Double fixUpPriceMin = (Double) fixUpTaskPrice.get(0)[1];
+		final Double fixUpPriceAvg = (Double) fixUpTaskPrice.get(0)[2];
+		final Double fixUpPriceDesv = (Double) fixUpTaskPrice.get(0)[3];
+
+		final List<Object[]> applicationPriceOffered = this.applicationService.maxMavAvgDesvPriceOffered();
+		final Double applicationPriceOfferedAvg = (Double) applicationPriceOffered.get(0)[0];
+		final Double applicationPriceOfferedMin = (Double) applicationPriceOffered.get(0)[1];
+		final Double applicationPriceOfferedMax = (Double) applicationPriceOffered.get(0)[2];
+		final Double applicationPriceOfferedDesv = (Double) applicationPriceOffered.get(0)[3];
+
+		final Double ratioPendingApp = this.applicationService.ratioPendingApp();
+		final Double ratioAcceptedApp = this.applicationService.ratioAcceptedApp();
+		final Double ratioRejectedApp = this.applicationService.ratioRejectedApp();
+		final Double rationPendingAppStatus = this.applicationService.rationPendingAppStatus();
+
+		final List<Object[]> fixUpTaskComplaint = this.fixUpTaskService.maxMinAvgDesvFixUpComplaint();
+		final Double fixUpComplaintAvg = (Double) fixUpTaskComplaint.get(0)[0];
+		final Double fixUpComplaintMin = (Double) fixUpTaskComplaint.get(0)[1];
+		final Double fixUpComplaintMax = (Double) fixUpTaskComplaint.get(0)[2];
+		final Double fixUpComplaintDesv = (Double) fixUpTaskComplaint.get(0)[3];
+
+		final List<Object[]> reportNote = this.reportService.maxMinAvgDesv();
+		final Double reportNoteAvg = (Double) reportNote.get(0)[0];
+		final Double reportNoteMin = (Double) reportNote.get(0)[1];
+		final Double reportNoteMax = (Double) reportNote.get(0)[2];
+		final Double reportNoteDesv = (Double) reportNote.get(0)[3];
 
 		result = new ModelAndView("administrator/dashboard");
-		result.addObject("fixUp1", a);
-		result.addObject("fixUp2", b);
-		result.addObject("fixUp3", c);
-		result.addObject("fixUp4", d);
 
-		result.addObject("fixUp5", a2);
-		result.addObject("fixUp6", b2);
-		result.addObject("fixUp7", c2);
-		result.addObject("fixUp8", d2);
+		result.addObject("fixUpMax", fixUpMax);
+		result.addObject("fixUpMin", fixUpMin);
+		result.addObject("fixUpAvg", fixUpAvg);
+		result.addObject("fixUpDesv", fixUpDesv);
+
+		result.addObject("fixUpAppMax", fixUpAppMax);
+		result.addObject("fixUpAppMin", fixUpAppMin);
+		result.addObject("fixUpAppAvg", fixUpAppAvg);
+		result.addObject("fixUpAppDesv", fixUpAppDesv);
+
+		result.addObject("fixUpPriceMax", fixUpPriceMax);
+		result.addObject("fixUpPriceMin", fixUpPriceMin);
+		result.addObject("fixUpPriceAvg", fixUpPriceAvg);
+		result.addObject("fixUpPriceDesv", fixUpPriceDesv);
+
+		result.addObject("applicationPriceOfferedAvg", applicationPriceOfferedAvg);
+		result.addObject("applicationPriceOfferedMin", applicationPriceOfferedMin);
+		result.addObject("applicationPriceOfferedMax", applicationPriceOfferedMax);
+		result.addObject("applicationPriceOfferedDesv", applicationPriceOfferedDesv);
+
+		result.addObject("ratioPendingApp", ratioPendingApp);
+		result.addObject("ratioAcceptedApp", ratioAcceptedApp);
+		result.addObject("ratioRejectedApp", ratioRejectedApp);
+		result.addObject("rationPendingAppStatus", rationPendingAppStatus);
+
+		result.addObject("fixUpComplaintAvg", fixUpComplaintAvg);
+		result.addObject("fixUpComplaintMin", fixUpComplaintMin);
+		result.addObject("fixUpComplaintMax", fixUpComplaintMax);
+		result.addObject("fixUpComplaintDesv", fixUpComplaintDesv);
+
+		result.addObject("reportNoteAvg", reportNoteAvg);
+		result.addObject("reportNoteMin", reportNoteMin);
+		result.addObject("reportNoteMax", reportNoteMax);
+		result.addObject("reportNoteDesv", reportNoteDesv);
 
 		return result;
 	}

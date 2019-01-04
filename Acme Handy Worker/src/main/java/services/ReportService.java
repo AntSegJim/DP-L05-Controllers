@@ -4,6 +4,7 @@ package services;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,6 +91,10 @@ public class ReportService {
 	public Collection<Report> findAllReportRefereeId(final int i) {
 
 		return this.reportRepository.findAllReportReferee(i);
+	}
+
+	public List<Object[]> maxMinAvgDesv() {
+		return this.reportRepository.maxMinAvgDesvReportNotes();
 	}
 
 }
