@@ -21,9 +21,14 @@
 <display:table pagesize="5" name="sections" id="row"
 requestURI="section/handyWorker/showSections.do" >
 
+<display:column>
+	<a href="section/handyWorker/editSection.do?sectionId=${row.id}"><spring:message code="section.edit" /></a>
+</display:column>
+
 <display:column property="number" titleKey="section.number" />
 <display:column property="title" titleKey="section.title" />
 <display:column property="number" titleKey="section.pieceOfText" />
+
 
 </display:table>
 </security:authorize>
