@@ -21,6 +21,10 @@
 <display:table pagesize="5" name="pictures" id="row"
 requestURI="picture/handyWorker/showPictures.do" >
 
+<display:column>
+	<a href="picture/handyWorker/editPicture.do?pictureId=${row.id}"><spring:message code="picture.edit" /></a>
+</display:column>
+
 <display:column property="picture" titleKey="pictures" />
 
 </display:table>

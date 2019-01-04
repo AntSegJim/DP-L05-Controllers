@@ -20,7 +20,10 @@
 		<put-attribute name="title" value="Secciones tutorial" />
 		<put-attribute name="body" value="/views/section/showSections.jsp" />
 	</definition>
-	
+	<definition name="section/editSection" extends="master.page">	
+		<put-attribute name="title" value="Editar sección" />
+		<put-attribute name="body" value="/views/section/editSection.jsp" />
+	</definition>
 
 	
 	
