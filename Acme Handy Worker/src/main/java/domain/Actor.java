@@ -1,8 +1,6 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -10,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -27,17 +24,16 @@ import security.UserAccount;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Actor extends DomainEntity {
 
-	private String								name;
-	private String								middleName;
-	private String								surname;
-	private String								photo;
-	private String								email;
-	private String								phone;
-	private String								address;
-	private Integer								numberSocialProfiles;
-	private Integer								isBanned;
-	private UserAccount							userAccount;
-	private Collection<ProfileSocialNetwork>	profileSocialNetwork;
+	private String		name;
+	private String		middleName;
+	private String		surname;
+	private String		photo;
+	private String		email;
+	private String		phone;
+	private String		address;
+	private Integer		numberSocialProfiles;
+	private Integer		isBanned;
+	private UserAccount	userAccount;
 
 
 	//Getters and Setters
@@ -130,15 +126,6 @@ public class Actor extends DomainEntity {
 
 	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
-	}
-	@Valid
-	@OneToMany
-	public Collection<ProfileSocialNetwork> getProfileSocialNetwork() {
-		return this.profileSocialNetwork;
-	}
-
-	public void setProfileSocialNetwork(final Collection<ProfileSocialNetwork> profileSocialNetwork) {
-		this.profileSocialNetwork = profileSocialNetwork;
 	}
 
 	@NotNull

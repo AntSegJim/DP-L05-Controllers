@@ -18,7 +18,6 @@ import security.Authority;
 import security.UserAccount;
 import domain.Customer;
 import domain.Endorsement;
-import domain.ProfileSocialNetwork;
 
 @Service
 @Transactional
@@ -42,7 +41,6 @@ public class CustomerService {
 		c.setNumberSocialProfiles(0);
 		c.setPhone("");
 		c.setPhoto("");
-		c.setProfileSocialNetwork(new HashSet<ProfileSocialNetwork>());
 		c.setReceiveEndorseFromCustomer(new HashSet<Endorsement>());
 		c.setScore(0);
 		c.setSurname("");

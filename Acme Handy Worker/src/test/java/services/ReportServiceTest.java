@@ -22,7 +22,6 @@ import domain.Category;
 import domain.Complaint;
 import domain.Customer;
 import domain.FixUpTask;
-import domain.ProfileSocialNetwork;
 import domain.Referee;
 import domain.Report;
 import domain.Warranty;
@@ -35,27 +34,24 @@ import domain.Warranty;
 public class ReportServiceTest extends AbstractTest {
 
 	@Autowired
-	private ReportService				reportService;
+	private ReportService		reportService;
 
 	@Autowired
-	private ComplaintService			complaintService;
+	private ComplaintService	complaintService;
 
 	@Autowired
-	private RefereeService				refereeService;
+	private RefereeService		refereeService;
 
 	@Autowired
-	private ProfileSocialNetworkService	profileSocialNetworkService;
-
+	private FixUpTaskService	fixUpTaskService;
 	@Autowired
-	private FixUpTaskService			fixUpTaskService;
+	private WarrantyService		warrantyService;
 	@Autowired
-	private WarrantyService				warrantyService;
+	private CategoryService		categoryService;
 	@Autowired
-	private CategoryService				categoryService;
+	private CustomerService		customerService;
 	@Autowired
-	private CustomerService				customerService;
-	@Autowired
-	private AttachmentService			attachmentService;
+	private AttachmentService	attachmentService;
 
 
 	@Test
@@ -67,14 +63,7 @@ public class ReportServiceTest extends AbstractTest {
 
 		Referee referee;
 		referee = this.refereeService.create();
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
 
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
 		final UserAccount uA = new UserAccount();
 		uA.setPassword("hola");
 		uA.setUsername("Jesus");
@@ -87,7 +76,6 @@ public class ReportServiceTest extends AbstractTest {
 		referee.setNumberSocialProfiles(1);
 		referee.setPhone("654456653");
 		referee.setPhoto("https://hangouts.google.com/");
-		referee.setProfileSocialNetwork(cprofile);
 		referee.setSurname("Perez");
 		referee.setUserAccount(uA);
 
@@ -166,14 +154,7 @@ public class ReportServiceTest extends AbstractTest {
 
 		Referee referee;
 		referee = this.refereeService.create();
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
 
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
 		final UserAccount uA = new UserAccount();
 		uA.setPassword("hola");
 		uA.setUsername("Jesus");
@@ -186,7 +167,6 @@ public class ReportServiceTest extends AbstractTest {
 		referee.setNumberSocialProfiles(1);
 		referee.setPhone("654456653");
 		referee.setPhoto("https://hangouts.google.com/");
-		referee.setProfileSocialNetwork(cprofile);
 		referee.setSurname("Perez");
 		referee.setUserAccount(uA);
 
@@ -269,14 +249,7 @@ public class ReportServiceTest extends AbstractTest {
 
 		Referee referee;
 		referee = this.refereeService.create();
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
 
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
 		final UserAccount uA = new UserAccount();
 		uA.setPassword("hola");
 		uA.setUsername("Jesus");
@@ -289,7 +262,6 @@ public class ReportServiceTest extends AbstractTest {
 		referee.setNumberSocialProfiles(1);
 		referee.setPhone("654456653");
 		referee.setPhoto("https://hangouts.google.com/");
-		referee.setProfileSocialNetwork(cprofile);
 		referee.setSurname("Perez");
 		referee.setUserAccount(uA);
 

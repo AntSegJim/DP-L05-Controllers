@@ -25,7 +25,6 @@
 	<form:hidden path="version" />
 	<form:hidden path="numberSocialProfiles" />
 	<form:hidden path="isBanned" />
-	<form:hidden path="profileSocialNetwork" />
 	<form:hidden path="userAccount.authorities" />
 	
 	<fieldset>

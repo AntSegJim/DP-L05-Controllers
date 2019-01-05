@@ -2,7 +2,6 @@
 package services;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -16,7 +15,6 @@ import org.springframework.util.Assert;
 import security.UserAccount;
 import utilities.AbstractTest;
 import domain.MessageBox;
-import domain.ProfileSocialNetwork;
 import domain.Referee;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,13 +25,10 @@ import domain.Referee;
 public class RefereeServiceTest extends AbstractTest {
 
 	@Autowired
-	private RefereeService				refereeService;
+	private RefereeService		refereeService;
 
 	@Autowired
-	private ProfileSocialNetworkService	profileSocialNetworkService;
-
-	@Autowired
-	private MessageBoxService			messageBoxService;
+	private MessageBoxService	messageBoxService;
 
 
 	@Test
@@ -41,14 +36,7 @@ public class RefereeServiceTest extends AbstractTest {
 
 		Referee referee;
 		referee = this.refereeService.create();
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
 
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
 		final UserAccount uA = new UserAccount();
 		uA.setPassword("Antonio");
 		uA.setUsername("Jesus");
@@ -61,12 +49,11 @@ public class RefereeServiceTest extends AbstractTest {
 		referee.setNumberSocialProfiles(1);
 		referee.setPhone("654456653");
 		referee.setPhoto("https://hangouts.google.com/");
-		referee.setProfileSocialNetwork(cprofile);
 		referee.setSurname("Perez");
 		referee.setUserAccount(uA);
 
 		Assert.isTrue(referee.getAddress() == "Dirección prueba" && referee.getEmail() == "jesuseli@gmail.com" && referee.getMiddleName() == "prueba" && referee.getName() == "Pablo" && referee.getNumberSocialProfiles() == 1
-			&& referee.getPhone() == "654456653" && referee.getPhoto() == "https://hangouts.google.com/" && referee.getProfileSocialNetwork() == cprofile && referee.getSurname() == "Perez" && referee.getUserAccount() == uA);
+			&& referee.getPhone() == "654456653" && referee.getPhoto() == "https://hangouts.google.com/" && referee.getSurname() == "Perez" && referee.getUserAccount() == uA);
 
 		Assert.isTrue(referee.getUserAccount().getUsername().equals("Jesus"));
 		Assert.isTrue(referee.getUserAccount().getPassword().equals("Antonio"));
@@ -81,8 +68,6 @@ public class RefereeServiceTest extends AbstractTest {
 		final Collection<Referee> referees;
 		referee = this.refereeService.create();
 
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-
 		final UserAccount uA = new UserAccount();
 		uA.setPassword("Antonio");
 		uA.setUsername("Jesus");
@@ -95,7 +80,6 @@ public class RefereeServiceTest extends AbstractTest {
 		referee.setNumberSocialProfiles(0);
 		referee.setPhone("654456653");
 		referee.setPhoto("https://hangouts.google.com/");
-		referee.setProfileSocialNetwork(cprofile);
 		referee.setSurname("Perez");
 		referee.setUserAccount(uA);
 

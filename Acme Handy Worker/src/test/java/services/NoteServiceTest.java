@@ -22,7 +22,6 @@ import domain.Complaint;
 import domain.Customer;
 import domain.FixUpTask;
 import domain.Note;
-import domain.ProfileSocialNetwork;
 import domain.Referee;
 import domain.Report;
 import domain.Warranty;
@@ -35,30 +34,27 @@ import domain.Warranty;
 public class NoteServiceTest {
 
 	@Autowired
-	private NoteService					noteService;
+	private NoteService			noteService;
 
 	@Autowired
-	private ReportService				reportService;
+	private ReportService		reportService;
 
 	@Autowired
-	private ComplaintService			complaintService;
+	private ComplaintService	complaintService;
 
 	@Autowired
-	private RefereeService				refereeService;
+	private RefereeService		refereeService;
 
 	@Autowired
-	private ProfileSocialNetworkService	profileSocialNetworkService;
-
+	private FixUpTaskService	fixUpTaskService;
 	@Autowired
-	private FixUpTaskService			fixUpTaskService;
+	private WarrantyService		warrantyService;
 	@Autowired
-	private WarrantyService				warrantyService;
+	private CategoryService		categoryService;
 	@Autowired
-	private CategoryService				categoryService;
+	private CustomerService		customerService;
 	@Autowired
-	private CustomerService				customerService;
-	@Autowired
-	private AttachmentService			attachmentService;
+	private AttachmentService	attachmentService;
 
 
 	@Test
@@ -72,14 +68,7 @@ public class NoteServiceTest {
 
 		Referee referee;
 		referee = this.refereeService.create();
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
 
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
 		final UserAccount uA = new UserAccount();
 		uA.setPassword("hola");
 		uA.setUsername("Jesus");
@@ -92,7 +81,6 @@ public class NoteServiceTest {
 		referee.setNumberSocialProfiles(1);
 		referee.setPhone("654456653");
 		referee.setPhoto("https://hangouts.google.com/");
-		referee.setProfileSocialNetwork(cprofile);
 		referee.setSurname("Perez");
 		referee.setUserAccount(uA);
 
@@ -180,14 +168,7 @@ public class NoteServiceTest {
 
 		Referee referee;
 		referee = this.refereeService.create();
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
 
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
 		final UserAccount uA = new UserAccount();
 		uA.setPassword("hola");
 		uA.setUsername("Jesus");
@@ -200,7 +181,6 @@ public class NoteServiceTest {
 		referee.setNumberSocialProfiles(1);
 		referee.setPhone("654456653");
 		referee.setPhoto("https://hangouts.google.com/");
-		referee.setProfileSocialNetwork(cprofile);
 		referee.setSurname("Perez");
 		referee.setUserAccount(uA);
 

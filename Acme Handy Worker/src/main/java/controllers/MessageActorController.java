@@ -77,11 +77,10 @@ public class MessageActorController {
 			final Message saved = this.messageService.save(mensaje);
 			this.messageService.sendMessage(saved);
 			result = new ModelAndView("redirect:show.do?messageId=" + saved.getId());
-		} else
-			//			result = new ModelAndView("mensaje/send");
-			//			result.addObject("newMessage", mensaje);
-			result = new ModelAndView("redirect:send.do");
-
+		} else {
+			result = new ModelAndView("mensaje/send");
+			result.addObject("newMessage", mensaje);
+		}
 		return result;
 	}
 
@@ -92,11 +91,22 @@ public class MessageActorController {
 			final Message saved = this.messageService.save(mensaje);
 			this.messageService.sendBroadcastMessage(saved);
 			result = new ModelAndView("redirect:show.do?messageId=" + saved.getId());
-		} else
-			//			result = new ModelAndView("mensaje/send");
-			//			result.addObject("newMessage", mensaje);
-			result = new ModelAndView("redirect:send.do");
+		} else {
+			result = new ModelAndView("mensaje/send");
+			result.addObject("newMessage", mensaje);
+		}
 		return result;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView deleteMessage(@RequestParam final Integer idMessage) {
+		ModelAndView result;
+
+		this.messageService.delete(this.messageService.findOne(idMessage));
+		result = new ModelAndView("redirect:send.do");
+
+		return result;
+
 	}
 
 }

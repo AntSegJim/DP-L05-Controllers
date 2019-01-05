@@ -20,7 +20,6 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
-import domain.ProfileSocialNetwork;
 
 @Service
 @Transactional
@@ -54,8 +53,6 @@ public class ActorService {
 		user.setPassword("");
 
 		admin.setUserAccount(user);
-
-		admin.setProfileSocialNetwork(new HashSet<ProfileSocialNetwork>());
 		return admin;
 	}
 	public Actor save(final Actor a) {

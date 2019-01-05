@@ -1,5 +1,5 @@
 <%--
- * action-1.jsp
+ * action-2.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -16,18 +16,23 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-
 <security:authorize access="isAuthenticated()">
 
-<display:table pagesize="5" name="messages" id="row"
-requestURI="${Uri }" >
-<display:column property="moment" titleKey ="message.moment"  format="{0,date,dd/MM/yyyy}"  />
-<display:column property="subject" titleKey="message.subject"  />
-<display:column property="tag" titleKey="message.tag"  />
-<display:column property="emailReceiver" titleKey="message.emailReceiver"  />
-<display:column> <a href="message/actor/show.do?messageId=${row.id}"><spring:message code="message.show" /></a> </display:column>
-<display:column> <a href="message/actor/delete.do?idMessage=${row.id}"><spring:message code="message.delete" /></a> </display:column>
+<display:table pagesize="5" name="profiles" id="row"
+requestURI="profileSocial/actor/list.do" >
+
+<display:column property="nickName" titleKey="profile.nickname"  />
+<display:column property="nameSocialNetwork" titleKey="profile.nameSocial"  />
+<display:column titleKey="profile.link"  >
+<a href="${row.linkProfile}">${row.nameSocialNetwork}</a>
+</display:column>
+<display:column>
+		<a href="profileSocial/actor/edit.do?idProfile=${row.id}"><spring:message code="profile.show" /></a>
+</display:column>
 
 </display:table>
- <a href="messageBox/actor/list.do"><spring:message code="message.send.cancel" /></a>
+
+<a href="profileSocial/actor/create.do"><spring:message code="profile.create" /></a>
+<a href="profile/personal-datas.do"><spring:message code="profile.cancel" /></a>
+
 </security:authorize>

@@ -43,7 +43,6 @@
 <form:hidden path="address"/>
 <form:hidden path="numberSocialProfiles"/>
 <form:hidden path="userAccount"/>
-<form:hidden path="profileSocialNetwork"/>
 
 <jstl:choose>
 

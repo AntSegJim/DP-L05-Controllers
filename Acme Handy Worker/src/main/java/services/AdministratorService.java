@@ -19,7 +19,6 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Category;
-import domain.ProfileSocialNetwork;
 
 @Service
 @Transactional
@@ -55,7 +54,6 @@ public class AdministratorService {
 
 		admin.setUserAccount(user);
 
-		admin.setProfileSocialNetwork(new HashSet<ProfileSocialNetwork>());
 		admin.setCategories(new HashSet<Category>());
 
 		return admin;

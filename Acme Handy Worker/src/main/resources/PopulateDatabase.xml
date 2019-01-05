@@ -264,18 +264,23 @@
 		<property name="nickName" value="Frank Cuesta" />
 		<property name="nameSocialNetwork" value="twitter" />
 		<property name="linkProfile" value="https://twitter.com/Frank_Cuesta" />
+		<property name="actor" ref="administrator1" />
 	</bean>
 
 	<bean id="profileSocialNetwork2" class="domain.ProfileSocialNetwork">
 		<property name="nickName" value="Leo Messi" />
 		<property name="nameSocialNetwork" value="facebook" />
 		<property name="linkProfile" value="https://es-es.facebook.com/leomessi/" />
+		<property name="actor" ref="administrator1" />
+		
 	</bean>
 
 	<bean id="profileSocialNetwork3" class="domain.ProfileSocialNetwork">
 		<property name="nickName" value="Antonio" />
 		<property name="nameSocialNetwork" value="facebook" />
 		<property name="linkProfile" value="https://es-la.facebook.com/ArthurPBS/" />
+		<property name="actor" ref="administrator1" />
+		
 	</bean>
 
 
@@ -1251,11 +1256,6 @@
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount1" />
-		<property name="profileSocialNetwork">
-			<list>
-				<ref bean="profileSocialNetwork1" />
-			</list>
-		</property>
 	</bean>
 
 
@@ -1273,11 +1273,6 @@
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount2" />
-		<property name="profileSocialNetwork">
-			<list>
-				<ref bean="profileSocialNetwork3" />
-			</list>
-		</property>
 	</bean>
 
 	<bean id="administrator3" class="domain.Administrator">
@@ -1307,11 +1302,6 @@
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount4" />
-		<property name="profileSocialNetwork">
-			<list>
-				<ref bean="profileSocialNetwork2" />
-			</list>
-		</property>
 	</bean>
 
 	<!-- SpamWord -->

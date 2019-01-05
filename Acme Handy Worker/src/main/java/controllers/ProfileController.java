@@ -24,6 +24,7 @@ import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
 import services.AdministratorService;
+import services.ProfileSocialNetworkService;
 import services.SponsorService;
 import domain.Actor;
 import domain.Administrator;
@@ -34,13 +35,16 @@ import domain.Sponsor;
 public class ProfileController extends AbstractController {
 
 	@Autowired
-	private ActorService			actorService;
+	private ProfileSocialNetworkService	profileService;
 
 	@Autowired
-	private AdministratorService	adminService;
+	private ActorService				actorService;
 
 	@Autowired
-	private SponsorService			sponsorService;
+	private AdministratorService		adminService;
+
+	@Autowired
+	private SponsorService				sponsorService;
 
 
 	// Action-2 ---------------------------------------------------------------		
@@ -86,6 +90,7 @@ public class ProfileController extends AbstractController {
 
 			if (!binding.hasErrors()) {
 				this.adminService.save(administrator);
+				this.profileService.UpdateProperty();
 				result = new ModelAndView("redirect:personal-datas.do");
 			} else {
 				result = new ModelAndView("profile/editAdmin");

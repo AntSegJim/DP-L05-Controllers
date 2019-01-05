@@ -16,7 +16,6 @@ import repositories.RefereeRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.ProfileSocialNetwork;
 import domain.Referee;
 
 @Service
@@ -52,7 +51,6 @@ public class RefereeService {
 		user.setPassword("");
 		res.setUserAccount(user);
 
-		res.setProfileSocialNetwork(new HashSet<ProfileSocialNetwork>());
 		return res;
 	}
 

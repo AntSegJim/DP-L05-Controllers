@@ -46,6 +46,9 @@
 		<value>/views/picture/tiles.xml</value>
 		<value>/views/section/tiles.xml</value>
 		
+		<value>/views/profile-social-network/tiles.xml</value>
+		
+		
 		
 	</util:list>
 

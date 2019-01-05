@@ -16,7 +16,6 @@ import org.springframework.util.Assert;
 import repositories.SponsorRepository;
 import security.Authority;
 import security.UserAccount;
-import domain.ProfileSocialNetwork;
 import domain.Sponsor;
 
 @Service
@@ -38,7 +37,6 @@ public class SponsorService {
 		s.setNumberSocialProfiles(0);
 		s.setPhone("");
 		s.setPhoto("");
-		s.setProfileSocialNetwork(new HashSet<ProfileSocialNetwork>());
 		s.setSurname("");
 		s.setIsBanned(0);
 		//PREGUNTAR

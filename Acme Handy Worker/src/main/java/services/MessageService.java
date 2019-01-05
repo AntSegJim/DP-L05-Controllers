@@ -125,18 +125,18 @@ public class MessageService {
 		final Actor actor = this.actorService.getActorByUserAccount(user.getId());
 
 		Assert.isTrue(actor != null);
-		Assert.isTrue(message.getSender().equals(actor));
 
-		final MessageBox trashBox = this.messageBoxService.getTrashBox(message.getSender().getId());
+		final MessageBox trashBox = this.messageBoxService.getTrashBox(actor.getId());
 		Assert.isTrue(trashBox.getActor().equals(actor));
 		if (trashBox.getMessages().contains(message))
 			this.messageRepository.delete(message);
 		else {
+			trashBox.getMessages().add(message);
 			final List<MessageBox> boxes = this.messageBoxService.findMessageBoxActor(actor.getId());
 			for (int i = 0; i < boxes.size(); i++)
 				if (boxes.get(i).getMessages().contains(message))
 					boxes.get(i).getMessages().remove(message);
-			trashBox.getMessages().add(message);
+
 		}
 	}
 	public Collection<Message> getMessageByBox(final int id) {

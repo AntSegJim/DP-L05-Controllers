@@ -19,7 +19,6 @@ import security.UserAccount;
 import domain.Application;
 import domain.Endorsement;
 import domain.HandyWorker;
-import domain.ProfileSocialNetwork;
 
 @Service
 @Transactional
@@ -43,7 +42,6 @@ public class HandyWorkerService {
 		h.setNumberSocialProfiles(0);
 		h.setPhone("");
 		h.setPhoto("");
-		h.setProfileSocialNetwork(new HashSet<ProfileSocialNetwork>());
 		h.setReceiveEndorseFromHWorker(new HashSet<Endorsement>());
 		h.setScore(0);
 		h.setSurname("");

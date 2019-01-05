@@ -115,13 +115,17 @@
 		<security:intercept-url pattern="/messageBox/actor/create.do" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/message/actor/list.do" access="isAuthenticated()" /> 		
-		<security:intercept-url pattern="/message/actor/show.do" access="isAuthenticated()" /> 
-		
+		<security:intercept-url pattern="/message/actor/show.do" access="isAuthenticated()" /> 		
+		<security:intercept-url pattern="/message/actor/delete.do" access="isAuthenticated()" /> 		
 		
 		<security:intercept-url pattern="/profile/personal-datas.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/edit-administrator.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/profile/edit-sponsor.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/message/actor/send.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profileSocial/actor/list.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profileSocial/actor/create.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profileSocial/actor/edit.do" access="isAuthenticated()" /> 
+		
 		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

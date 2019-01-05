@@ -26,9 +26,9 @@
 <form:label path="name"><spring:message code="profile.action.3.changePersonalData" />:</form:label><br /><br />
 	<form:hidden path="id"/>
 	<form:hidden path="version" />
+	<form:hidden path="numberSocialProfiles" />
 	<form:hidden path="userAccount" />
 	<form:hidden path="isBanned" />
-	<form:hidden path="profileSocialNetwork"/>	
 	
 	<form:label path="name"><spring:message code="profile.action.3.name" />:</form:label>
 	<form:input path="name"/>
@@ -64,14 +64,9 @@
 	<form:input path="address" />
 	<form:errors cssClass="error" path="address" />
 	<br />
-	
-	<form:label path="numberSocialProfiles"><spring:message code="profile.action.3.numberSocialProfiles" />:</form:label>
-	<form:input path="numberSocialProfiles" />
-	<form:errors cssClass="error" path="numberSocialProfiles" />
-	<br />
 	<br />
 	<input type="submit" name="save" value="<spring:message code="profile.action.3.save" />" />
 	<input type="button" name="cancel" value="<spring:message code="administrator.cancel" />"
-			onclick="javascript: relativeRedir('profile/action-2.do');" />
+			onclick="javascript: relativeRedir('profile/personal-datas.do');" />
 
 </form:form>

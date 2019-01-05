@@ -44,6 +44,7 @@
 		<value>/views/picture/messages</value>
 		<value>/views/section/messages</value>
 		
+		<value>/views/profile-social-network/messages</value>
 		
 		
 	</util:list>

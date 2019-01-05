@@ -24,7 +24,6 @@ import domain.Endorsement;
 import domain.FixUpTask;
 import domain.HandyWorker;
 import domain.Phase;
-import domain.ProfileSocialNetwork;
 import domain.Warranty;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,29 +34,26 @@ import domain.Warranty;
 public class PhaseServiceTest extends AbstractTest {
 
 	@Autowired
-	private PhaseService				phaseService;
+	private PhaseService		phaseService;
 
 	@Autowired
-	private ApplicationService			applicationService;
+	private ApplicationService	applicationService;
 	@Autowired
-	private CreditCardService			creditCardService;
+	private CreditCardService	creditCardService;
 	@Autowired
-	private FixUpTaskService			fixUpTaskService;
+	private FixUpTaskService	fixUpTaskService;
 	@Autowired
-	private CategoryService				categoryService;
+	private CategoryService		categoryService;
 
 	@Autowired
-	private CustomerService				customerService;
+	private CustomerService		customerService;
 	@Autowired
-	private EndorsementService			endorsementService;
+	private EndorsementService	endorsementService;
 	@Autowired
-	private HandyWorkerService			handyWorkerService;
+	private HandyWorkerService	handyWorkerService;
 
 	@Autowired
-	private ProfileSocialNetworkService	profileSocialNetworkService;
-
-	@Autowired
-	private WarrantyService				warrantyService;
+	private WarrantyService		warrantyService;
 
 
 	@Test
@@ -134,15 +130,6 @@ public class PhaseServiceTest extends AbstractTest {
 		e.setHandyWorkerSender(s1);
 		e.setMoment(Date.valueOf("2017-12-12"));
 
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
-
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
-
 		final UserAccount ua = new UserAccount();
 		ua.setPassword("hola");
 		ua.setUsername("Jesus");
@@ -156,7 +143,6 @@ public class PhaseServiceTest extends AbstractTest {
 		c.setNumberSocialProfiles(0);
 		c.setPhone("654456654");
 		c.setPhoto("https://hangouts.google.com/");
-		c.setProfileSocialNetwork(cprofile);
 		c.setReceiveEndorseFromCustomer(ce2);
 		c.setScore(8);
 		c.setSurname("Perez");
@@ -176,7 +162,6 @@ public class PhaseServiceTest extends AbstractTest {
 		c2.setNumberSocialProfiles(0);
 		c2.setPhone("654456653");
 		c2.setPhoto("https://hangouts.google.com/");
-		c2.setProfileSocialNetwork(cprofile);
 		c2.setReceiveEndorseFromCustomer(ce);
 		c2.setScore(8);
 		c2.setSurname("Perez");
@@ -305,15 +290,6 @@ public class PhaseServiceTest extends AbstractTest {
 		e.setHandyWorkerSender(s1);
 		e.setMoment(Date.valueOf("2018-10-10"));
 
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
-
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
-
 		final UserAccount ua = new UserAccount();
 		ua.setPassword("hola");
 		ua.setUsername("Jesus");
@@ -327,7 +303,6 @@ public class PhaseServiceTest extends AbstractTest {
 		c.setNumberSocialProfiles(0);
 		c.setPhone("654456654");
 		c.setPhoto("https://hangouts.google.com/");
-		c.setProfileSocialNetwork(cprofile);
 		c.setReceiveEndorseFromCustomer(ce2);
 		c.setScore(8);
 		c.setSurname("Perez");
@@ -347,7 +322,6 @@ public class PhaseServiceTest extends AbstractTest {
 		c2.setNumberSocialProfiles(0);
 		c2.setPhone("654456653");
 		c2.setPhoto("https://hangouts.google.com/");
-		c2.setProfileSocialNetwork(cprofile);
 		c2.setReceiveEndorseFromCustomer(ce);
 		c2.setScore(8);
 		c2.setSurname("Perez");
@@ -478,15 +452,6 @@ public class PhaseServiceTest extends AbstractTest {
 		e.setHandyWorkerSender(s1);
 		e.setMoment(Date.valueOf("2018-10-10"));
 
-		final ProfileSocialNetwork profile = this.profileSocialNetworkService.create();
-
-		profile.setNickName("jesus");
-		profile.setNameSocialNetwork("github");
-		profile.setLinkProfile("https://github.com/");
-
-		final Collection<ProfileSocialNetwork> cprofile = new HashSet<>();
-		cprofile.add(profile);
-
 		final UserAccount ua = new UserAccount();
 		ua.setPassword("hola");
 		ua.setUsername("Jesus");
@@ -500,7 +465,6 @@ public class PhaseServiceTest extends AbstractTest {
 		c.setNumberSocialProfiles(0);
 		c.setPhone("654456654");
 		c.setPhoto("https://hangouts.google.com/");
-		c.setProfileSocialNetwork(cprofile);
 		c.setReceiveEndorseFromCustomer(ce2);
 		c.setScore(8);
 		c.setSurname("Perez");
@@ -520,7 +484,6 @@ public class PhaseServiceTest extends AbstractTest {
 		c2.setNumberSocialProfiles(0);
 		c2.setPhone("654456653");
 		c2.setPhoto("https://hangouts.google.com/");
-		c2.setProfileSocialNetwork(cprofile);
 		c2.setReceiveEndorseFromCustomer(ce);
 		c2.setScore(8);
 		c2.setSurname("Perez");

@@ -28,15 +28,9 @@
 <b><spring:message code="profile.action.2.email" /></b> ${actor.email} <br/>
 <b><spring:message code="profile.action.2.phone" /></b> ${actor.phone} <br/>
 <b><spring:message code="profile.action.2.address" /></b> ${actor.address} <br/>
-<b><spring:message code="profile.action.2.numberSocial" /></b> ${actor.numberSocialProfiles} <br/>
+<b><spring:message code="profile.action.2.numberSocial" /></b> ${actor.numberSocialProfiles} <a href="profileSocial/actor/list.do"><spring:message code="profile.list" /></a>
 <%-- que hemos con la cuenta  --%>
-<b><spring:message code="profile.action.2.socialProfile" /></b>
-<display:table name="${actor.profileSocialNetwork}" id="row">
-<display:column property="nickName" titleKey="profile.nickname" />
-<display:column property="nameSocialNetwork" titleKey="profile.socialNetwork" />
-<display:column property="linkProfile" titleKey="profile.link" />
 
-</display:table>
 <br/>
 <input type="button" name="cancel" value="<spring:message code="administrator.cancel" />"
 			onclick="javascript: relativeRedir('welcome/index.do');" />
