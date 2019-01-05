@@ -33,13 +33,4 @@
 <spring:message code="tutorial.HW.numberSocial" /> ${h.numberSocialProfiles} <br/>
 </fieldset>
 	<br />
-	
-<%-- que hemos con la cuenta  --%>
-<spring:message code="tutorial.HW.socialProfile" />
-<display:table name="${h.profileSocialNetwork}" id="row">
-<display:column property="nickName" titleKey="tutorial.HW.nickname" />
-<display:column property="nameSocialNetwork" titleKey="tutorial.HW.socialNetwork" />
-<display:column property="linkProfile" titleKey="tutorial.HW.link" />
-
-</display:table>
 

@@ -130,9 +130,25 @@ public class ActorService {
 		return suspiciousActors;
 	}
 
+	public Collection<Actor> getSuspiciousActorsByFixUp(final String palabra) {
+		return this.actorRepository.actorSuspiciousFixUp(palabra);
+	}
+
+	public Collection<Actor> getSuspiciousActorsByFixUp() {
+		final Set<Actor> suspiciousActors = new HashSet<>();
+
+		final List<String> spamWords = (List<String>) this.spamWordService.getNamesOfSpamWord();
+		for (int i = 0; i < spamWords.size(); i++) {
+			final Collection<Actor> a = this.getSuspiciousActorsByFixUp(spamWords.get(i));
+			suspiciousActors.addAll(a);
+		}
+		return suspiciousActors;
+	}
+
 	public Collection<Actor> getSuspiciousActor() {
 		final Set<Actor> suspiciousActors = new HashSet<>();
 		suspiciousActors.addAll(this.getSuspiciousActorsByMessage());
+		suspiciousActors.addAll(this.getSuspiciousActorsByFixUp());
 
 		return suspiciousActors;
 
