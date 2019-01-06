@@ -2283,7 +2283,7 @@
 	<bean id="fixUpTask1" class="domain.FixUpTask">
 		<property name="ticker" value="091278-mknjbh" />
 		<property name="moment" value="01/02/2015 23:59" />
-		<property name="description" value="lo describo2 sex" />
+		<property name="description" value="lo describo2" />
 		<property name="address" value="pongo direccion2" />
 		<property name="maximunPrice" value="12" />
 		<property name="periodTime" value="1" />

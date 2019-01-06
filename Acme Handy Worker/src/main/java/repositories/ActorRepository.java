@@ -24,6 +24,12 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	@Query("select distinct f.customer from FixUpTask f where f.description like %?1% or f.address like %?1%")
 	public List<Actor> actorSuspiciousFixUp(String palabra);
 
+	@Query("select distinct c.fixUpTask.customer from Complaint c where c.description like %?1%")
+	public List<Actor> actorSuspiciousComplaint(String palabra);
+
+	@Query("select distinct r.complaint.fixUpTask.customer from Report r where r.description like %?1%")
+	public List<Actor> actorSuspicuiousReport(String palabra);
+
 	@Query("select a from Actor a where a.userAccount.username = ?1")
 	public Actor getActoyByUsername(String s);
 

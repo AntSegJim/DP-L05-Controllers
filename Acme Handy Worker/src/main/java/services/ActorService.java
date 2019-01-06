@@ -115,6 +115,8 @@ public class ActorService {
 
 	//	//BAN ACTOR
 	//
+
+	//MESSAGE
 	public Collection<Actor> getSuspiciousActorsByMessageWord(final String palabra) {
 		return this.actorRepository.actorSuspicious(palabra);
 	}
@@ -130,6 +132,7 @@ public class ActorService {
 		return suspiciousActors;
 	}
 
+	//FIXUP
 	public Collection<Actor> getSuspiciousActorsByFixUp(final String palabra) {
 		return this.actorRepository.actorSuspiciousFixUp(palabra);
 	}
@@ -145,10 +148,45 @@ public class ActorService {
 		return suspiciousActors;
 	}
 
+	//COMPLAINT
+	public Collection<Actor> getSuspiciousActorsByComplaint(final String palabra) {
+		return this.actorRepository.actorSuspiciousComplaint(palabra);
+	}
+
+	public Collection<Actor> getSuspiciousActorsByComplaint() {
+		final Set<Actor> suspiciousActors = new HashSet<>();
+
+		final List<String> spamWords = (List<String>) this.spamWordService.getNamesOfSpamWord();
+		for (int i = 0; i < spamWords.size(); i++) {
+			final Collection<Actor> a = this.getSuspiciousActorsByComplaint(spamWords.get(i));
+			suspiciousActors.addAll(a);
+		}
+		return suspiciousActors;
+	}
+
+	//REPORT
+	public Collection<Actor> getSuspiciousActorsByReport(final String palabra) {
+		return this.actorRepository.actorSuspicuiousReport(palabra);
+	}
+
+	public Collection<Actor> getSuspiciousActorsByReport() {
+		final Set<Actor> suspiciousActors = new HashSet<>();
+
+		final List<String> spamWords = (List<String>) this.spamWordService.getNamesOfSpamWord();
+		for (int i = 0; i < spamWords.size(); i++) {
+			final Collection<Actor> a = this.getSuspiciousActorsByReport(spamWords.get(i));
+			suspiciousActors.addAll(a);
+		}
+		return suspiciousActors;
+	}
+
+	//UNION DE LISTAS
 	public Collection<Actor> getSuspiciousActor() {
 		final Set<Actor> suspiciousActors = new HashSet<>();
 		suspiciousActors.addAll(this.getSuspiciousActorsByMessage());
 		suspiciousActors.addAll(this.getSuspiciousActorsByFixUp());
+		suspiciousActors.addAll(this.getSuspiciousActorsByComplaint());
+		suspiciousActors.addAll(this.getSuspiciousActorsByReport());
 
 		return suspiciousActors;
 
