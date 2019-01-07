@@ -89,7 +89,7 @@
 	</jstl:if>
 		
 		<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
-			onclick="javascript: relativeRedir('tutorial/handyWorker/show.do');" />
+			onclick="javascript: relativeRedir('tutorial/handyWorker/tutorials.do');" />
 	<br />
  	
 </form:form>
