@@ -71,7 +71,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="finder/handy-worker/show.do"><spring:message code="master.page.handyworker.show" /></a></li>
-					<li><a href="tutorial/handyWorker/show.do"><spring:message code="master.page.handyworker.tutorial" /></a></li>
+					<li><a href="tutorial/handyWorker/tutorials.do"><spring:message code="master.page.handyworker.tutorial" /></a></li>
 					<li><a href="fixUptask/handyWorker/list.do"><spring:message code="master.page.handyworker.fixUptask" /></a></li>
 				</ul>
 			</li>

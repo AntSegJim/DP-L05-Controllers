@@ -19,20 +19,23 @@
 
 <p><spring:message code="tutotial" /></p>
 <display:table pagesize="5" name="tutorials" id="row"
-requestURI="tutorial/handyWorker/show.do" >
+requestURI="tutorial/handyWorker/tutorials.do" >
 
+<display:column>
+	<a href="tutorial/handyWorker/editTutorial.do?tutorialId=${row.id}"><spring:message code="tutorial.edit" /></a>
+</display:column>
 <display:column property="title" titleKey="tutorial.title" />
 <display:column property="moment" titleKey="tutorial.moment" />
 <display:column property="summary" titleKey="tutorial.summary" />
-<display:column>
+<display:column titleKey="tutorial.pictures">
 	<a href="picture/handyWorker/showPictures.do?tutorialId=${row.id}"><spring:message code="tutorial.pictures" /></a>
 </display:column>
-<display:column>
+<display:column titleKey="tutorial.sections">
 	<a href="section/handyWorker/showSections.do?tutorialId=${row.id}"><spring:message code="tutorial.sections" /></a>
 </display:column>
 </display:table>
 
-<form action="tutorial/handyWorker/create.do">
+<form action="tutorial/handyWorker/createTutorial.do">
     <input type="submit" value="<spring:message code="tutorial.create" />" />
 </form>
 

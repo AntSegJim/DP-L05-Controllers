@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,8 +41,8 @@ public class TutorialController extends AbstractController {
 	private SponsorshipService	sponsorshipS;
 
 
-	@RequestMapping(value = "/handyWorker/show", method = RequestMethod.GET)
-	public ModelAndView action1() {
+	@RequestMapping(value = "/handyWorker/tutorials", method = RequestMethod.GET)
+	public ModelAndView tutorials() {
 		final ModelAndView result;
 		final Collection<Tutorial> tutorials;
 		final UserAccount user = LoginService.getPrincipal();
@@ -49,14 +50,14 @@ public class TutorialController extends AbstractController {
 
 		tutorials = this.tutorialService.getTutorialsByHandyWorker(h.getId());
 
-		result = new ModelAndView("tutorial/show");
+		result = new ModelAndView("tutorial/tutorials");
 		result.addObject("tutorials", tutorials);
 
 		return result;
 	}
 
-	@RequestMapping(value = "/handyWorker/create", method = RequestMethod.GET)
-	public ModelAndView action2() {
+	@RequestMapping(value = "/handyWorker/createTutorial", method = RequestMethod.GET)
+	public ModelAndView createTutorial() {
 		final ModelAndView result;
 		final Tutorial tutorial;
 		final Collection<Picture> pictures;
@@ -68,12 +69,23 @@ public class TutorialController extends AbstractController {
 		sponsorships = this.sponsorshipS.findAll();
 		tutorial = this.tutorialService.create();
 
-		result = new ModelAndView("tutorial/create");
+		result = new ModelAndView("tutorial/editTutorial");
 		result.addObject("tutorial", tutorial);
 		result.addObject("pictures", pictures);
 		result.addObject("sections", sections);
 		result.addObject("sponsorships", sponsorships);
 
+		return result;
+	}
+	@RequestMapping(value = "/handyWorker/editTutorial", method = RequestMethod.GET)
+	public ModelAndView editTutorial(@RequestParam final int tutorialId) {
+		ModelAndView result;
+		Tutorial tutorial;
+
+		tutorial = this.tutorialService.findOne(tutorialId);
+		Assert.notNull(tutorial);
+		result = new ModelAndView("tutorial/editTutorial");
+		result.addObject("tutorial", tutorial);
 		return result;
 	}
 

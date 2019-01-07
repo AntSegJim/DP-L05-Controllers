@@ -16,14 +16,14 @@
       
 <tiles-definitions>
 
-	<definition name="tutorial/show" extends="master.page">	
+	<definition name="tutorial/tutorials" extends="master.page">	
 		<put-attribute name="title" value="Trabajador: Acción 1" />
 		<put-attribute name="body" value="/views/tutorial/see-tutorial.jsp" />
 	</definition>
 	
-	<definition name="tutorial/create" extends="master.page">	
+	<definition name="tutorial/editTutorial" extends="master.page">	
 		<put-attribute name="title" value="Trabajador: Acción 1" />
-		<put-attribute name="body" value="/views/tutorial/create-tutorial.jsp" />
+		<put-attribute name="body" value="/views/tutorial/editTutorial.jsp" />
 	</definition>
 	
 	<definition name="tutorial/AllTutorials" extends="master.page">	

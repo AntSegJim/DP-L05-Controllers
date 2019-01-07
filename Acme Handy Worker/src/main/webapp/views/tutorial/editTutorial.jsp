@@ -18,7 +18,7 @@
 <body>
 
 <security:authorize access="hasRole('HANDYWORKER')">
-<form:form action="tutorial/handyWorker/edit.do" modelAttribute="tutorial">
+<form:form action="tutorial/handyWorker/editTutorial.do" modelAttribute="tutorial">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
