@@ -66,6 +66,15 @@
 			<li><a href="endorsement/customer,handy-worker/list.do"><spring:message	code="master.page.customer.endorsement" /></a>
 		</security:authorize>
 		
+			<security:authorize access="hasRole('REFEREE')">
+			<li><a class="fNiv"><spring:message	code="master.page.referee" /></a>
+				
+					<li class="arrow"></li>
+					<li><a href="complaint/referee/list.do"><spring:message code="master.page.referee.complaint" /></a></li>
+				
+		</security:authorize>
+		
+		
 		<security:authorize access="hasRole('HANDYWORKER')">
 			<li><a class="fNiv"><spring:message	code="master.page.handyWorker" /></a>
 				<ul>

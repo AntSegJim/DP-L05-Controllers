@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ComplaintService;
 import services.NoteService;
 import services.ReportService;
 import controllers.AbstractController;
@@ -37,17 +36,13 @@ public class NotetRefereeController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private ReportService		reportService;
+	private ReportService	reportService;
 
 	@Autowired
-	private NoteService			noteService;
-
-	@Autowired
-	private ComplaintService	complaintService;
+	private NoteService		noteService;
 
 
 	// Constructors -----------------------------------------------------------
-
 	public NotetRefereeController() {
 		super();
 	}
