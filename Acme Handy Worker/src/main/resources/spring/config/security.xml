@@ -101,6 +101,7 @@
 		
 		<security:intercept-url pattern="/sponsorship/sponsor/list.do" access="hasRole('SPONSOR')" /> 
 		<security:intercept-url pattern="/sponsorship/sponsor/create.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/edit.do" access="hasRole('SPONSOR')" />
 		
 		<security:intercept-url pattern="/endorsement/customer,handy-worker/**" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>
 		<security:intercept-url pattern="/endorsement/customer,handy-worker/list.do" access="hasAnyRole('CUSTOMER','HANDYWORKER')"/>

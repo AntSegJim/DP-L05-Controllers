@@ -100,8 +100,8 @@ public class SponsorService {
 
 		return res;
 	}
-	public Sponsor sponsorUserAccount(final Integer id) {
-		return this.sponsorRepository.handyWorkerUserAccount(id);
+	public Sponsor sponsorUserAccount(final int id) {
+		return this.sponsorRepository.sponsorByUserAccount(id);
 	}
 
 }
