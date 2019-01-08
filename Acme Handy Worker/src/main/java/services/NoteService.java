@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.NoteRepository;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Note;
@@ -57,11 +55,31 @@ public class NoteService {
 	public Note save(final Note note) {
 		final int a = note.getReport().getComplaint().getReferee().getId();
 		final UserAccount userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().contains(Authority.CUSTOMER) && this.RService.findAllReportRefereeId(a).contains(note.getReport()) || userAccount.getAuthorities().contains(Authority.REFEREE)
-			&& this.RService.findAllReportReferee().contains(note.getReport()) && note.getReport().getPublished() == 1 || userAccount.getAuthorities().contains(Authority.HANDYWORKER), "NoteService.save -> No estás autorizado.");
-		Assert.isTrue(!(note.getMoment().equals(null)));
-		Assert.isTrue(note != null && note.getReport() != null && note.getMoment().before(Calendar.getInstance().getTime()) && !(note.getComment().equals("")));
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CUSTOMER") && this.RService.findAllReportRefereeId(a).contains(note.getReport()) || userAccount.getAuthorities().iterator().next().getAuthority().equals("REFEREE")
+			&& this.RService.findAllReportReferee().contains(note.getReport()) && note.getReport().getPublished() == 1 || userAccount.getAuthorities().iterator().next().getAuthority().equals("HANDYWORKER"), "NoteService.save -> No estás autorizado.");
+
+		Assert.isTrue(note != null && note.getReport() != null && !(note.getComment().equals("")));
 		return this.noteRepository.save(note);
 	}
+	public Collection<Note> findAllNoteReportId(final int Id) {
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("REFEREE"));
 
+		return this.noteRepository.findAllNoteReportId(Id);
+	}
+	public Collection<Note> findAllNoteCustomerId(final int Id) {
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("CUSTOMER"));
+
+		return this.noteRepository.findAllNoteCustomerId(Id);
+
+	}
+
+	public Collection<Note> findAllNoteHandyWorkerId(final int Id) {
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("HANDYWORKER"));
+
+		return this.noteRepository.findAllNoteHandyWorkerId(Id);
+
+	}
 }

@@ -24,5 +24,13 @@
 		<put-attribute name="title" value="Editar queja" />
 		<put-attribute name="body" value="/views/complaint/editComplaint.jsp" />
 	</definition>
+		<definition name="complaint/List-Referee" extends="master.page">	
+		<put-attribute name="title" value="Lista de quejas sin asignar" />
+		<put-attribute name="body" value="/views/complaint/List-Referee.jsp" />
+	</definition>
+		<definition name="complaint/List-self-assign" extends="master.page">	
+		<put-attribute name="title" value="Lista de quejas asignadas" />
+		<put-attribute name="body" value="/views/complaint/List-self-assign.jsp" />
+	</definition>
 	
 </tiles-definitions>

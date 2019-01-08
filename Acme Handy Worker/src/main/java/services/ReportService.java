@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ReportRepository;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Attachment;
@@ -60,15 +59,15 @@ public class ReportService {
 	}
 
 	public Report findOne(final int reportId) {
-		final UserAccount ac = LoginService.getPrincipal();
-		Assert.isTrue(ac.getAuthorities().contains(Authority.HANDYWORKER) && this.reportRepository.findOne(reportId).getPublished() == 1);
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("REFEREE"));
 
 		return this.reportRepository.findOne(reportId);
 	}
 	//updating
 	public Report save(final Report report) {
 		final UserAccount ac = LoginService.getPrincipal();
-		Assert.isTrue(ac.getAuthorities().contains(Authority.REFEREE) && this.complaintService.findAllByReferee().contains(report.getComplaint()) && report.getPublished() == 0, "acceso denegado");
+		Assert.isTrue(ac.getAuthorities().iterator().next().getAuthority().equals("REFEREE") && this.complaintService.findAllByReferee().contains(report.getComplaint()), "acceso denegado");
 
 		Assert.isTrue(report != null && report.getComplaint() != null && !report.getAttachment().isEmpty() && (report.getPublished() == 0 || report.getPublished() == 1));
 		Assert.isTrue(!(report.getMoment().equals(null)));
@@ -76,17 +75,21 @@ public class ReportService {
 		return this.reportRepository.save(report);
 	}
 
-	//deleting
 	public void delete(final Report report) {
-		final UserAccount ac = LoginService.getPrincipal();
-		Assert.isTrue(ac.getAuthorities().contains(Authority.REFEREE) && report.getPublished() == 0);
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("REFEREE") && report.getPublished() == 0);
 		this.reportRepository.delete(report);
 	}
 	public Collection<Report> findAllReportReferee() {
-		final UserAccount userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().contains(Authority.REFEREE));
-		final Referee c = this.refereeService.refereeByUserAccount(userAccount.getId());
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("REFEREE"));
+		final Referee c = this.refereeService.refereeByUserAccount(userLoged.getId());
 		return this.reportRepository.findAllReportReferee(c.getId());
+	}
+	public Collection<Report> findAllReportComplaint(final int Id) {
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("REFEREE"));
+		return this.reportRepository.findAllReportComplaint(Id);
 	}
 	public Collection<Report> findAllReportRefereeId(final int i) {
 

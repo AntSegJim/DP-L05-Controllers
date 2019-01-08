@@ -13,10 +13,6 @@
 requestURI="${requestURI}" >
 
 
-<display:column>
-	<a href="complaint/customer/editComplaint.do?complaintId=${row.id}"><spring:message code="customer.complaint.editComplaint.link" /></a>
-</display:column>
-
 <display:column property="ticker" titleKey="complaint.ticker" />
 <display:column property="moment" titleKey="complaint.moment" />
 <display:column property="description" titleKey="complaint.description" />

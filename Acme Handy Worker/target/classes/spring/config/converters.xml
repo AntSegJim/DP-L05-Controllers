@@ -66,6 +66,22 @@
 		
 		<bean class="converters.CreditCardToStringConverter" />
 		<bean class="converters.StringToCreditCardConverter" />
+		
+			<bean class="converters.RefereeToStringConverter" />
+		<bean class="converters.StringToRefereeConverter" />
+		
+		<bean class="converters.ComplaintToStringConverter" />
+		<bean class="converters.StringToComplaintConverter" />
+		
+		<bean class="converters.ReportToStringConverter" />
+		<bean class="converters.StringToReportConverter" />
+				
+		<bean class="converters.NoteToStringConverter" />
+		<bean class="converters.StringToNoteConverter" />
+		
+		<bean class="converters.AttachmentToStringConverter" />
+		<bean class="converters.StringToAttachmentConverter" />
+				
 				
 	</util:list>
 	
