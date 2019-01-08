@@ -89,16 +89,15 @@ public class ComplaintService {
 	}
 
 	public Collection<Complaint> findAllByReferee() {
-		final UserAccount userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().contains(Authority.REFEREE));
-
-		final Referee c = this.refereeService.refereeByUserAccount(userAccount.getId());
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("REFEREE"));
+		final Referee c = this.refereeService.refereeByUserAccount(userLoged.getId());
 		return this.complaintRepository.findAllRefereeComplaint(c.getId());
 	}
 
 	public Collection<Complaint> findAllNoReferee() {
-		final UserAccount userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().contains(Authority.REFEREE));
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("REFEREE"));
 
 		return this.complaintRepository.findAllNoRefereeComplaint();
 
@@ -137,6 +136,24 @@ public class ComplaintService {
 
 	public Collection<Complaint> findAllCustomerComplaint(final Integer id) {
 		return this.complaintRepository.findAllCustomerComplaint(id);
+	}
+
+	public void selfAssignReferee(final int complaintId) {
+		Assert.isTrue(complaintId != 0);
+
+		Referee referee;
+		Complaint complaint;
+		final UserAccount userLoged = LoginService.getPrincipal();
+
+		referee = this.refereeService.refereeByUserAccount(userLoged.getId());
+		Assert.notNull(referee);
+
+		complaint = this.complaintRepository.findOne(complaintId);
+		Assert.notNull(complaint);
+
+		complaint.setReferee(referee);
+		this.complaintRepository.save(complaint);
+
 	}
 
 }
