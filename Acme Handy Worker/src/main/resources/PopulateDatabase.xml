@@ -1346,6 +1346,7 @@
 		<property name="expirationMonth" value="3"></property>
 		<property name="expirationYear" value="2019"></property>
 		<property name="CW" value="101"></property>
+		<property name="actor" ref="customer1" />
 	</bean>
 
 	<bean id="creditCard2" class="domain.CreditCard">
@@ -1355,6 +1356,7 @@
 		<property name="expirationMonth" value="5"></property>
 		<property name="expirationYear" value="2020"></property>
 		<property name="CW" value="201"></property>
+		<property name="actor" ref="sponsor1" />
 	</bean>
 	<bean id="creditCard3" class="domain.CreditCard">
 		<property name="holderName" value="nombre3"></property>
@@ -1363,6 +1365,7 @@
 		<property name="expirationMonth" value="6"></property>
 		<property name="expirationYear" value="2020"></property>
 		<property name="CW" value="202"></property>
+		<property name="actor" ref="sponsor2" />
 	</bean>
 	<bean id="creditCard4" class="domain.CreditCard">
 		<property name="holderName" value="nombre4"></property>
@@ -1371,6 +1374,7 @@
 		<property name="expirationMonth" value="2"></property>
 		<property name="expirationYear" value="2022"></property>
 		<property name="CW" value="203"></property>
+		<property name="actor" ref="sponsor1" />
 	</bean>
 
 	<!-- Sponsorship -->

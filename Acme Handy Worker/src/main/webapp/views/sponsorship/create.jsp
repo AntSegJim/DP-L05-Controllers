@@ -19,7 +19,9 @@
 <security:authorize access="hasRole('SPONSOR')">
 
 <p><spring:message code="sponsorship.new" /></p>
-<form:form action="sponsorship/sponsor/create.do" modelAttribute="sponsorship">
+<form:form action="sponsorship/sponsor/edit.do" modelAttribute="sponsorship">
+	
+	<form:hidden path="sponsor"/>
 	
 	<form:label path="urlBanner">
 	<spring:message code="sponsorship.urlBanner"/>:

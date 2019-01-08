@@ -24,6 +24,8 @@ public class CreditCardServiceTest extends AbstractTest {
 
 	@Autowired
 	private CreditCardService	CCService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	@Test
@@ -37,6 +39,7 @@ public class CreditCardServiceTest extends AbstractTest {
 		creditCard.setExpirationMonth(2);
 		creditCard.setExpirationYear(2019);
 		creditCard.setCW(201);
+		creditCard.setActor(this.actorService.getActorLogged());
 		Assert.isTrue(creditCard.getBrandName().equals("VISA") && creditCard.getHolderName().equals("raul") && creditCard.getNumber() == 101 && creditCard.getExpirationMonth() == 2 && creditCard.getExpirationYear() == 2019 && creditCard.getCW() == 201);
 	}
 
@@ -53,7 +56,7 @@ public class CreditCardServiceTest extends AbstractTest {
 		creditCard.setExpirationMonth(3);
 		creditCard.setExpirationYear(2019);
 		creditCard.setCW(202);
-
+		creditCard.setActor(this.actorService.getActorLogged());
 		saved = this.CCService.save(creditCard);
 		creditCards = this.CCService.findAll();
 		Assert.isTrue(creditCards.contains(saved));

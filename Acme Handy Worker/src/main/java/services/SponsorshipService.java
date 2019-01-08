@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.SponsorshipRepository;
+import security.LoginService;
 import security.UserAccount;
+import domain.Sponsor;
 import domain.Sponsorship;
 
 @Service
@@ -32,7 +34,8 @@ public class SponsorshipService {
 		sponsorship.setUrlBanner("");
 		sponsorship.setLinkTargetPage("");
 		sponsorship.setCreditCard(this.CCService.create());
-		sponsorship.setSponsor(this.sponsorService.create());
+		final int id = LoginService.getPrincipal().getId();
+		sponsorship.setSponsor(this.sponsorService.sponsorUserAccount(id));
 
 		return sponsorship;
 	}
@@ -47,13 +50,17 @@ public class SponsorshipService {
 
 	//updating
 	public Sponsorship save(final Sponsorship sponsorship) {
+
+		final Sponsor sponsor = this.sponsorService.sponsorUserAccount(LoginService.getPrincipal().getId());
+		Assert.isTrue(sponsor.getId() == sponsorship.getSponsor().getId(), "Sponsor logueado y enviado no igual");
+		Assert.isTrue(sponsorship.getCreditCard().getActor() == this.actorS.getActorLogged(), "Actor logueado y el actor de la creditCard no igual");
+
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("SPONSOR"));
 		Assert.isTrue(sponsorship != null && sponsorship.getLinkTargetPage() != null && sponsorship.getLinkTargetPage() != "" && sponsorship.getUrlBanner() != null && sponsorship.getUrlBanner() != "" && sponsorship.getCreditCard() != null
 			&& sponsorship.getSponsor() != null);
 		return this.SRepo.save(sponsorship);
 	}
-
 	//deleting
 	public void delete(final Sponsorship sponsorship) {
 		this.SRepo.delete(sponsorship);

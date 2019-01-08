@@ -5,6 +5,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -20,6 +21,7 @@ public class CreditCard extends DomainEntity {
 	private int		expirationMonth;
 	private int		expirationYear;
 	private int		CW;
+	private Actor	actor;
 
 
 	@NotBlank
@@ -70,5 +72,15 @@ public class CreditCard extends DomainEntity {
 
 	public void setCW(final int cW) {
 		this.CW = cW;
+	}
+
+	@NotNull
+	@ManyToOne(optional = false)
+	public Actor getActor() {
+		return this.actor;
+	}
+
+	public void setActor(final Actor actor) {
+		this.actor = actor;
 	}
 }

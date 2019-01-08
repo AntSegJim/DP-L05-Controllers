@@ -58,6 +58,14 @@
 		<bean class="converters.AplicationToStringConverter" />
 		<bean class="converters.StringToApplicationConverter" />
 		
+		<bean class="converters.SponsorToStringConverter" />
+		<bean class="converters.StringToSponsorConverter" />
+		
+		<bean class="converters.SponsorshipToStringConverter" />
+		<bean class="converters.StringToSponsorshipConverter" />
+		
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
 				
 	</util:list>
 	

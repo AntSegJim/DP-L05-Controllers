@@ -11,5 +11,6 @@ import domain.Sponsor;
 public interface SponsorRepository extends JpaRepository<Sponsor, Integer> {
 
 	@Query("select s from Sponsor s where s.userAccount.id = ?1")
-	public Sponsor handyWorkerUserAccount(Integer id);
+	public Sponsor sponsorByUserAccount(int id);
+
 }

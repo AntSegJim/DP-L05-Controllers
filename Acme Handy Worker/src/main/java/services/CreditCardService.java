@@ -18,13 +18,13 @@ import domain.CreditCard;
 public class CreditCardService {
 
 	@Autowired
-	private CreditCardRepository	CCRepo;
+	private CreditCardRepository	creditCardRepository;
 	@Autowired
 	private ActorService			actorService;
 
 
 	public Collection<CreditCard> findAll() {
-		return this.CCRepo.findAll();
+		return this.creditCardRepository.findAll();
 	}
 	//Metodo create
 	public CreditCard create() {
@@ -35,13 +35,17 @@ public class CreditCardService {
 		cc.setExpirationMonth(0);
 		cc.setExpirationYear(0);
 		cc.setCW(0);
+		cc.setActor(this.actorService.getActorLogged());
 		return cc;
 	}
 	public CreditCard save(final CreditCard cc) {
 		final UserAccount user = this.actorService.getActorLogged().getUserAccount();
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("CUSTOMER"));
 		Assert.isTrue(cc != null && cc.getBrandName() != null && cc.getHolderName() != null && cc.getBrandName() != "" && cc.getHolderName() != "");
-		return this.CCRepo.save(cc);
+		return this.creditCardRepository.save(cc);
 
+	}
+	public Collection<CreditCard> getAllMyCreditCards(final int actorId) {
+		return this.creditCardRepository.getAllMyCreditCards(actorId);
 	}
 }
