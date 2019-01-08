@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.handyWorker;
 
 import java.util.Collection;
 
@@ -18,13 +18,12 @@ import security.LoginService;
 import services.ActorService;
 import services.CustomerService;
 import services.EndorsementService;
-import services.HandyWorkerService;
 import domain.Actor;
 import domain.Endorsement;
 
 @Controller
-@RequestMapping("/endorsement/customer,handy-worker")
-public class EndorsementCustomerHandyWorkerController {
+@RequestMapping("/endorsement/handy-worker")
+public class EndorsementHandyWorkerController {
 
 	@Autowired
 	private EndorsementService	endorsementService;
@@ -32,8 +31,6 @@ public class EndorsementCustomerHandyWorkerController {
 	private ActorService		actorService;
 	@Autowired
 	private CustomerService		customerService;
-	@Autowired
-	private HandyWorkerService	handyWorkerService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -47,7 +44,7 @@ public class EndorsementCustomerHandyWorkerController {
 		result = new ModelAndView("endorsement/list");
 		result.addObject("myEmail", actor.getEmail());
 		result.addObject("endorsements", endorsements);
-		result.addObject("requestURI", "endorsement/customer,handy-worker/list.do");
+		result.addObject("requestURI", "endorsement/handy-worker/list.do");
 
 		return result;
 	}
@@ -91,9 +88,6 @@ public class EndorsementCustomerHandyWorkerController {
 		final Endorsement endorsement = this.endorsementService.create();
 		result = new ModelAndView("endorsement/create");
 		result.addObject("endorsement", endorsement);
-		result.addObject("myEmail", actor.getEmail());
-
-		result.addObject("handyWorkerReceivers", this.handyWorkerService.getHandyWorkerInvolveInAnyOfHisFixUpTask(actor.getId()));
 		result.addObject("customerReceivers", this.customerService.getCustomerForWhomItIsWorked(actor.getId()));
 		return result;
 	}

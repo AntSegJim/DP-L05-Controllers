@@ -16,32 +16,20 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasAnyRole('CUSTOMER','HANDYWORKER')">
+<security:authorize access="hasRole('CUSTOMER')">
 
 	<p><spring:message code="endorsement.show" /></p>
 	
 	<jstl:choose>
-    	<jstl:when test="${endorsement.handyWorkerReceiver.email==myEmail || endorsement.customerReceiver.email==myEmail}">
+    	<jstl:when test="${endorsement.customerReceiver.email==myEmail}">
 			<spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
-			<security:authorize access="hasRole('HANDYWORKER')">
-				<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
-				<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
-			</security:authorize>
-			<security:authorize access="hasRole('CUSTOMER')">
-				<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
-				<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
-			</security:authorize>
+			<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
+			<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
 	</jstl:when>    
     	<jstl:otherwise>
     		<spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
-			<security:authorize access="hasRole('HANDYWORKER')">
-				<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
-				<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
-			</security:authorize>
-			<security:authorize access="hasRole('CUSTOMER')">
-				<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
-				<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
-			</security:authorize>
+			<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
+			<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
     	</jstl:otherwise>
 	</jstl:choose>
 	
@@ -49,11 +37,37 @@
 
 	<br>
 	<div style="text-align: center;">
-		<a href="endorsement/customer,handy-worker/list.do"> <spring:message
+		<a href="endorsement/customer/list.do"> <spring:message
 				code="endorsement.back" />
 		</a>
 	</div>
 
 </security:authorize>
 
+<security:authorize access="hasRole('HANDYWORKER')">
 
+	<p><spring:message code="endorsement.show" /></p>
+	
+	<jstl:choose>
+    	<jstl:when test="${endorsement.handyWorkerReceiver.email==myEmail}">
+			<spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
+			<spring:message code="endorsement.sender" />: ${endorsement.customerSender.name} -> ${endorsement.customerSender.email} <br />
+			<spring:message code="endorsement.receiver" />: ${endorsement.handyWorkerReceiver.name} -> ${endorsement.handyWorkerReceiver.email} <br />
+	</jstl:when>    
+    	<jstl:otherwise>
+    		<spring:message code="endorsement.moment" />: ${endorsement.moment} <br />
+			<spring:message code="endorsement.sender" />: ${endorsement.handyWorkerSender.name} -> ${endorsement.handyWorkerSender.email} <br />
+			<spring:message code="endorsement.receiver" />: ${endorsement.customerReceiver.name} -> ${endorsement.customerReceiver.email} <br />
+    	</jstl:otherwise>
+	</jstl:choose>
+	
+	<spring:message code="endorsement.comments" />: ${endorsement.comments} <br />
+
+	<br>
+	<div style="text-align: center;">
+		<a href="endorsement/handy-worker/list.do"> <spring:message
+				code="endorsement.back" />
+		</a>
+	</div>
+
+</security:authorize>
