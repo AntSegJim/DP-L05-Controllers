@@ -115,6 +115,34 @@ public class AdministratorService {
 
 		Assert.isTrue(admin.getIsBanned() == 0 || admin.getIsBanned() == 1);
 
+		res = this.adminRepo.save(admin);
+		if (admin.getId() == 0)
+			this.messageBoxService.createMessageBoxSystem(res);
+		return res;
+	}
+
+	public Administrator SaveForBan(final Administrator admin) {
+
+		Administrator res = null;
+
+		final UserAccount userLoged = LoginService.getPrincipal();
+		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
+			final Administrator a = this.adminRepo.findOne(admin.getId());
+
+			Assert.isTrue(a.getId() == (admin.getId()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getVersion() == (admin.getVersion()), "Un administrador no debe modificar estos datos");
+
+			Assert.isTrue(a.getName().equals(admin.getName()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getMiddleName().equals(admin.getMiddleName()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getSurname().equals(admin.getSurname()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getPhoto().equals(admin.getPhoto()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getEmail().equals(admin.getEmail()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getPhone().equals(admin.getPhone()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getAddress().equals(admin.getAddress()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getNumberSocialProfiles() == (admin.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(a.getUserAccount() == (admin.getUserAccount()), "Un administrador no debe modificar estos datos");
+		}
+
 		if (admin.getIsBanned() == 1) {
 			final Collection<Authority> result = new ArrayList<Authority>();
 			Authority authority;
@@ -134,9 +162,8 @@ public class AdministratorService {
 		}
 
 		res = this.adminRepo.save(admin);
-		if (admin.getId() == 0)
-			this.messageBoxService.createMessageBoxSystem(res);
 		return res;
+
 	}
 
 }

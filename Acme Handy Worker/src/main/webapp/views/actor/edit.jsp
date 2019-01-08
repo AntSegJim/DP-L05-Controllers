@@ -49,24 +49,20 @@
 <form:hidden path="numberSocialProfiles"/>
 <form:hidden path="userAccount"/>
 
-<jstl:choose>
-
-<jstl:when test = "${fn:contains(row.userAccount.authorities, 'CUSTOMER') or fn:contains(row.userAccount.authorities, 'CUSTOMER_BAN')}">
+<jstl:if test = "${fn:contains(actor.userAccount.authorities, 'CUSTOMER') or fn:contains(actor.userAccount.authorities, 'CUSTOMER_BAN')}">
 <form:hidden path="score"/>
 <form:hidden path="endorseCustomer"/>
 <form:hidden path="receiveEndorseFromCustomer"/>
-</jstl:when>
+</jstl:if>
 
-<jstl:when test = "${fn:contains(row.userAccount.authorities, 'HANDYWORKER') or fn:contains(row.userAccount.authorities, 'HANDY_WORKER_BAN')}">
+<jstl:if test = "${fn:contains(actor.userAccount.authorities, 'HANDYWORKER') or fn:contains(actor.userAccount.authorities, 'HANDY_WORKER_BAN')}">
 <form:hidden path="makeHandyWorker"/>
 <form:hidden path="score"/>
+<form:hidden path="finder"/>
 <form:hidden path="endorseHWorker"/>
 <form:hidden path="receiveEndorseFromHWorker"/>
-<form:hidden path="application"/>
-<form:hidden path="finder"/>
-</jstl:when>
+</jstl:if>
 
-</jstl:choose>
 
 <form:label path="isBanned"><spring:message code="actor.isBanned" />:</form:label>
 	<form:select path="isBanned">

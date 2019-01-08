@@ -80,13 +80,21 @@ public class ActorAdministratorController {
 	public ModelAndView editAdminSuspicious(@Valid final Administrator admin, final BindingResult binding) {
 		ModelAndView result;
 
-		if (!binding.hasErrors()) {
-			this.adminService.save(admin);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+		try {
+			if (!binding.hasErrors()) {
+				this.adminService.SaveForBan(admin);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("actorsSuspicious/edit");
+				result.addObject("actor", admin);
+				result.addObject("action", "suspiciousActor/administrator/editAdministrator.do");
+			}
+		} catch (final Exception e) {
 			result = new ModelAndView("actorsSuspicious/edit");
 			result.addObject("actor", admin);
 			result.addObject("action", "suspiciousActor/administrator/editAdministrator.do");
+			result.addObject("exception", e);
+
 		}
 		return result;
 	}
@@ -111,13 +119,21 @@ public class ActorAdministratorController {
 	public ModelAndView editCustomerSuspicious(@Valid final Customer customer, final BindingResult binding) {
 		ModelAndView result;
 
-		if (!binding.hasErrors()) {
-			this.customerService.save(customer);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+		try {
+			if (!binding.hasErrors()) {
+				this.customerService.save(customer);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("actorsSuspicious/edit");
+				result.addObject("actor", customer);
+				result.addObject("action", "suspiciousActor/administrator/editCustomer.do");
+			}
+		} catch (final Exception e) {
 			result = new ModelAndView("actorsSuspicious/edit");
 			result.addObject("actor", customer);
 			result.addObject("action", "suspiciousActor/administrator/editCustomer.do");
+			result.addObject("exception", e);
+
 		}
 		return result;
 	}
@@ -142,13 +158,21 @@ public class ActorAdministratorController {
 	public ModelAndView editHandyWorkerSuspicious(@Valid final HandyWorker handyWorker, final BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors()) {
-			this.handyWorkerService.save(handyWorker);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+		try {
+			if (!binding.hasErrors()) {
+				this.handyWorkerService.save(handyWorker);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("actorsSuspicious/edit");
+				result.addObject("actor", handyWorker);
+				result.addObject("action", "suspiciousActor/administrator/editHandyWorker.do");
+			}
+		} catch (final Exception e) {
 			result = new ModelAndView("actorsSuspicious/edit");
 			result.addObject("actor", handyWorker);
 			result.addObject("action", "suspiciousActor/administrator/editHandyWorker.do");
+			result.addObject("exception", e);
+
 		}
 		return result;
 	}

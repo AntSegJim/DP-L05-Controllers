@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 
 import repositories.HandyWorkerRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Application;
 import domain.Endorsement;
@@ -75,6 +76,29 @@ public class HandyWorkerService {
 	}
 
 	public HandyWorker save(final HandyWorker h) {
+
+		final UserAccount userLoged = LoginService.getPrincipal();
+		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
+			final HandyWorker handy = this.handyWorkerRepository.findOne(h.getId());
+
+			Assert.isTrue(handy.getId() == (h.getId()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getVersion() == (h.getVersion()), "Un administrador no debe modificar estos datos");
+
+			Assert.isTrue(handy.getName().equals(h.getName()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getMiddleName().equals(h.getMiddleName()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getSurname().equals(h.getSurname()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getPhoto().equals(h.getPhoto()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getEmail().equals(h.getEmail()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getPhone().equals(h.getPhone()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getAddress().equals(h.getAddress()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getNumberSocialProfiles() == (h.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(handy.getUserAccount() == (h.getUserAccount()), "Un administrador no debe modificar estos datos");
+
+			//			Assert.isTrue(handy.getScore() == (h.getScore()), "Un administrador no debe modificar estos datos");
+			//			Assert.isTrue(handy.getMakeHandyWorker() == (h.getMakeHandyWorker()), "Un administrador no debe modificar estos datos");
+
+		}
+
 		HandyWorker res = null;
 
 		Assert.isTrue(h.getName() != null && h.getSurname() != null && h.getName() != "" && h.getSurname() != "" && h.getUserAccount() != null && h.getEmail() != null && h.getEmail() != "", "HandyWorkerService.save -> Name or Surname invalid");
