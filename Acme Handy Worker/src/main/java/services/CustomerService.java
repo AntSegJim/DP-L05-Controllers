@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.regex.Matcher;
@@ -68,6 +69,29 @@ public class CustomerService {
 		return this.customerRepository.findOne(customerId);
 	}
 	public Customer save(final Customer c) {
+
+		//		final UserAccount userLoged = LoginService.getPrincipal();
+		//		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
+		//			final Customer customer = this.customerRepository.findOne(c.getId());
+		//
+		//			Assert.isTrue(customer.getId() == (c.getId()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getId() == (c.getId()), "Un administrador no debe modificar estos datos");
+		//
+		//			Assert.isTrue(customer.getName().equals(c.getName()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getMiddleName().equals(c.getMiddleName()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getSurname().equals(c.getSurname()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getPhoto().equals(c.getPhoto()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getEmail().equals(c.getEmail()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getPhone().equals(c.getPhone()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getAddress().equals(c.getAddress()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getNumberSocialProfiles() == (c.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getUserAccount() == (c.getUserAccount()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getScore() == (c.getScore()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getEndorseCustomer() == (c.getEndorseCustomer()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getReceiveEndorseFromCustomer() == (c.getReceiveEndorseFromCustomer()), "Un administrador no debe modificar estos datos");
+		//
+		//		}
+
 		Customer res = null;
 
 		Assert.isTrue(c != null && c.getName() != null && c.getSurname() != null && c.getName() != "" && c.getSurname() != "" && c.getUserAccount() != null && c.getEmail() != null && c.getEmail() != "", "CustomerService.save -> Name or Surname invalid");
@@ -100,6 +124,24 @@ public class CustomerService {
 			user.setPassword(hash);
 		}
 		Assert.isTrue(c.getIsBanned() == 0 || c.getIsBanned() == 1);
+
+		if (c.getIsBanned() == 1) {
+			final Collection<Authority> result = new ArrayList<Authority>();
+			Authority authority;
+			authority = new Authority();
+			authority.setAuthority(Authority.CUSTOMER_BAN);
+			result.add(authority);
+
+			c.getUserAccount().setAuthorities(result);
+		} else {
+			final Collection<Authority> result = new ArrayList<Authority>();
+			Authority authority;
+			authority = new Authority();
+			authority.setAuthority(Authority.CUSTOMER);
+			result.add(authority);
+
+			c.getUserAccount().setAuthorities(result);
+		}
 
 		res = this.customerRepository.save(c);
 

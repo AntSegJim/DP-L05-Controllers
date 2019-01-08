@@ -23,19 +23,16 @@ import domain.MessageBox;
 public class MessageService {
 
 	@Autowired
-	private MessageRepository		messageRepository;
+	private MessageRepository	messageRepository;
 
 	@Autowired
-	private ActorService			actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private MessageBoxService		messageBoxService;
+	private MessageBoxService	messageBoxService;
 
 	@Autowired
-	private SpamWordService			spamWordService;
-
-	@Autowired
-	private AdministratorService	adminService;
+	private SpamWordService		spamWordService;
 
 
 	public Message create() {
@@ -129,13 +126,14 @@ public class MessageService {
 		final MessageBox trashBox = this.messageBoxService.getTrashBox(actor.getId());
 		Assert.isTrue(trashBox.getActor().equals(actor));
 		if (trashBox.getMessages().contains(message))
-			this.messageRepository.delete(message);
+			trashBox.getMessages().remove(message);
 		else {
-			trashBox.getMessages().add(message);
 			final List<MessageBox> boxes = this.messageBoxService.findMessageBoxActor(actor.getId());
 			for (int i = 0; i < boxes.size(); i++)
 				if (boxes.get(i).getMessages().contains(message))
 					boxes.get(i).getMessages().remove(message);
+
+			trashBox.getMessages().add(message);
 
 		}
 	}

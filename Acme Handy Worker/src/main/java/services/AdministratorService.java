@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.regex.Matcher;
@@ -113,6 +114,24 @@ public class AdministratorService {
 		}
 
 		Assert.isTrue(admin.getIsBanned() == 0 || admin.getIsBanned() == 1);
+
+		if (admin.getIsBanned() == 1) {
+			final Collection<Authority> result = new ArrayList<Authority>();
+			Authority authority;
+			authority = new Authority();
+			authority.setAuthority(Authority.ADMIN_BAN);
+			result.add(authority);
+
+			admin.getUserAccount().setAuthorities(result);
+		} else {
+			final Collection<Authority> result = new ArrayList<Authority>();
+			Authority authority;
+			authority = new Authority();
+			authority.setAuthority(Authority.ADMIN);
+			result.add(authority);
+
+			admin.getUserAccount().setAuthorities(result);
+		}
 
 		res = this.adminRepo.save(admin);
 		if (admin.getId() == 0)

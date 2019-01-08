@@ -173,13 +173,20 @@ public class ActorAdministratorController {
 	public ModelAndView editAdminSuspicious(@Valid final Sponsor sponsor, final BindingResult binding) {
 		ModelAndView result;
 
-		if (!binding.hasErrors()) {
-			this.sponsorService.save(sponsor);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+		try {
+			if (!binding.hasErrors()) {
+				this.sponsorService.save(sponsor);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("actorsSuspicious/edit");
+				result.addObject("actor", sponsor);
+				result.addObject("action", "suspiciousActor/administrator/editSponsor.do");
+			}
+		} catch (final Exception e) {
 			result = new ModelAndView("actorsSuspicious/edit");
 			result.addObject("actor", sponsor);
 			result.addObject("action", "suspiciousActor/administrator/editSponsor.do");
+			result.addObject("exception", e);
 		}
 		return result;
 	}
@@ -204,13 +211,20 @@ public class ActorAdministratorController {
 	public ModelAndView editAdminSuspicious(@Valid final Referee referee, final BindingResult binding) {
 		ModelAndView result;
 
-		if (!binding.hasErrors()) {
-			this.refereeService.save(referee);
-			result = new ModelAndView("redirect:list.do");
-		} else {
+		try {
+			if (!binding.hasErrors()) {
+				this.refereeService.save(referee);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("actorsSuspicious/edit");
+				result.addObject("actor", referee);
+				result.addObject("action", "suspiciousActor/administrator/editReferee.do");
+			}
+		} catch (final Exception e) {
 			result = new ModelAndView("actorsSuspicious/edit");
 			result.addObject("actor", referee);
 			result.addObject("action", "suspiciousActor/administrator/editReferee.do");
+			result.addObject("exception", e);
 		}
 		return result;
 	}

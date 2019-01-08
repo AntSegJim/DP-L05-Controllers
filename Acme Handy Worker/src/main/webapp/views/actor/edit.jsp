@@ -32,6 +32,11 @@
 
 <form:form action="${action }" modelAttribute="actor">
 
+
+<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="error" /> </p>
+</jstl:if>
+
 <form:hidden path="id"/>
 <form:hidden path="version"/>
 <form:hidden path="name"/>
@@ -46,13 +51,13 @@
 
 <jstl:choose>
 
-<jstl:when test = "${fn:contains(row.userAccount.authorities, 'CUSTOMER')}">
+<jstl:when test = "${fn:contains(row.userAccount.authorities, 'CUSTOMER') or fn:contains(row.userAccount.authorities, 'CUSTOMER_BAN')}">
 <form:hidden path="score"/>
 <form:hidden path="endorseCustomer"/>
 <form:hidden path="receiveEndorseFromCustomer"/>
 </jstl:when>
 
-<jstl:when test = "${fn:contains(row.userAccount.authorities, 'HANDYWORKER')}">
+<jstl:when test = "${fn:contains(row.userAccount.authorities, 'HANDYWORKER') or fn:contains(row.userAccount.authorities, 'HANDY_WORKER_BAN')}">
 <form:hidden path="makeHandyWorker"/>
 <form:hidden path="score"/>
 <form:hidden path="endorseHWorker"/>

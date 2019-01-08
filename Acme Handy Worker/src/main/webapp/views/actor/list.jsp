@@ -32,23 +32,23 @@ requestURI="suspiciousActor/administrator/list.do" >
 
 <display:column>
 	<jstl:choose>
-		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'ADMIN')}">
+		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'ADMIN') or fn:contains(row.userAccount.authorities, 'ADMIN_BAN')}">
 			<a href="suspiciousActor/administrator/editAdministrator.do?idAdmin=${row.id}"><spring:message code="actor.edit" /></a>
 		</jstl:when>
 		
-		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'CUSTOMER')}">
+		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'CUSTOMER') or fn:contains(row.userAccount.authorities, 'CUSTOMER_BAN')}">
 			<a href="suspiciousActor/administrator/editCustomer.do?idCustomer=${row.id}"><spring:message code="actor.edit" /></a>
 		</jstl:when>
 		
-		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'HANDYWORKER')}">
+		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'HANDYWORKER') or fn:contains(row.userAccount.authorities, 'HANDY_WORKER_BAN')}">
 			<a href="suspiciousActor/administrator/editHandyWorker.do?idHandyWorker=${row.id}"><spring:message code="actor.edit" /></a>
 		</jstl:when>
 		
-		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'SPONSOR')}">
+		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'SPONSOR') or fn:contains(row.userAccount.authorities, 'SPONSOR_BAN')}">
 			<a href="suspiciousActor/administrator/editSponsor.do?idSponsor=${row.id}"><spring:message code="actor.edit" /></a>
 		</jstl:when>
 		
-		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'REFEREE')}">
+		<jstl:when test = "${fn:contains(row.userAccount.authorities, 'REFEREE') or fn:contains(row.userAccount.authorities, 'REFEREE_BAN')}">
 			<a href="suspiciousActor/administrator/editReferee.do?idReferee=${row.id}"><spring:message code="actor.edit" /></a>
 		</jstl:when>
 	</jstl:choose>

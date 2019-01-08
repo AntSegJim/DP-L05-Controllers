@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.regex.Matcher;
@@ -85,6 +86,24 @@ public class RefereeService {
 			Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		}
 
+		final UserAccount userLoged = LoginService.getPrincipal();
+		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
+			final Referee referee = this.refereeRepository.findOne(r.getId());
+
+			Assert.isTrue(referee.getId() == (r.getId()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getId() == (r.getId()), "Un administrador no debe modificar estos datos");
+
+			Assert.isTrue(referee.getName().equals(r.getName()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getMiddleName().equals(r.getMiddleName()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getSurname().equals(r.getSurname()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getPhoto().equals(r.getPhoto()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getEmail().equals(r.getEmail()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getPhone().equals(r.getPhone()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getAddress().equals(r.getAddress()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getNumberSocialProfiles() == (r.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
+			Assert.isTrue(referee.getUserAccount() == (r.getUserAccount()), "Un administrador no debe modificar estos datos");
+		}
+
 		Referee res = null;
 
 		Assert.isTrue(r != null && r.getName() != null && r.getSurname() != null && r.getName() != "" && r.getSurname() != "" && r.getUserAccount() != null && r.getEmail() != null && r.getEmail() != "", "RefereeService.save -> Name or Surname invalid");
@@ -117,6 +136,27 @@ public class RefereeService {
 			final UserAccount user = r.getUserAccount();
 			user.setPassword(hash);
 		}
+
+		Assert.isTrue(r.getIsBanned() == 0 || r.getIsBanned() == 1);
+
+		if (r.getIsBanned() == 1) {
+			final Collection<Authority> result = new ArrayList<Authority>();
+			Authority authority;
+			authority = new Authority();
+			authority.setAuthority(Authority.REFEREE_BAN);
+			result.add(authority);
+
+			r.getUserAccount().setAuthorities(result);
+		} else {
+			final Collection<Authority> result = new ArrayList<Authority>();
+			Authority authority;
+			authority = new Authority();
+			authority.setAuthority(Authority.REFEREE);
+			result.add(authority);
+
+			r.getUserAccount().setAuthorities(result);
+		}
+
 		res = this.refereeRepository.save(r);
 
 		if (r.getId() == 0)

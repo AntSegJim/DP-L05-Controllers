@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.regex.Matcher;
@@ -110,6 +111,24 @@ public class HandyWorkerService {
 
 		}
 		Assert.isTrue(h.getIsBanned() == 0 || h.getIsBanned() == 1);
+
+		if (h.getIsBanned() == 1) {
+			final Collection<Authority> result = new ArrayList<Authority>();
+			Authority authority;
+			authority = new Authority();
+			authority.setAuthority(Authority.HANDY_WORKER_BAN);
+			result.add(authority);
+
+			h.getUserAccount().setAuthorities(result);
+		} else {
+			final Collection<Authority> result = new ArrayList<Authority>();
+			Authority authority;
+			authority = new Authority();
+			authority.setAuthority(Authority.HANDYWORKER);
+			result.add(authority);
+
+			h.getUserAccount().setAuthorities(result);
+		}
 
 		this.finderService.save(h.getFinder());
 		res = this.handyWorkerRepository.save(h);

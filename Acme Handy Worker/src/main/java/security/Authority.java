@@ -37,11 +37,16 @@ public class Authority implements GrantedAuthority {
 
 	// Values -----------------------------------------------------------------
 
-	public static final String	ADMIN		= "ADMIN";
-	public static final String	CUSTOMER	= "CUSTOMER";
-	public static final String	REFEREE		= "REFEREE";
-	public static final String	SPONSOR		= "SPONSOR";
-	public static final String	HANDYWORKER	= "HANDYWORKER";
+	public static final String	ADMIN				= "ADMIN";
+	public static final String	CUSTOMER			= "CUSTOMER";
+	public static final String	REFEREE				= "REFEREE";
+	public static final String	SPONSOR				= "SPONSOR";
+	public static final String	HANDYWORKER			= "HANDYWORKER";
+	public static final String	ADMIN_BAN			= "ADMIN_BAN";
+	public static final String	CUSTOMER_BAN		= "CUSTOMER_BAN";
+	public static final String	HANDY_WORKER_BAN	= "HANDY_WORKER_BAN";
+	public static final String	SPONSOR_BAN			= "SPONSOR_BAN";
+	public static final String	REFEREE_BAN			= "REFEREE_BAN";
 
 	// Attributes -------------------------------------------------------------
 
@@ -49,7 +54,8 @@ public class Authority implements GrantedAuthority {
 
 
 	@NotBlank
-	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.CUSTOMER + "|" + Authority.REFEREE + "|" + Authority.SPONSOR + "|" + Authority.HANDYWORKER + "$")
+	@Pattern(regexp = "^" + Authority.ADMIN + "|" + Authority.CUSTOMER + "|" + Authority.REFEREE + "|" + Authority.SPONSOR + "|" + Authority.HANDYWORKER + "|" + Authority.ADMIN_BAN + "|" + Authority.CUSTOMER_BAN + "|" + Authority.HANDY_WORKER_BAN + "|"
+		+ Authority.SPONSOR_BAN + "|" + Authority.REFEREE_BAN + "$")
 	@Override
 	public String getAuthority() {
 		return this.authority;
@@ -83,6 +89,26 @@ public class Authority implements GrantedAuthority {
 
 		authority = new Authority();
 		authority.setAuthority(Authority.HANDYWORKER);
+		result.add(authority);
+
+		authority = new Authority();
+		authority.setAuthority(Authority.ADMIN_BAN);
+		result.add(authority);
+
+		authority = new Authority();
+		authority.setAuthority(Authority.CUSTOMER_BAN);
+		result.add(authority);
+
+		authority = new Authority();
+		authority.setAuthority(Authority.HANDY_WORKER_BAN);
+		result.add(authority);
+
+		authority = new Authority();
+		authority.setAuthority(Authority.SPONSOR_BAN);
+		result.add(authority);
+
+		authority = new Authority();
+		authority.setAuthority(Authority.REFEREE_BAN);
 		result.add(authority);
 
 		return result;
