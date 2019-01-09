@@ -40,12 +40,24 @@ public class PictureHandyWorkerController extends AbstractController {
 
 		result = new ModelAndView("picture/showPictures");
 		result.addObject("pictures", pictures);
+		result.addObject("tutorial", t);
 
 		return result;
 	}
 
+	@RequestMapping(value = "/createPicture", method = RequestMethod.GET)
+	public ModelAndView createPicture() {
+		ModelAndView result;
+		Picture picture;
+
+		picture = this.pictureService.create();
+		result = new ModelAndView("picture/editPicture");
+		result.addObject("picture", picture);
+		return result;
+	}
+
 	@RequestMapping(value = "/editPicture", method = RequestMethod.GET)
-	public ModelAndView editPicture(@RequestParam final int pictureId) {
+	public ModelAndView editPicture(@RequestParam final int pictureId, @RequestParam final int tutorialId) {
 		ModelAndView result;
 		Picture picture;
 
@@ -53,23 +65,26 @@ public class PictureHandyWorkerController extends AbstractController {
 		Assert.notNull(picture);
 		result = new ModelAndView("picture/editPicture");
 		result.addObject("picture", picture);
+		result.addObject("tutorialId", tutorialId);
 		return result;
 	}
 
 	@RequestMapping(value = "/editPicture", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Picture picture, final BindingResult binding) {
+	public ModelAndView save(@RequestParam(value = "tutorialId") final int tutorialId, @Valid final Picture picture, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors())
 			result = new ModelAndView("picture/editPicture");
+		//result.addObject("picture", picture);
 		else
 			try {
+				//final Collection<Picture> pictures = this.pictureService.finaAll();
 				this.pictureService.save(picture);
-				result = new ModelAndView("redirect:showPictures.do");
+				//pictures.add(nueva);
+				result = new ModelAndView("redirect:showPictures.do?tutorialId=" + tutorialId);
 			} catch (final Throwable oopd) {
 				result = new ModelAndView("picture/editPicture");
 			}
 		return result;
 	}
-
 }

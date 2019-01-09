@@ -10,7 +10,7 @@
 
 <p><spring:message code="picture.edit.title" /></p>
 
-<form:form action="picture/handyWorker/editPicture.do" modelAttribute="picture">
+<form:form action="picture/handyWorker/editPicture.do?pictureId=${picture.id}&tutorialId=${tutorialId}" modelAttribute="picture">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
