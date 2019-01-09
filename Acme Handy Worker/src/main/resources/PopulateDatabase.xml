@@ -2071,7 +2071,7 @@
 	<!-- Application -->
 	<bean id="application1" class="domain.Application">
 		<property name="moment" value="02/06/2018 20:12" />
-		<property name="status" value="1" />
+		<property name="status" value="0" />
 		<property name="price" value="30" />
 		<property name="handyWorker" ref="handyWorker1"></property>
 		<property name="comments">

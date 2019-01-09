@@ -49,7 +49,7 @@ public class ApplicationService {
 		a.setHandyWorker(hw);
 		a.setMoment(new Date());
 		a.setPrice(0.);
-		a.setStatus(0);
+		a.setStatus(1);
 		return a;
 	}
 
@@ -58,26 +58,37 @@ public class ApplicationService {
 	}
 
 	public Collection<Application> findAll() {
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		final Customer c = this.customerService.customerByUserAccount(userAccount.getId());
-		return this.applicationRepository.findAllCustomerApplication(c.getId());
+
+		return this.applicationRepository.findAll();
 	}
 
 	public Application save(final Application a) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		final Customer c = this.customerService.customerByUserAccount(userAccount.getId());
-		Assert.isTrue(Integer.valueOf(a.getFixUpTask().getCustomer().getId()).equals(c.getId()));
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("HANDYWORKER")) {
+			Assert.isTrue(this.FUTService.findAll().contains(a.getFixUpTask()));
+			Assert.isTrue(!this.FUTService.findAllfixUpTasksHandyWorkerId().contains(a.getFixUpTask()));
+
+		} else {
+
+			final Customer c = this.customerService.customerByUserAccount(userAccount.getId());
+			Assert.isTrue(Integer.valueOf(a.getFixUpTask().getCustomer().getId()) == (c.getId()));
+
+		}
+
 		Assert.isTrue(a.getMoment() != null && a.getMoment().before(Calendar.getInstance().getTime()) && a.getStatus() >= 0 && a.getStatus() <= 2 && a.getHandyWorker() != null && a.getFixUpTask() != null);
-		if (a.getStatus() == 1)
+		if (a.getStatus() == 0)
 			Assert.isTrue(a.getCreditCard() != null);
 		else
-			Assert.isTrue(a.getCreditCard().equals(null));
+			Assert.isTrue(a.getCreditCard() == null);
 		return this.applicationRepository.save(a);
 	}
 	public Collection<Application> getMyApplications(final int handyWorkerId) {
 		return this.getMyApplications(handyWorkerId);
+	}
+
+	public Collection<Application> findAllApplicationCustomer(final int customerId) {
+		return this.applicationRepository.findAllCustomerApplication(customerId);
 	}
 
 	public List<Object[]> maxMavAvgDesvPriceOffered() {

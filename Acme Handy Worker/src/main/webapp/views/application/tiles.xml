@@ -17,12 +17,20 @@
 <tiles-definitions>
 
 	<definition name="application/applications" extends="master.page">	
-		<put-attribute name="title" value="Applications handy worker" />
+		<put-attribute name="title" value="List Applications" />
 		<put-attribute name="body" value="/views/application/applications.jsp" />
 	</definition>
-	<definition name="application/editApplication" extends="master.page">	
-		<put-attribute name="title" value="Edit aplicación" />
-		<put-attribute name="body" value="/views/application/editApplication.jsp" />
+	<definition name="application/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit application" />
+		<put-attribute name="body" value="/views/application/edit.jsp" />
 	</definition>
+	<definition name="application/show" extends="master.page">	
+		<put-attribute name="title" value="Details of the application" />
+		<put-attribute name="body" value="/views/application/show.jsp" />
+	</definition>
+	
+		<definition name="application/dropdown" template="/views/application/dropdown.jsp" >
+	</definition>
+	
 	
 </tiles-definitions>

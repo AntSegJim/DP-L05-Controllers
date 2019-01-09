@@ -17,6 +17,9 @@ public interface FixUpTaskRepository extends JpaRepository<FixUpTask, Integer> {
 	@Query("select f from FixUpTask f where f.customer.id = ?1")
 	public Collection<FixUpTask> fixUpTasksCustomer(Integer id);
 
+	@Query("select f from FixUpTask f join f.application a where a.handyWorker.id=?1")
+	public Collection<FixUpTask> findAllfixUpTasksHandyWorkerId(Integer id);
+
 	@Query("select f.fixUpTask from Finder f where f.id = ?1")
 	public Collection<FixUpTask> fixUpTasksByFinder(Integer finderId);
 

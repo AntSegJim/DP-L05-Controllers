@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -35,8 +36,9 @@ public class Application extends DomainEntity {
 
 	//Getters and Setters
 	@NotNull
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
+	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return this.moment;
 	}
@@ -82,7 +84,7 @@ public class Application extends DomainEntity {
 		this.handyWorker = handyWorker;
 	}
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public CreditCard getCreditCard() {
 		return this.creditCard;
 	}

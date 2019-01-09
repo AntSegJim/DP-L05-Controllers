@@ -17,6 +17,7 @@ import security.UserAccount;
 import domain.Category;
 import domain.Customer;
 import domain.FixUpTask;
+import domain.HandyWorker;
 import domain.Warranty;
 
 @Service
@@ -35,6 +36,8 @@ public class FixUpTaskService {
 	private CurriculaService	curriculaService;
 	@Autowired
 	private ComplaintService	complaintService;
+	@Autowired
+	private HandyWorkerService	handyWorkerService;
 
 
 	public FixUpTask create() {
@@ -81,6 +84,14 @@ public class FixUpTaskService {
 
 	public Collection<FixUpTask> fixUpTasksByFinder(final Integer finderId) {
 		return this.fixUpTaskRepository.fixUpTasksByFinder(finderId);
+	}
+
+	public Collection<FixUpTask> findAllfixUpTasksHandyWorkerId() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		final HandyWorker handyWorker = this.handyWorkerService.handyWorkerUserAccount(userAccount.getId());
+
+		return this.fixUpTaskRepository.findAllfixUpTasksHandyWorkerId(handyWorker.getId());
 	}
 	public Collection<String> allTickersFix() {
 		return this.fixUpTaskRepository.allTickerInFixUpTask();
