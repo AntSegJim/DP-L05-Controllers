@@ -51,6 +51,9 @@
   <value>/views/miscellaneousRecord/messages</value> 
   <value>/views/endorserRecord/messages</value> 
   <value>/views/personalRecord/messages</value> 
+   <value>/views/phase/messages</value> 
+   
+		
 		
 		
 		<value>/views/profile-social-network/messages</value>

@@ -58,6 +58,7 @@
 		
 		<value>/views/profile-social-network/tiles.xml</value>
 		<value>/views/sponsor/tiles.xml</value>
+		<value>/views/phase/tiles.xml</value>
 		
 		
 		

@@ -80,12 +80,10 @@ public class PhaseService {
 		Assert.isTrue(phase.getApplication().getStatus() == 0);
 		this.phaseRepository.delete(phase);
 	}
-	//No piden que listemos las phases
-	//	public Collection<Phase> findAllByHandyWorker() {
-	//		UserAccount userAccount;
-	//		userAccount = LoginService.getPrincipal();
-	//		final HandyWorker c = this.handyWorkerService.handyWorkerUserAccount(userAccount.getId());
-	//		return this.phaseRepository.findAllHandyWorkerPhase(c.getId());
-	//	}
+
+	public Collection<Phase> findAllApplicationId(final Integer applicationId) {
+
+		return this.phaseRepository.findAllApplicationId(applicationId);
+	}
 
 }

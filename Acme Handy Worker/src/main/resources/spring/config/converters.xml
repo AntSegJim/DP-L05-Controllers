@@ -111,6 +111,9 @@
 		
 		<bean class="converters.FixUpTaskToStringConverter" />
 		<bean class="converters.StringToFixUpTaskConverter" />
+		
+		<bean class="converters.PhaseToStringConverter" />
+		<bean class="converters.StringToPhaseConverter" />
 				
 				
 	</util:list>
