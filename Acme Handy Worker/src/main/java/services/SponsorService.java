@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
 
 import repositories.SponsorRepository;
 import security.Authority;
-import security.LoginService;
 import security.UserAccount;
 import domain.Sponsor;
 
@@ -68,23 +67,23 @@ public class SponsorService {
 
 	public Sponsor save(final Sponsor s) {
 
-		final UserAccount userLoged = LoginService.getPrincipal();
-		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
-			final Sponsor sponsor = this.sponsorRepository.findOne(s.getId());
-
-			Assert.isTrue(sponsor.getId() == (s.getId()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getId() == (s.getId()), "Un administrador no debe modificar estos datos");
-
-			Assert.isTrue(sponsor.getName().equals(s.getName()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getMiddleName().equals(s.getMiddleName()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getSurname().equals(s.getSurname()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getPhoto().equals(s.getPhoto()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getEmail().equals(s.getEmail()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getPhone().equals(s.getPhone()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getAddress().equals(s.getAddress()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getNumberSocialProfiles() == (s.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(sponsor.getUserAccount() == (s.getUserAccount()), "Un administrador no debe modificar estos datos");
-		}
+		//		final UserAccount userLoged = LoginService.getPrincipal();
+		//		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
+		//			final Sponsor sponsor = this.sponsorRepository.findOne(s.getId());
+		//
+		//			Assert.isTrue(sponsor.getId() == (s.getId()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(sponsor.getVersion() == (s.getVersion()), "Un administrador no debe modificar estos datos");
+		//
+		//			Assert.isTrue(sponsor.getName().equals(s.getName()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(sponsor.getMiddleName().equals(s.getMiddleName()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(sponsor.getSurname().equals(s.getSurname()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(sponsor.getPhoto().equals(s.getPhoto()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(sponsor.getEmail().equals(s.getEmail()), "Un administrador no debe modificar estos datos");
+		//			//			Assert.isTrue(sponsor.getPhone().equals(s.getPhone()), "Un administrador no debe modificar estos datos");
+		//			//			Assert.isTrue(sponsor.getAddress().equals(s.getAddress()), "Un administrador no debe modificar estos datos");
+		//			//			Assert.isTrue(sponsor.getNumberSocialProfiles() == (s.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
+		//
+		//		}
 
 		Sponsor res = null;
 		Assert.isTrue(s.getName() != null && s.getSurname() != null && s.getName() != "" && s.getSurname() != "" && s.getUserAccount() != null && s.getEmail() != null && s.getEmail() != "", "SponsorService.save -> Name or Surname invalid");
@@ -152,6 +151,7 @@ public class SponsorService {
 
 		return res;
 	}
+
 	public Sponsor sponsorUserAccount(final int id) {
 		return this.sponsorRepository.sponsorByUserAccount(id);
 	}
