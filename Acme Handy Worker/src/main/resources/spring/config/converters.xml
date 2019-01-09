@@ -109,6 +109,8 @@
 		<bean class="converters.EndorserRecordToStringConverter" />
 		<bean class="converters.StringToEndorserRecordConverter" />
 		
+		<bean class="converters.FixUpTaskToStringConverter" />
+		<bean class="converters.StringToFixUpTaskConverter" />
 				
 				
 	</util:list>

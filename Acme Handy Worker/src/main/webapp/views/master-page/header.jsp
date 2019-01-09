@@ -64,6 +64,7 @@
 			<li><a href="complaint/customer/complaints.do"><spring:message code="master.page.customer.complaints" /></a></li>
 			<li><a href="fix-up-task/customer/list.do"><spring:message	code="master.page.customer.fixUpTask" /></a>
 			<li><a href="endorsement/customer/list.do"><spring:message	code="master.page.customer.endorsement" /></a>
+			<li><a href="application/handyWorker,customer/applications.do"><spring:message code="master.page.handyworker.applications"/></a></li>
 		</security:authorize>
 		
 			<security:authorize access="hasRole('REFEREE')">
@@ -87,7 +88,7 @@
 			<li><a href="endorsement/handy-worker/list.do"><spring:message	code="master.page.customer.endorsement" /></a>
 			<li><a href="curricula/handyWorker/curriculas.do"><spring:message	code="master.page.handyWorker.curricula" /></a>
 			<li><a href="fix-up-task/handy-worker/list.do"><spring:message	code="master.page.handyworker.fixUpTask" /></a>
-			<li><a href="application/handyWorker/applications.do"><spring:message code="master.page.handyworker.applications"/></a></li>
+			<li><a href="application/handyWorker,customer/applications.do"><spring:message code="master.page.handyworker.applications"/></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('SPONSOR')">

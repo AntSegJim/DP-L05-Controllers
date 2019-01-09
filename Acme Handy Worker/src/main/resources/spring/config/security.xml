@@ -82,7 +82,7 @@
 		<security:intercept-url pattern="/complaint/referee/**" access="hasRole('REFEREE')" /> 
 		<security:intercept-url pattern="/report/referee/**" access="hasRole('REFEREE')" /> 
 		<security:intercept-url pattern="/note/referee/**" access="hasRole('REFEREE')" /> 
-  		<security:intercept-url pattern="/application/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
+		<security:intercept-url pattern="/application/handyWorker,customer/**" access="hasAnyRole('HANDYWORKER','CUSTOMER')" /> 
   		<security:intercept-url pattern="/finder/handyWorker/**" access="hasRole('HANDYWORKER')" />		
 		<security:intercept-url pattern="/fixUpTask/customer/**" access="hasRole('CUSTOMER')" />
 
