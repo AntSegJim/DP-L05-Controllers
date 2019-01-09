@@ -121,7 +121,7 @@ public class HandyWorkerService {
 		final List<String> emails = this.actorService.getEmails();
 
 		if (h.getId() == 0)
-			Assert.isTrue(emails.contains(h.getEmail()));
+			Assert.isTrue(!emails.contains(h.getEmail()));
 		else {
 			final HandyWorker a = this.handyWorkerRepository.findOne(h.getId());
 			Assert.isTrue(a.getEmail().equals(h.getEmail()));

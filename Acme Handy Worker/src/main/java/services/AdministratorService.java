@@ -100,7 +100,7 @@ public class AdministratorService {
 		final List<String> emails = this.actorService.getEmails();
 
 		if (admin.getId() == 0)
-			Assert.isTrue(emails.contains(admin.getEmail()));
+			Assert.isTrue(!emails.contains(admin.getEmail()));
 		else {
 			final Administrator a = this.adminRepo.findOne(admin.getId());
 			Assert.isTrue(a.getEmail().equals(admin.getEmail()));

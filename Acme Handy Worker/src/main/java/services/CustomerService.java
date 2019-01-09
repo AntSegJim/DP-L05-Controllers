@@ -111,7 +111,7 @@ public class CustomerService {
 		final List<String> emails = this.actorService.getEmails();
 
 		if (c.getId() == 0)
-			Assert.isTrue(emails.contains(c.getEmail()));
+			Assert.isTrue(!emails.contains(c.getEmail()));
 		else {
 			final Customer a = this.customerRepository.findOne(c.getId());
 			Assert.isTrue(a.getEmail().equals(c.getEmail()));

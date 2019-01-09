@@ -101,7 +101,7 @@ public class SponsorService {
 		final List<String> emails = this.actorService.getEmails();
 
 		if (s.getId() == 0)
-			Assert.isTrue(emails.contains(s.getEmail()));
+			Assert.isTrue(!emails.contains(s.getEmail()));
 		else {
 			final Sponsor a = this.sponsorRepository.findOne(s.getId());
 			Assert.isTrue(a.getEmail().equals(s.getEmail()));

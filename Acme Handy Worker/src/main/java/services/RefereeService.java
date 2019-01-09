@@ -126,7 +126,7 @@ public class RefereeService {
 		final List<String> emails = this.actorService.getEmails();
 
 		if (r.getId() == 0)
-			Assert.isTrue(emails.contains(r.getEmail()));
+			Assert.isTrue(!emails.contains(r.getEmail()));
 		else {
 			final Referee a = this.refereeRepository.findOne(r.getId());
 			Assert.isTrue(a.getEmail().equals(r.getEmail()));
