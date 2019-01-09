@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +30,8 @@ public class AdministratorService {
 	private AdministratorRepository	adminRepo;
 	@Autowired
 	private MessageBoxService		messageBoxService;
+	@Autowired
+	private ActorService			actorService;
 
 
 	public Administrator create() {
@@ -93,6 +96,15 @@ public class AdministratorService {
 		final Matcher matcherEmail4 = patternEmail4.matcher(admin.getEmail());
 
 		Assert.isTrue((matcherEmail1.matches() == true || matcherEmail2.matches() == true || matcherEmail3.matches() == true || matcherEmail4.matches() == true), "Email");
+
+		final List<String> emails = this.actorService.getEmails();
+
+		if (admin.getId() == 0)
+			Assert.isTrue(emails.contains(admin.getEmail()));
+		else {
+			final Administrator a = this.adminRepo.findOne(admin.getId());
+			Assert.isTrue(a.getEmail().equals(admin.getEmail()));
+		}
 
 		if (admin.getPhone() != "" || admin.getPhone() != null) {
 			final String regexTelefono = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$";

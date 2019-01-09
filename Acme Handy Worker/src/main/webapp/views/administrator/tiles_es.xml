@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="administrator/create" extends="master.page">	
-		<put-attribute name="title" value="Administrador: Acción 1" />
+		<put-attribute name="title" value="Administrador: Crear nuevo Administrador" />
 		<put-attribute name="body" value="/views/administrator/edit.jsp" />
 	</definition>
 	
@@ -29,6 +29,12 @@
 	<definition name="administrator/dashboard" extends="master.page">	
 		<put-attribute name="title" value="Administrador: Tablero" />
 		<put-attribute name="body" value="/views/administrator/dashboard.jsp" />
+	</definition>
+	
+		
+	<definition name="referee/create" extends="master.page">	
+		<put-attribute name="title" value="Administrador: Crear nuevo Árbitro" />
+		<put-attribute name="body" value="/views/administrator/editReferee.jsp" />
 	</definition>
 	
 </tiles-definitions>

@@ -29,6 +29,8 @@
 	<form:hidden path="numberSocialProfiles" />
 	<form:hidden path="userAccount" />
 	<form:hidden path="isBanned" />
+	<form:hidden path="email" />
+	
 	
 	<form:label path="name"><spring:message code="profile.action.3.name" />:</form:label>
 	<form:input path="name"/>
@@ -48,11 +50,6 @@
 	<form:label path="photo"><spring:message code="profile.action.3.photo" />:</form:label>
 	<form:input path="photo" />
 	<form:errors cssClass="error" path="photo" />
-	<br />
-	
-	<form:label path="email"><spring:message code="profile.action.3.email" />:</form:label>
-	<form:input path="email" />
-	<form:errors cssClass="error" path="email" />
 	<br />
 	
 	<form:label path="phone"><spring:message code="profile.action.3.phone" />:</form:label>

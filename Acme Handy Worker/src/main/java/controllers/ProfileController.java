@@ -25,9 +25,11 @@ import security.UserAccount;
 import services.ActorService;
 import services.AdministratorService;
 import services.ProfileSocialNetworkService;
+import services.RefereeService;
 import services.SponsorService;
 import domain.Actor;
 import domain.Administrator;
+import domain.Referee;
 import domain.Sponsor;
 
 @Controller
@@ -45,6 +47,9 @@ public class ProfileController extends AbstractController {
 
 	@Autowired
 	private SponsorService				sponsorService;
+
+	@Autowired
+	private RefereeService				refereeService;
 
 
 	// Action-2 ---------------------------------------------------------------		
@@ -84,7 +89,7 @@ public class ProfileController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit-administrator", method = RequestMethod.POST, params = "save")
-	public ModelAndView action3(@Valid final Administrator administrator, final BindingResult binding) {
+	public ModelAndView editAdministrator(@Valid final Administrator administrator, final BindingResult binding) {
 		ModelAndView result;
 		try {
 
@@ -126,12 +131,13 @@ public class ProfileController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit-sponsor", method = RequestMethod.POST, params = "save")
-	public ModelAndView action3(@Valid final Sponsor sponsor, final BindingResult binding) {
+	public ModelAndView editSponsor(@Valid final Sponsor sponsor, final BindingResult binding) {
 		ModelAndView result;
 		try {
 
 			if (!binding.hasErrors()) {
 				this.sponsorService.save(sponsor);
+				this.profileService.UpdateProperty();
 				result = new ModelAndView("redirect:personal-datas.do");
 			} else {
 				result = new ModelAndView("profile/editSponsor");
@@ -147,4 +153,43 @@ public class ProfileController extends AbstractController {
 
 	}
 
+	//REFEREE
+	@RequestMapping(value = "/edit-referee", method = RequestMethod.GET)
+	public ModelAndView editReferee() {
+		ModelAndView result;
+		Referee r;
+
+		final UserAccount user = LoginService.getPrincipal();
+		r = (Referee) this.actorService.getActorByUserAccount(user.getId());
+		Assert.notNull(r);
+
+		result = new ModelAndView("profile/editReferee");
+		result.addObject("actor", r);
+		result.addObject("action", "profile/edit-referee.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit-referee", method = RequestMethod.POST, params = "save")
+	public ModelAndView editReferee(@Valid final Referee referee, final BindingResult binding) {
+		ModelAndView result;
+		try {
+
+			if (!binding.hasErrors()) {
+				this.refereeService.save(referee);
+				this.profileService.UpdateProperty();
+				result = new ModelAndView("redirect:personal-datas.do");
+			} else {
+				result = new ModelAndView("profile/editReferee");
+				result.addObject("actor", referee);
+			}
+		} catch (final Exception e) {
+			result = new ModelAndView("profile/editReferee");
+			result.addObject("actor", referee);
+			result.addObject("exception", e);
+
+		}
+		return result;
+
+	}
 }

@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +28,8 @@ public class RefereeService {
 	private RefereeRepository	refereeRepository;
 	@Autowired
 	private MessageBoxService	messageBoxService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	//Metodos CRUD
@@ -42,6 +45,7 @@ public class RefereeService {
 		res.setPhone("");
 		res.setAddress("");
 		res.setNumberSocialProfiles(0);
+		res.setIsBanned(0);
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
 		user.setAuthorities(new HashSet<Authority>());
@@ -87,22 +91,24 @@ public class RefereeService {
 		}
 
 		final UserAccount userLoged = LoginService.getPrincipal();
-		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
-			final Referee referee = this.refereeRepository.findOne(r.getId());
 
-			Assert.isTrue(referee.getId() == (r.getId()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getId() == (r.getId()), "Un administrador no debe modificar estos datos");
+		if (r.getId() != 0 && userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"))
+			if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
+				final Referee referee = this.refereeRepository.findOne(r.getId());
 
-			Assert.isTrue(referee.getName().equals(r.getName()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getMiddleName().equals(r.getMiddleName()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getSurname().equals(r.getSurname()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getPhoto().equals(r.getPhoto()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getEmail().equals(r.getEmail()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getPhone().equals(r.getPhone()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getAddress().equals(r.getAddress()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getNumberSocialProfiles() == (r.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(referee.getUserAccount() == (r.getUserAccount()), "Un administrador no debe modificar estos datos");
-		}
+				Assert.isTrue(referee.getId() == (r.getId()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getId() == (r.getId()), "Un administrador no debe modificar estos datos");
+
+				Assert.isTrue(referee.getName().equals(r.getName()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getMiddleName().equals(r.getMiddleName()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getSurname().equals(r.getSurname()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getPhoto().equals(r.getPhoto()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getEmail().equals(r.getEmail()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getPhone().equals(r.getPhone()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getAddress().equals(r.getAddress()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getNumberSocialProfiles() == (r.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
+				Assert.isTrue(referee.getUserAccount() == (r.getUserAccount()), "Un administrador no debe modificar estos datos");
+			}
 
 		Referee res = null;
 
@@ -116,6 +122,15 @@ public class RefereeService {
 		final Pattern patternEmail2 = Pattern.compile(regexEmail2);
 		final Matcher matcherEmail2 = patternEmail2.matcher(r.getEmail());
 		Assert.isTrue(matcherEmail1.find() == true || matcherEmail2.find() == true, "CustomerService.save -> Correo inválido");
+
+		final List<String> emails = this.actorService.getEmails();
+
+		if (r.getId() == 0)
+			Assert.isTrue(emails.contains(r.getEmail()));
+		else {
+			final Referee a = this.refereeRepository.findOne(r.getId());
+			Assert.isTrue(a.getEmail().equals(r.getEmail()));
+		}
 
 		if (r.getPhone() != "" || r.getPhone() != null) {
 			final String regexTelefono = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$";

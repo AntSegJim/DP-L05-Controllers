@@ -29,7 +29,6 @@
 <b><spring:message code="profile.action.2.phone" /></b> ${actor.phone} <br/>
 <b><spring:message code="profile.action.2.address" /></b> ${actor.address} <br/>
 <b><spring:message code="profile.action.2.numberSocial" /></b> ${actor.numberSocialProfiles} <a href="profileSocial/actor/list.do"><spring:message code="profile.list" /></a>
-<%-- que hemos con la cuenta  --%>
 
 <br/>
 <input type="button" name="cancel" value="<spring:message code="administrator.cancel" />"
@@ -46,6 +45,12 @@
 
 <security:authorize access="hasRole('SPONSOR')">
 <form action="profile/edit-sponsor.do">
+    <input type="submit" value="<spring:message code="profile.edit.profile" />" />
+</form>
+</security:authorize>
+
+<security:authorize access="hasRole('REFEREE')">
+<form action="profile/edit-referee.do">
     <input type="submit" value="<spring:message code="profile.edit.profile" />" />
 </form>
 </security:authorize>

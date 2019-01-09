@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +31,8 @@ public class CustomerService {
 	private CustomerRepository	customerRepository;
 	@Autowired
 	private MessageBoxService	messageBoxService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	//------------------------Simple CRUD methods---------------------
@@ -104,6 +107,15 @@ public class CustomerService {
 		final Pattern patternEmail2 = Pattern.compile(regexEmail2);
 		final Matcher matcherEmail2 = patternEmail2.matcher(c.getEmail());
 		Assert.isTrue(matcherEmail1.matches() == true || matcherEmail2.matches() == true, "CustomerService.save -> Correo no válido");
+
+		final List<String> emails = this.actorService.getEmails();
+
+		if (c.getId() == 0)
+			Assert.isTrue(emails.contains(c.getEmail()));
+		else {
+			final Customer a = this.customerRepository.findOne(c.getId());
+			Assert.isTrue(a.getEmail().equals(c.getEmail()));
+		}
 
 		if (c.getPhone() != "" || c.getPhone() != null) {
 			final String regexTelefono = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$";

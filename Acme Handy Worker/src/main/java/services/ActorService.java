@@ -113,6 +113,10 @@ public class ActorService {
 		return this.actorRepository.getActoyByUsername(username);
 	}
 
+	public List<String> getEmails() {
+		return this.actorRepository.getEmails();
+	}
+
 	//	//BAN ACTOR
 	//
 

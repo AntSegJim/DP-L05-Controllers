@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +29,9 @@ public class SponsorService {
 	private SponsorRepository	sponsorRepository;
 	@Autowired
 	private MessageBoxService	messageBoxService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	public Sponsor create() {
@@ -93,6 +97,15 @@ public class SponsorService {
 		final Pattern patternEmail2 = Pattern.compile(regexEmail2);
 		final Matcher matcherEmail2 = patternEmail2.matcher(s.getEmail());
 		Assert.isTrue(matcherEmail1.matches() == true || matcherEmail2.matches() == true, "SponsorService.save -> Correo inválido");
+
+		final List<String> emails = this.actorService.getEmails();
+
+		if (s.getId() == 0)
+			Assert.isTrue(emails.contains(s.getEmail()));
+		else {
+			final Sponsor a = this.sponsorRepository.findOne(s.getId());
+			Assert.isTrue(a.getEmail().equals(s.getEmail()));
+		}
 
 		if (s.getPhone() != "" || s.getPhone() != null) {
 			final String regexTelefono = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$";
