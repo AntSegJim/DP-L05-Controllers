@@ -98,5 +98,8 @@ public class CurriculaService {
 	public Collection<String> allTickersCurricula() {
 		return this.CRepo.tickerByCurricula();
 	}
+	public Collection<Curricula> findAllHandyWorkerCurricula(final Integer id) {
+		return this.CRepo.findAllHandyWorkerCurricula(id);
+	}
 
 }

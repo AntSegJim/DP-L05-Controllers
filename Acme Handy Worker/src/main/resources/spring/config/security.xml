@@ -83,6 +83,14 @@
   		<security:intercept-url pattern="/finder/handyWorker/**" access="hasRole('HANDYWORKER')" />		
 		<security:intercept-url pattern="/fixUpTask/customer/**" access="hasRole('CUSTOMER')" />
 
+		<security:intercept-url pattern="/curricula/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
+  <security:intercept-url pattern="/educationRecord/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
+  <security:intercept-url pattern="/professionalRecord/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
+  <security:intercept-url pattern="/miscellaneousRecord/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
+  <security:intercept-url pattern="/endorserRecord/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
+  <security:intercept-url pattern="/personalRecord/handyWorker/**" access="hasRole('HANDYWORKER')" /> 
+		
+			
 		<security:intercept-url pattern="/picture/handyWorker/**" access="hasRole('HANDYWORKER')" />
 		<security:intercept-url pattern="/section/handyWorker/**" access="hasRole('HANDYWORKER')" />
 		
