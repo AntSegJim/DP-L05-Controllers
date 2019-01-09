@@ -81,6 +81,34 @@
 		
 		<bean class="converters.AttachmentToStringConverter" />
 		<bean class="converters.StringToAttachmentConverter" />
+		
+		<bean class="converters.PictureToStringConverter" />
+		<bean class="converters.StringToPictureConverter" />
+		
+		<bean class="converters.SectionToStringConverter" />
+		<bean class="converters.StringToSectionConverter" />
+		
+		<bean class="converters.TutorialToStringConverter" />
+		<bean class="converters.StringToTutorialConverter" />
+		
+		<bean class="converters.CurriculaToStringConverter" />
+		<bean class="converters.StringToCurriculaConverter" />
+		
+		<bean class="converters.EducationRecordToStringConverter" />
+		<bean class="converters.StringToEducationRecordConverter" />
+		
+		<bean class="converters.ProfessionalRecordToStringConverter" />
+		<bean class="converters.StringToProfessionalRecordConverter" />
+		
+		<bean class="converters.MiscellaneousRecordToStringConverter" />
+		<bean class="converters.StringToMiscellaneousRecordConverter" />
+		
+		<bean class="converters.PersonalRecordToStringConverter" />
+		<bean class="converters.StringToPersonalRecordConverter" />
+		
+		<bean class="converters.EndorserRecordToStringConverter" />
+		<bean class="converters.StringToEndorserRecordConverter" />
+		
 				
 				
 	</util:list>

@@ -18,14 +18,21 @@
 <security:authorize access="hasRole('HANDYWORKER')">
 
 <p><spring:message code="pictures.title" /></p>
+<input type="hidden" value="tutorial" />
 <display:table pagesize="5" name="pictures" id="row"
 requestURI="picture/handyWorker/showPictures.do" >
 
 <display:column>
-	<a href="picture/handyWorker/editPicture.do?pictureId=${row.id}"><spring:message code="picture.edit" /></a>
+	<a href="picture/handyWorker/editPicture.do?pictureId=${row.id}&tutorialId=${tutorial.id}" ><spring:message code="picture.edit" /></a>
 </display:column>
 
 <display:column property="picture" titleKey="pictures" />
 
+<form action="picture/handyWorker/createPicture.do">
+    <input type="submit" value="<spring:message code="picture.create" />" />
+</form>
+
 </display:table>
+
+
 </security:authorize>
