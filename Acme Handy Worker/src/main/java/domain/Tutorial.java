@@ -27,7 +27,7 @@ public class Tutorial extends DomainEntity {
 	private String					title;
 	private Date					moment;
 	private String					summary;
-	private Collection<Picture>		picture;
+
 	private Collection<Section>		section;
 	private Collection<Sponsorship>	sponsorship;
 	private HandyWorker				handyWorker;
@@ -62,15 +62,7 @@ public class Tutorial extends DomainEntity {
 	public void setSummary(final String summary) {
 		this.summary = summary;
 	}
-	@Valid
-	@ManyToMany
-	public Collection<Picture> getPicture() {
-		return this.picture;
-	}
 
-	public void setPicture(final Collection<Picture> picture) {
-		this.picture = picture;
-	}
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Section> getSection() {

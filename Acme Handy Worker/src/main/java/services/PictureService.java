@@ -18,12 +18,15 @@ public class PictureService {
 
 	@Autowired
 	private PictureRepository	PRepo;
+	@Autowired
+	private TutorialService		TService;
 
 
 	//Metodo create
 	public Picture create() {
 		final Picture pic = new Picture();
-		pic.setPicture("");
+		pic.setUrlPicture("");
+		pic.setTutorial(this.TService.create());
 		return pic;
 	}
 
@@ -35,7 +38,7 @@ public class PictureService {
 		return this.PRepo.findOne(PictureId);
 	}
 	public Picture save(final Picture picture) {
-		Assert.isTrue(picture != null && picture.getPicture() != null && picture.getPicture() != "");
+		Assert.isTrue(picture.getTutorial() != null && picture != null && picture.getUrlPicture() != null && picture.getUrlPicture() != "");
 		return this.PRepo.save(picture);
 	}
 	public void delete(final Picture picture) {

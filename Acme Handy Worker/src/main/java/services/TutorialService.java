@@ -1,9 +1,7 @@
 
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -16,8 +14,7 @@ import org.springframework.util.Assert;
 
 import repositories.TutorialRepository;
 import security.UserAccount;
-import domain.HandyWorker;
-import domain.Picture;
+import domain.Actor;
 import domain.Section;
 import domain.Sponsorship;
 import domain.Tutorial;
@@ -38,20 +35,21 @@ public class TutorialService {
 
 	public Tutorial create() {
 		final Tutorial tutorial = new Tutorial();
-		final Section section = this.SService.create();
+		//final Section section = this.SService.create();
 		//Me creo una lista de con una seccion ya que un tutorial cuando se crea tiene que tener
 		//al menos una section porque es una composicion, asi que no puedo crear una lista vacia como
 		//en picture y en sponsorship
-		final Collection<Section> sections = new HashSet<>();
-		Collections.addAll(sections, section);
+		//		final Collection<Section> sections = new HashSet<>();
+		//		Collections.addAll(sections, section);
 
 		tutorial.setTitle("");
 		tutorial.setMoment(new Date());
 		tutorial.setSummary("");
-		tutorial.setPicture(new HashSet<Picture>());
-		tutorial.setSection(sections);
+		tutorial.setSection(new HashSet<Section>());
 		tutorial.setSponsorship(new HashSet<Sponsorship>());
-		tutorial.setHandyWorker(new HandyWorker());
+		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
+		final Actor a = this.actorS.getActorByUserAccount(user.getId());
+		tutorial.setHandyWorker(this.handyWorkerService.findOne(a.getId()));
 		return tutorial;
 	}
 
@@ -66,11 +64,15 @@ public class TutorialService {
 	//updating
 	public Tutorial save(final Tutorial tutorial) {
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
+		//		final Actor a = this.actorS.getActorByUserAccount(user.getId());
+		//		tutorial.setHandyWorker(this.handyWorkerService.findOne(a.getId()));
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HANDYWORKER"));
-		Assert.isTrue(tutorial != null && tutorial.getTitle() != null && tutorial.getTitle() != "" && tutorial.getMoment() != null && tutorial.getMoment().before(Calendar.getInstance().getTime()) && tutorial.getSummary() != ""
-			&& !tutorial.getSection().isEmpty() && tutorial.getSection() != null && tutorial.getHandyWorker() != null);
-		final HandyWorker h = this.handyWorkerService.handyWorkerUserAccount(user.getId());
-		tutorial.setHandyWorker(h);
+		Assert.isTrue(tutorial.getMoment() != null);
+		Assert.isTrue(tutorial.getSection() != null);
+		Assert.isTrue(tutorial.getHandyWorker() != null);
+		Assert.isTrue(tutorial != null && tutorial.getTitle() != null && tutorial.getTitle() != "" && tutorial.getSummary() != "");
+		//final HandyWorker h = this.handyWorkerService.handyWorkerUserAccount(user.getId());
+
 		return this.TRepo.save(tutorial);
 	}
 

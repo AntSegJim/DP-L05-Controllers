@@ -22,8 +22,11 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	
+	<form:hidden path="sponsorship" />
 	<form:hidden path="handyWorker" />
+	<form:hidden path="moment" />
+	<form:hidden path="section" />
+	
 
  
  	<form:label path="title">
@@ -33,65 +36,21 @@
 	<form:errors cssClass="error" path="title" />
 	<br />
 	
-	<form:label path="moment">
-		<spring:message code="tutorial.moment" />:
-	</form:label>
-	<form:input path="moment" />
-	<form:errors cssClass="error" path="moment" />
-	<br />
-	
 	<form:label path="summary">
 		<spring:message code="tutorial.summary" />:
 	</form:label>
 	<form:input path="summary" />
 	<form:errors cssClass="error" path="summary" />
 	<br />
-	
-	<form:label path="picture">
-		<spring:message code="tutorial.pictures" />:
-	</form:label>
-	<form:select id="pictures" path="picture">
-		<form:option value="0" label="----" />		
-		<form:options items="${pictures}" itemValue="id"
-			itemLabel="picture" />
-	</form:select>
-	<form:errors cssClass="error" path="picture" />
-	<br />
-	
 		
-	<form:label path="section">
-		<spring:message code="tutorial.sections" />:
-	</form:label>
-	<jstl:forEach var="section" items="${sections}"> 
-
-	<input type="checkbox" name="section" value="${section.title}"/>
-	
-	</jstl:forEach>
-	<form:errors cssClass="error" path="section" />
-	<br />
-		
-	<form:label path="sponsorship">
-		<spring:message code="tutorial.sponsorship" />:
-	</form:label>
-	<jstl:forEach var="sponsorship" items="${sponsorships}"> 
-
-	<input type="checkbox" name="sponsorship" value="${sponsorship.linkTargetPage}"/>
-	
-	</jstl:forEach>
-	<form:errors cssClass="error" path="sponsorship" />
-	<br />
-	<input type="submit" name="save"
-		value="<spring:message code="tutorial.save" />" />&nbsp; 
-	<jstl:if test="${tutorial.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="tutorial.delete" />"
-			onclick="return confirm('<spring:message code="tutorial.confirm.delete" />')" />&nbsp;
+	<input type="submit" name="save" value="<spring:message code="tutorial.save" />" />
+	<jstl:if test="${tutorial.id ne 0 }">
+		<input type="submit" name="delete" value="<spring:message code="tutorial.delete" />"/>
 	</jstl:if>
-		
-		<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
-			onclick="javascript: relativeRedir('tutorial/handyWorker/tutorials.do');" />
+	
+	<input type="button" name="cancel" value="<spring:message code="tutorial.cancel" />"
+		onclick="javascript: relativeRedir('tutorial/handyWorker/tutorials.do');" />
 	<br />
- 	
 </form:form>
 </security:authorize>
 </body>

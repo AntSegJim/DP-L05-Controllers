@@ -1487,15 +1487,18 @@
 
 	<!-- Picture -->
 	<bean id="picture1" class="domain.Picture">
-		<property name="picture" value="https://goo.gl/images/BBstA5"></property>
+		<property name="urlPicture" value="https://goo.gl/images/BBstA5"></property>
+		<property name="tutorial" ref="tutorial1"></property>
 	</bean>
 
 	<bean id="picture2" class="domain.Picture">
-		<property name="picture" value="https://goo.gl/images/C8yiYE"></property>
+		<property name="urlPicture" value="https://goo.gl/images/C8yiYE"></property>
+		<property name="tutorial" ref="tutorial2"></property>
 	</bean>
 
 	<bean id="picture3" class="domain.Picture">
-		<property name="picture" value="https://goo.gl/images/dLjah6"></property>
+		<property name="urlPicture" value="https://goo.gl/images/dLjah6"></property>
+		<property name="tutorial" ref="tutorial3"></property>
 	</bean>
 
 	<!-- Benas para que den errores <bean id="picture4" class="domain.Picture"> 
@@ -2764,12 +2767,6 @@
 		<property name="title" value="Titulo del primer tutorial"></property>
 		<property name="moment" value="05/06/2018 11:30"></property>
 		<property name="summary" value="Breve resumen del primer tutorial"></property>
-		<property name="picture">
-			<list>
-				<ref bean="picture1" />
-				<ref bean="picture2" />
-			</list>
-		</property>
 		<property name="section">
 			<list>
 				<ref bean="section1" />
@@ -2788,12 +2785,6 @@
 		<property name="title" value="Titulo del segundo tutorial"></property>
 		<property name="moment" value="05/06/2017 11:30"></property>
 		<property name="summary" value="Breve resumen del segundo tutorial"></property>
-		<property name="picture">
-			<list>
-				<ref bean="picture1" />
-				<ref bean="picture2" />
-			</list>
-		</property>
 		<property name="section">
 			<list>
 				<ref bean="section4" />
@@ -2812,12 +2803,6 @@
 		<property name="title" value="Titulo del Tercer tutorial"></property>
 		<property name="moment" value="05/06/2017 11:30"></property>
 		<property name="summary" value="Breve resumen del segundo tutorial"></property>
-		<property name="picture">
-			<list>
-				<ref bean="picture3" />
-
-			</list>
-		</property>
 		<property name="section">
 			<list>
 				<ref bean="section5" />

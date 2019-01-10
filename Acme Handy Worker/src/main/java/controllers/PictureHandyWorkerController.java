@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import services.ActorService;
 import services.PictureService;
 import services.TutorialService;
+import domain.Actor;
 import domain.Picture;
 import domain.Tutorial;
 
@@ -24,23 +27,26 @@ import domain.Tutorial;
 public class PictureHandyWorkerController extends AbstractController {
 
 	@Autowired
-	private TutorialService	tutorialService;
-	@Autowired
 	private PictureService	pictureService;
 
+	@Autowired
+	private ActorService	actorService;
+	@Autowired
+	private TutorialService	tutorialService;
 
-	@RequestMapping(value = "/showPictures", method = RequestMethod.GET)
-	public ModelAndView showPictures(@RequestParam final int tutorialId) {
+
+	//Cambiar
+	@RequestMapping(value = "/handyWorker/showPicture", method = RequestMethod.GET)
+	public ModelAndView tutorials() {
 		final ModelAndView result;
-		Tutorial t;
-		Collection<Picture> pictures;
+		final Collection<Picture> pictures;
+		//final UserAccount user = LoginService.getPrincipal();
+		//final HandyWorker h = this.handyWorkerService.handyWorkerUserAccount(user.getId());
 
-		t = this.tutorialService.findOne(tutorialId);
-		pictures = t.getPicture();
+		pictures = this.pictureService.finaAll();
 
 		result = new ModelAndView("picture/showPictures");
 		result.addObject("pictures", pictures);
-		result.addObject("tutorial", t);
 
 		return result;
 	}
@@ -49,15 +55,23 @@ public class PictureHandyWorkerController extends AbstractController {
 	public ModelAndView createPicture() {
 		ModelAndView result;
 		Picture picture;
+		Collection<Tutorial> tutorials;
+
+		final Integer id = LoginService.getPrincipal().getId();
+		final Actor a = this.actorService.getActorByUserAccount(id);
+
+		tutorials = this.tutorialService.getTutorialsByHandyWorker(a.getId());
 
 		picture = this.pictureService.create();
 		result = new ModelAndView("picture/editPicture");
 		result.addObject("picture", picture);
+		result.addObject("tutorials", tutorials);
+
 		return result;
 	}
 
 	@RequestMapping(value = "/editPicture", method = RequestMethod.GET)
-	public ModelAndView editPicture(@RequestParam final int pictureId, @RequestParam final int tutorialId) {
+	public ModelAndView editPicture(@RequestParam final int pictureId) {
 		ModelAndView result;
 		Picture picture;
 
@@ -65,26 +79,35 @@ public class PictureHandyWorkerController extends AbstractController {
 		Assert.notNull(picture);
 		result = new ModelAndView("picture/editPicture");
 		result.addObject("picture", picture);
-		result.addObject("tutorialId", tutorialId);
 		return result;
 	}
 
 	@RequestMapping(value = "/editPicture", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@RequestParam(value = "tutorialId") final int tutorialId, @Valid final Picture picture, final BindingResult binding) {
+	public ModelAndView save(@Valid final Picture picture, final BindingResult binding) {
+		ModelAndView result;
+		if (!binding.hasErrors()) {
+			this.pictureService.save(picture);
+			result = new ModelAndView("redirect:showPictures.do");
+		} else {
+			result = new ModelAndView("picture/editPicture");
+			result.addObject("picture", picture);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/editPicture", method = RequestMethod.POST, params = "delete")
+	public ModelAndView deleteTutorial(final Picture picture, final BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors())
+		if (!binding.hasErrors()) {
+			this.pictureService.delete(picture);
+			result = new ModelAndView("redirect:showPictures.do");
+		} else {
 			result = new ModelAndView("picture/editPicture");
-		//result.addObject("picture", picture);
-		else
-			try {
-				//final Collection<Picture> pictures = this.pictureService.finaAll();
-				this.pictureService.save(picture);
-				//pictures.add(nueva);
-				result = new ModelAndView("redirect:showPictures.do?tutorialId=" + tutorialId);
-			} catch (final Throwable oopd) {
-				result = new ModelAndView("picture/editPicture");
-			}
+			result.addObject("picture", picture);
+		}
+
 		return result;
+
 	}
 }

@@ -26,9 +26,6 @@ requestURI="tutorial/AllTutorials.do" >
 <display:column property="summary" titleKey="tutorial.summary" />
 <display:column property="handyWorker.id" titleKey="tutorial.handyWorker" />
 <display:column>
-	<a href="tutorial/showTutorialPictureHW.do?tutorialId=${row.id}"><spring:message code="tutorial.pictures" /></a>
-</display:column>
-<display:column>
 	<a href="tutorial/showTutorialSectionHW.do?tutorialId=${row.id}"><spring:message code="tutorial.sections" /></a>
 </display:column>
 <display:column>

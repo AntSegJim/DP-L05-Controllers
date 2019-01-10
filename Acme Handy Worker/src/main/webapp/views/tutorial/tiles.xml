@@ -26,6 +26,11 @@
 		<put-attribute name="body" value="/views/tutorial/editTutorial.jsp" />
 	</definition>
 	
+	<definition name="tutorial/showTutorial" extends="master.page">	
+		<put-attribute name="title" value="Tutorial" />
+		<put-attribute name="body" value="/views/tutorial/showTutorial.jsp" />
+	</definition>
+	
 	
 	
 	

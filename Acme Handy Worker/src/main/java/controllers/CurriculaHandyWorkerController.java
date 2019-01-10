@@ -107,12 +107,6 @@ public class CurriculaHandyWorkerController extends AbstractController {
 		} else {
 			result = new ModelAndView("curricula/createCurricula");
 			result.addObject("curricula", curricula);
-
-			result.addObject("educationsRecords", this.ERService.findAll());
-			result.addObject("professionalsRecords", this.PRService.findAll());
-			result.addObject("miscellaneousRecords", this.MRService.findAll());
-			result.addObject("endosersRecords", this.EnRService.findAll());
-			result.addObject("personalRecord", this.PerRService.findAll());
 		}
 		return result;
 	}
