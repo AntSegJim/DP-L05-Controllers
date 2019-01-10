@@ -35,7 +35,7 @@ requestURI="${requestURI}" >
 
 </display:table>
 	<div>
-		<a href="phase/handyWorker/create.do?applicationId=${row.application.id}"> <spring:message code="phase.create" />
+		<a href="phase/handyWorker/create.do?applicationId=${application.id}"> <spring:message code="phase.create" />
 		</a>
 	</div>
 

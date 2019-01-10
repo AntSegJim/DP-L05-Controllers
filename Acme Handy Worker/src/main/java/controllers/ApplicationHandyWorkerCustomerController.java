@@ -139,16 +139,19 @@ public class ApplicationHandyWorkerCustomerController extends AbstractController
 		ModelAndView result;
 
 		final Collection<FixUpTask> fixUpTasks;
-		final Collection<CreditCard> creditCards;
+		final Collection<FixUpTask> HandyFixUpTasks;
 		//		final UserAccount user = LoginService.getPrincipal();
 		//		if (user.getAuthorities().iterator().next().getAuthority().equals("CUSTOMER")) {
 		//			final Actor customer = this.actorService.getActorByUserAccount(user.getId());
 		//			creditCards = this.creditCardS.getAllMyCreditCards(customer.getId());
 		//		} else
-		creditCards = null;
+		final Collection<CreditCard> creditCards;
 
 		fixUpTasks = this.fixUpTaskS.findAll();
+		HandyFixUpTasks = this.fixUpTaskS.findAllfixUpTasksHandyWorkerId();
+		fixUpTasks.removeAll(HandyFixUpTasks);
 
+		creditCards = null;
 		result = new ModelAndView("application/edit");
 		result.addObject("application", application);
 		result.addObject("fixUpTasks", fixUpTasks);
@@ -157,6 +160,7 @@ public class ApplicationHandyWorkerCustomerController extends AbstractController
 
 		return result;
 	}
+
 	@RequestMapping(value = "/loadCreditCard")
 	public ModelAndView findByCertificationId(@RequestParam final Integer valorStatus) {
 		ModelAndView result;
