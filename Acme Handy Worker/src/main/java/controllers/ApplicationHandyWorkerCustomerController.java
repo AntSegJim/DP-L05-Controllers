@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import security.UserAccount;
-import services.ActorService;
 import services.ApplicationService;
 import services.CreditCardService;
 import services.CustomerService;
@@ -47,8 +46,6 @@ public class ApplicationHandyWorkerCustomerController extends AbstractController
 	private CreditCardService	creditCardS;
 	@Autowired
 	private FixUpTaskService	fixUpTaskS;
-	@Autowired
-	private ActorService		actorService;
 
 
 	@RequestMapping(value = "/applications", method = RequestMethod.GET)
@@ -140,17 +137,18 @@ public class ApplicationHandyWorkerCustomerController extends AbstractController
 
 		final Collection<FixUpTask> fixUpTasks;
 		final Collection<FixUpTask> HandyFixUpTasks;
-		//		final UserAccount user = LoginService.getPrincipal();
-		//		if (user.getAuthorities().iterator().next().getAuthority().equals("CUSTOMER")) {
-		//			final Actor customer = this.actorService.getActorByUserAccount(user.getId());
-		//			creditCards = this.creditCardS.getAllMyCreditCards(customer.getId());
-		//		} else
 		final Collection<CreditCard> creditCards;
+		final UserAccount user = LoginService.getPrincipal();
+		if (user.getAuthorities().iterator().next().getAuthority().equals("CUSTOMER"))
+			fixUpTasks = null;
+		//					final Actor customer = this.actorService.getActorByUserAccount(user.getId());
+		//					creditCards = this.creditCardS.getAllMyCreditCards(customer.getId());
+		else {
 
-		fixUpTasks = this.fixUpTaskS.findAll();
-		HandyFixUpTasks = this.fixUpTaskS.findAllfixUpTasksHandyWorkerId();
-		fixUpTasks.removeAll(HandyFixUpTasks);
-
+			fixUpTasks = this.fixUpTaskS.findAll();
+			HandyFixUpTasks = this.fixUpTaskS.findAllfixUpTasksHandyWorkerId();
+			fixUpTasks.removeAll(HandyFixUpTasks);
+		}
 		creditCards = null;
 		result = new ModelAndView("application/edit");
 		result.addObject("application", application);
