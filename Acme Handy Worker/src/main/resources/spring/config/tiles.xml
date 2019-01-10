@@ -60,6 +60,7 @@
 		<value>/views/sponsor/tiles.xml</value>
 		<value>/views/phase/tiles.xml</value>
 		<value>/views/handyWorker/tiles.xml</value>
+		<value>/views/customer/tiles.xml</value>
 		
 		
 		
