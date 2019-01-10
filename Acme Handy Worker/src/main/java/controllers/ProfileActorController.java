@@ -3,6 +3,8 @@ package controllers;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -72,7 +74,7 @@ public class ProfileActorController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final ProfileSocialNetwork profile, final BindingResult binding) {
+	public ModelAndView edit(@Valid final ProfileSocialNetwork profile, final BindingResult binding) {
 
 		ModelAndView result;
 		try {
