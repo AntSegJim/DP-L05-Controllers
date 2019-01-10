@@ -12,8 +12,12 @@ package controllers.handyWorker;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,89 +64,87 @@ public class PhaseHandyWorkerController extends AbstractController {
 
 		return result;
 	}
-}
-// Creation ---------------------------------------------------------------
 
-//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-//	public ModelAndView create(@Valid final int complaintId) {
-//		ModelAndView result;
-//		Report report;
-//
-//		report = this.reportService.create();
-//		report.setComplaint(this.complaintService.findOne(complaintId));
-//		result = this.createEditModelAndView(report);
-//
-//		return result;
-//	}
-//	// Edition ----------------------------------------------------------------
-//
-//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-//	public ModelAndView edit(@RequestParam final int reportId) {
-//		ModelAndView result;
-//		Report report;
-//
-//		report = this.reportService.findOne(reportId);
-//		Assert.notNull(report);
-//
-//		result = this.createEditModelAndView(report);
-//
-//		return result;
-//	}
-//
-//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-//	public ModelAndView save(@Valid final Report report, final BindingResult binding) {
-//		ModelAndView result;
-//
-//		if (!binding.hasErrors()) {
-//			this.reportService.save(report);
-//			final Integer idComplaint = report.getComplaint().getId();
-//			result = new ModelAndView("redirect:list.do?complaintId=" + idComplaint);
-//		} else
-//			result = this.createEditModelAndView(report);
-//
-//		return result;
-//	}
-//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-//	public ModelAndView delete(final Report report, final BindingResult binding) {
-//		ModelAndView result;
-//
-//		try {
-//			this.reportService.delete(report);
-//			final Integer idComplaint = report.getComplaint().getId();
-//			result = new ModelAndView("redirect:list.do?complaintId=" + idComplaint);
-//		} catch (final Throwable oops) {
-//			result = this.createEditModelAndView(report, "report.commit.error");
-//		}
-//
-//		return result;
-//	}
-//
-//	// Ancillary methods ------------------------------------------------------
-//
-//	protected ModelAndView createEditModelAndView(final Report report) {
-//		ModelAndView result;
-//
-//		result = this.createEditModelAndView(report, null);
-//
-//		return result;
-//	}
-//
-//	protected ModelAndView createEditModelAndView(final Report report, final String message) {
-//		ModelAndView result;
-//		final Collection<Attachment> attachments;
-//		final Complaint complaint;
-//
-//		complaint = report.getComplaint();
-//
-//		attachments = this.attachmentService.findAll();
-//
-//		result = new ModelAndView("report/edit");
-//		result.addObject("report", report);
-//		result.addObject("attachments", attachments);
-//		result.addObject("complaint", complaint);
-//		result.addObject("message", message);
-//
-//		return result;
-//	}
-//
-//}
+	// Creation ---------------------------------------------------------------
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@Valid final int applicationId) {
+		ModelAndView result;
+		Phase phase;
+
+		phase = this.phaseService.create();
+		phase.setApplication(this.applicationService.findOne(applicationId));
+		result = this.createEditModelAndView(phase);
+
+		return result;
+	}
+
+	//	// Edition ----------------------------------------------------------------
+	//
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int phaseId) {
+		ModelAndView result;
+		Phase phase;
+
+		phase = this.phaseService.findOne(phaseId);
+		Assert.notNull(phase);
+
+		result = this.createEditModelAndView(phase);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Phase phase, final BindingResult binding) {
+		ModelAndView result;
+
+		if (!binding.hasErrors()) {
+			this.phaseService.save(phase);
+			final Integer idApplication = phase.getApplication().getId();
+			result = new ModelAndView("redirect:list.do?applicationId=" + idApplication);
+		} else
+			result = this.createEditModelAndView(phase);
+
+		return result;
+	}
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Phase phase, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			this.phaseService.delete(phase);
+			final Integer idApplication = phase.getApplication().getId();
+			result = new ModelAndView("redirect:list.do?applicationId=" + idApplication);
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(phase, "phase.commit.error");
+		}
+
+		return result;
+	}
+
+	// Ancillary methods ------------------------------------------------------
+
+	protected ModelAndView createEditModelAndView(final Phase phase) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(phase, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Phase phase, final String message) {
+		ModelAndView result;
+
+		final Application application;
+
+		application = phase.getApplication();
+
+		result = new ModelAndView("phase/edit");
+		result.addObject("phase", phase);
+		result.addObject("application", application);
+		result.addObject("message", message);
+
+		return result;
+	}
+
+}

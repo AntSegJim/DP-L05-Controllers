@@ -19,11 +19,11 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="report/referee/edit.do" modelAttribute="report">
+<form:form action="phase/handyWorker/edit.do" modelAttribute="phase">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="starMoment" />
+	<form:hidden path="startMoment" />
 	<form:hidden path="application"/>
 
 
@@ -44,7 +44,7 @@
 		<form:label path="endMoment">
 		<spring:message code="phase.endMoment" />:
 	</form:label>
-	<form:input path="endMoment" />
+	<form:input path="endMoment" format="{0,date,dd/MM/yyyy HH:mm}"/>
 	<form:errors cssClass="error" path="endMoment" />
 	<br /><br />
 
@@ -52,16 +52,16 @@
 	<input type="submit" name="save"
 		value="<spring:message code="phase.save" />" />&nbsp; 
 	
-	
+	<jstl:if test="${report.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message code="phase.delete" />"
 			onclick="return confirm('<spring:message code="phase.confirm.delete" />')" />&nbsp;
-
+	</jstl:if>
 	
 	
 	<input type="button" name="cancel"
 		value="<spring:message code="report.cancel" />"
-		onclick="javascript: relativeRedir('phase/handyWorker/list.do');" />
+		onclick="javascript: relativeRedir('phase/handyWorker/list.do?applicationId=${phase.application.id}');" />
 	<br />
 
 	

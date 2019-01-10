@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PhaseRepository;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Application;
@@ -55,16 +54,15 @@ public class PhaseService {
 	}
 
 	public Phase findOne(final int phaseId) {
-		final UserAccount ac = LoginService.getPrincipal();
-		Assert.isTrue(ac.getAuthorities().contains(Authority.HANDYWORKER));
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("HANDYWORKER"));
 		Assert.isTrue(this.phaseRepository.findOne(phaseId).getApplication().getStatus() == 0);
 		return this.phaseRepository.findOne(phaseId);
 	}
 	//updating
 	public Phase save(final Phase phase) {
-		final UserAccount ac = LoginService.getPrincipal();
-
-		Assert.isTrue(ac.getAuthorities().contains(Authority.HANDYWORKER));
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("HANDYWORKER"));
 		Assert.isTrue(phase.getApplication().getStatus() == 0);
 
 		Assert.isTrue(phase != null && !(phase.getTitle().equals("") && !(phase.getTitle().equals(null))));
@@ -75,8 +73,8 @@ public class PhaseService {
 
 	//deleting
 	public void delete(final Phase phase) {
-		final UserAccount ac = LoginService.getPrincipal();
-		Assert.isTrue(ac.getAuthorities().contains(Authority.HANDYWORKER));
+		final UserAccount userLoged = LoginService.getPrincipal();
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("HANDYWORKER"));
 		Assert.isTrue(phase.getApplication().getStatus() == 0);
 		this.phaseRepository.delete(phase);
 	}
