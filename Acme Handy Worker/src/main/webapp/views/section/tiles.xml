@@ -25,4 +25,8 @@
 		<put-attribute name="body" value="/views/section/editSection.jsp" />
 	</definition>
 
+	<definition name="section/action-2" extends="master.page">	
+		<put-attribute name="title" value="Editar sección" />
+		<put-attribute name="body" value="/views/section/action-2.jsp" />
+	</definition>
 </tiles-definitions>

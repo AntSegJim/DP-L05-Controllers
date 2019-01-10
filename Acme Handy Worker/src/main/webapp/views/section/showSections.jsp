@@ -27,8 +27,11 @@ requestURI="section/handyWorker/showSections.do" >
 
 <display:column property="number" titleKey="section.number" />
 <display:column property="title" titleKey="section.title" />
-<display:column property="number" titleKey="section.pieceOfText" />
-
+<display:column property="pieceOfText" titleKey="section.pieceOfText" />
 
 </display:table>
+
+<input type="button" name="cancel" value="<spring:message code="section.cancel" />"
+			onclick="javascript: relativeRedir('tutorial/handyWorker/tutorials.do');" />
+
 </security:authorize>

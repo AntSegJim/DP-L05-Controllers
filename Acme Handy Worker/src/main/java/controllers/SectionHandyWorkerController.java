@@ -29,6 +29,15 @@ public class SectionHandyWorkerController extends AbstractController {
 	private SectionService	sectionService;
 
 
+	@RequestMapping("/action-2")
+	public ModelAndView action2() {
+		ModelAndView result;
+
+		result = new ModelAndView("section/action-2");
+
+		return result;
+	}
+
 	@RequestMapping(value = "/showSections", method = RequestMethod.GET)
 	public ModelAndView showSections(@RequestParam final int tutorialId) {
 		final ModelAndView result;
@@ -65,8 +74,8 @@ public class SectionHandyWorkerController extends AbstractController {
 		else
 			try {
 				this.sectionService.save(section);
-				result = new ModelAndView("redirect:showSections.do");
-			} catch (final Throwable oopd) {
+				result = new ModelAndView("redirect:action-2.do");
+			} catch (final Throwable oops) {
 				result = new ModelAndView("section/editSection");
 			}
 		return result;
