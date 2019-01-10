@@ -28,7 +28,7 @@
 	<spring:message code="fixUpTask.category" />: ${fixUpTask.category.name} <br />
 	<spring:message code="fixUpTask.warranty" />: ${fixUpTask.warranty.title} <br />
 	<security:authorize access="hasRole('HANDYWORKER')">
-		<spring:message code="fixUpTask.customer" />: <a href="fix-up-task/handy-worker/customer-data.do?customerId=${fixUpTask.customer.id}">Info</a><br />
+		<spring:message code="fixUpTask.customer" /> <a href="fix-up-task/handy-worker/customer-data.do?customerId=${fixUpTask.customer.id}">Info</a><br />
 	</security:authorize>
 	<spring:message code="fixUpTask.application" />
 	<display:table name="${fixUpTask.application}" id="row">

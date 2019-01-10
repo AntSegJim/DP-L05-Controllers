@@ -105,6 +105,7 @@
 		<security:intercept-url pattern="/fix-up-task/handy-worker/list.do" access="hasRole('HANDYWORKER')" />
 		<security:intercept-url pattern="/fix-up-task/handy-worker/show.do" access="hasRole('HANDYWORKER')" />
 		<security:intercept-url pattern="/fix-up-task/handy-worker/customer-data.do" access="hasRole('HANDYWORKER')" />
+		<security:intercept-url pattern="/fix-up-task/handy-worker/customer-data-profile.do" access="hasRole('HANDYWORKER')" />
 
 		<security:intercept-url pattern="/fix-up-task/customer/**" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/fix-up-task/customer/create.do" access="hasRole('CUSTOMER')" /> 
