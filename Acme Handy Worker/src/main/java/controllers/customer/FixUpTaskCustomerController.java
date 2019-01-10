@@ -65,6 +65,26 @@ public class FixUpTaskCustomerController extends AbstractController {
 
 		return result;
 	}
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int fixUpTaskId) {
+		ModelAndView result;
+		FixUpTask fixUpTask;
+		try {
+			fixUpTask = this.fixUpTaskService.findOne(fixUpTaskId);
+			Assert.notNull(fixUpTask);
+			result = new ModelAndView("fixUpTask/edit");
+			result.addObject("fixUpTask", fixUpTask);
+			final Collection<Category> categories = this.categoryService.findAll();
+			result.addObject("categories", categories);
+
+			final Collection<Warranty> warranties = this.warrantyService.findAllNotDraftMode();
+			result.addObject("warranties", warranties);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do");
+		}
+
+		return result;
+	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView actionSearch(@Valid final FixUpTask newf, final BindingResult binding) {

@@ -36,7 +36,9 @@
 			<a href="fix-up-task/customer/show.do?fixUpTaskId=${row.id}">
 				<spring:message code="fixUpTask.show" /></a>
 		</display:column>
-		
+		<display:column titleKey="fix.edit">
+		<a href="fix-up-task/customer/edit.do?fixUpTaskId=${row.id}"><spring:message code="fix.edit" /></a>
+		</display:column>
 		<display:column>
 			<a href="fix-up-task/customer/delete.do?fixUpTaskId=${row.id}">
 				<spring:message code="fixUpTask.delete" /></a>

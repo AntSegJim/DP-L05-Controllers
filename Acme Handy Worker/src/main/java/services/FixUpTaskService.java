@@ -69,13 +69,14 @@ public class FixUpTaskService {
 		return this.fixUpTaskRepository.findOne(id);
 	}
 	public FixUpTask save(final FixUpTask f) {
+		if (f.getId() == 0) {
+			final Collection<String> allTickerFix = this.fixUpTaskRepository.allTickerInFixUpTask();
+			final Collection<String> allTickerCurricula = this.curriculaService.allTickersCurricula();
+			final Collection<String> allTickerComplaint = this.complaintService.allTickersComplaint();
+			Assert.isTrue(!allTickerComplaint.contains(f.getTicker()) && !allTickerFix.contains(f.getTicker()) && !allTickerCurricula.contains(f.getTicker()));
+		}
 
-		final Collection<String> allTickerFix = this.fixUpTaskRepository.allTickerInFixUpTask();
-		final Collection<String> allTickerCurricula = this.curriculaService.allTickersCurricula();
-		final Collection<String> allTickerComplaint = this.complaintService.allTickersComplaint();
-		f.setMoment(new Date());
 		Assert.isTrue(f.getTicker() != null && f.getTicker() != "" && f.getCategory() != null && f.getCustomer() != null);
-		Assert.isTrue(!allTickerComplaint.contains(f.getTicker()) && !allTickerFix.contains(f.getTicker()) && !allTickerCurricula.contains(f.getTicker()));
 		return this.fixUpTaskRepository.save(f);
 	}
 	public void delete(final FixUpTask f) {
