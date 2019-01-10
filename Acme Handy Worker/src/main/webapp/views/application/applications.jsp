@@ -14,7 +14,7 @@ requestURI="${requestURI}" >
 
 <security:authorize access="hasRole('CUSTOMER')">
 
-<display:column>
+<display:column >
 <jstl:if test="${row.status==1}">
 	<a href="application/handyWorker,customer/edit.do?applicationId=${row.id}"><spring:message code="customer.application.editApplication.link" /></a>
 </jstl:if>
@@ -23,8 +23,8 @@ requestURI="${requestURI}" >
 </security:authorize>
 
 <display:column property="moment" titleKey="application.moment"  />
-
-<display:column  titleKey="application.status" >
+<jstl:if test="${row.status eq 0}">
+<display:column  titleKey="application.status" style="color:green" >
 <jstl:choose>
 <jstl:when test="${row.status eq 0}">
 <spring:message code="status.aceptado.tabla" />
@@ -37,6 +37,39 @@ requestURI="${requestURI}" >
 </jstl:otherwise>
 </jstl:choose>
 </display:column>
+</jstl:if>
+
+<jstl:if test="${row.status eq 1}">
+<display:column  titleKey="application.status" style="color:black"  >
+<jstl:choose>
+<jstl:when test="${row.status eq 0}">
+<spring:message code="status.aceptado.tabla" />
+</jstl:when>
+<jstl:when test="${row.status eq 1}">
+<spring:message code="status.pendiente" />
+</jstl:when>
+<jstl:otherwise>
+<spring:message code="status.rechazado.tabla" />
+</jstl:otherwise>
+</jstl:choose>
+</display:column>
+</jstl:if>
+
+<jstl:if test="${row.status eq 2}">
+<display:column  titleKey="application.status" style="color:red" >
+<jstl:choose>
+<jstl:when test="${row.status eq 0}">
+<spring:message code="status.aceptado.tabla" />
+</jstl:when>
+<jstl:when test="${row.status eq 1}">
+<spring:message code="status.pendiente" />
+</jstl:when>
+<jstl:otherwise>
+<spring:message code="status.rechazado.tabla" />
+</jstl:otherwise>
+</jstl:choose>
+</display:column>
+</jstl:if>
 <display:column property="price" titleKey="application.price" />
 <display:column property="comments" titleKey="application.comments" />
 <display:column property="creditCard.number" titleKey="application.creditCard" />
@@ -59,6 +92,7 @@ requestURI="${requestURI}" >
 </display:column>
 
 </security:authorize>
+
 </display:table>
 
 <security:authorize access="hasRole('HANDYWORKER')">
