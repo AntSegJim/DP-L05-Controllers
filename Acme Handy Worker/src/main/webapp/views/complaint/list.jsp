@@ -23,7 +23,7 @@ requestURI="${requestURI}" >
 
 
 </display:table>
-<form action="complaint/customer/createComplaint.do">
+<form action="complaint/customer/create.do">
   	 	<input type="submit" value="<spring:message code="customer.complaint.create.link" />" />
 	</form>
 
