@@ -20,7 +20,7 @@
 <p><spring:message code="pictures.title" /></p>
 <input type="hidden" value="tutorial" />
 <display:table pagesize="5" name="pictures" id="row"
-requestURI="picture/handyWorker/showPictures.do" >
+requestURI="picture/handyWorker/show.do" >
 
 <display:column>
 	<a href="picture/handyWorker/editPicture.do?pictureId=${row.id}" ><spring:message code="picture.edit" /></a>
