@@ -40,7 +40,11 @@ requestURI="tutorial/handyWorker/tutorials.do" >
     <input type="submit" value="<spring:message code="tutorial.create" />" />
 </form>
 
-<a href="picture/handyWorker/showPictures.do"><spring:message code="tutorial.show" /></a>
+
+<form action="picture/handyWorker/showPicture.do">
+    <input type="submit" value="<spring:message code="tutorial.pictures" />" />
+</form>
+
 
 
 

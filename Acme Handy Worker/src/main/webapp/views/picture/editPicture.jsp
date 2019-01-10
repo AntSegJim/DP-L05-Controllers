@@ -24,7 +24,7 @@
 <br />
 
 <form:label path="tutorial">
-	<spring:message code="picture.picture.form" />:
+	<spring:message code="picture.tutorial.form" />:
 	</form:label>
 	<form:select id="tutorial" path="tutorial">
 		<form:options items="${tutorials}" itemValue="id" itemLabel="title" />
@@ -37,7 +37,7 @@
 	<input type="submit" name="delete" value="<spring:message code="picture.delete" />"/>
 </jstl:if>
 <input type="button" name="cancel" value="<spring:message code="picture.cancel" />"
-			onclick="javascript: relativeRedir('picture/handyWorker/showPictures.do');" />
+			onclick="javascript: relativeRedir('picture/handyWorker/showPicture.do');" />
 	
 
 </form:form>

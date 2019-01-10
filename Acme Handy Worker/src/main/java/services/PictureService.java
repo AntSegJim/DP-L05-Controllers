@@ -44,5 +44,8 @@ public class PictureService {
 	public void delete(final Picture picture) {
 		this.PRepo.delete(picture);
 	}
+	public Collection<Picture> picturesByHandy(final Integer id) {
+		return this.PRepo.pictureByHandy(id);
+	}
 
 }
