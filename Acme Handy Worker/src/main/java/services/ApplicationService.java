@@ -21,6 +21,7 @@ import domain.CreditCard;
 import domain.Customer;
 import domain.FixUpTask;
 import domain.HandyWorker;
+import domain.Message;
 
 @Service
 @Transactional
@@ -36,6 +37,8 @@ public class ApplicationService {
 	private FixUpTaskService		FUTService;
 	@Autowired
 	private HandyWorkerService		HWService;
+	@Autowired
+	private MessageService			messageService;
 
 
 	public Application create() {
@@ -77,6 +80,20 @@ public class ApplicationService {
 		}
 
 		Assert.isTrue(a.getMoment() != null && a.getMoment().before(Calendar.getInstance().getTime()) && a.getStatus() >= 0 && a.getStatus() <= 2 && a.getHandyWorker() != null && a.getFixUpTask() != null);
+
+		if (a.getId() != 0) {
+			final Application app = this.applicationRepository.findOne(a.getId());
+			if (app.getStatus() != a.getStatus()) {
+				final Message m = this.messageService.create();
+				m.setSubject("Status application of Fix Up " + a.getFixUpTask().getTicker());
+				m.setBody("El estatus de su aplicación ha sido modificado de // Status of your appliaction has been modificated");
+				m.setEmailReceiver(a.getHandyWorker().getEmail());
+				m.setPriority(0);
+				final Message saved = this.messageService.save(m);
+				this.messageService.sendMessage(saved);
+			}
+		}
+
 		if (a.getStatus() == 0)
 			Assert.isTrue(a.getCreditCard() != null);
 		else

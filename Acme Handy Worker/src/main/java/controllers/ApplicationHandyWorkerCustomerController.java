@@ -107,6 +107,11 @@ public class ApplicationHandyWorkerCustomerController extends AbstractController
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(application, "application.commit.error");
 			}
+		//		if (!binding.hasErrors()) {
+		//			this.applicationS.save(application);
+		//			result = new ModelAndView("redirect:applications.do");
+		//		} else
+		//			result = this.createEditModelAndView(application);
 		return result;
 	}
 
