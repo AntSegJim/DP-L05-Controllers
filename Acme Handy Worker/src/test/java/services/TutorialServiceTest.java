@@ -18,7 +18,6 @@ import org.springframework.util.Assert;
 import security.UserAccount;
 import utilities.AbstractTest;
 import domain.HandyWorker;
-import domain.Picture;
 import domain.Section;
 import domain.Sponsorship;
 import domain.Tutorial;
@@ -69,13 +68,13 @@ public class TutorialServiceTest extends AbstractTest {
 		tutorial.setTitle("Primer tutorial");
 		tutorial.setMoment(new Date(02 / 04 / 2018));
 		tutorial.setSummary("Descripcion");
-		tutorial.setPicture(new HashSet<Picture>());
+
 		tutorial.setSection(sections);
 		tutorial.setSponsorship(new HashSet<Sponsorship>());
 		tutorial.setHandyWorker(h);
 
-		Assert.isTrue(tutorial.getTitle().equals("Primer tutorial") && tutorial.getMoment().equals(new Date(02 / 04 / 2018)) && tutorial.getSummary().equals("Descripcion") && tutorial.getPicture().equals(new HashSet<Picture>())
-			&& tutorial.getSection().equals(sections) && tutorial.getSponsorship().equals(new HashSet<Sponsorship>()) && tutorial.getHandyWorker().equals(h));
+		Assert.isTrue(tutorial.getTitle().equals("Primer tutorial") && tutorial.getMoment().equals(new Date(02 / 04 / 2018)) && tutorial.getSummary().equals("Descripcion") && tutorial.getSection().equals(sections)
+			&& tutorial.getSponsorship().equals(new HashSet<Sponsorship>()) && tutorial.getHandyWorker().equals(h));
 		super.authenticate(null);
 	}
 
@@ -102,7 +101,7 @@ public class TutorialServiceTest extends AbstractTest {
 		tutorial.setTitle("Primer tutorial");
 		tutorial.setMoment(new Date(03 / 04 / 2018));
 		tutorial.setSummary("Descripcion");
-		tutorial.setPicture(new HashSet<Picture>());
+
 		tutorial.setSection(sectionsTutorial);
 		tutorial.setSponsorship(new HashSet<Sponsorship>());
 		savedT = this.TService.save(tutorial);
@@ -137,7 +136,7 @@ public class TutorialServiceTest extends AbstractTest {
 		tutorial.setTitle("segundo tutorial");
 		tutorial.setMoment(new Date(01 / 04 / 2018));
 		tutorial.setSummary("resumen del segundo tutorial");
-		tutorial.setPicture(new HashSet<Picture>());
+
 		tutorial.setSection(sectionsTutorial);
 		tutorial.setSponsorship(new HashSet<Sponsorship>());
 		savedT = this.TService.save(tutorial);

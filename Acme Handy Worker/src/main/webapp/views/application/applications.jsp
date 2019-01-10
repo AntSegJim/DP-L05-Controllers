@@ -6,14 +6,36 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-
+<style type="text/css">
+.ACCEPTED{
+  background-color: green;
+}
+.REJECTED{
+  background-color: orange;
+}
+.PENDING{
+  background-color: grey;
+}
+</style>
 
 <body>
 <display:table pagesize="5" name="applications" id="row"
 requestURI="${requestURI}" >
 
-<security:authorize access="hasRole('CUSTOMER')">
 
+
+<jstl:choose>
+		<jstl:when test="${row.status == 0}">
+		<jstl:set var="css" value="ACCEPTED"></jstl:set>
+		</jstl:when>
+		<jstl:when test="${row.status == 1}">
+			<jstl:set var="css" value="PENDING"></jstl:set>
+		</jstl:when>
+		<jstl:when test="${row.status == 2}">
+			<jstl:set var="css" value="REJECTED"></jstl:set>
+		</jstl:when>
+	</jstl:choose>
+<security:authorize access="hasRole('CUSTOMER')">
 <display:column >
 <jstl:if test="${row.status==1}">
 	<a href="application/handyWorker,customer/edit.do?applicationId=${row.id}"><spring:message code="customer.application.editApplication.link" /></a>
@@ -22,41 +44,10 @@ requestURI="${requestURI}" >
 
 </security:authorize>
 
-<display:column property="moment" titleKey="application.moment"  />
-<jstl:if test="${row.status eq 0}">
-<display:column  titleKey="application.status" style="color:green" >
-<jstl:choose>
-<jstl:when test="${row.status eq 0}">
-<spring:message code="status.aceptado.tabla" />
-</jstl:when>
-<jstl:when test="${row.status eq 1}">
-<spring:message code="status.pendiente" />
-</jstl:when>
-<jstl:otherwise>
-<spring:message code="status.rechazado.tabla" />
-</jstl:otherwise>
-</jstl:choose>
-</display:column>
-</jstl:if>
+<display:column property="moment" titleKey="application.moment" class="${css}" />
 
-<jstl:if test="${row.status eq 1}">
-<display:column  titleKey="application.status" style="color:black"  >
-<jstl:choose>
-<jstl:when test="${row.status eq 0}">
-<spring:message code="status.aceptado.tabla" />
-</jstl:when>
-<jstl:when test="${row.status eq 1}">
-<spring:message code="status.pendiente" />
-</jstl:when>
-<jstl:otherwise>
-<spring:message code="status.rechazado.tabla" />
-</jstl:otherwise>
-</jstl:choose>
-</display:column>
-</jstl:if>
 
-<jstl:if test="${row.status eq 2}">
-<display:column  titleKey="application.status" style="color:red" >
+<display:column  titleKey="application.status" class="${css}" >
 <jstl:choose>
 <jstl:when test="${row.status eq 0}">
 <spring:message code="status.aceptado.tabla" />
@@ -69,11 +60,11 @@ requestURI="${requestURI}" >
 </jstl:otherwise>
 </jstl:choose>
 </display:column>
-</jstl:if>
-<display:column property="price" titleKey="application.price" />
-<display:column property="comments" titleKey="application.comments" />
-<display:column property="creditCard.number" titleKey="application.creditCard" />
-<display:column property="fixUpTask.id" titleKey="application.fixUpTask" />
+
+<display:column property="price" titleKey="application.price" class="${css}"/>
+<display:column property="comments" titleKey="application.comments" class="${css}"/>
+<display:column property="creditCard.number" titleKey="application.creditCard" class="${css}"/>
+<display:column property="fixUpTask.id" titleKey="application.fixUpTask" class="${css}"/>
 
 <security:authorize access="hasRole('HANDYWORKER')">
 
