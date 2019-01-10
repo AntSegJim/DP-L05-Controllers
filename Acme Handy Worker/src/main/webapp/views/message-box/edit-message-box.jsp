@@ -59,9 +59,11 @@
 
 	<input type="button" name="cancel" value="<spring:message code="messageBox.create.cancel" />"
 			onclick="javascript: relativeRedir('messageBox/actor/list.do');" />
-			
+	
+	<jstl:if test="${messageBox.id ne 0 }">	
 	<input type="submit" name="delete" 
 	value="<spring:message code="messageBox.delete" />" />
+	</jstl:if>	
 </form:form>
 
 
