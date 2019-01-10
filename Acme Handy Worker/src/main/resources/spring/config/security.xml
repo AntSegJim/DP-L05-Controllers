@@ -156,6 +156,9 @@
 		<security:intercept-url pattern="/handy-worker/create.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/handy-worker/action-2.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/handy-worker/edit.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/customer/create.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/customer/action-2.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/customer/edit.do" access="isAnonymous()" /> 
 		
 	 
 		

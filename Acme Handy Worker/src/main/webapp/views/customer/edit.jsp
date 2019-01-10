@@ -17,7 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <p><spring:message code="administrator.action.1" /></p>
-<form:form action="handy-worker/edit.do" modelAttribute="handyWorker">
+<form:form action="customer/edit.do" modelAttribute="customer">
 <jstl:if test="${not empty exception}">
 		<p style="color:red"> <spring:message code="administrator.error" /> </p>
 </jstl:if>
