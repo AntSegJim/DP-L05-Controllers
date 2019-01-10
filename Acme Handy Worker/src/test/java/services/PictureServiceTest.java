@@ -30,8 +30,8 @@ public class PictureServiceTest extends AbstractTest {
 	public void testCreatePicture() {
 		Picture picture;
 		picture = this.PService.create();
-		picture.setPicture("http://google.com");
-		Assert.isTrue(picture.getPicture().equals("http://google.com"));
+		picture.setUrlPicture("http://google.com");
+		Assert.isTrue(picture.getUrlPicture().equals("http://google.com"));
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class PictureServiceTest extends AbstractTest {
 		Picture picture, saved;
 		Collection<Picture> pictures;
 		picture = this.PService.create();
-		picture.setPicture("http://amazom.com");
+		picture.setUrlPicture("http://amazom.com");
 
 		saved = this.PService.save(picture);
 		pictures = this.PService.finaAll();
@@ -50,7 +50,7 @@ public class PictureServiceTest extends AbstractTest {
 		Picture picture, saved;
 		Collection<Picture> pictures;
 		picture = this.PService.create();
-		picture.setPicture("http://aliexpress.com");
+		picture.setUrlPicture("http://aliexpress.com");
 
 		saved = this.PService.save(picture);
 		this.PService.delete(saved);
