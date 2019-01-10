@@ -10,17 +10,13 @@
 
 <p><spring:message code="customer.complaint.form.edit.title" /></p>
 
-<form:form action="complaint/customer/editComplaint.do" modelAttribute="complaint">
+<form:form action="complaint/customer/edit.do" modelAttribute="complaint">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="ticker" />
+	<form:hidden path="moment" />
 	
-<form:label path="moment">
-	<spring:message code="customer.complaint.moment" />
-</form:label>
-<form:input path="moment" />
-<form:errors path="moment"/>
 
-<br />
 
 <form:label path="description">
 	<spring:message code="customer.complaint.description" />
@@ -65,7 +61,7 @@
 	
 <input type="submit" name="save" value="<spring:message code="customer.complaint.save" />" />
 <input type="button" name="cancel" value="<spring:message code="customer.complaint.cancel" />"
-			onclick="javascript: relativeRedir('complaint/customer/complaints.do');" />
+			onclick="javascript: relativeRedir('complaint/customer/list.do');" />
 	
 
 </form:form>

@@ -116,7 +116,14 @@ public class ComplaintService {
 		final Integer ano = date.getYear() + 1900;
 		final Integer mes = date.getMonth() + 1;
 		final Integer dia = date.getDate();
-		final String d = ano.toString().substring(ano.toString().length() - 2, ano.toString().length()) + mes.toString() + dia.toString();
+
+		String day = dia.toString();
+		String month = mes.toString();
+		if (mes < 10)
+			month = "0" + mes.toString();
+		if (dia < 10)
+			day = "0" + dia.toString();
+		final String d = ano.toString().substring(ano.toString().length() - 2, ano.toString().length()) + month + day;
 
 		String ticker = "-";
 		final String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -129,7 +136,6 @@ public class ComplaintService {
 		return d + ticker;
 
 	}
-
 	public Collection<String> allTickersComplaint() {
 		return this.complaintRepository.tickerByComplaint();
 	}

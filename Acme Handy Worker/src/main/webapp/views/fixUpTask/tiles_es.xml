@@ -36,5 +36,9 @@
 		<put-attribute name="title" value="Mostrando los datos del cliente" />
 		<put-attribute name="body" value="/views/fixUpTask/customerData.jsp" />
 	</definition>
+	<definition name="fixUpTask/edit" extends="master.page">	
+		<put-attribute name="title" value="Mostrando tarea" />
+		<put-attribute name="body" value="/views/fixUpTask/edit.jsp" />
+	</definition>
 	
 </tiles-definitions>

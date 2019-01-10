@@ -111,6 +111,7 @@
 		<security:intercept-url pattern="/fix-up-task/customer/list.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/fix-up-task/customer/show.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/fix-up-task/customer/delete.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/fix-up-task/customer/edit.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
 		
