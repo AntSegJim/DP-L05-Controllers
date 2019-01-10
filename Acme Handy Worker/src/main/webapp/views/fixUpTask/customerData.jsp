@@ -29,12 +29,10 @@
 <spring:message code="profile.action.2.address" /> ${customer.address} <br/>
 <spring:message code="profile.action.2.numberSocial" /> ${customer.numberSocialProfiles} <br/>
 <%-- que hemos con la cuenta  --%>
-<spring:message code="profile.action.2.socialProfile" />
-<display:table name="${customer.profileSocialNetwork}" id="row">
-<display:column property="nickName" titleKey="profile.nickname" />
-<display:column property="nameSocialNetwork" titleKey="profile.socialNetwork" />
-<display:column property="linkProfile" titleKey="profile.link" />
-</display:table>
+<spring:message code="profile.socialProfile" />
+
+<a href="fix-up-task/handy-worker/customer-data-profile.do?customerId=${customer.id}">Info</a><br />
+
 
 <p><spring:message code="fixUpTask.list" /></p>
 	<display:table  name="fixUpTasks" id="row">

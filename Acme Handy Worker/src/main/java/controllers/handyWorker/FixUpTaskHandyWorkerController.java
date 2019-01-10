@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
 import services.FixUpTaskService;
+import services.ProfileSocialNetworkService;
 import controllers.AbstractController;
 import domain.Customer;
 import domain.FixUpTask;
@@ -22,9 +23,11 @@ import domain.FixUpTask;
 public class FixUpTaskHandyWorkerController extends AbstractController {
 
 	@Autowired
-	private FixUpTaskService	fixUpTaskService;
+	private FixUpTaskService			fixUpTaskService;
 	@Autowired
-	CustomerService				customerService;
+	private CustomerService				customerService;
+	@Autowired
+	private ProfileSocialNetworkService	profileSocialNetworkService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -65,11 +68,24 @@ public class FixUpTaskHandyWorkerController extends AbstractController {
 			result = new ModelAndView("fixUpTask/customerData");
 			result.addObject("customer", customer);
 			result.addObject("fixUpTasks", f);
-			result.addObject("requestURI", "fix-up-task/handy-worker/customer-data.do");
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
 		}
 		return result;
 	}
-
+	@RequestMapping(value = "/customer-data-profile", method = RequestMethod.GET)
+	public ModelAndView infonetwork(@RequestParam final int customerId) {
+		ModelAndView result;
+		Customer customer;
+		try {
+			customer = this.customerService.findOne(customerId);
+			Assert.notNull(customer);
+			result = new ModelAndView("fixUpTask/customerDataProfile");
+			result.addObject("customer", customer);
+			result.addObject("profileSocialNetwork", this.profileSocialNetworkService.getProfilesByActor(customerId));
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do");
+		}
+		return result;
+	}
 }
