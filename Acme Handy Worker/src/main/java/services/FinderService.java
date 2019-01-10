@@ -12,10 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.FinderRepository;
-import domain.Category;
 import domain.Finder;
 import domain.FixUpTask;
-import domain.Warranty;
 
 @Service
 @Transactional
@@ -23,27 +21,27 @@ public class FinderService {
 
 	@Autowired
 	private FinderRepository	finderRepository;
-	@Autowired
-	private CategoryService		categoryService;
-	@Autowired
-	private WarrantyService		warrantyService;
 
+
+	//	@Autowired
+	//	private CategoryService		categoryService;
+	//	@Autowired
+	//	private WarrantyService		warrantyService;
 
 	// ---------- Simple CRUD methods ----------
 
 	public Finder create() {
 		final Finder f = new Finder();
-		final Category ca = this.categoryService.create();
-		final Warranty wa = this.warrantyService.create();
+
 		f.setAddress("");
-		f.setCategory(ca);
+		f.setCategory(null);
 		f.setDescription("");
 		f.setEndDate(new Date());
 		f.setHighPrice(0.);
 		f.setLowPrice(0.);
 		f.setStartDate(new Date());
 		f.setTicker("");
-		f.setWarranty(wa);
+		f.setWarranty(null);
 		f.setMoment(new Date());
 		f.setFixUpTask(new HashSet<FixUpTask>());
 		return f;

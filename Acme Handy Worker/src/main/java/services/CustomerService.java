@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
 
 import repositories.CustomerRepository;
 import security.Authority;
-import security.LoginService;
 import security.UserAccount;
 import domain.Customer;
 import domain.Endorsement;
@@ -74,26 +73,26 @@ public class CustomerService {
 	}
 	public Customer save(final Customer c) {
 
-		final UserAccount userLoged = LoginService.getPrincipal();
-		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
-			final Customer customer = this.customerRepository.findOne(c.getId());
-
-			Assert.isTrue(customer.getId() == (c.getId()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getId() == (c.getId()), "Un administrador no debe modificar estos datos");
-
-			Assert.isTrue(customer.getName().equals(c.getName()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getMiddleName().equals(c.getMiddleName()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getSurname().equals(c.getSurname()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getPhoto().equals(c.getPhoto()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getEmail().equals(c.getEmail()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getPhone().equals(c.getPhone()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getAddress().equals(c.getAddress()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getNumberSocialProfiles() == (c.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(customer.getUserAccount() == (c.getUserAccount()), "Un administrador no debe modificar estos datos");
-
-			Assert.isTrue(customer.getScore() == (c.getScore()), "Un administrador no debe modificar estos datos");
-
-		}
+		//		final UserAccount userLoged = LoginService.getPrincipal();
+		//		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
+		//			final Customer customer = this.customerRepository.findOne(c.getId());
+		//
+		//			Assert.isTrue(customer.getId() == (c.getId()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getId() == (c.getId()), "Un administrador no debe modificar estos datos");
+		//
+		//			Assert.isTrue(customer.getName().equals(c.getName()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getMiddleName().equals(c.getMiddleName()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getSurname().equals(c.getSurname()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getPhoto().equals(c.getPhoto()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getEmail().equals(c.getEmail()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getPhone().equals(c.getPhone()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getAddress().equals(c.getAddress()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getNumberSocialProfiles() == (c.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(customer.getUserAccount() == (c.getUserAccount()), "Un administrador no debe modificar estos datos");
+		//
+		//			Assert.isTrue(customer.getScore() == (c.getScore()), "Un administrador no debe modificar estos datos");
+		//
+		//		}
 
 		Customer res = null;
 

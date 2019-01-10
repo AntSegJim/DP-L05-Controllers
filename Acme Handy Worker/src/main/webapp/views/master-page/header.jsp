@@ -106,6 +106,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="sponsor/create.do"><spring:message code="master.page.sponsor.register" /></a></li>
+					<li><a href="handy-worker/create.do"><spring:message code="master.page.handy.register" /></a></li>
 				</ul>
 			</li>			<li><a href="tutorial/AllTutorials.do"><spring:message code="master.page.tutorials" /></a></li>
 		</security:authorize>

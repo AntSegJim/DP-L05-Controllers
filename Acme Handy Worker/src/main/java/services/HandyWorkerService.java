@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
 
 import repositories.HandyWorkerRepository;
 import security.Authority;
-import security.LoginService;
 import security.UserAccount;
 import domain.Application;
 import domain.Endorsement;
@@ -51,7 +50,7 @@ public class HandyWorkerService {
 		h.setScore(0);
 		h.setSurname("");
 		h.setIsBanned(0);
-		h.setFinder(this.finderService.create());
+		h.setFinder(this.finderService.save(this.finderService.create()));
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
 		user.setAuthorities(new HashSet<Authority>());
@@ -65,7 +64,7 @@ public class HandyWorkerService {
 
 		h.setUserAccount(user);
 
-		h.setMakeHandyWorker("");
+		h.setMakeHandyWorker("changed-later");
 		h.setApplication(new HashSet<Application>());
 		return h;
 	}
@@ -80,27 +79,27 @@ public class HandyWorkerService {
 
 	public HandyWorker save(final HandyWorker h) {
 
-		final UserAccount userLoged = LoginService.getPrincipal();
-		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
-			final HandyWorker handy = this.handyWorkerRepository.findOne(h.getId());
-
-			Assert.isTrue(handy.getId() == (h.getId()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getVersion() == (h.getVersion()), "Un administrador no debe modificar estos datos");
-
-			Assert.isTrue(handy.getName().equals(h.getName()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getMiddleName().equals(h.getMiddleName()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getSurname().equals(h.getSurname()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getPhoto().equals(h.getPhoto()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getEmail().equals(h.getEmail()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getPhone().equals(h.getPhone()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getAddress().equals(h.getAddress()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getNumberSocialProfiles() == (h.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
-			Assert.isTrue(handy.getUserAccount() == (h.getUserAccount()), "Un administrador no debe modificar estos datos");
-
-			//			Assert.isTrue(handy.getScore() == (h.getScore()), "Un administrador no debe modificar estos datos");
-			//			Assert.isTrue(handy.getMakeHandyWorker() == (h.getMakeHandyWorker()), "Un administrador no debe modificar estos datos");
-
-		}
+		//		final UserAccount userLoged = LoginService.getPrincipal();
+		//		if (userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
+		//			final HandyWorker handy = this.handyWorkerRepository.findOne(h.getId());
+		//
+		//			Assert.isTrue(handy.getId() == (h.getId()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getVersion() == (h.getVersion()), "Un administrador no debe modificar estos datos");
+		//
+		//			Assert.isTrue(handy.getName().equals(h.getName()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getMiddleName().equals(h.getMiddleName()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getSurname().equals(h.getSurname()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getPhoto().equals(h.getPhoto()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getEmail().equals(h.getEmail()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getPhone().equals(h.getPhone()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getAddress().equals(h.getAddress()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getNumberSocialProfiles() == (h.getNumberSocialProfiles()), "Un administrador no debe modificar estos datos");
+		//			Assert.isTrue(handy.getUserAccount() == (h.getUserAccount()), "Un administrador no debe modificar estos datos");
+		//
+		//			//			Assert.isTrue(handy.getScore() == (h.getScore()), "Un administrador no debe modificar estos datos");
+		//			//			Assert.isTrue(handy.getMakeHandyWorker() == (h.getMakeHandyWorker()), "Un administrador no debe modificar estos datos");
+		//
+		//		}
 
 		HandyWorker res = null;
 
@@ -165,13 +164,10 @@ public class HandyWorkerService {
 
 			h.getUserAccount().setAuthorities(result);
 		}
-
-		this.finderService.save(h.getFinder());
 		res = this.handyWorkerRepository.save(h);
 
 		if (h.getId() == 0)
 			this.messageBoxService.createMessageBoxSystem(res);
-
 		return res;
 	}
 
