@@ -36,8 +36,15 @@
 <jstl:if test="${picture.id ne 0 }">
 	<input type="submit" name="delete" value="<spring:message code="picture.delete" />"/>
 </jstl:if>
+<jstl:if test="${picture.id eq 0 }">
+<input type="button" name="cancel" value="<spring:message code="picture.cancel" />"
+			onclick="javascript: relativeRedir('tutorial/handyWorker/tutorials.do');" />
+</jstl:if>
+<jstl:if test="${picture.id ne 0 }">
 <input type="button" name="cancel" value="<spring:message code="picture.cancel" />"
 			onclick="javascript: relativeRedir('picture/handyWorker/showPicture.do');" />
+</jstl:if>
+
 	
 
 </form:form>

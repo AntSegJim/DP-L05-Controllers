@@ -21,6 +21,7 @@
 <display:table pagesize="5" name="tutorials" id="row"
 requestURI="tutorial/handyWorker/tutorials.do" >
 
+
 <display:column>
 	<a href="tutorial/handyWorker/editTutorial.do?tutorialId=${row.id}"><spring:message code="tutorial.edit" /></a>
 </display:column>
@@ -31,6 +32,9 @@ requestURI="tutorial/handyWorker/tutorials.do" >
 <display:column property="moment" titleKey="tutorial.moment" />
 <display:column property="summary" titleKey="tutorial.summary" />
 
+<display:column>
+	<a href="picture/handyWorker/show.do?idTutorial=${row.id}"><spring:message code="tutorial.pictures" /></a>
+</display:column>
 <display:column titleKey="tutorial.sections">
 	<a href="section/handyWorker/showSections.do?tutorialId=${row.id}"><spring:message code="tutorial.sections" /></a>
 </display:column>
@@ -41,8 +45,8 @@ requestURI="tutorial/handyWorker/tutorials.do" >
 </form>
 
 
-<form action="picture/handyWorker/showPicture.do">
-    <input type="submit" value="<spring:message code="tutorial.pictures" />" />
+<form action="picture/handyWorker/createPicture.do">
+    <input type="submit" value="<spring:message code="tutorial.create.pictures" />" />
 </form>
 
 

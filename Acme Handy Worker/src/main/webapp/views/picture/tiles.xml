@@ -25,5 +25,8 @@
 		<put-attribute name="body" value="/views/picture/editPicture.jsp" />
 	</definition>
 	
-
+	<definition name="picture/action-2" extends="master.page">	
+		<put-attribute name="title" value="Editar imagen" />
+		<put-attribute name="body" value="/views/picture/action-2.jsp" />
+	</definition>	
 </tiles-definitions>

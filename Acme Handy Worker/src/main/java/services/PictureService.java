@@ -48,4 +48,8 @@ public class PictureService {
 		return this.PRepo.pictureByHandy(id);
 	}
 
+	public Collection<Picture> picturesByTutorial(final Integer id) {
+		return this.PRepo.pictureByTutorial(id);
+	}
+
 }

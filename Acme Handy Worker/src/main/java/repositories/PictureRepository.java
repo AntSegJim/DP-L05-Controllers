@@ -15,4 +15,7 @@ public interface PictureRepository extends JpaRepository<Picture, Integer> {
 	@Query("select p from Picture p where p.tutorial.handyWorker.id = ?1")
 	public Collection<Picture> pictureByHandy(Integer id);
 
+	@Query("select p from Picture p where p.tutorial.id = ?1")
+	public Collection<Picture> pictureByTutorial(Integer id);
+
 }

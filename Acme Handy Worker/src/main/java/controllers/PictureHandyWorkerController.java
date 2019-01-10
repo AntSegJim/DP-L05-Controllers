@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
-import security.UserAccount;
 import services.ActorService;
-import services.HandyWorkerService;
 import services.PictureService;
 import services.TutorialService;
 import domain.Actor;
-import domain.HandyWorker;
 import domain.Picture;
 import domain.Tutorial;
 
@@ -30,24 +27,46 @@ import domain.Tutorial;
 public class PictureHandyWorkerController extends AbstractController {
 
 	@Autowired
-	private PictureService		pictureService;
+	private PictureService	pictureService;
 	@Autowired
-	private ActorService		actorService;
+	private ActorService	actorService;
 	@Autowired
-	private TutorialService		tutorialService;
-	@Autowired
-	private HandyWorkerService	handyWorkerService;
+	private TutorialService	tutorialService;
 
 
 	//Cambiar
-	@RequestMapping(value = "/showPicture", method = RequestMethod.GET)
-	public ModelAndView tutorials() {
+	//	@RequestMapping(value = "/showPicture", method = RequestMethod.GET)
+	//	public ModelAndView tutorials() {
+	//		final ModelAndView result;
+	//		final Collection<Picture> pictures;
+	//		final UserAccount user = LoginService.getPrincipal();
+	//		final HandyWorker h = this.handyWorkerService.handyWorkerUserAccount(user.getId());
+	//
+	//		pictures = this.pictureService.picturesByHandy(h.getId());
+	//
+	//		result = new ModelAndView("picture/showPictures");
+	//		result.addObject("pictures", pictures);
+	//
+	//		return result;
+	//	}
+
+	@RequestMapping("/action-2")
+	public ModelAndView action2() {
+		ModelAndView result;
+
+		result = new ModelAndView("picture/action-2");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView picturesByTutorial(@RequestParam final int idTutorial) {
 		final ModelAndView result;
 		final Collection<Picture> pictures;
-		final UserAccount user = LoginService.getPrincipal();
-		final HandyWorker h = this.handyWorkerService.handyWorkerUserAccount(user.getId());
 
-		pictures = this.pictureService.picturesByHandy(h.getId());
+		final Tutorial t = this.tutorialService.findOne(idTutorial);
+
+		pictures = this.pictureService.picturesByTutorial(t.getId());
 
 		result = new ModelAndView("picture/showPictures");
 		result.addObject("pictures", pictures);
@@ -97,7 +116,7 @@ public class PictureHandyWorkerController extends AbstractController {
 		ModelAndView result;
 		if (!binding.hasErrors()) {
 			this.pictureService.save(picture);
-			result = new ModelAndView("redirect:showPicture.do");
+			result = new ModelAndView("redirect:action-2.do");
 		} else {
 			Collection<Tutorial> tutorials;
 
@@ -119,7 +138,7 @@ public class PictureHandyWorkerController extends AbstractController {
 
 		if (!binding.hasErrors()) {
 			this.pictureService.delete(picture);
-			result = new ModelAndView("redirect:showPicture.do");
+			result = new ModelAndView("redirect:action-2.do");
 		} else {
 			Collection<Tutorial> tutorials;
 

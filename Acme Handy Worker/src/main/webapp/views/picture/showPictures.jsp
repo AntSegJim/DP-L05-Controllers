@@ -26,12 +26,9 @@ requestURI="picture/handyWorker/showPictures.do" >
 	<a href="picture/handyWorker/editPicture.do?pictureId=${row.id}" ><spring:message code="picture.edit" /></a>
 </display:column>
 
-<display:column> <img src="${row.urlPicture}" width="130px" height="80px">  </display:column>
+<display:column titleKey="pictures"> <img src="${row.urlPicture}" width="130px" height="80px">  </display:column>
 
 </display:table>
-<form action="picture/handyWorker/createPicture.do">
-    <input type="submit" value="<spring:message code="picture.create" />" />
-</form>
 
 <input type="button" name="cancel" value="<spring:message code="picture.cancel" />"
 			onclick="javascript: relativeRedir('tutorial/handyWorker/tutorials.do');" />
