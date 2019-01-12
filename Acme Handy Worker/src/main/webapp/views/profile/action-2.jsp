@@ -55,7 +55,16 @@
 </form>
 </security:authorize>
 
+<security:authorize access="hasRole('HANDYWORKER')">
+<form action="profile/edit-handyWorker.do">
+    <input type="submit" value="<spring:message code="profile.edit.profile" />" />
+</form>
+</security:authorize>
+
 <security:authorize access="hasRole('CUSTOMER')">
+<form action="profile/edit-customer.do">
+    <input type="submit" value="<spring:message code="profile.edit.profile" />" />
+</form>
 <form action="fixUpTask/customer/list.do">
     <input type="submit" value="<spring:message code="fixUpTask.list" />" />
 </form>

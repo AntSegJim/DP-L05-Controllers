@@ -147,6 +147,10 @@
 		<security:intercept-url pattern="/profile/edit-administrator.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/profile/edit-referee.do" access="hasRole('REFEREE')" /> 
 		<security:intercept-url pattern="/profile/edit-sponsor.do" access="hasRole('SPONSOR')" /> 
+		<security:intercept-url pattern="/profile/edit-customer.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/profile/edit-handyWorker.do" access="hasRole('HANDYWORKER')" /> 
+		
+		
 		<security:intercept-url pattern="/message/actor/send.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profileSocial/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profileSocial/actor/create.do" access="isAuthenticated()" /> 

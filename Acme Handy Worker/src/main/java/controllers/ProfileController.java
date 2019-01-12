@@ -24,11 +24,15 @@ import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
 import services.AdministratorService;
+import services.CustomerService;
+import services.HandyWorkerService;
 import services.ProfileSocialNetworkService;
 import services.RefereeService;
 import services.SponsorService;
 import domain.Actor;
 import domain.Administrator;
+import domain.Customer;
+import domain.HandyWorker;
 import domain.Referee;
 import domain.Sponsor;
 
@@ -50,6 +54,12 @@ public class ProfileController extends AbstractController {
 
 	@Autowired
 	private RefereeService				refereeService;
+
+	@Autowired
+	private CustomerService				customerService;
+
+	@Autowired
+	private HandyWorkerService			handyService;
 
 
 	// Action-2 ---------------------------------------------------------------		
@@ -192,4 +202,75 @@ public class ProfileController extends AbstractController {
 		return result;
 
 	}
+
+	@RequestMapping(value = "/edit-customer", method = RequestMethod.GET)
+	public ModelAndView editCustomer() {
+		ModelAndView result;
+		Customer c;
+
+		final UserAccount user = LoginService.getPrincipal();
+		c = (Customer) this.actorService.getActorByUserAccount(user.getId());
+		Assert.notNull(c);
+
+		result = new ModelAndView("profile/editCustomer");
+		result.addObject("actor", c);
+		result.addObject("action", "profile/edit-customer.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit-customer", method = RequestMethod.POST, params = "save")
+	public ModelAndView editCustomer(@Valid final Customer customer, final BindingResult binding) {
+		ModelAndView result;
+		try {
+			if (!binding.hasErrors()) {
+				this.customerService.save(customer);
+				this.profileService.UpdateProperty();
+				result = new ModelAndView("redirect:personal-datas.do");
+			} else {
+				result = new ModelAndView("profile/editCustomer");
+				result.addObject("actor", customer);
+			}
+		} catch (final Exception e) {
+			result = new ModelAndView("profile/editCustomer");
+			result.addObject("actor", customer);
+			result.addObject("exception", e);
+
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit-handyWorker", method = RequestMethod.GET)
+	public ModelAndView editHandyWorker() {
+		ModelAndView result;
+		HandyWorker h;
+
+		final UserAccount user = LoginService.getPrincipal();
+		h = (HandyWorker) this.actorService.getActorByUserAccount(user.getId());
+		Assert.notNull(h);
+
+		result = new ModelAndView("profile/editHandyWorker");
+		result.addObject("actor", h);
+		result.addObject("action", "profile/edit-handyWorker.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit-handyWorker", method = RequestMethod.POST, params = "save")
+	public ModelAndView editHandyWorker(@Valid final HandyWorker handy, final BindingResult binding) {
+		ModelAndView result;
+
+		if (!binding.hasErrors()) {
+			this.handyService.save(handy);
+			this.profileService.UpdateProperty();
+			result = new ModelAndView("redirect:personal-datas.do");
+		} else {
+			result = new ModelAndView("profile/edit-handyWorker");
+			result.addObject("actor", handy);
+		}
+
+		return result;
+	}
+
 }

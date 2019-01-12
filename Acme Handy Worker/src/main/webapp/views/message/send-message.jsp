@@ -16,7 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="isAuthenticated()">
+<security:authorize access="hasRole('ADMIN') or hasRole('HANDYWORKER') or hasRole('CUSTOMER') or hasRole('SPONSOR') or hasRole('REFEREE')">
 
 <p><spring:message code="message.send" /></p>
 

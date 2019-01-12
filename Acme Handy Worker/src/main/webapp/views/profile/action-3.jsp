@@ -16,6 +16,8 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 <p><spring:message code="profile.action.3" /></p>
 <form:form  modelAttribute="actor" action="${action }">
 
@@ -31,6 +33,19 @@
 	<form:hidden path="isBanned" />
 	<form:hidden path="email" />
 	
+	<jstl:if test = "${fn:contains(actor.userAccount.authorities, 'CUSTOMER')}">
+		<form:hidden path="score"/>
+		<form:hidden path="endorseCustomer"/>
+		<form:hidden path="receiveEndorseFromCustomer"/>
+	</jstl:if>
+	
+	<jstl:if test = "${fn:contains(actor.userAccount.authorities, 'HANDYWORKER')}">		
+		<form:hidden path="makeHandyWorker"/>
+		<form:hidden path="score"/>
+		<form:hidden path="finder"/>
+		<form:hidden path="endorseHWorker"/>
+		<form:hidden path="receiveEndorseFromHWorker"/>
+	</jstl:if>
 	
 	<form:label path="name"><spring:message code="profile.action.3.name" />:</form:label>
 	<form:input path="name"/>
