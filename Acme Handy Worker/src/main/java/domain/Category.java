@@ -19,6 +19,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Category extends DomainEntity {
 
 	private String					name;
+	private String					spanishName;
 	private Category				parent;
 	private Collection<Category>	soon;
 
@@ -32,6 +33,15 @@ public class Category extends DomainEntity {
 	}
 	public void setName(final String name) {
 		this.name = name;
+	}
+
+	@NotBlank
+	@NotNull
+	public String getSpanishName() {
+		return this.spanishName;
+	}
+	public void setSpanishName(final String spanishName) {
+		this.spanishName = spanishName;
 	}
 
 	@Valid

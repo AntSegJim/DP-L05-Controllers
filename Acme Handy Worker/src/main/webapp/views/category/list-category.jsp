@@ -20,7 +20,6 @@
 
 
 <security:authorize access="hasRole('ADMIN')">
-
 <display:table pagesize="5" name="categories" id="row"
 requestURI="category/administrator/list.do" >
 
@@ -30,8 +29,13 @@ requestURI="category/administrator/list.do" >
 	</jstl:if>
 </display:column>
 
-
+<jstl:if test="${language eq 'en' }">
 <display:column property="name" titleKey="category.name"  />
+</jstl:if>
+
+<jstl:if test="${language eq 'es' }">
+<display:column property="spanishName" titleKey="category.name"  />
+</jstl:if>
 
 <display:column>
 		<a href="category/administrator/show.do?categoryId=${row.id}"><spring:message code="category.show" /></a>

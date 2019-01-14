@@ -39,6 +39,8 @@ public class CategoryService {
 	public Category create() {
 		final Category category = new Category();
 		category.setName("");
+		category.setSpanishName("");
+
 		//PREGUNTAR
 		category.setParent(this.rootCategory());
 		category.setSoon(new HashSet<Category>());
@@ -58,6 +60,8 @@ public class CategoryService {
 	public Category save(final Category category) {
 		Assert.isTrue(category.getName() != null && category.getName() != "" && !category.getSoon().contains(category.getParent()), "CategoryService.save -> Primero");
 		Assert.isTrue(!(category.getParent().equals(null)), "CategoryService.save -> Parent");
+		if (category.getId() == 0)
+			Assert.isTrue(!(category.getSpanishName().equals("") && category.getSpanishName() != null));
 		Assert.isTrue(!(category == category.getParent()));
 		final Collection<String> names = this.namesCategory();
 

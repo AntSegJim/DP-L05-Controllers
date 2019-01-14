@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -32,9 +33,12 @@ public class CategoryAdministratorController extends AbstractController {
 		final Collection<Category> categories;
 
 		categories = this.categoryService.findAll();
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("category/list");
 		result.addObject("categories", categories);
+		result.addObject("language", lang);
+
 		return result;
 
 	}
@@ -62,8 +66,11 @@ public class CategoryAdministratorController extends AbstractController {
 		Category category;
 
 		category = this.categoryService.findOne(categoryId);
+		final String lang = LocaleContextHolder.getLocale().getLanguage();
+
 		result = new ModelAndView("category/show");
 		result.addObject("category", category);
+		result.addObject("language", lang);
 
 		return result;
 

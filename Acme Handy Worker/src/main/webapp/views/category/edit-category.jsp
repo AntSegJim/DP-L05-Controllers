@@ -33,10 +33,17 @@
 	
 	
 	<form:label path="name">
-	<spring:message code="category.name" />:
+	<spring:message code="category.name.1" />:
 	</form:label>
 	<form:input path="name" />
 	<form:errors cssClass="error" path="name" />
+	<br />
+	
+	<form:label path="spanishName">
+	<spring:message code="category.name.2" />:
+	</form:label>
+	<form:input path="spanishName" />
+	<form:errors cssClass="error" path="spanishName" />
 	<br />
 	
 	<form:label path="parent">
