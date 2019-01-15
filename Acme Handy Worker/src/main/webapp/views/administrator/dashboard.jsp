@@ -16,12 +16,14 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <fieldset>
 <legend><spring:message code="administrator.FixUp" /></legend>
 <b><spring:message code="administrator.max" /></b>: ${fixUpMax }<br/>
 <b><spring:message code="administrator.min" /></b>: ${fixUpMin }<br/>
 <b><spring:message code="administrator.avg" /></b>: ${fixUpAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${fixUpDesv }
+<b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "2" value ="${fixUpDesv }"></fmt:formatNumber>
 </fieldset>
 
 <fieldset>
@@ -29,23 +31,29 @@
 <b><spring:message code="administrator.max" /></b>: ${fixUpAppMax }<br/>
 <b><spring:message code="administrator.min" /></b>: ${fixUpAppMin }<br/>
 <b><spring:message code="administrator.avg" /></b>: ${fixUpAppAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${fixUpAppDesv }
+<b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "2" value ="${fixUpAppDesv }"></fmt:formatNumber>
+
 </fieldset>
 
 <fieldset>
 <legend><spring:message code="administrator.FixUpPrice" /></legend>
 <b><spring:message code="administrator.max" /></b>: ${fixUpPriceMax }<br/>
 <b><spring:message code="administrator.min" /></b>: ${fixUpPriceMin }<br/>
-<b><spring:message code="administrator.avg" /></b>: ${fixUpPriceAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${fixUpPriceDesv }<br/>
+<b><spring:message code="administrator.avg" /></b>: <b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "2" value ="${fixUpPriceAvg }"></fmt:formatNumber>
+<br/>
+<b><spring:message code="administrator.desv" /></b>: <b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "2" value ="${fixUpPriceDesv }"></fmt:formatNumber>
+<br/>
+
 </fieldset>
 
 <fieldset>
 <legend><spring:message code="administrator.ApplicationPrice" /></legend>
 <b><spring:message code="administrator.max" /></b>: ${applicationPriceOfferedMax }<br/>
 <b><spring:message code="administrator.min" /></b>: ${applicationPriceOfferedMin }<br/>
-<b><spring:message code="administrator.avg" /></b>: ${applicationPriceOfferedAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${applicationPriceOfferedDesv }<br/>
+<b><spring:message code="administrator.avg" /></b>: <b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "2" value ="${applicationPriceOfferedAvg }"></fmt:formatNumber>
+<br/>
+<b><spring:message code="administrator.desv" /></b>: <b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "2" value ="${applicationPriceOfferedDesv }"></fmt:formatNumber>
+<br/>
 </fieldset>
 
 <fieldset>
@@ -61,7 +69,9 @@
 <b><spring:message code="administrator.max" /></b>: ${fixUpComplaintMax }<br/>
 <b><spring:message code="administrator.min" /></b>: ${fixUpComplaintMin }<br/>
 <b><spring:message code="administrator.avg" /></b>: ${fixUpComplaintAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${fixUpComplaintDesv }<br/>
+<b><spring:message code="administrator.desv" /></b>: <b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "2" value ="${fixUpComplaintDesv }"></fmt:formatNumber>
+<br/>
+
 </fieldset>
 
 <fieldset>
@@ -69,5 +79,7 @@
 <b><spring:message code="administrator.max" /></b>: ${reportNoteMax }<br/>
 <b><spring:message code="administrator.min" /></b>: ${reportNoteMin }<br/>
 <b><spring:message code="administrator.avg" /></b>: ${reportNoteAvg }<br/>
-<b><spring:message code="administrator.desv" /></b>: ${reportNoteDesv }<br/>
+<b><spring:message code="administrator.desv" /></b>: <b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "2" value ="${reportNoteDesv }"></fmt:formatNumber>
+<br/>
+
 </fieldset>

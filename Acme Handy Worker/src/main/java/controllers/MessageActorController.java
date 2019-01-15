@@ -103,7 +103,7 @@ public class MessageActorController {
 		ModelAndView result;
 
 		this.messageService.delete(this.messageService.findOne(idMessage));
-		result = new ModelAndView("redirect:send.do");
+		result = new ModelAndView("redirect:http://localhost:8080/Acme-Handy-Worker/messageBox/actor/list.do");
 
 		return result;
 
